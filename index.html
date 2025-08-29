@@ -272,14 +272,125 @@
             animation: glitch-2 0.5s linear infinite alternate-reverse;
         }
 
+        @keyframes textGlitch {
+            0%, 14%, 15%, 49%, 50%, 99%, 100% { 
+                color: var(--white);
+            }
+            1%, 13% {
+                color: transparent;
+                text-shadow: 
+                    -2px 0 var(--silver-grey),
+                    2px 0 var(--red-dark),
+                    0 0 5px var(--silver-grey);
+            }
+            16%, 48% {
+                color: transparent;
+                text-shadow: 
+                    -1px 0 var(--red-dark),
+                    1px 0 var(--silver-grey),
+                    0 0 3px var(--red-dark);
+            }
+            51%, 98% {
+                color: transparent;
+                text-shadow: 
+                    -3px 0 var(--silver-grey),
+                    3px 0 var(--red-dark),
+                    0 0 8px var(--silver-grey);
+            }
+        }
+
         @keyframes glitch-1 {
-            0% { clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%); transform: translate(-2px); }
-            100% { clip-path: polygon(0 60%, 100% 60%, 100% 61%, 0 61%); transform: translate(2px); }
+            0% { 
+                clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%); 
+                transform: translate(-2px); 
+            }
+            10% { 
+                clip-path: polygon(0 10%, 100% 10%, 100% 15%, 0 15%); 
+                transform: translate(1px); 
+            }
+            20% { 
+                clip-path: polygon(0 80%, 100% 80%, 100% 85%, 0 85%); 
+                transform: translate(-1px); 
+            }
+            30% { 
+                clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%); 
+                transform: translate(2px); 
+            }
+            40% { 
+                clip-path: polygon(0 70%, 100% 70%, 100% 75%, 0 75%); 
+                transform: translate(-2px); 
+            }
+            50% { 
+                clip-path: polygon(0 30%, 100% 30%, 100% 35%, 0 35%); 
+                transform: translate(1px); 
+            }
+            60% { 
+                clip-path: polygon(0 90%, 100% 90%, 100% 95%, 0 95%); 
+                transform: translate(-1px); 
+            }
+            70% { 
+                clip-path: polygon(0 40%, 100% 40%, 100% 45%, 0 45%); 
+                transform: translate(2px); 
+            }
+            80% { 
+                clip-path: polygon(0 60%, 100% 60%, 100% 65%, 0 65%); 
+                transform: translate(-2px); 
+            }
+            90% { 
+                clip-path: polygon(0 25%, 100% 25%, 100% 30%, 0 30%); 
+                transform: translate(1px); 
+            }
+            100% { 
+                clip-path: polygon(0 60%, 100% 60%, 100% 61%, 0 61%); 
+                transform: translate(2px); 
+            }
         }
 
         @keyframes glitch-2 {
-            0% { clip-path: polygon(0 80%, 100% 80%, 100% 81%, 0 81%); transform: translate(2px); }
-            100% { clip-path: polygon(0 10%, 100% 10%, 100% 11%, 0 11%); transform: translate(-2px); }
+            0% { 
+                clip-path: polygon(0 80%, 100% 80%, 100% 81%, 0 81%); 
+                transform: translate(2px); 
+            }
+            15% { 
+                clip-path: polygon(0 95%, 100% 95%, 100% 100%, 0 100%); 
+                transform: translate(-1px); 
+            }
+            25% { 
+                clip-path: polygon(0 5%, 100% 5%, 100% 10%, 0 10%); 
+                transform: translate(1px); 
+            }
+            35% { 
+                clip-path: polygon(0 85%, 100% 85%, 100% 90%, 0 90%); 
+                transform: translate(-2px); 
+            }
+            45% { 
+                clip-path: polygon(0 35%, 100% 35%, 100% 40%, 0 40%); 
+                transform: translate(2px); 
+            }
+            55% { 
+                clip-path: polygon(0 75%, 100% 75%, 100% 80%, 0 80%); 
+                transform: translate(-1px); 
+            }
+            65% { 
+                clip-path: polygon(0 15%, 100% 15%, 100% 20%, 0 20%); 
+                transform: translate(1px); 
+            }
+            75% { 
+                clip-path: polygon(0 65%, 100% 65%, 100% 70%, 0 70%); 
+                transform: translate(-2px); 
+            }
+            85% { 
+                clip-path: polygon(0 45%, 100% 45%, 100% 50%, 0 50%); 
+                transform: translate(2px); 
+            }
+            95% { 
+                clip-path: polygon(0 55%, 100% 55%, 100% 60%, 0 60%); 
+                transform: translate(-1px); 
+            }
+            100% { 
+                clip-path: polygon(0 10%, 100% 10%, 100% 11%, 0 11%); 
+                transform: translate(-2px); 
+            }
         }
 
         .hero-subtitle {
@@ -1292,60 +1403,8 @@
                 }, 2000);
             }
             
-            // Enhanced continuous glitch text effect for hero title
-            function startContinuousGlitch(element) {
-                const originalText = element.getAttribute('data-text') || element.textContent;
-                const glitchChars = '█▓▒░▄▀▐▌│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌▲►▼◄♠♣♥♦•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼';
-                let isGlitching = false;
-                
-                function performGlitch() {
-                    if (isGlitching) return;
-                    isGlitching = true;
-                    
-                    let iterations = 0;
-                    const totalIterations = 8;
-                    
-                    const glitchInterval = setInterval(() => {
-                        element.textContent = originalText.split('').map((char, index) => {
-                            if (Math.random() > 0.7) {
-                                return glitchChars[Math.floor(Math.random() * glitchChars.length)];
-                            }
-                            return char;
-                        }).join('');
-                        
-                        iterations++;
-                        
-                        if (iterations >= totalIterations) {
-                            clearInterval(glitchInterval);
-                            element.textContent = originalText;
-                            isGlitching = false;
-                        }
-                    }, 50);
-                }
-                
-                // Continuous glitch effect - trigger randomly
-                function scheduleNextGlitch() {
-                    const delay = Math.random() * 3000 + 2000; // Random delay between 2-5 seconds
-                    setTimeout(() => {
-                        performGlitch();
-                        scheduleNextGlitch();
-                    }, delay);
-                }
-                
-                // Start the continuous glitch cycle
-                scheduleNextGlitch();
-                
-                // Also trigger on hover for immediate feedback
-                element.addEventListener('mouseenter', function() {
-                    performGlitch();
-                });
-            }
-            
-            // Apply continuous glitch effect to hero title
-            const heroGlitch = document.querySelector('.hero-glitch');
-            if (heroGlitch) {
-                startContinuousGlitch(heroGlitch);
-            }
+            // CSS-based glitch effect is now handling the continuous animation
+            // No JavaScript needed for the hero title glitch effect
             
             // Parallax effect for particles
             window.addEventListener('scroll', function() {
