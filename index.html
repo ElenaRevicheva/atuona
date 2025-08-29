@@ -60,9 +60,9 @@
             z-index: 1;
             background-image: 
                 radial-gradient(1px 1px at 20% 30%, var(--silver-medium), transparent),
-                radial-gradient(1px 1px at 40% 70%, var(--purple-medium), transparent),
+                radial-gradient(1px 1px at 40% 70%, var(--red-dark), transparent),
                 radial-gradient(1px 1px at 90% 40%, var(--silver-bright), transparent),
-                radial-gradient(2px 2px at 80% 10%, var(--purple-light), transparent);
+                radial-gradient(2px 2px at 80% 10%, var(--red-blood), transparent);
             background-size: 300px 300px, 400px 400px, 200px 200px, 350px 350px;
             animation: float 20s linear infinite, pulse 4s ease-in-out infinite alternate;
         }
@@ -245,7 +245,7 @@
             font-size: 4rem;
             font-weight: 700;
             font-family: 'Space Grotesk', sans-serif;
-            color: var(--white);
+            color: var(--off-grey);
             margin-bottom: 2rem;
             position: relative;
             display: inline-block;
@@ -274,7 +274,7 @@
 
         @keyframes textGlitch {
             0%, 14%, 15%, 49%, 50%, 99%, 100% { 
-                color: var(--white);
+                color: var(--off-grey);
             }
             1%, 13% {
                 color: transparent;
@@ -543,7 +543,7 @@
             font-size: 1.8rem;
             font-weight: 700;
             font-family: 'Space Grotesk', sans-serif;
-            color: var(--white);
+            color: var(--off-grey);
             margin-bottom: 1.5rem;
             line-height: 1.2;
         }
@@ -1155,7 +1155,6 @@
                         this.style.boxShadow = '0 20px 60px rgba(220, 20, 60, 0.4), inset 0 1px 0 rgba(240, 240, 240, 0.1)';
                     } else {
                         this.style.boxShadow = '0 20px 60px rgba(139, 0, 0, 0.3), inset 0 1px 0 rgba(240, 240, 240, 0.1)';
-                    }.style.boxShadow = '0 20px 60px rgba(138, 43, 226, 0.3), inset 0 1px 0 rgba(240, 240, 240, 0.1)';
                     }
                 });
                 
@@ -1478,7 +1477,6 @@
             
             // Initialize the glitch system
             startContinuousGlitch();
-            }
             
             // Parallax effect for particles
             window.addEventListener('scroll', function() {
