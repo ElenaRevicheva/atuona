@@ -1403,63 +1403,123 @@
                 }, 2000);
             }
             
-            // Enhanced glitch effect with moving symbols
-            function startSymbolGlitch(element) {
+            // Continuous morphing text effect - always in motion
+            function startContinuousMorph(element) {
                 const originalText = element.getAttribute('data-text') || element.textContent;
                 const glitchChars = 'M<]&&>._=-$+[#+!@#$%^&*()_+-=[]{}|;:,.<>?`~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789█▓▒░▄▀▐▌│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌▲►▼◄♠♣♥♦•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼';
-                let isGlitching = false;
+                let currentText = originalText.split('');
+                let targetText = originalText.split('');
+                let isTransitioning = false;
                 
-                function performSymbolGlitch() {
-                    if (isGlitching) return;
-                    isGlitching = true;
+                function morphToSymbols() {
+                    // Create random symbol target
+                    targetText = originalText.split('').map(() => 
+                        glitchChars[Math.floor(Math.random() * glitchChars.length)]
+                    );
+                    startMorphing();
+                }
+                
+                function morphToOriginal() {
+                    // Set target back to original text
+                    targetText = originalText.split('');
+                    startMorphing();
+                }
+                
+                function startMorphing() {
+                    if (isTransitioning) return;
+                    isTransitioning = true;
                     
-                    let iterations = 0;
-                    const totalIterations = 12;
+                    let step = 0;
+                    const totalSteps = 8;
                     
-                    const glitchInterval = setInterval(() => {
-                        // Create glitched text with random symbols
-                        element.textContent = originalText.split('').map((char, index) => {
-                            // Higher chance of glitch symbols during animation
-                            if (Math.random() > 0.4) {
+                    const morphInterval = setInterval(() => {
+                        currentText = currentText.map((char, index) => {
+                            // Gradually morph each character towards target
+                            if (Math.random() > 0.3) {
+                                return targetText[index];
+                            }
+                            // Sometimes show intermediate random symbols during transition
+                            if (Math.random() > 0.7) {
                                 return glitchChars[Math.floor(Math.random() * glitchChars.length)];
                             }
                             return char;
-                        }).join('');
+                        });
                         
-                        iterations++;
+                        element.textContent = currentText.join('');
+                        step++;
                         
-                        if (iterations >= totalIterations) {
-                            clearInterval(glitchInterval);
-                            element.textContent = originalText;
-                            isGlitching = false;
+                        if (step >= totalSteps) {
+                            clearInterval(morphInterval);
+                            currentText = [...targetText];
+                            element.textContent = currentText.join('');
+                            isTransitioning = false;
                         }
-                    }, 80);
+                    }, 120);
                 }
                 
-                // Continuous symbol glitch effect
-                function scheduleNextSymbolGlitch() {
-                    const delay = Math.random() * 2000 + 1500; // Random delay between 1.5-3.5 seconds
+                // Continuous morphing cycle
+                function startMorphingCycle() {
+                    // Phase 1: Morph to symbols (1-2 seconds)
                     setTimeout(() => {
-                        performSymbolGlitch();
-                        scheduleNextSymbolGlitch();
-                    }, delay);
+                        morphToSymbols();
+                        
+                        // Phase 2: Stay as symbols briefly (0.5-1 second)
+                        setTimeout(() => {
+                            // Phase 3: Morph back to text (1-2 seconds)
+                            morphToOriginal();
+                            
+                            // Phase 4: Stay as text briefly (0.5-1 second)
+                            setTimeout(() => {
+                                startMorphingCycle(); // Restart the cycle
+                            }, Math.random() * 500 + 500);
+                            
+                        }, Math.random() * 500 + 500);
+                        
+                    }, Math.random() * 1000 + 1000);
                 }
                 
-                // Start the continuous symbol glitch cycle
-                setTimeout(() => {
-                    scheduleNextSymbolGlitch();
-                }, 1000); // Start after 1 second
+                // Start the continuous morphing
+                startMorphingCycle();
                 
-                // Also trigger on hover for immediate feedback
+                // Also trigger morphing on hover
                 element.addEventListener('mouseenter', function() {
-                    performSymbolGlitch();
+                    if (!isTransitioning) {
+                        morphToSymbols();
+                        setTimeout(() => {
+                            if (!isTransitioning) morphToOriginal();
+                        }, 800);
+                    }
                 });
+                
+                // Add periodic random character changes even during "stable" periods
+                setInterval(() => {
+                    if (!isTransitioning && Math.random() > 0.7) {
+                        // Randomly change 1-2 characters temporarily
+                        const tempText = [...currentText];
+                        const randomIndex = Math.floor(Math.random() * tempText.length);
+                        const randomIndex2 = Math.floor(Math.random() * tempText.length);
+                        
+                        tempText[randomIndex] = glitchChars[Math.floor(Math.random() * glitchChars.length)];
+                        if (Math.random() > 0.5) {
+                            tempText[randomIndex2] = glitchChars[Math.floor(Math.random() * glitchChars.length)];
+                        }
+                        
+                        element.textContent = tempText.join('');
+                        
+                        // Restore after a brief moment
+                        setTimeout(() => {
+                            if (!isTransitioning) {
+                                element.textContent = currentText.join('');
+                            }
+                        }, 150);
+                    }
+                }, 300);
             }
             
-            // Apply symbol glitch effect to hero title (in addition to CSS)
+            // Apply continuous morphing effect to hero title (in addition to CSS)
             const heroGlitch = document.querySelector('.hero-glitch');
             if (heroGlitch) {
-                startSymbolGlitch(heroGlitch);
+                startContinuousMorph(heroGlitch);
             }
             
             // Parallax effect for particles
