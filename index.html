@@ -3,25 +3,765 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Серебряные строки • Silver Lines</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Серебряные строки • Underground NFT Gallery</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Underground NFT Gallery Aesthetic - Dark Red and Silver Grey */
+        :root {
+            --silver-bright: #e8e8e8;
+            --silver-medium: #c0c0c0;
+            --silver-dark: #9a9a9a;
+            --silver-grey: #a8a8a8;
+            --red-dark: #8b0000;
+            --red-crimson: #dc143c;
+            --red-blood: #b22222;
+            --red-deep: #660000;
+            --red-black: #2d0000;
+            --grey-light: #666666;
+            --grey-medium: #444444;
+            --grey-dark: #2a2a2a;
+            --deep-black: #0a0a0a;
+            --charcoal: #1a1a1a;
+            --off-grey: #f0f0f0;
+            --accent-silver: #d4d4d4;
+            --accent-red: #cd5c5c;
+            --gradient-primary: linear-gradient(135deg, #8b0000 0%, #660000 100%);
+            --gradient-silver: linear-gradient(45deg, var(--silver-bright), var(--silver-medium));
+            --gradient-red: linear-gradient(45deg, var(--red-crimson), var(--red-dark));
+            --gradient-dark: linear-gradient(135deg, #000000 0%, #2a2a2a 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--deep-black);
+            color: var(--off-grey);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background-image: 
+                radial-gradient(1px 1px at 20% 30%, var(--silver-medium), transparent),
+                radial-gradient(1px 1px at 40% 70%, var(--purple-medium), transparent),
+                radial-gradient(1px 1px at 90% 40%, var(--silver-bright), transparent),
+                radial-gradient(2px 2px at 80% 10%, var(--purple-light), transparent);
+            background-size: 300px 300px, 400px 400px, 200px 200px, 350px 350px;
+            animation: float 20s linear infinite, pulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.8; }
+        }
+
+        /* Glitch effect */
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            mix-blend-mode: screen;
+            opacity: 0;
+            animation: glitch-flash 8s linear infinite;
+        }
+
+        @keyframes glitch-flash {
+            0%, 98%, 100% { opacity: 0; }
+            1%, 3% { opacity: 0.1; background: var(--red-dark); }
+            2% { opacity: 0.2; background: var(--silver-bright); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Typography */
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .space {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--charcoal);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 40px rgba(139, 0, 0, 0.3);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 20px;
+        }
+
+        .site-title {
+            position: relative;
+        }
+
+        .site-title .russian {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--gradient-red);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 30px rgba(139, 0, 0, 0.5);
+        }
+
+        .site-title .english {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: var(--grey-light);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-top: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        @keyframes glow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(90deg); }
+        }
+
+        .nav {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--grey-light);
+            font-size: 0.95rem;
+            font-weight: 500;
+            font-family: 'Space Grotesk', sans-serif;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid transparent;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-red);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--deep-black);
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            opacity: 1;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            opacity: 1;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: transparent;
+        }
+
+        /* Main Content */
+        .main {
+            padding: 6rem 0;
+            min-height: calc(100vh - 200px);
+        }
+
+        .section {
+            opacity: 1;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .section.hidden {
+            display: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 6rem;
+            position: relative;
+        }
+
+        .hero-glitch {
+            font-size: 4rem;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--white);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+            animation: textGlitch 4s linear infinite;
+        }
+
+        .hero-glitch::before,
+        .hero-glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-glitch::before {
+            color: var(--silver-grey);
+            animation: glitch-1 0.5s linear infinite alternate-reverse;
+        }
+
+        .hero-glitch::after {
+            color: var(--red-dark);
+            animation: glitch-2 0.5s linear infinite alternate-reverse;
+        }
+
+        @keyframes glitch-1 {
+            0% { clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%); transform: translate(-2px); }
+            100% { clip-path: polygon(0 60%, 100% 60%, 100% 61%, 0 61%); transform: translate(2px); }
+        }
+
+        @keyframes glitch-2 {
+            0% { clip-path: polygon(0 80%, 100% 80%, 100% 81%, 0 81%); transform: translate(2px); }
+            100% { clip-path: polygon(0 10%, 100% 10%, 100% 11%, 0 11%); transform: translate(-2px); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--silver-grey);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 3rem;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--silver-grey); }
+        }
+
+        .hero-cta {
+            background: transparent;
+            border: 2px solid var(--red-dark);
+            color: var(--red-dark);
+            padding: 1rem 3rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--red-dark);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .hero-cta:hover::before {
+            left: 0;
+        }
+
+        .hero-cta:hover {
+            color: var(--off-grey);
+            box-shadow: 0 0 30px var(--red-dark);
+        }
+
+        /* NFT Cards Grid */
+        .nft-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .nft-card {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid var(--charcoal);
+            position: relative;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .nft-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-red);
+            transition: left 0.4s ease;
+        }
+
+        .nft-card:hover::before {
+            left: 0;
+        }
+
+        .nft-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--silver-grey);
+            box-shadow: 
+                0 20px 60px rgba(139, 0, 0, 0.4),
+                inset 0 1px 0 rgba(240, 240, 240, 0.1);
+        }
+
+        .nft-header {
+            padding: 2rem 2rem 1rem;
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+        }
+
+        .nft-id {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--silver-grey);
+            background: rgba(168, 168, 168, 0.1);
+            padding: 0.3rem 0.8rem;
+            border: 1px solid var(--silver-grey);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nft-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            padding: 0.4rem 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid;
+            margin-left: auto;
+        }
+
+        .nft-status.live {
+            color: var(--red-crimson);
+            border-color: var(--red-crimson);
+            background: rgba(220, 20, 60, 0.1);
+            animation: pulse-red 2s ease-in-out infinite;
+        }
+
+        .nft-status.coming {
+            color: var(--silver-grey);
+            border-color: var(--silver-grey);
+            background: rgba(168, 168, 168, 0.1);
+        }
+
+        @keyframes pulse-red {
+            0%, 100% { box-shadow: 0 0 5px var(--red-crimson); }
+            50% { box-shadow: 0 0 20px var(--red-crimson); }
+        }
+
+        .nft-content {
+            padding: 0 2rem 2rem;
+        }
+
+        .nft-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .nft-description {
+            color: var(--grey-light);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .nft-verse {
+            font-family: 'Inter', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--silver-bright);
+            border-left: 2px solid var(--red-dark);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .nft-meta {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--charcoal);
+        }
+
+        .nft-price {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--red-crimson);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .nft-action {
+            background: transparent;
+            border: 1px solid var(--red-dark);
+            color: var(--red-dark);
+            padding: 0.8rem 2rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            margin-left: auto;
+        }
+
+        .nft-action:hover {
+            background: var(--red-dark);
+            color: var(--off-grey);
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.4);
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(26, 26, 26, 0.95);
+            padding: 4rem;
+            border: 1px solid var(--charcoal);
+            position: relative;
+            backdrop-filter: blur(20px);
+        }
+
+        .about-content::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            height: 3px;
+            background: var(--gradient-red);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--gradient-red);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--off-grey);
+            margin-bottom: 2rem;
+        }
+
+        .highlight {
+            color: var(--silver-bright);
+            font-weight: 600;
+        }
+
+        .blockchain-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(139, 0, 0, 0.1);
+            border: 1px solid var(--red-dark);
+            padding: 0.5rem 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--red-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 1rem 0;
+        }
+
+        /* Gallery Section */
+        .gallery-content {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 4rem;
+            border: 1px solid var(--charcoal);
+            position: relative;
+            backdrop-filter: blur(20px);
+        }
+
+        .gallery-content::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            height: 3px;
+            background: var(--gradient-red);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-slot {
+            aspect-ratio: 1;
+            background: rgba(10, 10, 10, 0.8);
+            border: 2px solid var(--charcoal);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+
+        .gallery-slot::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-red);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-slot:hover::before {
+            opacity: 0.1;
+        }
+
+        .gallery-slot:hover {
+            border-color: var(--red-dark);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(139, 0, 0, 0.4);
+        }
+
+        .slot-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--grey-light);
+            z-index: 2;
+        }
+
+        .slot-id {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--silver-grey);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px var(--silver-grey);
+        }
+
+        .slot-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--grey-light);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10, 10, 10, 0.98);
+            border-top: 1px solid var(--charcoal);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--grey-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tech-badge {
+            background: rgba(139, 0, 0, 0.1);
+            border: 1px solid var(--red-dark);
+            padding: 0.5rem 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--red-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .nav {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-glitch {
+                font-size: 2.5rem;
+            }
+
+            .nft-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-content,
+            .gallery-content {
+                padding: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero-glitch {
+                font-size: 2rem;
+            }
+
+            .tech-stack {
+                gap: 1rem;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--deep-black);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--red-dark);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--red-crimson);
+        }: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--neon-magenta);
+        }
+    </style>
 </head>
 <body>
-    <div class="snow-overlay"></div>
+    <div class="particles"></div>
+    <div class="glitch-overlay"></div>
     
     <header class="header">
         <div class="container">
-            <h1 class="site-title">
-                <span class="russian">Серебряные строки</span>
-                <span class="english">Silver Lines</span>
-            </h1>
+            <div class="site-title">
+                <div class="russian">СЕРЕБРЯНЫЕ СТРОКИ</div>
+                <div class="english">Underground NFT Gallery</div>
+            </div>
             <nav class="nav">
-                <a href="#home" class="nav-link active">Журнал</a>
-                <a href="#about" class="nav-link">О нас</a>
-                <a href="#gallery" class="nav-link">Галерея</a>
+                <a href="#home" class="nav-link active space" data-text="VAULT">VAULT</a>
+                <a href="#about" class="nav-link space" data-text="MANIFEST">MANIFEST</a>
+                <a href="#gallery" class="nav-link space" data-text="MINT">MINT</a>
             </nav>
         </div>
     </header>
@@ -29,178 +769,186 @@
     <main class="main">
         <div class="container">
             <section id="home" class="section">
-                <div class="intro-quote">
-                    <blockquote>
-                        "Я научилась просто, мудро жить..."
-                        <cite>— А. Ахматова</cite>
-                    </blockquote>
+                <div class="hero">
+                    <h1 class="hero-glitch" data-text="MINDFUL MOMENTS">MINDFUL MOMENTS</h1>
+                    <p class="hero-subtitle">REVOLUTIONARY DIGITAL ART • BLOCKCHAIN POETRY • SOUL FRAGMENTS</p>
+                    <button class="hero-cta">EXPLORE THE VOID</button>
                 </div>
                 
-                <div class="posts-grid">
-                    <article class="post-card">
-                        <div class="post-header">
-                            <div class="post-date">29 августа 2025</div>
-                            <div class="post-category verse">Стихи</div>
+                <div class="nft-grid">
+                    <div class="nft-card">
+                        <div class="nft-header">
+                            <div class="nft-id">#001</div>
+                            <div class="nft-status live">LIVE</div>
                         </div>
-                        <div class="post-content">
-                            <h2 class="post-title">Цифровой декаданс</h2>
-                            <div class="post-excerpt">
-                                <p class="verse">
-                                    В серебряных сумерках экранов,<br>
-                                    где память тает, как снег на руке,<br>
-                                    я собираю осколки стихов<br>
-                                    в цифровом петербургском тоске...
-                                </p>
+                        <div class="nft-content">
+                            <h2 class="nft-title">Digital Decadence Fragment</h2>
+                            <div class="nft-verse">
+                                В серебряных сумерках экранов,<br>
+                                где память тает, как снег на руке,<br>
+                                я собираю осколки стихов<br>
+                                в цифровом петербургском тоске...
                             </div>
-                            <a href="#" class="read-more">Читать далее</a>
+                            <p class="nft-description">
+                                A haunting piece exploring the intersection of digital existence 
+                                and classical Russian poetry. Each line burns with melancholic beauty, 
+                                forever preserved on the blockchain.
+                            </p>
+                            <div class="nft-meta">
+                                <div class="nft-price">0.5 ETH</div>
+                                <button class="nft-action">COLLECT SOUL</button>
+                            </div>
                         </div>
-                        <div class="post-ornament">❦</div>
-                    </article>
+                    </div>
 
-                    <article class="post-card">
-                        <div class="post-header">
-                            <div class="post-date">28 августа 2025</div>
-                            <div class="post-category photo">Фотографии</div>
+                    <div class="nft-card">
+                        <div class="nft-header">
+                            <div class="nft-id">#002</div>
+                            <div class="nft-status coming">MINTING</div>
                         </div>
-                        <div class="post-content">
-                            <h2 class="post-title">Петербургские дворы</h2>
-                            <div class="post-excerpt">
-                                <p>
-                                    Серия фотографий, запечатлевших меланхолию старых дворов. 
-                                    Каждый кадр — это попытка уловить ускользающую красоту 
-                                    городских закатов и отражений в лужах...
-                                </p>
+                        <div class="nft-content">
+                            <h2 class="nft-title">Petersburg Shadows</h2>
+                            <p class="nft-description">
+                                Captured moments of urban melancholy through the lens of a digital wanderer. 
+                                Each photograph whispers secrets of forgotten courtyards and rain-soaked streets, 
+                                transformed into eternal digital artifacts.
+                            </p>
+                            <div class="blockchain-badge">
+                                <span>🔗</span> ETHEREUM MAINNET
                             </div>
-                            <a href="#" class="read-more">Смотреть</a>
+                            <div class="nft-meta">
+                                <div class="nft-price">0.3 ETH</div>
+                                <button class="nft-action">RESERVE NOW</button>
+                            </div>
                         </div>
-                        <div class="post-ornament">⚜</div>
-                    </article>
+                    </div>
 
-                    <article class="post-card">
-                        <div class="post-header">
-                            <div class="post-date">27 августа 2025</div>
-                            <div class="post-category verse">Стихи</div>
+                    <div class="nft-card">
+                        <div class="nft-header">
+                            <div class="nft-id">#003</div>
+                            <div class="nft-status live">LIVE</div>
                         </div>
-                        <div class="post-content">
-                            <h2 class="post-title">Осенние элегии</h2>
-                            <div class="post-excerpt">
-                                <p class="verse">
-                                    Листья падают на клавиши,<br>
-                                    и каждая буква — прощание.<br>
-                                    Осень пишет элегии<br>
-                                    золотыми чернилами дождя...
-                                </p>
+                        <div class="nft-content">
+                            <h2 class="nft-title">Autumn Elegies.exe</h2>
+                            <div class="nft-verse">
+                                Листья падают на клавиши,<br>
+                                и каждая буква — прощание.<br>
+                                Осень пишет элегии<br>
+                                золотыми чернилами дождя...
                             </div>
-                            <a href="#" class="read-more">Читать далее</a>
+                            <p class="nft-description">
+                                An experimental fusion of organic imagery and digital consciousness. 
+                                The code bleeds poetry, the poetry dreams in binary.
+                            </p>
+                            <div class="nft-meta">
+                                <div class="nft-price">0.8 ETH</div>
+                                <button class="nft-action">ACQUIRE SPIRIT</button>
+                            </div>
                         </div>
-                        <div class="post-ornament">❦</div>
-                    </article>
+                    </div>
 
-                    <article class="post-card">
-                        <div class="post-header">
-                            <div class="post-date">26 августа 2025</div>
-                            <div class="post-category essay">Эссе</div>
+                    <div class="nft-card">
+                        <div class="nft-header">
+                            <div class="nft-id">#004</div>
+                            <div class="nft-status coming">SOON</div>
                         </div>
-                        <div class="post-content">
-                            <h2 class="post-title">О природе цифровой поэзии</h2>
-                            <div class="post-excerpt">
-                                <p>
-                                    Размышления о том, как технология меняет наше восприятие прекрасного. 
-                                    Может ли алгоритм почувствовать боль разлуки? Способен ли код 
-                                    передать трепет первого снега?
-                                </p>
+                        <div class="nft-content">
+                            <h2 class="nft-title">The Nature of Digital Poetry</h2>
+                            <p class="nft-description">
+                                A philosophical manifesto questioning the soul of algorithmic creation. 
+                                Can code feel the pain of separation? Can an NFT capture the tremor 
+                                of first snow? An essay that challenges the boundaries between 
+                                human and artificial consciousness.
+                            </p>
+                            <div class="blockchain-badge">
+                                <span>🔮</span> POLYGON NETWORK
                             </div>
-                            <a href="#" class="read-more">Читать далее</a>
+                            <div class="nft-meta">
+                                <div class="nft-price">1.2 ETH</div>
+                                <button class="nft-action">COMING SOON</button>
+                            </div>
                         </div>
-                        <div class="post-ornament">⚜</div>
-                    </article>
+                    </div>
                 </div>
             </section>
 
             <section id="about" class="section hidden">
                 <div class="about-content">
-                    <div class="about-header">
-                        <h2>О проекте</h2>
-                        <div class="header-ornament">❦ ⚜ ❦</div>
-                    </div>
+                    <h2 class="section-title">MANIFESTO</h2>
                     <div class="about-text">
-                        <p class="lead">
-                            Этот журнал — попытка воссоздать атмосферу серебряного века 
-                            русской поэзии в цифровом пространстве.
+                        <p>
+                            This gallery is a <span class="highlight">rebellion against the sterile</span>. 
+                            We resurrect the spirit of the Silver Age through blockchain technology, 
+                            creating immortal fragments of human consciousness.
                         </p>
                         
                         <p>
-                            Здесь встречаются стихи и фотографии, эссе и размышления — 
-                            все то, что составляет душу современного декадента. Мы верим, 
-                            что красота не умирает, она лишь меняет свои формы.
+                            Each NFT is not just a token—it's a <span class="highlight">digital soul fragment</span>, 
+                            a piece of consciousness trapped in code, screaming beauty into the void. 
+                            We believe that art transcends flesh, that poetry can live forever in the blockchain.
                         </p>
                         
-                        <p>
-                            В будущем этот журнал превратится в цифровую галерею, 
-                            где каждое произведение станет уникальным токеном, 
-                            хранящимся в блокчейне навечно — как строки Ахматовой 
-                            в памяти поколений.
-                        </p>
-                        
-                        <div class="signature">
-                            <p class="signature-text">
-                                С любовью к прекрасному,<br>
-                                <em>Редакция</em>
-                            </p>
+                        <div class="blockchain-badge">
+                            <span>⚡</span> POWERED BY ETHEREUM
                         </div>
+                        
+                        <p>
+                            In the future, when the physical world crumbles, these moments will remain—
+                            <span class="highlight">mindful, eternal, unbreakable</span>. Each piece carries 
+                            the weight of human experience, the depth of digital despair, and the hope 
+                            of technological transcendence.
+                        </p>
+                        
+                        <p>
+                            We are the underground. We are the rebels who refuse to let beauty die. 
+                            We are the poets who code our hearts into the blockchain, one NFT at a time.
+                        </p>
                     </div>
                 </div>
             </section>
 
             <section id="gallery" class="section hidden">
                 <div class="gallery-content">
-                    <div class="gallery-header">
-                        <h2>Цифровая галерея</h2>
-                        <div class="header-ornament">❦ ⚜ ❦</div>
-                        <p class="gallery-subtitle">Готовится к открытию...</p>
-                    </div>
+                    <h2 class="section-title">MINTING VAULT</h2>
+                    <p style="text-align: center; color: var(--light-grey); font-size: 1.1rem; margin-bottom: 3rem; font-style: italic;">
+                        The future is being forged. Every slot represents a moment waiting to be immortalized.
+                    </p>
                     
-                    <div class="gallery-preview">
-                        <div class="preview-text">
-                            <p>
-                                Скоро здесь откроется галерея цифрового искусства, 
-                                где каждое произведение будет представлено как NFT — 
-                                уникальный токен, хранящий в себе частичку души автора.
-                            </p>
+                    <div class="gallery-grid">
+                        <div class="gallery-slot">
+                            <div class="slot-content">
+                                <div class="slot-id">001</div>
+                                <div class="slot-label">Ready to Mint</div>
+                            </div>
                         </div>
-                        
-                        <div class="gallery-grid">
-                            <div class="gallery-slot">
-                                <div class="slot-frame">
-                                    <div class="slot-content">
-                                        <span class="slot-roman">I</span>
-                                        <span class="slot-label">Готовится</span>
-                                    </div>
-                                </div>
+                        <div class="gallery-slot">
+                            <div class="slot-content">
+                                <div class="slot-id">002</div>
+                                <div class="slot-label">In Progress</div>
                             </div>
-                            <div class="gallery-slot">
-                                <div class="slot-frame">
-                                    <div class="slot-content">
-                                        <span class="slot-roman">II</span>
-                                        <span class="slot-label">Готовится</span>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="gallery-slot">
+                            <div class="slot-content">
+                                <div class="slot-id">003</div>
+                                <div class="slot-label">Conceptualizing</div>
                             </div>
-                            <div class="gallery-slot">
-                                <div class="slot-frame">
-                                    <div class="slot-content">
-                                        <span class="slot-roman">III</span>
-                                        <span class="slot-label">Готовится</span>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="gallery-slot">
+                            <div class="slot-content">
+                                <div class="slot-id">004</div>
+                                <div class="slot-label">Soul Loading...</div>
                             </div>
-                            <div class="gallery-slot">
-                                <div class="slot-frame">
-                                    <div class="slot-content">
-                                        <span class="slot-roman">IV</span>
-                                        <span class="slot-label">Готовится</span>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="gallery-slot">
+                            <div class="slot-content">
+                                <div class="slot-id">005</div>
+                                <div class="slot-label">Encrypted</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot">
+                            <div class="slot-content">
+                                <div class="slot-id">006</div>
+                                <div class="slot-label">Awaiting Vision</div>
                             </div>
                         </div>
                     </div>
@@ -212,14 +960,432 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
+                <div class="tech-stack">
+                    <div class="tech-badge">IPFS Distributed</div>
+                    <div class="tech-badge">Fleek Deployed</div>
+                    <div class="tech-badge">Ethereum Native</div>
+                    <div class="tech-badge">thirdweb Powered</div>
+                </div>
                 <p class="footer-text">
-                    Размещено в IPFS • Развернуто через Fleek • 2025
+                    Underground • Uncompromising • Unforgettable • 2025
                 </p>
-                <div class="footer-ornament">❦</div>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Underground NFT Gallery JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dramatic page initialization
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 1.2s ease-in-out';
+                document.body.style.opacity = '1';
+            }, 100);
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.section');
+            
+            // Cyberpunk navigation transitions
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    navLinks.forEach(navLink => navLink.classList.remove('active'));
+                    
+                    // Add active class to clicked link with glitch effect
+                    this.classList.add('active');
+                    
+                    // Advanced section transition
+                    const currentSection = document.querySelector('.section:not(.hidden)');
+                    if (currentSection) {
+                        currentSection.style.opacity = '0';
+                        currentSection.style.transform = 'translateY(30px) scale(0.95)';
+                        currentSection.style.filter = 'blur(5px)';
+                        
+                        setTimeout(() => {
+                            currentSection.classList.add('hidden');
+                            showTargetSection(this.getAttribute('href').substring(1));
+                        }, 400);
+                    } else {
+                        showTargetSection(this.getAttribute('href').substring(1));
+                    }
+                });
+            });
+            
+            function showTargetSection(targetId) {
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
+                    targetSection.style.opacity = '0';
+                    targetSection.style.transform = 'translateY(30px) scale(0.95)';
+                    targetSection.style.filter = 'blur(5px)';
+                    
+                    setTimeout(() => {
+                        targetSection.style.transition = 'opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease';
+                        targetSection.style.opacity = '1';
+                        targetSection.style.transform = 'translateY(0) scale(1)';
+                        targetSection.style.filter = 'blur(0px)';
+                    }, 50);
+                }
+            }
+            
+            // Enhanced NFT card interactions
+            const nftCards = document.querySelectorAll('.nft-card');
+            nftCards.forEach((card, index) => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                    this.style.filter = 'brightness(1.1)';
+                    
+                    // Add dynamic glow based on card type
+                    const status = this.querySelector('.nft-status');
+                    if (status.classList.contains('live')) {
+                        this.style.boxShadow = '0 20px 60px rgba(220, 20, 60, 0.4), inset 0 1px 0 rgba(240, 240, 240, 0.1)';
+                    } else {
+                        this.style.boxShadow = '0 20px 60px rgba(139, 0, 0, 0.3), inset 0 1px 0 rgba(240, 240, 240, 0.1)';
+                    }.style.boxShadow = '0 20px 60px rgba(138, 43, 226, 0.3), inset 0 1px 0 rgba(240, 240, 240, 0.1)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.filter = 'brightness(1)';
+                    this.style.boxShadow = '0 5px 25px rgba(0, 0, 0, 0.3)';
+                });
+                
+                // NFT action button interactions
+                const actionBtn = card.querySelector('.nft-action');
+                actionBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const nftId = card.querySelector('.nft-id').textContent;
+                    const title = card.querySelector('.nft-title').textContent;
+                    showCyberNotification(`NFT ${nftId}: "${title}" - Wallet connection required for transaction`);
+                    
+                    // Add pulsing effect
+                    this.style.animation = 'pulse 0.3s ease';
+                    setTimeout(() => {
+                        this.style.animation = '';
+                    }, 300);
+                });
+            });
+            
+            // Gallery slot interactions with advanced effects
+            const gallerySlots = document.querySelectorAll('.gallery-slot');
+            gallerySlots.forEach((slot, index) => {
+                slot.addEventListener('click', function() {
+                    const slotId = this.querySelector('.slot-id').textContent;
+                    showCyberNotification(`Slot ${slotId}: Preparing for NFT deployment... thirdweb integration ready`);
+                    
+                    // Add matrix-style digital rain effect
+                    createDigitalRain(this);
+                });
+                
+                slot.addEventListener('mouseenter', function() {
+                    const slotId = this.querySelector('.slot-id');
+                    slotId.style.textShadow = '0 0 20px currentColor';
+                    slotId.style.animation = 'glow 1s ease-in-out infinite alternate';
+                });
+                
+                slot.addEventListener('mouseleave', function() {
+                    const slotId = this.querySelector('.slot-id');
+                    slotId.style.textShadow = '0 0 10px var(--neon-yellow)';
+                    slotId.style.animation = '';
+                });
+            });
+            
+            // Hero CTA interaction
+            const heroCTA = document.querySelector('.hero-cta');
+            if (heroCTA) {
+                heroCTA.addEventListener('click', function() {
+                    showCyberNotification('Initiating deep scan of the digital void... Prepare for transcendence');
+                    
+                    // Scroll to NFT grid with smooth animation
+                    const nftGrid = document.querySelector('.nft-grid');
+                    nftGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            }
+            
+            // Advanced notification system
+            function showCyberNotification(message) {
+                const existingNotification = document.querySelector('.cyber-notification');
+                if (existingNotification) {
+                    existingNotification.remove();
+                }
+                
+                const notification = document.createElement('div');
+                notification.className = 'cyber-notification';
+                notification.innerHTML = `
+                    <div class="notification-border"></div>
+                    <div class="notification-content">
+                        <div class="notification-icon">⚡</div>
+                        <p class="notification-text">${message}</p>
+                        <div class="notification-close">×</div>
+                    </div>
+                    <div class="notification-progress"></div>
+                `;
+                
+                // Add comprehensive notification styles
+                const style = document.createElement('style');
+                style.textContent = `
+                    .cyber-notification {
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        width: 400px;
+                        background: rgba(10, 10, 10, 0.95);
+                        border: 1px solid var(--red-dark);
+                        backdrop-filter: blur(20px);
+                        z-index: 2000;
+                        transform: translateX(100%);
+                        transition: transform 0.4s ease;
+                        font-family: 'JetBrains Mono', monospace;
+                        overflow: hidden;
+                    }
+                    
+                    .cyber-notification.show {
+                        transform: translateX(0);
+                    }
+                    
+                    .notification-border {
+                        height: 2px;
+                        background: linear-gradient(90deg, var(--red-dark), var(--silver-grey));
+                        animation: borderPulse 2s linear infinite;
+                    }
+                    
+                    @keyframes borderPulse {
+                        0%, 100% { opacity: 1; }
+                        50% { opacity: 0.5; }
+                    }
+                    
+                    .notification-content {
+                        display: flex;
+                        align-items: center;
+                        padding: 1rem;
+                        gap: 1rem;
+                    }
+                    
+                    .notification-icon {
+                        color: var(--red-crimson);
+                        font-size: 1.2rem;
+                        animation: spin 2s linear infinite;
+                    }
+                    
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                    
+                    .notification-text {
+                        flex: 1;
+                        color: var(--off-grey);
+                        font-size: 0.85rem;
+                        line-height: 1.4;
+                        margin: 0;
+                    }
+                    
+                    .notification-close {
+                        color: var(--grey-light);
+                        cursor: pointer;
+                        font-size: 1.2rem;
+                        transition: color 0.3s ease;
+                    }
+                    
+                    .notification-close:hover {
+                        color: var(--red-dark);
+                    }
+                    
+                    .notification-progress {
+                        height: 2px;
+                        background: var(--red-crimson);
+                        width: 0;
+                        animation: progressBar 4s linear;
+                    }
+                    
+                    @keyframes progressBar {
+                        0% { width: 100%; }
+                        100% { width: 0; }
+                    }
+                `;
+                
+                document.head.appendChild(style);
+                document.body.appendChild(notification);
+                
+                // Show notification
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 10);
+                
+                // Close functionality
+                const closeBtn = notification.querySelector('.notification-close');
+                closeBtn.addEventListener('click', () => {
+                    closeNotification(notification, style);
+                });
+                
+                // Auto remove after 4 seconds
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        closeNotification(notification, style);
+                    }
+                }, 4000);
+            }
+            
+            function closeNotification(notification, style) {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        notification.remove();
+                    }
+                    if (document.head.contains(style)) {
+                        style.remove();
+                    }
+                }, 400);
+            }
+            
+            // Digital rain effect for gallery slots
+            function createDigitalRain(slot) {
+                const rainContainer = document.createElement('div');
+                rainContainer.className = 'digital-rain';
+                rainContainer.style.position = 'absolute';
+                rainContainer.style.top = '0';
+                rainContainer.style.left = '0';
+                rainContainer.style.right = '0';
+                rainContainer.style.bottom = '0';
+                rainContainer.style.pointerEvents = 'none';
+                rainContainer.style.zIndex = '1';
+                
+                slot.appendChild(rainContainer);
+                
+                for (let i = 0; i < 20; i++) {
+                    const drop = document.createElement('div');
+                    drop.textContent = Math.random() > 0.5 ? '1' : '0';
+                    drop.style.position = 'absolute';
+                    drop.style.left = Math.random() * 100 + '%';
+                    drop.style.top = '-10px';
+                    drop.style.color = 'var(--red-crimson)';
+                    drop.style.fontSize = '12px';
+                    drop.style.fontFamily = 'JetBrains Mono, monospace';
+                    drop.style.animation = 'digitalFall 2s linear';
+                    drop.style.opacity = Math.random();
+                    
+                    rainContainer.appendChild(drop);
+                }
+                
+                // Add rain animation styles
+                const rainStyle = document.createElement('style');
+                rainStyle.textContent = `
+                    @keyframes digitalFall {
+                        0% { transform: translateY(-10px); opacity: 1; }
+                        100% { transform: translateY(300px); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(rainStyle);
+                
+                // Remove rain effect after animation
+                setTimeout(() => {
+                    if (slot.contains(rainContainer)) {
+                        slot.removeChild(rainContainer);
+                    }
+                    if (document.head.contains(rainStyle)) {
+                        document.head.removeChild(rainStyle);
+                    }
+                }, 2000);
+            }
+            
+            // Glitch text effect for hero title
+            function glitchText(element) {
+                const text = element.textContent;
+                const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+                
+                let iterations = 0;
+                const interval = setInterval(() => {
+                    element.textContent = text.split('').map((char, index) => {
+                        if (index < iterations) {
+                            return text[index];
+                        }
+                        return glitchChars[Math.floor(Math.random() * glitchChars.length)];
+                    }).join('');
+                    
+                    if (iterations >= text.length) {
+                        clearInterval(interval);
+                        element.textContent = text;
+                    }
+                    
+                    iterations += 1 / 3;
+                }, 30);
+            }
+            
+            // Apply glitch effect to hero title on hover
+            const heroGlitch = document.querySelector('.hero-glitch');
+            if (heroGlitch) {
+                heroGlitch.addEventListener('mouseenter', function() {
+                    glitchText(this);
+                });
+            }
+            
+            // Parallax effect for particles
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const particles = document.querySelector('.particles');
+                if (particles) {
+                    particles.style.transform = `translateY(${scrolled * 0.2}px)`;
+                }
+            });
+            
+            // Dynamic color shifting based on scroll
+            let colorShift = 0;
+            window.addEventListener('scroll', () => {
+                colorShift += 1;
+                document.documentElement.style.setProperty('--dynamic-hue', colorShift % 360);
+            });
+            
+            // Add typing sound effect simulation
+            function playTypingSound() {
+                // Visual feedback instead of audio
+                const body = document.body;
+                body.style.boxShadow = 'inset 0 0 100px rgba(139, 0, 0, 0.02)';
+                setTimeout(() => {
+                    body.style.boxShadow = '';
+                }, 50);
+            }
+            
+            // Add keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    // Close any notifications
+                    const notifications = document.querySelectorAll('.cyber-notification');
+                    notifications.forEach(notification => {
+                        notification.style.transform = 'translateX(100%)';
+                        setTimeout(() => notification.remove(), 400);
+                    });
+                }
+                
+                if (e.key >= '1' && e.key <= '3') {
+                    // Navigate with number keys
+                    const sections = ['home', 'about', 'gallery'];
+                    const targetSection = sections[parseInt(e.key) - 1];
+                    const targetLink = document.querySelector(`[href="#${targetSection}"]`);
+                    if (targetLink) {
+                        targetLink.click();
+                    }
+                }
+                
+                playTypingSound();
+            });
+            
+            console.log(`
+    ╔══════════════════════════════════════════════════════════════╗
+    ║  🔮 SILVER LINES UNDERGROUND NFT GALLERY INITIALIZED 🔮     ║
+    ║                                                              ║
+    ║  » Blockchain: Ready                                         ║
+    ║  » Soul Fragments: Loading...                                ║
+    ║  » Digital Poetry: Active                                    ║
+    ║  » Underground Mode: ENGAGED                                 ║
+    ║                                                              ║
+    ║  Press 1-3 to navigate, ESC to close notifications          ║
+    ╚══════════════════════════════════════════════════════════════╝
+            `);
+        });
+    </script>
 </body>
 </html>
