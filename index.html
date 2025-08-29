@@ -1403,154 +1403,55 @@
                 }, 2000);
             }
             
-            // Continuous character-by-character morphing - symbols evolve into letters
-            function startContinuousMorph(element) {
+            // Continuous glitch text effect - symbols always moving
+            function startContinuousGlitch(element) {
                 const originalText = element.getAttribute('data-text') || element.textContent;
-                const glitchChars = 'M<]&&>._=-$+[#+!@#$%^&*()_+-=[]{}|;:,.<>?`~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789█▓▒░▄▀▐▌│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌▲►▼◄♠♣♥♦•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼';
-                let displayText = originalText.split('').map(() => glitchChars[Math.floor(Math.random() * glitchChars.length)]);
-                let revealProgress = new Array(originalText.length).fill(0); // 0 = symbol, 1 = letter
+                const glitchChars = 'M<]&&>._=-$+[#+!@#$%^&*()_+-=[]{}|;:,.<>?█▓▒░▄▀▐▌│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌▲►▼◄♠♣♥♦•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼';
                 
-                function morphToText() {
-                    // Gradually reveal letters one by one
-                    let step = 0;
-                    const morphInterval = setInterval(() => {
-                        // Pick a random character that hasn't been revealed yet
-                        const unrevealedIndices = revealProgress.map((progress, index) => progress < 1 ? index : null).filter(i => i !== null);
-                        
-                        if (unrevealedIndices.length > 0) {
-                            // Reveal 1-3 characters this step
-                            const revealCount = Math.min(Math.floor(Math.random() * 3) + 1, unrevealedIndices.length);
-                            
-                            for (let i = 0; i < revealCount; i++) {
-                                const randomIndex = unrevealedIndices[Math.floor(Math.random() * unrevealedIndices.length)];
-                                if (randomIndex !== undefined) {
-                                    revealProgress[randomIndex] = 1;
-                                    displayText[randomIndex] = originalText[randomIndex];
-                                    // Remove from unrevealed list
-                                    const indexPos = unrevealedIndices.indexOf(randomIndex);
-                                    if (indexPos > -1) unrevealedIndices.splice(indexPos, 1);
-                                }
+                function performGlitch() {
+                    const text = originalText;
+                    let iterations = 0;
+                    const totalIterations = 10;
+                    
+                    const interval = setInterval(() => {
+                        element.textContent = text.split('').map((char, index) => {
+                            if (index < iterations) {
+                                return text[index];
                             }
-                        }
-                        
-                        // Add some chaos to unrevealed characters
-                        displayText = displayText.map((char, index) => {
-                            if (revealProgress[index] < 1) {
-                                // Keep changing symbols for unrevealed characters
-                                if (Math.random() > 0.3) {
-                                    return glitchChars[Math.floor(Math.random() * glitchChars.length)];
-                                }
-                            }
-                            return char;
-                        });
-                        
-                        element.textContent = displayText.join('');
-                        step++;
-                        
-                        // Stop when all characters are revealed or after max steps
-                        if (revealProgress.every(p => p >= 1) || step > 20) {
-                            clearInterval(morphInterval);
-                            // Ensure final text is correct
-                            displayText = originalText.split('');
-                            revealProgress.fill(1);
-                            element.textContent = displayText.join('');
-                        }
-                    }, 200);
-                }
-                
-                function morphToSymbols() {
-                    // Gradually dissolve letters into symbols
-                    let step = 0;
-                    const morphInterval = setInterval(() => {
-                        // Pick random revealed characters to dissolve
-                        const revealedIndices = revealProgress.map((progress, index) => progress >= 1 ? index : null).filter(i => i !== null);
-                        
-                        if (revealedIndices.length > 0) {
-                            // Dissolve 1-2 characters this step
-                            const dissolveCount = Math.min(Math.floor(Math.random() * 2) + 1, revealedIndices.length);
-                            
-                            for (let i = 0; i < dissolveCount; i++) {
-                                const randomIndex = revealedIndices[Math.floor(Math.random() * revealedIndices.length)];
-                                if (randomIndex !== undefined) {
-                                    revealProgress[randomIndex] = 0;
-                                    displayText[randomIndex] = glitchChars[Math.floor(Math.random() * glitchChars.length)];
-                                    // Remove from revealed list
-                                    const indexPos = revealedIndices.indexOf(randomIndex);
-                                    if (indexPos > -1) revealedIndices.splice(indexPos, 1);
-                                }
-                            }
-                        }
-                        
-                        // Keep animating all symbol characters
-                        displayText = displayText.map((char, index) => {
-                            if (revealProgress[index] < 1) {
-                                if (Math.random() > 0.4) {
-                                    return glitchChars[Math.floor(Math.random() * glitchChars.length)];
-                                }
-                            }
-                            return char;
-                        });
-                        
-                        element.textContent = displayText.join('');
-                        step++;
-                        
-                        // Stop when all characters are symbols or after max steps
-                        if (revealProgress.every(p => p < 1) || step > 15) {
-                            clearInterval(morphInterval);
-                            // Ensure all are symbols
-                            displayText = displayText.map(() => glitchChars[Math.floor(Math.random() * glitchChars.length)]);
-                            revealProgress.fill(0);
-                            element.textContent = displayText.join('');
-                        }
-                    }, 150);
-                }
-                
-                // Continuous morphing cycle
-                function startMorphingCycle() {
-                    // Start with symbols, then morph to text
-                    setTimeout(() => {
-                        morphToText();
-                        
-                        // Stay as text briefly, then dissolve back to symbols
-                        setTimeout(() => {
-                            morphToSymbols();
-                            
-                            // Brief pause as symbols, then restart cycle
-                            setTimeout(() => {
-                                startMorphingCycle();
-                            }, Math.random() * 800 + 600);
-                            
-                        }, Math.random() * 1500 + 1000);
-                        
-                    }, Math.random() * 800 + 600);
-                }
-                
-                // Initialize with symbols and start morphing
-                element.textContent = displayText.join('');
-                startMorphingCycle();
-                
-                // Hover effect
-                element.addEventListener('mouseenter', function() {
-                    morphToText();
-                    setTimeout(() => morphToSymbols(), 1200);
-                });
-                
-                // Constant symbol animation for unrevealed characters
-                setInterval(() => {
-                    displayText = displayText.map((char, index) => {
-                        if (revealProgress[index] < 1 && Math.random() > 0.6) {
                             return glitchChars[Math.floor(Math.random() * glitchChars.length)];
+                        }).join('');
+                        
+                        if (iterations >= text.length) {
+                            clearInterval(interval);
+                            element.textContent = text;
                         }
-                        return char;
-                    });
-                    element.textContent = displayText.join('');
-                }, 100);
+                        
+                        iterations += 1 / 3;
+                    }, 50);
+                }
+                
+                // Continuous glitch cycle - trigger every 2-5 seconds
+                function scheduleNextGlitch() {
+                    const delay = Math.random() * 3000 + 2000; // Random delay between 2-5 seconds
+                    setTimeout(() => {
+                        performGlitch();
+                        scheduleNextGlitch(); // Schedule the next one
+                    }, delay);
+                }
+                
+                // Start the continuous cycle
+                scheduleNextGlitch();
+                
+                // Also trigger on hover for immediate feedback
+                element.addEventListener('mouseenter', function() {
+                    performGlitch();
+                });
             }
             
-            // Apply continuous morphing effect to hero title (in addition to CSS)
+            // Apply continuous glitch effect to hero title (in addition to CSS)
             const heroGlitch = document.querySelector('.hero-glitch');
             if (heroGlitch) {
-                startContinuousMorph(heroGlitch);
+                startContinuousGlitch(heroGlitch);
             }
             
             // Parallax effect for particles
