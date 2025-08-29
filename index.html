@@ -1403,40 +1403,36 @@
                 }, 2000);
             }
             
-            // Working Moving Symbols Glitch Animation - from dev implementation
-            let autoGlitchEnabled = true;
-            let isGlitching = false;
-            let glitchInterval = null;
-            
+            // Advanced Moving Symbols Glitch Animation
             function glitchText(element) {
-                if (isGlitching) return;
-                
                 const originalText = element.textContent;
                 const glitchChars = 'M<]&&>._=-$+[#+!@#$%^&*()_+-=[]{}|;:,.<>?█▓▒░▄▀▐▌│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌▲►▼◄♠♣♥♦•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼';
                 
                 let iterations = 0;
-                const revealSpeed = 1/3;
-                const frameDelay = 35;
-                
-                isGlitching = true;
+                const revealSpeed = 1/3; // Control reveal speed (smaller = slower)
+                const frameDelay = 35; // Milliseconds between updates
                 
                 const interval = setInterval(() => {
                     const glitchedText = originalText.split('').map((char, index) => {
                         if (index < Math.floor(iterations)) {
+                            // Character has been fully revealed
                             return originalText[index];
                         } else {
+                            // Show random glitch symbol
                             return glitchChars[Math.floor(Math.random() * glitchChars.length)];
                         }
                     }).join('');
                     
+                    // Update both textContent AND data-text attribute for CSS pseudo-elements
                     element.textContent = glitchedText;
                     element.setAttribute('data-text', glitchedText);
                     
+                    // Check if animation is complete
                     if (iterations >= originalText.length) {
                         clearInterval(interval);
+                        // Ensure final state is correct
                         element.textContent = originalText;
                         element.setAttribute('data-text', originalText);
-                        isGlitching = false;
                     }
                     
                     iterations += revealSpeed;
@@ -1448,38 +1444,39 @@
                 const heroElement = document.querySelector('.hero-glitch');
                 if (!heroElement) return;
                 
+                let isGlitching = false; // Prevent overlapping animations
+                
                 function triggerGlitch() {
-                    if (!autoGlitchEnabled) return;
+                    if (isGlitching) return;
+                    
+                    isGlitching = true;
                     glitchText(heroElement);
+                    
+                    // Reset flag after animation completes
+                    setTimeout(() => {
+                        isGlitching = false;
+                    }, 2000); // Approximate animation duration
                 }
                 
                 function scheduleNextGlitch() {
-                    if (glitchInterval) clearTimeout(glitchInterval);
-                    
-                    const delay = Math.random() * 3000 + 2000;
-                    glitchInterval = setTimeout(() => {
+                    const delay = Math.random() * 3000 + 2000; // 2-5 seconds random
+                    setTimeout(() => {
                         triggerGlitch();
-                        if (autoGlitchEnabled) {
-                            scheduleNextGlitch();
-                        }
+                        scheduleNextGlitch(); // Schedule the next one
                     }, delay);
                 }
                 
                 // Start the continuous cycle
                 scheduleNextGlitch();
                 
-                // Hover trigger
-                heroElement.addEventListener('mouseenter', () => {
-                    glitchText(heroElement);
-                });
+                // Hover trigger for immediate feedback
+                heroElement.addEventListener('mouseenter', triggerGlitch);
                 
-                // Initial test after page load
-                setTimeout(() => {
-                    glitchText(heroElement);
-                }, 1000);
+                // Debug: Initial test after page load (remove in production)
+                setTimeout(triggerGlitch, 1000);
             }
             
-            // Apply continuous glitch effect to hero title (in addition to CSS)
+            // Initialize the glitch system
             startContinuousGlitch();
             }
             
