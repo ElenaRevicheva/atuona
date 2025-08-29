@@ -1403,8 +1403,64 @@
                 }, 2000);
             }
             
-            // CSS-based glitch effect is now handling the continuous animation
-            // No JavaScript needed for the hero title glitch effect
+            // Enhanced glitch effect with moving symbols
+            function startSymbolGlitch(element) {
+                const originalText = element.getAttribute('data-text') || element.textContent;
+                const glitchChars = 'M<]&&>._=-$+[#+!@#$%^&*()_+-=[]{}|;:,.<>?`~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789█▓▒░▄▀▐▌│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌▲►▼◄♠♣♥♦•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼';
+                let isGlitching = false;
+                
+                function performSymbolGlitch() {
+                    if (isGlitching) return;
+                    isGlitching = true;
+                    
+                    let iterations = 0;
+                    const totalIterations = 12;
+                    
+                    const glitchInterval = setInterval(() => {
+                        // Create glitched text with random symbols
+                        element.textContent = originalText.split('').map((char, index) => {
+                            // Higher chance of glitch symbols during animation
+                            if (Math.random() > 0.4) {
+                                return glitchChars[Math.floor(Math.random() * glitchChars.length)];
+                            }
+                            return char;
+                        }).join('');
+                        
+                        iterations++;
+                        
+                        if (iterations >= totalIterations) {
+                            clearInterval(glitchInterval);
+                            element.textContent = originalText;
+                            isGlitching = false;
+                        }
+                    }, 80);
+                }
+                
+                // Continuous symbol glitch effect
+                function scheduleNextSymbolGlitch() {
+                    const delay = Math.random() * 2000 + 1500; // Random delay between 1.5-3.5 seconds
+                    setTimeout(() => {
+                        performSymbolGlitch();
+                        scheduleNextSymbolGlitch();
+                    }, delay);
+                }
+                
+                // Start the continuous symbol glitch cycle
+                setTimeout(() => {
+                    scheduleNextSymbolGlitch();
+                }, 1000); // Start after 1 second
+                
+                // Also trigger on hover for immediate feedback
+                element.addEventListener('mouseenter', function() {
+                    performSymbolGlitch();
+                });
+            }
+            
+            // Apply symbol glitch effect to hero title (in addition to CSS)
+            const heroGlitch = document.querySelector('.hero-glitch');
+            if (heroGlitch) {
+                startSymbolGlitch(heroGlitch);
+            }
             
             // Parallax effect for particles
             window.addEventListener('scroll', function() {
