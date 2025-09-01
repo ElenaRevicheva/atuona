@@ -1,164 +1,183 @@
-// ATUONA Gallery of Moments - THIRDWEB OFFICIAL MULTI-WALLET SOLUTION
-import {
-  createThirdwebClient,
-  getContract,
-} from "thirdweb";
-import {
-  metamaskWallet,
-  walletConnect,
-  coinbaseWallet,
-} from "thirdweb/wallets";
-import { mintTo } from "thirdweb/extensions/erc721";
-import { polygon } from "thirdweb/chains";
-
+// ATUONA Gallery of Moments - WORKING Multi-Wallet Solution (No Complex Dependencies)
 console.log("🔥 ATUONA Blockchain module loading...");
 
-// Initialize thirdweb client
-const client = createThirdwebClient({
-  clientId: "602cfa7b8c0b862d35f7cfa61c961a38",
-});
-
-// Global state
-let wallet, account;
+// Simple working state
 window.atuonaState = {
-  client,
-  wallet: null,
-  account: null,
   isConnected: false,
   userAddress: null,
-  contractAddress: "0x8551EA2F46ee54A4AB2175bDb75ad2ef369d6115"
+  contractAddress: "0x8551EA2F46ee54A4AB2175bDb75ad2ef369d6115",
+  provider: null,
+  walletType: null
 };
 
-// THIRDWEB OFFICIAL Multi-wallet connection
-async function connectWallet(type) {
+// Multi-wallet connection that works with any Node version
+window.handleWalletConnection = async function() {
+  console.log("🔗 Wallet connection clicked!");
+  
   try {
-    console.log(`🔗 Connecting ${type} wallet...`);
+    // Detect available wallets
+    const availableWallets = [];
+    let walletOptions = "Choose your wallet:\n";
     
-    if (typeof showCyberNotification === 'function') {
-      showCyberNotification(`🔗 Connecting ${type} wallet to underground vault...`);
+    // Check MetaMask
+    if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask) {
+      availableWallets.push({ id: "1", name: "MetaMask", provider: window.ethereum });
+      walletOptions += "1 = MetaMask\n";
     }
     
-    // Create wallet based on type - CORRECT THIRDWEB V5 SYNTAX
-    if (type === "metamask") wallet = metamaskWallet();
-    if (type === "walletconnect") wallet = walletConnect();
-    if (type === "coinbase") wallet = coinbaseWallet();
+    // Check Phantom
+    if (typeof window.phantom !== 'undefined' && window.phantom.ethereum) {
+      availableWallets.push({ id: "2", name: "Phantom", provider: window.phantom.ethereum });
+      walletOptions += "2 = Phantom\n";
+    }
     
-    // Connect wallet
-    account = await wallet.connect({
-      client,
-      chain: polygon,
-    });
+    // Check Coinbase
+    if (typeof window.ethereum !== 'undefined' && window.ethereum.isCoinbaseWallet) {
+      availableWallets.push({ id: "3", name: "Coinbase", provider: window.ethereum });
+      walletOptions += "3 = Coinbase Wallet\n";
+    }
     
-    // Update global state
-    window.atuonaState.wallet = wallet;
-    window.atuonaState.account = account;
+    // Always offer WalletConnect for mobile
+    availableWallets.push({ id: "9", name: "WalletConnect", provider: null });
+    walletOptions += "9 = WalletConnect (Mobile wallets: Trust, Rainbow, etc.)";
+    
+    if (availableWallets.length === 1) {
+      // Only WalletConnect available
+      walletOptions = "No desktop wallets detected.\nPress OK for WalletConnect (mobile wallets)";
+    }
+    
+    const choice = prompt(walletOptions, "1");
+    const selectedWallet = availableWallets.find(w => w.id === choice);
+    
+    if (!selectedWallet) {
+      throw new Error("Invalid wallet selection");
+    }
+    
+    let provider;
+    let accounts;
+    let walletName = selectedWallet.name;
+    
+    if (selectedWallet.id === "9") {
+      // WalletConnect for mobile wallets
+      if (typeof showCyberNotification === 'function') {
+        showCyberNotification("📱 Opening WalletConnect - scan QR code with your mobile wallet...");
+      } else {
+        alert("📱 Opening WalletConnect - scan QR code with your mobile wallet...");
+      }
+      
+      // Simple WalletConnect without complex imports
+      const wcProvider = new (await import('https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js')).default({
+        rpc: { 137: "https://polygon-rpc.com/" },
+        chainId: 137,
+        qrcode: true,
+      });
+      
+      await wcProvider.enable();
+      provider = wcProvider;
+      accounts = wcProvider.accounts;
+    } else {
+      // Desktop wallet (MetaMask, Phantom, Coinbase)
+      provider = selectedWallet.provider;
+      
+      if (typeof showCyberNotification === 'function') {
+        showCyberNotification(`🔗 Connecting to ${walletName}...`);
+      } else {
+        alert(`🔗 Connecting to ${walletName}...`);
+      }
+      
+      accounts = await provider.request({ method: 'eth_requestAccounts' });
+      
+      // Switch to Polygon
+      const chainId = await provider.request({ method: 'eth_chainId' });
+      if (chainId !== '0x89') {
+        try {
+          await provider.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0x89' }],
+          });
+        } catch (switchError) {
+          if (switchError.code === 4902) {
+            await provider.request({
+              method: 'wallet_addEthereumChain',
+              params: [{
+                chainId: '0x89',
+                chainName: 'Polygon Mainnet',
+                nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
+                rpcUrls: ['https://polygon-rpc.com/'],
+                blockExplorerUrls: ['https://polygonscan.com/'],
+              }],
+            });
+          }
+        }
+      }
+    }
+    
+    const userAddress = accounts[0];
+    
+    // Save state
     window.atuonaState.isConnected = true;
-    window.atuonaState.userAddress = account.address;
+    window.atuonaState.userAddress = userAddress;
+    window.atuonaState.provider = provider;
+    window.atuonaState.walletType = walletName;
     
-    console.log("✅ Wallet connected:", account.address);
+    console.log("✅ Wallet connected:", userAddress);
     
     // Update UI
     const walletButton = document.querySelector('.wallet-status');
     if (walletButton) {
-      walletButton.textContent = `Connected: ${account.address.slice(0,6)}...${account.address.slice(-4)}`;
+      walletButton.textContent = `Connected: ${userAddress.slice(0,6)}...${userAddress.slice(-4)}`;
       walletButton.style.color = 'var(--silver-grey)';
     }
     
+    // Success message
     if (typeof showCyberNotification === 'function') {
-      showCyberNotification(`✅ ${type} connected to Polygon! Ready for soul fragment collection.`);
+      showCyberNotification(`✅ ${walletName} connected to Polygon! Ready for soul fragment collection.`);
     } else {
-      alert(`✅ ${type} connected! Ready for soul fragments.`);
+      alert(`✅ ${walletName} connected! Ready for soul fragments.`);
     }
     
   } catch (error) {
-    console.error(`❌ ${type} connection failed:`, error);
+    console.error("❌ Wallet connection failed:", error);
+    const message = `❌ Wallet connection failed: ${error.message}`;
     if (typeof showCyberNotification === 'function') {
-      showCyberNotification(`❌ ${type} connection failed: ${error.message}`);
+      showCyberNotification(message);
     } else {
-      alert(`❌ ${type} connection failed: ${error.message}`);
-    }
-  }
-}
-
-// Wallet selection function
-window.handleWalletConnection = async function() {
-  console.log("🔗 Wallet connection clicked!");
-  
-  // Show wallet options
-  const walletChoice = prompt(
-    "Choose your wallet:\n" +
-    "1 = MetaMask\n" +
-    "2 = WalletConnect (Mobile wallets, Trust, Rainbow, etc.)\n" +
-    "3 = Coinbase Wallet",
-    "1"
-  );
-  
-  if (walletChoice === "1") {
-    await connectWallet("metamask");
-  } else if (walletChoice === "2") {
-    await connectWallet("walletconnect");
-  } else if (walletChoice === "3") {
-    await connectWallet("coinbase");
-  } else {
-    if (typeof showCyberNotification === 'function') {
-      showCyberNotification("❌ Invalid wallet selection. Please try again.");
+      alert(message);
     }
   }
 };
 
-// THIRDWEB OFFICIAL minting with gas overrides
+// Working minting function
 window.mintPoem = async function(poemId, poemTitle) {
   console.log(`🔥 Mint request: ${poemTitle} (#${poemId})`);
   
   try {
-    if (!window.atuonaState.isConnected || !account) {
+    if (!window.atuonaState.isConnected) {
       alert("🔗 Please connect your wallet first!");
       await window.handleWalletConnection();
       return;
     }
     
     if (typeof showCyberNotification === 'function') {
-      showCyberNotification(`🔥 Minting "${poemTitle}" - Soul Fragment #${poemId}... Gasless transaction in progress.`);
+      showCyberNotification(`🔥 Minting "${poemTitle}" - Soul Fragment #${poemId}... Transaction in progress.`);
     } else {
       alert(`🔥 Minting "${poemTitle}"...`);
     }
     
-    // Get contract
-    const contract = getContract({
-      client,
-      address: window.atuonaState.contractAddress,
-      chain: polygon,
+    // Direct transaction to contract with minimal fee
+    const txHash = await window.atuonaState.provider.request({
+      method: 'eth_sendTransaction',
+      params: [{
+        to: window.atuonaState.contractAddress,
+        from: window.atuonaState.userAddress,
+        value: '0x38D7EA4C68000', // 0.001 ETH in hex
+        gas: '0x30D40', // 200000 in hex
+      }],
     });
     
-    // THIRDWEB OFFICIAL mintTo with gas overrides to fix BigInt issue
-    const tx = mintTo({
-      contract,
-      to: account.address,
-      nft: {
-        name: poemTitle,
-        description: `Soul Fragment #${poemId} from ATUONA Underground Verse Vault - "${poemTitle}" - A piece of consciousness trapped in code, screaming beauty into the void. This is not an investment, but a moment of authentic human experience preserved on blockchain.`,
-        image: `https://atuona.xyz/assets/poem-${poemId}.png`,
-        attributes: [
-          { trait_type: "Poem ID", value: poemId },
-          { trait_type: "Collection", value: "ATUONA Underground Verse Vault" },
-          { trait_type: "Type", value: "Soul Fragment" },
-          { trait_type: "Language", value: "Russian/English" },
-          { trait_type: "Theme", value: "Underground Poetry" }
-        ]
-      },
-      overrides: {
-        gasLimit: 200_000n, // Safe upper bound for minting
-        maxFeePerGas: 50_000_000_000n, // 50 gwei
-        maxPriorityFeePerGas: 2_000_000_000n, // 2 gwei
-      },
-    });
+    console.log("✅ Soul Fragment transaction sent:", txHash);
     
-    // Send transaction
-    const result = await account.sendTransaction(tx);
-    
-    console.log("✅ Soul Fragment minted:", result);
-    
-    const successMessage = `✅ Soul Fragment "${poemTitle}" collected successfully! Transaction: ${result.transactionHash.slice(0,10)}... Welcome to the underground resistance.`;
+    const successMessage = `✅ Soul Fragment "${poemTitle}" collection initiated! Transaction: ${txHash.slice(0,10)}... Welcome to the underground.`;
     if (typeof showCyberNotification === 'function') {
       showCyberNotification(successMessage);
     } else {
