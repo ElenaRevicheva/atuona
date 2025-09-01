@@ -78,7 +78,7 @@
             }
         };
         
-        // Minting through thirdweb dashboard (redirect approach)
+        // Direct minting to Polygon contract
         window.mintPoem = async function(poemId, poemTitle) {
             console.log(`🔥 Mint request: ${poemTitle} (#${poemId})`);
             
@@ -89,26 +89,67 @@
                     return;
                 }
                 
-                // Show message about minting process
-                const message = `🔥 Opening minting interface for "${poemTitle}" - Soul Fragment #${poemId}. You'll be redirected to complete the gasless transaction.`;
+                // Check if on Polygon network
+                const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+                if (chainId !== '0x89') { // Polygon mainnet chain ID
+                    // Request network switch to Polygon
+                    try {
+                        await window.ethereum.request({
+                            method: 'wallet_switchEthereumChain',
+                            params: [{ chainId: '0x89' }],
+                        });
+                    } catch (switchError) {
+                        // If network doesn't exist, add it
+                        if (switchError.code === 4902) {
+                            await window.ethereum.request({
+                                method: 'wallet_addEthereumChain',
+                                params: [{
+                                    chainId: '0x89',
+                                    chainName: 'Polygon Mainnet',
+                                    nativeCurrency: {
+                                        name: 'MATIC',
+                                        symbol: 'MATIC',
+                                        decimals: 18,
+                                    },
+                                    rpcUrls: ['https://polygon-rpc.com/'],
+                                    blockExplorerUrls: ['https://polygonscan.com/'],
+                                }],
+                            });
+                        }
+                    }
+                }
+                
+                const message = `🔥 Minting "${poemTitle}" - Soul Fragment #${poemId}... Prepare for transcendence on Polygon.`;
                 if (typeof showCyberNotification === 'function') {
                     showCyberNotification(message);
                 } else {
                     alert(message);
                 }
                 
-                // Redirect to thirdweb minting interface for your Polygon contract
-                const mintingUrl = `https://thirdweb.com/polygon/0x8551EA2F46ee54A4AB2175bDb75ad2ef369d6115/nfts`;
+                // Simple minting transaction to your contract
+                const mintPrice = "0x38D7EA4C68000"; // 0.001 ETH in hex (symbolic fee)
                 
-                // Open in new tab
-                window.open(mintingUrl, '_blank');
+                const transactionParameters = {
+                    to: window.atuonaState.contractAddress,
+                    from: window.atuonaState.userAddress,
+                    value: mintPrice,
+                    data: "0x", // Empty data for simple minting
+                };
                 
-                // Show follow-up message
-                setTimeout(() => {
-                    if (typeof showCyberNotification === 'function') {
-                        showCyberNotification(`📖 Complete "${poemTitle}" collection on the opened thirdweb page. Return here to continue exploring the underground vault.`);
-                    }
-                }, 2000);
+                // Send transaction
+                const txHash = await window.ethereum.request({
+                    method: 'eth_sendTransaction',
+                    params: [transactionParameters],
+                });
+                
+                console.log("✅ Soul Fragment transaction sent:", txHash);
+                
+                const successMessage = `✅ Soul Fragment "${poemTitle}" collection initiated! Transaction: ${txHash.slice(0,10)}... Welcome to the underground. Check Polygonscan for confirmation.`;
+                if (typeof showCyberNotification === 'function') {
+                    showCyberNotification(successMessage);
+                } else {
+                    alert(successMessage);
+                }
                 
             } catch (error) {
                 console.error("❌ Minting failed:", error);
