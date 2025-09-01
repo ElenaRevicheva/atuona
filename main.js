@@ -1,45 +1,86 @@
-// ATUONA Gallery of Moments - Simple Working Blockchain Integration
+// ATUONA Gallery of Moments - Multi-Wallet Blockchain Integration
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
 console.log("🔥 ATUONA Blockchain module loading...");
 
-// Simple working state
+// Multi-wallet state
 window.atuonaState = {
   isConnected: false,
   userAddress: null,
   contractAddress: "0x8551EA2F46ee54A4AB2175bDb75ad2ef369d6115",
+  provider: null,
+  walletType: null,
   isInitialized: true
 };
 
-// Simple reliable wallet connection
+// Multi-wallet connection supporting all major wallets
 window.handleWalletConnection = async function() {
   console.log("🔗 Wallet connection clicked!");
   
   try {
-    // Check if MetaMask is available
-    if (typeof window.ethereum !== 'undefined') {
-      console.log("🦊 MetaMask detected!");
+    // Show wallet selection
+    const walletChoice = confirm("Choose wallet:\nOK = MetaMask/Injected\nCancel = WalletConnect (Mobile wallets, Coinbase, Trust, etc.)");
+    
+    let provider;
+    let accounts;
+    
+    if (walletChoice) {
+      // MetaMask/Injected wallet
+      if (typeof window.ethereum !== 'undefined') {
+        console.log("🦊 Using injected wallet (MetaMask/etc)");
+        provider = window.ethereum;
+        window.atuonaState.walletType = "injected";
+        
+        if (typeof showCyberNotification === 'function') {
+          showCyberNotification("🔗 Connecting to injected wallet...");
+        } else {
+          alert("🔗 Connecting to injected wallet...");
+        }
+        
+        accounts = await provider.request({ method: 'eth_requestAccounts' });
+      } else {
+        throw new Error("No injected wallet found. Please install MetaMask or use WalletConnect.");
+      }
+    } else {
+      // WalletConnect for mobile wallets, Coinbase, Trust, etc.
+      console.log("📱 Using WalletConnect");
       
       if (typeof showCyberNotification === 'function') {
-        showCyberNotification("🔗 Connecting to MetaMask on Polygon...");
+        showCyberNotification("🔗 Connecting via WalletConnect - Choose your wallet...");
       } else {
-        alert("🔗 Connecting to MetaMask...");
+        alert("🔗 Connecting via WalletConnect...");
       }
       
-      // Request account access
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      const userAddress = accounts[0];
+      provider = new WalletConnectProvider({
+        rpc: {
+          137: "https://polygon-rpc.com/", // Polygon mainnet
+        },
+        chainId: 137,
+        qrcode: true,
+        qrcodeModalOptions: {
+          mobileLinks: ["metamask", "coinbase", "trust", "rainbow", "argent"],
+        },
+      });
       
-      // Switch to Polygon network
-      const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+      await provider.enable();
+      accounts = provider.accounts;
+      window.atuonaState.walletType = "walletconnect";
+    }
+    
+    const userAddress = accounts[0];
+    
+    // Switch to Polygon if using injected wallet
+    if (window.atuonaState.walletType === "injected") {
+      const chainId = await provider.request({ method: 'eth_chainId' });
       if (chainId !== '0x89') {
         try {
-          await window.ethereum.request({
+          await provider.request({
             method: 'wallet_switchEthereumChain',
             params: [{ chainId: '0x89' }],
           });
         } catch (switchError) {
           if (switchError.code === 4902) {
-            await window.ethereum.request({
+            await provider.request({
               method: 'wallet_addEthereumChain',
               params: [{
                 chainId: '0x89',
@@ -52,33 +93,27 @@ window.handleWalletConnection = async function() {
           }
         }
       }
-      
-      window.atuonaState.isConnected = true;
-      window.atuonaState.userAddress = userAddress;
-      
-      console.log("✅ Wallet connected:", userAddress);
-      
-      // Update UI
-      const walletButton = document.querySelector('.wallet-status');
-      if (walletButton) {
-        walletButton.textContent = `Connected: ${userAddress.slice(0,6)}...${userAddress.slice(-4)}`;
-        walletButton.style.color = 'var(--silver-grey)';
-      }
-      
-      // Success message
-      if (typeof showCyberNotification === 'function') {
-        showCyberNotification("✅ Wallet connected to Polygon! Ready for soul fragment collection.");
-      } else {
-        alert("✅ Wallet connected to Polygon! Ready for soul fragments.");
-      }
-      
+    }
+    
+    window.atuonaState.isConnected = true;
+    window.atuonaState.userAddress = userAddress;
+    window.atuonaState.provider = provider;
+    
+    console.log("✅ Wallet connected:", userAddress);
+    
+    // Update UI
+    const walletButton = document.querySelector('.wallet-status');
+    if (walletButton) {
+      walletButton.textContent = `Connected: ${userAddress.slice(0,6)}...${userAddress.slice(-4)}`;
+      walletButton.style.color = 'var(--silver-grey)';
+    }
+    
+    // Success message
+    const walletName = window.atuonaState.walletType === "injected" ? "MetaMask" : "WalletConnect";
+    if (typeof showCyberNotification === 'function') {
+      showCyberNotification(`✅ ${walletName} connected to Polygon! Ready for soul fragment collection.`);
     } else {
-      const message = "❌ Please install MetaMask to collect soul fragments.";
-      if (typeof showCyberNotification === 'function') {
-        showCyberNotification(message);
-      } else {
-        alert(message);
-      }
+      alert(`✅ ${walletName} connected! Ready for soul fragments.`);
     }
     
   } catch (error) {
@@ -134,8 +169,8 @@ window.mintPoem = async function(poemId, poemTitle) {
     // ERC721 mint function call data
     const Web3 = window.ethereum;
     
-    // Simple transfer to contract (basic minting)
-    const txHash = await Web3.request({
+    // Send transaction using connected provider
+    const txHash = await window.atuonaState.provider.request({
       method: 'eth_sendTransaction',
       params: [{
         to: contractAddress,
