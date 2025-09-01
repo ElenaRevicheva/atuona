@@ -8,53 +8,88 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Simple Working Wallet Connection -->
+    <!-- Thirdweb SDK v4 - More Stable -->
+    <script src="https://unpkg.com/@thirdweb-dev/sdk@4/dist/browser/index.js"></script>
     <script>
         console.log("🔥 ATUONA Script loading...");
         
-        // Simple wallet connection using Web3 standard
+        // Global state
+        window.atuonaState = {
+            sdk: null,
+            contract: null,
+            isConnected: false,
+            userAddress: null,
+            isInitialized: false
+        };
+        
+        // Initialize thirdweb SDK v4
+        async function initializeAtuona() {
+            try {
+                console.log("🔥 Initializing ATUONA with Thirdweb v4...");
+                
+                // Wait for SDK to be available
+                if (!window.ThirdwebSDK) {
+                    console.log("⏳ Waiting for ThirdwebSDK...");
+                    setTimeout(initializeAtuona, 1000);
+                    return;
+                }
+                
+                // Initialize SDK
+                window.atuonaState.sdk = new window.ThirdwebSDK("ethereum", {
+                    clientId: "816ab255dd4019069f7df4c5aafa492a"
+                });
+                
+                // Get contract
+                window.atuonaState.contract = await window.atuonaState.sdk.getContract("0xd57d203710f0cb1c12A4E4AC8549dDfD3E807811");
+                
+                window.atuonaState.isInitialized = true;
+                console.log("✅ ATUONA Blockchain initialized with gasless transactions!");
+                
+                if (typeof showCyberNotification === 'function') {
+                    showCyberNotification("🔥 Underground blockchain sanctuary initialized - Gasless soul collection ready!");
+                }
+                
+            } catch (error) {
+                console.error("❌ ATUONA initialization failed:", error);
+                setTimeout(initializeAtuona, 3000);
+            }
+        }
+        
+        // Wallet connection with thirdweb
         window.handleWalletConnection = async function() {
             console.log("🔗 Wallet connection clicked!");
             
             try {
-                // Check if MetaMask is available
-                if (typeof window.ethereum !== 'undefined') {
-                    console.log("🦊 MetaMask detected!");
-                    
-                    if (typeof showCyberNotification === 'function') {
-                        showCyberNotification("🔗 Connecting to MetaMask...");
-                    } else {
-                        alert("🔗 Connecting to MetaMask...");
-                    }
-                    
-                    // Request account access
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    const userAddress = accounts[0];
-                    
-                    console.log("✅ Wallet connected:", userAddress);
-                    
-                    // Update button
-                    const walletButton = document.querySelector('.wallet-status');
-                    if (walletButton) {
-                        walletButton.textContent = `Connected: ${userAddress.slice(0,6)}...${userAddress.slice(-4)}`;
-                        walletButton.style.color = 'var(--silver-grey)';
-                    }
-                    
-                    // Success message
-                    if (typeof showCyberNotification === 'function') {
-                        showCyberNotification("✅ Wallet connected successfully! Ready to collect soul fragments.");
-                    } else {
-                        alert("✅ Wallet connected successfully! Ready to collect soul fragments.");
-                    }
-                    
+                if (!window.atuonaState.isInitialized) {
+                    alert("⏳ Initializing underground blockchain sanctuary... Please wait.");
+                    return;
+                }
+                
+                if (typeof showCyberNotification === 'function') {
+                    showCyberNotification("🔗 Connecting to your wallet...");
                 } else {
-                    // No MetaMask
-                    const message = "❌ Please install MetaMask to collect soul fragments from the underground vault.";
-                    if (typeof showCyberNotification === 'function') {
-                        showCyberNotification(message);
-                    } else {
-                        alert(message);
-                    }
+                    alert("🔗 Connecting to your wallet...");
+                }
+                
+                // Connect wallet using thirdweb
+                const address = await window.atuonaState.sdk.wallet.connect("metamask");
+                
+                window.atuonaState.isConnected = true;
+                window.atuonaState.userAddress = address;
+                
+                // Update UI
+                const walletButton = document.querySelector('.wallet-status');
+                if (walletButton) {
+                    walletButton.textContent = `Connected: ${address.slice(0,6)}...${address.slice(-4)}`;
+                    walletButton.style.color = 'var(--silver-grey)';
+                }
+                
+                console.log("✅ Wallet connected:", address);
+                
+                if (typeof showCyberNotification === 'function') {
+                    showCyberNotification("✅ Wallet connected successfully! Ready to collect soul fragments with minimal gas fees.");
+                } else {
+                    alert("✅ Wallet connected successfully! Ready to collect soul fragments.");
                 }
                 
             } catch (error) {
@@ -68,51 +103,41 @@
             }
         };
         
-        // Real NFT minting function
+        // Real gasless NFT minting
         window.mintPoem = async function(poemId, poemTitle) {
             console.log(`🔥 Mint request: ${poemTitle} (#${poemId})`);
             
             try {
-                // Check wallet connection
-                const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-                if (accounts.length === 0) {
+                if (!window.atuonaState.isConnected) {
                     alert("🔗 Please connect your wallet first!");
                     await window.handleWalletConnection();
                     return;
                 }
                 
-                const userAddress = accounts[0];
-                
-                // Show minting message
-                const mintingMessage = `🔥 Minting "${poemTitle}" - Soul Fragment #${poemId}... Prepare for transcendence.`;
+                const message = `🔥 Minting "${poemTitle}" - Soul Fragment #${poemId}... Gasless transaction in progress.`;
                 if (typeof showCyberNotification === 'function') {
-                    showCyberNotification(mintingMessage);
+                    showCyberNotification(message);
                 } else {
-                    alert(mintingMessage);
+                    alert(message);
                 }
                 
-                // Prepare transaction data for minting
-                const contractAddress = "0xd57d203710f0cb1c12A4E4AC8549dDfD3E807811";
-                const mintPrice = "0x38D7EA4C68000"; // 0.001 ETH in hex
-                
-                // Simple contract interaction for minting
-                const transactionParameters = {
-                    to: contractAddress,
-                    from: userAddress,
-                    value: mintPrice,
-                    data: `0x${poemId}`, // Simple data payload
-                };
-                
-                // Request transaction
-                const txHash = await window.ethereum.request({
-                    method: 'eth_sendTransaction',
-                    params: [transactionParameters],
+                // Mint NFT with metadata
+                const result = await window.atuonaState.contract.erc721.mintTo(window.atuonaState.userAddress, {
+                    name: poemTitle,
+                    description: `Soul Fragment #${poemId} from ATUONA Underground Verse Vault - "${poemTitle}" - A piece of consciousness trapped in code, screaming beauty into the void. This is not an investment, but a moment of authentic human experience preserved on blockchain.`,
+                    image: `https://atuona.xyz/assets/poem-${poemId}.png`,
+                    attributes: {
+                        "Poem ID": poemId,
+                        "Collection": "ATUONA Underground Verse Vault",
+                        "Type": "Soul Fragment",
+                        "Language": "Russian/English",
+                        "Theme": "Underground Poetry"
+                    }
                 });
                 
-                console.log("✅ Transaction sent:", txHash);
+                console.log("✅ Soul Fragment minted:", result);
                 
-                // Success message
-                const successMessage = `✅ Soul Fragment "${poemTitle}" collection initiated! Transaction: ${txHash.slice(0,10)}... Welcome to the underground.`;
+                const successMessage = `✅ Soul Fragment "${poemTitle}" collected successfully! Welcome to the underground resistance.`;
                 if (typeof showCyberNotification === 'function') {
                     showCyberNotification(successMessage);
                 } else {
@@ -131,6 +156,12 @@
         };
         
         console.log("🔥 ATUONA Underground Gallery functions loaded!");
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("📄 Page loaded - Starting ATUONA initialization...");
+            setTimeout(initializeAtuona, 2000);
+        });
     </script>
     <style>
         /* Underground NFT Gallery Aesthetic - Dark Red and Silver Grey */
