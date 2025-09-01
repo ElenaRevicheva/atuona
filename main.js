@@ -106,58 +106,32 @@ window.mintPoem = async function(poemId, poemTitle) {
       alert(message);
     }
     
-    // Use raw Web3 approach to bypass thirdweb gas estimation issues
-    try {
-      // Switch to Polygon if needed
-      const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-      if (chainId !== '0x89') {
-        await window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x89' }],
-        });
-      }
-      
-      // Prepare metadata for IPFS (simplified)
-      const metadata = {
+    // THIRDWEB OFFICIAL FIX: Use explicit gas values to bypass estimation issues
+    const transaction = mintTo({
+      contract: window.atuonaState.contract,
+      to: window.atuonaState.userAddress,
+      nft: {
         name: poemTitle,
-        description: `Soul Fragment #${poemId} from ATUONA Underground Verse Vault - "${poemTitle}" - A piece of consciousness trapped in code, screaming beauty into the void.`,
+        description: `Soul Fragment #${poemId} from ATUONA Underground Verse Vault - "${poemTitle}" - A piece of consciousness trapped in code, screaming beauty into the void. This is not an investment, but a moment of authentic human experience preserved on blockchain.`,
         image: `https://atuona.xyz/assets/poem-${poemId}.png`,
         attributes: [
           { trait_type: "Poem ID", value: poemId },
+          { trait_type: "Collection", value: "ATUONA Underground Verse Vault" },
           { trait_type: "Type", value: "Soul Fragment" },
-          { trait_type: "Theme", value: "Underground Poetry" }
+          { trait_type: "Language", value: "Russian/English" },
+          { trait_type: "Theme", value: "Underground Poetry" },
+          { trait_type: "Publication Date", value: "2019-2025" }
         ]
-      };
-      
-      // Simple contract interaction using Web3
-      const contractAddress = window.atuonaState.contractAddress;
-      
-      // ERC721 mintTo function signature: mintTo(address to, string memory uri)
-      const mintFunction = "0x40c10f19"; // mintTo function selector
-      const toAddress = window.atuonaState.userAddress.slice(2).padStart(64, '0');
-      const metadataUri = `https://atuona.xyz/metadata/${poemId}.json`; // Metadata URI
-      const uriHex = Buffer.from(metadataUri, 'utf8').toString('hex').padEnd(64, '0');
-      
-      const txData = mintFunction + toAddress + "0000000000000000000000000000000000000000000000000000000000000040" + 
-                     (metadataUri.length).toString(16).padStart(64, '0') + uriHex;
-      
-      // Send transaction
-      const txHash = await window.ethereum.request({
-        method: 'eth_sendTransaction',
-        params: [{
-          to: contractAddress,
-          from: window.atuonaState.userAddress,
-          data: txData,
-          gas: '0x493E0', // 300000 in hex
-        }],
-      });
-      
-      const result = { transactionHash: txHash };
-      
-    } catch (rawError) {
-      console.error("Raw transaction failed:", rawError);
-      throw new Error(`Direct minting failed: ${rawError.message}`);
-    }
+      },
+      overrides: {
+        gasLimit: 200_000n, // Safe upper bound for minting
+        maxFeePerGas: 50_000_000_000n, // 50 gwei
+        maxPriorityFeePerGas: 2_000_000_000n, // 2 gwei
+      },
+    });
+    
+    // Send transaction with explicit gas values
+    const result = await window.atuonaState.account.sendTransaction(transaction);
     
     console.log("✅ Soul Fragment minted:", result);
     
