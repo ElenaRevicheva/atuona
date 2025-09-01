@@ -106,31 +106,48 @@ window.mintPoem = async function(poemId, poemTitle) {
       alert(message);
     }
     
-    // Create mint transaction with simplified gas handling
-    const transaction = mintTo({
-      contract: window.atuonaState.contract,
-      to: window.atuonaState.userAddress,
-      nft: {
+    // Try direct contract call approach to avoid gas estimation issues
+    try {
+      // Prepare NFT metadata
+      const metadata = {
         name: poemTitle,
         description: `Soul Fragment #${poemId} from ATUONA Underground Verse Vault - "${poemTitle}" - A piece of consciousness trapped in code, screaming beauty into the void. This is not an investment, but a moment of authentic human experience preserved on blockchain.`,
         image: `https://atuona.xyz/assets/poem-${poemId}.png`,
-        attributes: {
-          "Poem ID": poemId,
-          "Collection": "ATUONA Underground Verse Vault", 
-          "Type": "Soul Fragment",
-          "Language": "Russian/English",
-          "Theme": "Underground Poetry",
-          "Publication Date": "2019-2025"
-        }
+        attributes: [
+          { trait_type: "Poem ID", value: poemId },
+          { trait_type: "Collection", value: "ATUONA Underground Verse Vault" },
+          { trait_type: "Type", value: "Soul Fragment" },
+          { trait_type: "Language", value: "Russian/English" },
+          { trait_type: "Theme", value: "Underground Poetry" },
+          { trait_type: "Publication Date", value: "2019-2025" }
+        ]
+      };
+      
+      // Use thirdweb's prepareContractCall for better gas handling
+      const { prepareContractCall } = await import("thirdweb");
+      
+      const transaction = prepareContractCall({
+        contract: window.atuonaState.contract,
+        method: "function mintTo(address to, string memory uri) public",
+        params: [window.atuonaState.userAddress, JSON.stringify(metadata)]
+      });
+      
+      // Send with fixed gas
+      const result = await window.atuonaState.account.sendTransaction(transaction);
+      
+    } catch (contractError) {
+      console.log("Contract call failed, trying simple approach...");
+      
+      // Fallback: redirect to thirdweb for now
+      const mintingUrl = `https://thirdweb.com/polygon/${window.atuonaState.contractAddress}/nfts`;
+      window.open(mintingUrl, '_blank');
+      
+      const message = `🔥 Opening minting interface for "${poemTitle}" - Complete gasless transaction on thirdweb page.`;
+      if (typeof showCyberNotification === 'function') {
+        showCyberNotification(message);
       }
-    });
-    
-    // Send transaction with explicit gas settings
-    const result = await window.atuonaState.account.sendTransaction({
-      ...transaction,
-      gasLimit: 300000n, // Fixed gas limit as BigInt
-      gasPrice: undefined, // Let network determine
-    });
+      return;
+    }
     
     console.log("✅ Soul Fragment minted:", result);
     
