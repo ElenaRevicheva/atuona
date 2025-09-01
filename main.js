@@ -1,8 +1,12 @@
 // ATUONA Gallery of Moments - THIRDWEB OFFICIAL MULTI-WALLET SOLUTION
 import { createThirdwebClient, getContract } from "thirdweb";
+import { 
+  metamaskWallet,
+  walletConnect,
+  coinbaseWallet,
+} from "thirdweb/wallets";
 import { mintTo } from "thirdweb/extensions/erc721";
 import { polygon } from "thirdweb/chains";
-import { createWallet } from "thirdweb/wallets";
 
 console.log("🔥 ATUONA Blockchain module loading...");
 
@@ -32,9 +36,9 @@ async function connectWallet(type) {
     }
     
     // Create wallet based on type using correct thirdweb v5 syntax
-    if (type === "metamask") wallet = createWallet("io.metamask");
-    if (type === "walletconnect") wallet = createWallet("walletConnect");
-    if (type === "coinbase") wallet = createWallet("com.coinbase.wallet");
+    if (type === "metamask") wallet = metamaskWallet();
+    if (type === "walletconnect") wallet = walletConnect();
+    if (type === "coinbase") wallet = coinbaseWallet();
     
     // Connect wallet
     account = await wallet.connect({
