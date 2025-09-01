@@ -8,21 +8,52 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Simple wallet connection for testing -->
+    <!-- Debug wallet connection -->
     <script>
+        console.log("🔥 ATUONA Script loading...");
+        
+        // Test if basic JavaScript works
+        window.testClick = function() {
+            alert("✅ JavaScript is working!");
+            console.log("✅ Button click detected!");
+        };
+        
         // Simple wallet connection for debugging
         window.handleWalletConnection = function() {
             console.log("🔗 Wallet connection clicked!");
-            showCyberNotification("🔗 Wallet connection feature coming soon - Underground poetry preservation in progress!");
+            alert("🔗 Wallet button clicked - check console!");
+            
+            // Try to show notification if the function exists
+            if (typeof showCyberNotification === 'function') {
+                showCyberNotification("🔗 Wallet connection feature coming soon - Underground poetry preservation in progress!");
+            } else {
+                console.log("📢 showCyberNotification not available yet");
+            }
         };
         
         // Simple minting function for testing
         window.mintPoem = function(poemId, poemTitle) {
             console.log(`🔥 Mint request: ${poemTitle} (#${poemId})`);
-            showCyberNotification(`🔥 "${poemTitle}" - Soul Fragment collection coming soon! Underground poetry preservation in development.`);
+            alert(`🔥 Minting: ${poemTitle}`);
+            
+            if (typeof showCyberNotification === 'function') {
+                showCyberNotification(`🔥 "${poemTitle}" - Soul Fragment collection coming soon!`);
+            }
         };
         
-        console.log("🔥 ATUONA Underground Gallery loaded - Wallet functionality initialized!");
+        console.log("🔥 ATUONA Underground Gallery functions loaded!");
+        
+        // Test when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("📄 Page loaded - Testing button setup...");
+            
+            const walletButton = document.querySelector('.wallet-status');
+            if (walletButton) {
+                console.log("✅ Wallet button found:", walletButton);
+            } else {
+                console.log("❌ Wallet button not found");
+            }
+        });
     </script>
     <style>
         /* Underground NFT Gallery Aesthetic - Dark Red and Silver Grey */
