@@ -6,9 +6,8 @@ import {
   getContract,
 } from "thirdweb";
 import {
-  metamaskWallet,
+  createWallet,
   walletConnect,
-  coinbaseWallet,
 } from "thirdweb/wallets";
 import { mintTo } from "thirdweb/extensions/erc721";
 import { polygon } from "thirdweb/chains";
@@ -25,8 +24,6 @@ const contract = getContract({
   chain: polygon,
 });
 
-let wallet, account;
-
 // Global state
 window.atuonaState = {
   isConnected: false,
@@ -42,12 +39,16 @@ async function connectWallet(type = 'auto') {
   console.log("🔗 Wallet connection clicked!");
   
   try {
+    let wallet;
+    
     // Auto-detect or use specified wallet
     if (type === 'auto') {
       if (window.ethereum?.isMetaMask) {
         type = 'metamask';
       } else if (window.ethereum?.isPhantom) {
         type = 'phantom';
+      } else if (window.ethereum?.isCoinbaseWallet) {
+        type = 'coinbase';
       } else {
         type = 'walletconnect';
       }
@@ -55,20 +56,22 @@ async function connectWallet(type = 'auto') {
     
     console.log(`🔗 Using ${type} wallet`);
     
-    // Initialize wallet based on type
+    // Initialize wallet based on type using correct thirdweb v5 API
     if (type === "metamask") {
-      wallet = metamaskWallet();
+      wallet = createWallet("io.metamask");
+    } else if (type === "coinbase") {
+      wallet = createWallet("com.coinbase.wallet");
+    } else if (type === "phantom") {
+      wallet = createWallet("app.phantom");
     } else if (type === "walletconnect") {
       wallet = walletConnect();
-    } else if (type === "coinbase") {
-      wallet = coinbaseWallet();
     } else {
       // Fallback to MetaMask
-      wallet = metamaskWallet();
+      wallet = createWallet("io.metamask");
     }
     
     // Connect wallet
-    account = await wallet.connect({
+    const account = await wallet.connect({
       client,
       chain: polygon,
     });
@@ -110,7 +113,7 @@ async function connectWallet(type = 'auto') {
 async function mintNFT(poemId, poemTitle) {
   console.log(`🔥 Mint request: ${poemTitle} (${poemId})`);
   
-  if (!account) {
+  if (!window.atuonaState.account) {
     if (typeof showCyberNotification === 'function') {
       showCyberNotification('❌ Please connect your wallet first!', 'error');
     } else {
@@ -151,19 +154,21 @@ async function mintNFT(poemId, poemTitle) {
     };
     
     // Execute mint transaction with explicit gas settings
-    const tx = mintTo({
-      contract,
-      to: account.address,
+    const transaction = mintTo({
+      contract: window.atuonaState.contract,
+      to: window.atuonaState.account.address,
       nft: nftMetadata,
-      // Add gas overrides to prevent BigInt errors
-      overrides: {
-        gasLimit: BigInt(300000), // 300k gas limit
-        maxFeePerGas: BigInt(50000000000), // 50 gwei
-        maxPriorityFeePerGas: BigInt(2000000000), // 2 gwei
-      }
     });
     
-    const result = await account.sendTransaction(tx);
+    // Send transaction with gas overrides
+    const result = await window.atuonaState.wallet.sendTransaction({
+      transaction,
+      account: window.atuonaState.account,
+      // Add gas overrides to prevent BigInt errors
+      gas: BigInt(300000), // 300k gas limit
+      maxFeePerGas: BigInt(50000000000), // 50 gwei
+      maxPriorityFeePerGas: BigInt(2000000000), // 2 gwei
+    });
     
     console.log("✅ Soul Fragment transaction sent:", result.transactionHash);
     
