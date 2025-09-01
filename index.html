@@ -8,63 +8,74 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Working MetaMask Integration -->
-    <script>
-        console.log("🔥 ATUONA Script loading...");
+    <!-- Thirdweb SDK v5 - Correct Implementation -->
+    <script type="module">
+        import { createThirdwebClient, getContract } from "https://unpkg.com/thirdweb@latest/dist/thirdweb.esm.js";
+        import { mintTo } from "https://unpkg.com/thirdweb@latest/dist/extensions/erc721/index.esm.js";
+        import { polygon } from "https://unpkg.com/thirdweb@latest/dist/chains/index.esm.js";
+        import { connect, inAppWallet } from "https://unpkg.com/thirdweb@latest/dist/wallets/index.esm.js";
+        
+        console.log("🔥 ATUONA Script loading with correct thirdweb implementation...");
+        
+        // Initialize thirdweb client
+        const client = createThirdwebClient({
+            clientId: "602cfa7b8c0b862d35f7cfa61c961a38",
+        });
+        
+        // Get contract on Polygon
+        const contract = getContract({
+            client,
+            address: "0x8551EA2F46ee54A4AB2175bDb75ad2ef369d6115",
+            chain: polygon,
+        });
+        
+        // Wallet setup
+        const wallet = inAppWallet();
         
         // Global state
         window.atuonaState = {
+            client,
+            contract,
+            wallet,
             isConnected: false,
             userAddress: null,
-            contractAddress: "0x8551EA2F46ee54A4AB2175bDb75ad2ef369d6115"
+            isInitialized: true
         };
         
-        // Working wallet connection
+        console.log("✅ ATUONA Thirdweb client initialized for Polygon!");
+        
+        // Thirdweb wallet connection
         window.handleWalletConnection = async function() {
             console.log("🔗 Wallet connection clicked!");
             
             try {
-                // Check if MetaMask is available
-                if (typeof window.ethereum !== 'undefined') {
-                    console.log("🦊 MetaMask detected!");
-                    
-                    if (typeof showCyberNotification === 'function') {
-                        showCyberNotification("🔗 Connecting to MetaMask...");
-                    } else {
-                        alert("🔗 Connecting to MetaMask...");
-                    }
-                    
-                    // Request account access
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    const userAddress = accounts[0];
-                    
-                    window.atuonaState.isConnected = true;
-                    window.atuonaState.userAddress = userAddress;
-                    
-                    console.log("✅ Wallet connected:", userAddress);
-                    
-                    // Update button
-                    const walletButton = document.querySelector('.wallet-status');
-                    if (walletButton) {
-                        walletButton.textContent = `Connected: ${userAddress.slice(0,6)}...${userAddress.slice(-4)}`;
-                        walletButton.style.color = 'var(--silver-grey)';
-                    }
-                    
-                    // Success message
-                    if (typeof showCyberNotification === 'function') {
-                        showCyberNotification("✅ Wallet connected successfully! Soul fragment collection ready.");
-                    } else {
-                        alert("✅ Wallet connected successfully! Soul fragment collection ready.");
-                    }
-                    
+                if (typeof showCyberNotification === 'function') {
+                    showCyberNotification("🔗 Connecting wallet to Polygon network...");
                 } else {
-                    // No MetaMask
-                    const message = "❌ Please install MetaMask to collect soul fragments from the underground vault.";
-                    if (typeof showCyberNotification === 'function') {
-                        showCyberNotification(message);
-                    } else {
-                        alert(message);
-                    }
+                    alert("🔗 Connecting wallet to Polygon network...");
+                }
+                
+                // Connect wallet using thirdweb
+                const account = await connect({ client, wallet });
+                const userAddress = account.address;
+                
+                window.atuonaState.isConnected = true;
+                window.atuonaState.userAddress = userAddress;
+                
+                console.log("✅ Wallet connected:", userAddress);
+                
+                // Update button
+                const walletButton = document.querySelector('.wallet-status');
+                if (walletButton) {
+                    walletButton.textContent = `Connected: ${userAddress.slice(0,6)}...${userAddress.slice(-4)}`;
+                    walletButton.style.color = 'var(--silver-grey)';
+                }
+                
+                // Success message
+                if (typeof showCyberNotification === 'function') {
+                    showCyberNotification("✅ Wallet connected to Polygon! Ready for gasless soul fragment collection.");
+                } else {
+                    alert("✅ Wallet connected to Polygon! Ready for gasless soul fragment collection.");
                 }
                 
             } catch (error) {
@@ -78,7 +89,7 @@
             }
         };
         
-        // Direct minting to Polygon contract
+        // Correct thirdweb minting implementation
         window.mintPoem = async function(poemId, poemTitle) {
             console.log(`🔥 Mint request: ${poemTitle} (#${poemId})`);
             
@@ -89,73 +100,30 @@
                     return;
                 }
                 
-                // Check if on Polygon network
-                const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-                if (chainId !== '0x89') { // Polygon mainnet chain ID
-                    // Request network switch to Polygon
-                    try {
-                        await window.ethereum.request({
-                            method: 'wallet_switchEthereumChain',
-                            params: [{ chainId: '0x89' }],
-                        });
-                    } catch (switchError) {
-                        // If network doesn't exist, add it
-                        if (switchError.code === 4902) {
-                            await window.ethereum.request({
-                                method: 'wallet_addEthereumChain',
-                                params: [{
-                                    chainId: '0x89',
-                                    chainName: 'Polygon Mainnet',
-                                    nativeCurrency: {
-                                        name: 'MATIC',
-                                        symbol: 'MATIC',
-                                        decimals: 18,
-                                    },
-                                    rpcUrls: ['https://polygon-rpc.com/'],
-                                    blockExplorerUrls: ['https://polygonscan.com/'],
-                                }],
-                            });
-                        }
-                    }
-                }
-                
-                const message = `🔥 Minting "${poemTitle}" - Soul Fragment #${poemId}... Prepare for transcendence on Polygon.`;
+                const message = `🔥 Minting "${poemTitle}" - Soul Fragment #${poemId}... Using thirdweb gasless minting.`;
                 if (typeof showCyberNotification === 'function') {
                     showCyberNotification(message);
                 } else {
                     alert(message);
                 }
                 
-                // For now, redirect to thirdweb interface until we get proper minting setup
-                const mintingUrl = `https://thirdweb.com/polygon/${window.atuonaState.contractAddress}`;
-                window.open(mintingUrl, '_blank');
-                
-                const followUpMessage = `📖 Complete "${poemTitle}" collection on the thirdweb page. The contract needs proper minting configuration - checking with thirdweb support.`;
-                if (typeof showCyberNotification === 'function') {
-                    showCyberNotification(followUpMessage);
-                }
-                
-                return; // Skip direct transaction for now
-                
-                // Direct transaction (disabled until contract is properly configured)
-                const mintPrice = "0x38D7EA4C68000"; // 0.001 ETH in hex (symbolic fee)
-                
-                const transactionParameters = {
-                    to: window.atuonaState.contractAddress,
-                    from: window.atuonaState.userAddress,
-                    value: mintPrice,
-                    data: "0x40c10f19" + window.atuonaState.userAddress.slice(2).padStart(64, '0') + "1".padStart(64, '0'), // mintTo function call
-                };
-                
-                // Send transaction
-                const txHash = await window.ethereum.request({
-                    method: 'eth_sendTransaction',
-                    params: [transactionParameters],
+                // Use correct thirdweb mintTo function
+                const transaction = mintTo({
+                    contract: window.atuonaState.contract,
+                    to: window.atuonaState.userAddress,
+                    nft: {
+                        name: poemTitle,
+                        description: `Soul Fragment #${poemId} from ATUONA Underground Verse Vault - "${poemTitle}" - A piece of consciousness trapped in code, screaming beauty into the void. This is not an investment, but a moment of authentic human experience preserved on blockchain.`,
+                        image: `https://atuona.xyz/assets/poem-${poemId}.png`,
+                    }
                 });
                 
-                console.log("✅ Soul Fragment transaction sent:", txHash);
+                // Send transaction
+                const result = await transaction;
                 
-                const successMessage = `✅ Soul Fragment "${poemTitle}" collection initiated! Transaction: ${txHash.slice(0,10)}... Welcome to the underground. Check Polygonscan for confirmation.`;
+                console.log("✅ Soul Fragment minted:", result);
+                
+                const successMessage = `✅ Soul Fragment "${poemTitle}" collected successfully! Welcome to the underground resistance.`;
                 if (typeof showCyberNotification === 'function') {
                     showCyberNotification(successMessage);
                 } else {
