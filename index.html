@@ -126,14 +126,25 @@
                     alert(message);
                 }
                 
-                // Simple minting transaction to your contract
+                // For now, redirect to thirdweb interface until we get proper minting setup
+                const mintingUrl = `https://thirdweb.com/polygon/${window.atuonaState.contractAddress}`;
+                window.open(mintingUrl, '_blank');
+                
+                const followUpMessage = `📖 Complete "${poemTitle}" collection on the thirdweb page. The contract needs proper minting configuration - checking with thirdweb support.`;
+                if (typeof showCyberNotification === 'function') {
+                    showCyberNotification(followUpMessage);
+                }
+                
+                return; // Skip direct transaction for now
+                
+                // Direct transaction (disabled until contract is properly configured)
                 const mintPrice = "0x38D7EA4C68000"; // 0.001 ETH in hex (symbolic fee)
                 
                 const transactionParameters = {
                     to: window.atuonaState.contractAddress,
                     from: window.atuonaState.userAddress,
                     value: mintPrice,
-                    data: "0x", // Empty data for simple minting
+                    data: "0x40c10f19" + window.atuonaState.userAddress.slice(2).padStart(64, '0') + "1".padStart(64, '0'), // mintTo function call
                 };
                 
                 // Send transaction
