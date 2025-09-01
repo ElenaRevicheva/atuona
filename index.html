@@ -8,52 +8,152 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Debug wallet connection -->
+    <!-- Thirdweb SDK Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/thirdweb@5/dist/thirdweb.umd.js"></script>
     <script>
         console.log("🔥 ATUONA Script loading...");
         
-        // Test if basic JavaScript works
-        window.testClick = function() {
-            alert("✅ JavaScript is working!");
-            console.log("✅ Button click detected!");
+        // Global blockchain state
+        window.atuonaBlockchain = {
+            isInitialized: false,
+            isConnected: false,
+            userAddress: null,
+            client: null,
+            contract: null
         };
         
-        // Simple wallet connection for debugging
-        window.handleWalletConnection = function() {
+        // Initialize blockchain when thirdweb is ready
+        function initializeAtuonaBlockchain() {
+            try {
+                if (!window.ThirdwebSDK) {
+                    console.log("⏳ Thirdweb SDK not ready yet, retrying...");
+                    setTimeout(initializeAtuonaBlockchain, 1000);
+                    return;
+                }
+                
+                console.log("🔥 Initializing ATUONA blockchain...");
+                
+                // Initialize thirdweb client
+                window.atuonaBlockchain.client = new window.ThirdwebSDK("ethereum", {
+                    clientId: "816ab255dd4019069f7df4c5aafa492a"
+                });
+                
+                window.atuonaBlockchain.isInitialized = true;
+                console.log("✅ ATUONA Blockchain initialized successfully!");
+                
+            } catch (error) {
+                console.error("❌ Blockchain initialization failed:", error);
+                setTimeout(initializeAtuonaBlockchain, 2000); // Retry
+            }
+        }
+        
+        // Wallet connection function
+        window.handleWalletConnection = async function() {
             console.log("🔗 Wallet connection clicked!");
             
-            // Try to show notification, with fallback to alert
-            if (typeof showCyberNotification === 'function') {
-                showCyberNotification("🔗 Wallet connection feature coming soon - Underground poetry preservation in progress!");
-            } else {
-                // Fallback notification
-                alert("🔗 Wallet connection feature coming soon - Underground poetry preservation in progress!");
-                console.log("📢 Using alert fallback - showCyberNotification not ready yet");
+            try {
+                if (!window.atuonaBlockchain.isInitialized) {
+                    alert("⏳ Initializing blockchain... Please wait.");
+                    return;
+                }
+                
+                // Show loading message
+                if (typeof showCyberNotification === 'function') {
+                    showCyberNotification("🔗 Connecting to your wallet...");
+                } else {
+                    alert("🔗 Connecting to your wallet...");
+                }
+                
+                // Connect wallet using thirdweb
+                const address = await window.atuonaBlockchain.client.wallet.connect();
+                
+                window.atuonaBlockchain.isConnected = true;
+                window.atuonaBlockchain.userAddress = address;
+                
+                // Update UI
+                updateWalletStatus();
+                
+                // Success message
+                if (typeof showCyberNotification === 'function') {
+                    showCyberNotification("✅ Wallet connected successfully! Ready to collect soul fragments.");
+                } else {
+                    alert("✅ Wallet connected successfully! Ready to collect soul fragments.");
+                }
+                
+            } catch (error) {
+                console.error("❌ Wallet connection failed:", error);
+                if (typeof showCyberNotification === 'function') {
+                    showCyberNotification(`❌ Wallet connection failed: ${error.message}`);
+                } else {
+                    alert(`❌ Wallet connection failed: ${error.message}`);
+                }
             }
         };
         
-        // Simple minting function for testing
-        window.mintPoem = function(poemId, poemTitle) {
+        // Minting function
+        window.mintPoem = async function(poemId, poemTitle) {
             console.log(`🔥 Mint request: ${poemTitle} (#${poemId})`);
-            alert(`🔥 Minting: ${poemTitle}`);
             
-            if (typeof showCyberNotification === 'function') {
-                showCyberNotification(`🔥 "${poemTitle}" - Soul Fragment collection coming soon!`);
+            try {
+                if (!window.atuonaBlockchain.isConnected) {
+                    alert("🔗 Please connect your wallet first!");
+                    await window.handleWalletConnection();
+                    return;
+                }
+                
+                // Show minting message
+                if (typeof showCyberNotification === 'function') {
+                    showCyberNotification(`🔥 Minting "${poemTitle}" - Soul Fragment #${poemId}...`);
+                } else {
+                    alert(`🔥 Minting "${poemTitle}" - Soul Fragment #${poemId}...`);
+                }
+                
+                // Get contract
+                const contract = await window.atuonaBlockchain.client.getContract("0xd57d203710f0cb1c12A4E4AC8549dDfD3E807811");
+                
+                // Mint NFT
+                const result = await contract.erc721.mintTo(window.atuonaBlockchain.userAddress, {
+                    name: poemTitle,
+                    description: `Soul Fragment #${poemId} from ATUONA Underground Verse Vault - A piece of consciousness trapped in code, screaming beauty into the void.`,
+                    image: `https://atuona.xyz/assets/poem-${poemId}.png`,
+                });
+                
+                // Success message
+                if (typeof showCyberNotification === 'function') {
+                    showCyberNotification(`✅ Soul Fragment "${poemTitle}" collected successfully! Welcome to the underground.`);
+                } else {
+                    alert(`✅ Soul Fragment "${poemTitle}" collected successfully! Welcome to the underground.`);
+                }
+                
+            } catch (error) {
+                console.error("❌ Minting failed:", error);
+                if (typeof showCyberNotification === 'function') {
+                    showCyberNotification(`❌ Collection failed: ${error.message}`);
+                } else {
+                    alert(`❌ Collection failed: ${error.message}`);
+                }
             }
         };
+        
+        function updateWalletStatus() {
+            const statusElements = document.querySelectorAll('.wallet-status');
+            statusElements.forEach(el => {
+                if (window.atuonaBlockchain.isConnected && window.atuonaBlockchain.userAddress) {
+                    el.textContent = `Connected: ${window.atuonaBlockchain.userAddress.slice(0,6)}...${window.atuonaBlockchain.userAddress.slice(-4)}`;
+                    el.style.color = 'var(--silver-grey)';
+                } else {
+                    el.textContent = 'Connect Wallet';
+                    el.style.color = 'var(--red-dark)';
+                }
+            });
+        }
         
         console.log("🔥 ATUONA Underground Gallery functions loaded!");
         
-        // Test when page loads
+        // Initialize blockchain when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            console.log("📄 Page loaded - Testing button setup...");
-            
-            const walletButton = document.querySelector('.wallet-status');
-            if (walletButton) {
-                console.log("✅ Wallet button found:", walletButton);
-            } else {
-                console.log("❌ Wallet button not found");
-            }
+            console.log("📄 Page loaded - Initializing blockchain...");
+            setTimeout(initializeAtuonaBlockchain, 2000);
         });
     </script>
     <style>
