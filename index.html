@@ -21,13 +21,14 @@
         // Simple wallet connection for debugging
         window.handleWalletConnection = function() {
             console.log("🔗 Wallet connection clicked!");
-            alert("🔗 Wallet button clicked - check console!");
             
-            // Try to show notification if the function exists
+            // Try to show notification, with fallback to alert
             if (typeof showCyberNotification === 'function') {
                 showCyberNotification("🔗 Wallet connection feature coming soon - Underground poetry preservation in progress!");
             } else {
-                console.log("📢 showCyberNotification not available yet");
+                // Fallback notification
+                alert("🔗 Wallet connection feature coming soon - Underground poetry preservation in progress!");
+                console.log("📢 Using alert fallback - showCyberNotification not ready yet");
             }
         };
         
