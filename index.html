@@ -3407,18 +3407,7 @@
             // Initialize blockchain enhancements after page load
             setTimeout(enhanceAllMintingButtons, 1000);
             
-            // Simple wallet connection handler for testing
-            window.handleWalletConnection = function() {
-                console.log("🔗 Wallet connection button clicked!");
-                showCyberNotification("🔗 Attempting wallet connection...");
-                
-                if (window.connectWallet) {
-                    window.connectWallet();
-                } else {
-                    console.error("❌ connectWallet function not available");
-                    showCyberNotification("❌ Blockchain functionality not loaded. Please refresh the page.");
-                }
-            };
+            // Remove old wallet connection handler - replaced with new one above
             
             // Test function for debugging
             window.testBlockchain = function() {
