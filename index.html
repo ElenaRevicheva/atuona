@@ -8,142 +8,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Thirdweb SDK for blockchain functionality -->
-    <script src="https://unpkg.com/thirdweb@latest/dist/thirdweb.umd.js"></script>
+    <!-- Simple wallet connection for testing -->
     <script>
-        // Global blockchain state
-        window.blockchainState = {
-            client: null,
-            contract: null,
-            wallet: null,
-            isConnected: false,
-            userAddress: null,
-            isInitialized: false
+        // Simple wallet connection for debugging
+        window.handleWalletConnection = function() {
+            console.log("🔗 Wallet connection clicked!");
+            showCyberNotification("🔗 Wallet connection feature coming soon - Underground poetry preservation in progress!");
         };
         
-        // Initialize blockchain functionality
-        async function initializeBlockchain() {
-            try {
-                console.log("🔥 Initializing ATUONA blockchain functionality...");
-                
-                // Create thirdweb client
-                const client = window.thirdweb.createThirdwebClient({
-                    clientId: "816ab255dd4019069f7df4c5aafa492a",
-                });
-                
-                // Define Ethereum mainnet
-                const ethereum = window.thirdweb.defineChain(1);
-                
-                // Contract configuration
-                const contract = window.thirdweb.getContract({
-                    client,
-                    address: "0xd57d203710f0cb1c12A4E4AC8549dDfD3E807811",
-                    chain: ethereum,
-                });
-                
-                // Wallet configuration
-                const wallet = window.thirdweb.inAppWallet();
-                
-                // Update global state
-                window.blockchainState = {
-                    client,
-                    contract,
-                    wallet,
-                    isConnected: false,
-                    userAddress: null,
-                    isInitialized: true
-                };
-                
-                console.log("✅ ATUONA Blockchain functionality initialized successfully!");
-                showCyberNotification("🔥 Underground blockchain sanctuary initialized - Ready for soul collection!");
-                
-            } catch (error) {
-                console.error("❌ Blockchain initialization failed:", error);
-                showCyberNotification("❌ Blockchain initialization failed. Check console for details.");
-            }
-        }
-        
-        // Wallet connection function
-        window.handleWalletConnection = async function() {
-            try {
-                console.log("🔗 Wallet connection attempt started...");
-                
-                if (!window.blockchainState.isInitialized) {
-                    showCyberNotification("⏳ Initializing blockchain functionality...");
-                    await initializeBlockchain();
-                }
-                
-                if (!window.blockchainState.client) {
-                    throw new Error("Blockchain client not initialized");
-                }
-                
-                showCyberNotification("🔗 Connecting to your wallet...");
-                
-                await window.thirdweb.connect({ 
-                    client: window.blockchainState.client, 
-                    wallet: window.blockchainState.wallet 
-                });
-                
-                window.blockchainState.isConnected = true;
-                window.blockchainState.userAddress = await window.blockchainState.wallet.getAddress();
-                
-                updateWalletStatus();
-                showCyberNotification("✅ Wallet connected successfully! Ready to collect soul fragments.");
-                
-            } catch (error) {
-                console.error("❌ Wallet connection failed:", error);
-                showCyberNotification(`❌ Wallet connection failed: ${error.message}`);
-            }
+        // Simple minting function for testing
+        window.mintPoem = function(poemId, poemTitle) {
+            console.log(`🔥 Mint request: ${poemTitle} (#${poemId})`);
+            showCyberNotification(`🔥 "${poemTitle}" - Soul Fragment collection coming soon! Underground poetry preservation in development.`);
         };
         
-        // Minting function
-        window.mintPoem = async function(poemId, poemTitle) {
-            try {
-                if (!window.blockchainState.isConnected) {
-                    showCyberNotification("🔗 Connecting wallet first...");
-                    await window.handleWalletConnection();
-                    if (!window.blockchainState.isConnected) return;
-                }
-                
-                showCyberNotification(`🔥 Minting "${poemTitle}" - Soul Fragment #${poemId}...`);
-                
-                const transaction = await window.thirdweb.mintTo({
-                    contract: window.blockchainState.contract,
-                    to: window.blockchainState.userAddress,
-                    nft: {
-                        name: poemTitle,
-                        description: `Soul Fragment #${poemId} from ATUONA Underground Verse Vault - A piece of consciousness trapped in code, screaming beauty into the void.`,
-                        image: `https://atuona.xyz/assets/poem-${poemId}.png`,
-                    }
-                });
-                
-                showCyberNotification(`✅ Soul Fragment "${poemTitle}" collected successfully! Welcome to the underground.`);
-                
-            } catch (error) {
-                console.error("❌ Minting failed:", error);
-                showCyberNotification(`❌ Collection failed: ${error.message}`);
-            }
-        };
-        
-        function updateWalletStatus() {
-            const statusElements = document.querySelectorAll('.wallet-status');
-            statusElements.forEach(el => {
-                if (window.blockchainState.isConnected && window.blockchainState.userAddress) {
-                    el.textContent = `Connected: ${window.blockchainState.userAddress.slice(0,6)}...${window.blockchainState.userAddress.slice(-4)}`;
-                    el.style.color = 'var(--silver-grey)';
-                } else {
-                    el.textContent = 'Connect Wallet';
-                    el.style.color = 'var(--red-dark)';
-                }
-            });
-        }
-        
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("🔥 ATUONA page loaded - Preparing blockchain initialization...");
-            // Initialize blockchain after a short delay to ensure everything is loaded
-            setTimeout(initializeBlockchain, 2000);
-        });
+        console.log("🔥 ATUONA Underground Gallery loaded - Wallet functionality initialized!");
     </script>
     <style>
         /* Underground NFT Gallery Aesthetic - Dark Red and Silver Grey */
