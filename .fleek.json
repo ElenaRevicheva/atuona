@@ -1,8 +1,0 @@
-{
-  "build": {
-    "image": "node:20-alpine",
-    "buildCommand": "npm install && npm run build",
-    "publishDir": "dist",
-    "nodeVersion": "20.18.0"
-  }
-}
