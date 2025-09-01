@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "ATUONA Gallery of Moments - Underground Verse Vault",
   "type": "module",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
-  },
-  "dependencies": {
-    "thirdweb": "latest"
   },
   "devDependencies": {
     "vite": "^5.0.0"
