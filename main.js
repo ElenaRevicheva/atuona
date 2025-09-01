@@ -1,145 +1,133 @@
-// ATUONA Gallery of Moments - Multi-Wallet thirdweb v5 Solution
-console.log("🔥 ATUONA Blockchain module loading...");
+// ATUONA Gallery of Moments - Complete NFT Gallery with Multi-Wallet Support
+console.log("🔥 ATUONA Underground NFT Gallery Loading...");
 
-import {
-  createThirdwebClient,
-  getContract,
-} from "thirdweb";
-import {
-  createWallet,
-  walletConnect,
-} from "thirdweb/wallets";
+import { createThirdwebClient, getContract } from "thirdweb";
+import { createWallet, walletConnect } from "thirdweb/wallets";
 import { mintTo } from "thirdweb/extensions/erc721";
 import { polygon } from "thirdweb/chains";
 
-// Initialize thirdweb client
+// Initialize thirdweb client with your API key
 const client = createThirdwebClient({
   clientId: "602cfa7b8c0b862d35f7cfa61c961a38",
 });
 
-// Contract setup
+// Your NFT contract on Polygon
 const contract = getContract({
   client,
   address: "0x8551EA2F46ee54A4AB2175bDb75ad2ef369d6115",
   chain: polygon,
 });
 
-// Global state
-window.atuonaState = {
+// Global state for wallet connection
+window.atuonaGallery = {
   isConnected: false,
   userAddress: null,
-  client: client,
-  contract: contract,
   wallet: null,
-  account: null
+  account: null,
+  client: client,
+  contract: contract
 };
 
-// Multi-wallet connection function
-async function connectWallet(type = 'auto') {
-  console.log("🔗 Wallet connection clicked!");
+// Multi-wallet connection with support for all major wallets
+async function connectWallet(walletType = 'auto') {
+  console.log("🔗 Connecting wallet...");
   
   try {
     let wallet;
     
-    // Auto-detect or use specified wallet
-    if (type === 'auto') {
+    // Auto-detect wallet or use specified type
+    if (walletType === 'auto') {
+      // Check for installed wallets
       if (window.ethereum?.isMetaMask) {
-        type = 'metamask';
+        walletType = 'metamask';
       } else if (window.ethereum?.isPhantom) {
-        type = 'phantom';
+        walletType = 'phantom';
       } else if (window.ethereum?.isCoinbaseWallet) {
-        type = 'coinbase';
+        walletType = 'coinbase';
+      } else if (window.ethereum) {
+        walletType = 'injected';
       } else {
-        type = 'walletconnect';
+        walletType = 'walletconnect';
       }
     }
     
-    console.log(`🔗 Using ${type} wallet`);
+    console.log(`🔗 Using ${walletType} wallet`);
     
-    // Initialize wallet based on type using correct thirdweb v5 API
-    if (type === "metamask") {
-      wallet = createWallet("io.metamask");
-    } else if (type === "coinbase") {
-      wallet = createWallet("com.coinbase.wallet");
-    } else if (type === "phantom") {
-      wallet = createWallet("app.phantom");
-    } else if (type === "walletconnect") {
-      wallet = walletConnect();
-    } else {
-      // Fallback to MetaMask
-      wallet = createWallet("io.metamask");
+    // Create wallet based on type
+    switch (walletType) {
+      case 'metamask':
+        wallet = createWallet("io.metamask");
+        break;
+      case 'coinbase':
+        wallet = createWallet("com.coinbase.wallet");
+        break;
+      case 'phantom':
+        wallet = createWallet("app.phantom");
+        break;
+      case 'walletconnect':
+        wallet = walletConnect();
+        break;
+      case 'injected':
+      default:
+        // Try to use any injected wallet
+        wallet = createWallet("io.metamask"); // Fallback to MetaMask format
+        break;
     }
     
-    // Connect wallet
+    // Connect the wallet
     const account = await wallet.connect({
       client,
       chain: polygon,
     });
     
     // Update global state
-    window.atuonaState.isConnected = true;
-    window.atuonaState.userAddress = account.address;
-    window.atuonaState.wallet = wallet;
-    window.atuonaState.account = account;
+    window.atuonaGallery.isConnected = true;
+    window.atuonaGallery.userAddress = account.address;
+    window.atuonaGallery.wallet = wallet;
+    window.atuonaGallery.account = account;
     
     console.log("✅ Wallet connected:", account.address);
     
     // Update UI
-    const walletButton = document.querySelector('.wallet-status');
-    if (walletButton) {
-      walletButton.textContent = `${account.address.substring(0, 6)}...${account.address.substring(38)}`;
-      walletButton.setAttribute('data-text', 'CONNECTED');
-    }
+    updateWalletUI(account.address);
     
     // Show success notification
-    if (typeof showCyberNotification === 'function') {
-      showCyberNotification('🔗 Wallet Connected Successfully!', 'success');
-    } else {
-      alert(`✅ Wallet Connected: ${account.address}`);
-    }
+    showNotification(`🔗 Wallet Connected: ${account.address.substring(0, 6)}...${account.address.substring(38)}`, 'success');
+    
+    return account;
     
   } catch (error) {
     console.error("❌ Wallet connection failed:", error);
-    
-    if (typeof showCyberNotification === 'function') {
-      showCyberNotification('❌ Wallet connection failed. Please try again.', 'error');
-    } else {
-      alert("❌ Wallet connection failed. Please try again.");
-    }
+    showNotification('❌ Wallet connection failed. Please try again.', 'error');
+    throw error;
   }
 }
 
-// NFT Minting function
+// NFT Minting function with proper error handling
 async function mintNFT(poemId, poemTitle) {
-  console.log(`🔥 Mint request: ${poemTitle} (${poemId})`);
+  console.log(`🔥 Minting: ${poemTitle} (${poemId})`);
   
-  if (!window.atuonaState.account) {
-    if (typeof showCyberNotification === 'function') {
-      showCyberNotification('❌ Please connect your wallet first!', 'error');
-    } else {
-      alert("❌ Please connect your wallet first!");
-    }
+  if (!window.atuonaGallery.isConnected || !window.atuonaGallery.account) {
+    showNotification('❌ Please connect your wallet first!', 'error');
     return;
   }
   
   try {
     // Show minting notification
-    if (typeof showCyberNotification === 'function') {
-      showCyberNotification('🔄 Minting Soul Fragment... Please confirm in wallet.', 'info');
-    }
+    showNotification('🔄 Minting Soul Fragment... Please confirm in wallet.', 'info');
     
-    // Prepare NFT metadata
+    // Create NFT metadata
     const nftMetadata = {
       name: `${poemTitle} ${poemId}`,
       description: `ATUONA Gallery of Moments - Underground Verse Vault. ${poemTitle} - A digital soul fragment preserved on blockchain. Not as commodity, but as eternal fragment of consciousness.`,
-      image: `https://atuona.xyz/images/poem-${poemId.replace('#', '').padStart(3, '0')}.png`, // Placeholder - you can replace with actual images
+      image: `https://atuona.xyz/images/poem-${poemId.replace('#', '').padStart(3, '0')}.png`,
       attributes: [
         {
           trait_type: "Collection",
           value: "GALLERY OF MOMENTS"
         },
         {
-          trait_type: "Poem ID",
+          trait_type: "Poem ID", 
           value: poemId
         },
         {
@@ -153,31 +141,28 @@ async function mintNFT(poemId, poemTitle) {
       ]
     };
     
-    // Execute mint transaction with explicit gas settings
+    // Execute mint transaction
     const transaction = mintTo({
-      contract: window.atuonaState.contract,
-      to: window.atuonaState.account.address,
+      contract: window.atuonaGallery.contract,
+      to: window.atuonaGallery.account.address,
       nft: nftMetadata,
     });
     
-    // Send transaction with gas overrides
-    const result = await window.atuonaState.wallet.sendTransaction({
+    // Send transaction with the connected wallet
+    const result = await window.atuonaGallery.wallet.sendTransaction({
       transaction,
-      account: window.atuonaState.account,
-      // Add gas overrides to prevent BigInt errors
-      gas: BigInt(300000), // 300k gas limit
-      maxFeePerGas: BigInt(50000000000), // 50 gwei
-      maxPriorityFeePerGas: BigInt(2000000000), // 2 gwei
+      account: window.atuonaGallery.account,
     });
     
-    console.log("✅ Soul Fragment transaction sent:", result.transactionHash);
+    console.log("✅ NFT minted successfully:", result.transactionHash);
     
     // Show success notification
-    if (typeof showCyberNotification === 'function') {
-      showCyberNotification(`✅ Soul Fragment Collected! TX: ${result.transactionHash}`, 'success');
-    } else {
-      alert(`✅ Soul Fragment Collected!\nTransaction: ${result.transactionHash}`);
-    }
+    showNotification(`✅ Soul Fragment Collected! TX: ${result.transactionHash}`, 'success');
+    
+    // Update UI to show minted status
+    updateNFTCardStatus(poemId, 'minted', result.transactionHash);
+    
+    return result;
     
   } catch (error) {
     console.error("❌ Minting failed:", error);
@@ -189,17 +174,92 @@ async function mintNFT(poemId, poemTitle) {
       errorMessage = "❌ Insufficient funds for gas fees.";
     }
     
-    if (typeof showCyberNotification === 'function') {
-      showCyberNotification(errorMessage, 'error');
-    } else {
-      alert(errorMessage);
+    showNotification(errorMessage, 'error');
+    throw error;
+  }
+}
+
+// UI Helper Functions
+function updateWalletUI(address) {
+  const walletButton = document.querySelector('.wallet-status');
+  if (walletButton) {
+    walletButton.textContent = `${address.substring(0, 6)}...${address.substring(38)}`;
+    walletButton.setAttribute('data-text', 'CONNECTED');
+    walletButton.classList.add('connected');
+  }
+}
+
+function updateNFTCardStatus(poemId, status, txHash = null) {
+  const nftCard = document.querySelector(`[data-poem-id="${poemId}"]`);
+  if (nftCard) {
+    const statusElement = nftCard.querySelector('.nft-status');
+    const actionButton = nftCard.querySelector('.nft-action');
+    
+    if (status === 'minted' && statusElement && actionButton) {
+      statusElement.textContent = 'COLLECTED';
+      statusElement.classList.add('minted');
+      actionButton.textContent = 'VIEW ON POLYGONSCAN';
+      actionButton.onclick = () => window.open(`https://polygonscan.com/tx/${txHash}`, '_blank');
     }
   }
 }
 
-// Attach functions to window for HTML access
-window.handleWalletConnection = connectWallet;
+function showNotification(message, type = 'info') {
+  // Use existing cyber notification system if available
+  if (typeof showCyberNotification === 'function') {
+    showCyberNotification(message, type);
+  } else {
+    // Fallback to alert
+    alert(message);
+  }
+}
+
+// Wallet connection options for different wallet types
+function showWalletOptions() {
+  const options = [
+    { type: 'metamask', name: 'MetaMask', available: !!window.ethereum?.isMetaMask },
+    { type: 'coinbase', name: 'Coinbase Wallet', available: !!window.ethereum?.isCoinbaseWallet },
+    { type: 'phantom', name: 'Phantom', available: !!window.ethereum?.isPhantom },
+    { type: 'walletconnect', name: 'WalletConnect', available: true }
+  ];
+  
+  const availableOptions = options.filter(opt => opt.available);
+  
+  if (availableOptions.length === 1) {
+    // Auto-connect if only one wallet available
+    return connectWallet(availableOptions[0].type);
+  } else {
+    // Show selection or auto-detect
+    return connectWallet('auto');
+  }
+}
+
+// Make functions globally available for HTML onclick handlers
+window.handleWalletConnection = showWalletOptions;
 window.mintPoem = mintNFT;
 window.connectWallet = connectWallet;
+window.atuonaConnect = showWalletOptions;
+window.atuonaMint = mintNFT;
 
-console.log("✅ ATUONA Underground Gallery blockchain module loaded!");
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("✅ ATUONA Underground Gallery blockchain module loaded!");
+  
+  // Check if wallet was previously connected
+  if (localStorage.getItem('atuona-wallet-connected') === 'true') {
+    console.log("🔄 Attempting to reconnect wallet...");
+    connectWallet('auto').catch(err => {
+      console.log("Could not auto-reconnect wallet:", err);
+      localStorage.removeItem('atuona-wallet-connected');
+    });
+  }
+});
+
+// Save connection state
+window.addEventListener('beforeunload', function() {
+  if (window.atuonaGallery.isConnected) {
+    localStorage.setItem('atuona-wallet-connected', 'true');
+  }
+});
+
+console.log("🎭 ATUONA Gallery of Moments - Ready for Underground NFT Collection!");
