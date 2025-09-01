@@ -106,7 +106,7 @@ window.mintPoem = async function(poemId, poemTitle) {
       alert(message);
     }
     
-    // Create mint transaction
+    // Create mint transaction with simplified gas handling
     const transaction = mintTo({
       contract: window.atuonaState.contract,
       to: window.atuonaState.userAddress,
@@ -116,7 +116,7 @@ window.mintPoem = async function(poemId, poemTitle) {
         image: `https://atuona.xyz/assets/poem-${poemId}.png`,
         attributes: {
           "Poem ID": poemId,
-          "Collection": "ATUONA Underground Verse Vault",
+          "Collection": "ATUONA Underground Verse Vault", 
           "Type": "Soul Fragment",
           "Language": "Russian/English",
           "Theme": "Underground Poetry",
@@ -125,8 +125,12 @@ window.mintPoem = async function(poemId, poemTitle) {
       }
     });
     
-    // Send transaction using connected wallet
-    const result = await window.atuonaState.account.sendTransaction(transaction);
+    // Send transaction with explicit gas settings
+    const result = await window.atuonaState.account.sendTransaction({
+      ...transaction,
+      gasLimit: 300000n, // Fixed gas limit as BigInt
+      gasPrice: undefined, // Let network determine
+    });
     
     console.log("✅ Soul Fragment minted:", result);
     
