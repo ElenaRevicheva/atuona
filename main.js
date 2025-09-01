@@ -18,28 +18,42 @@ window.handleWalletConnection = async function() {
   console.log("🔗 Wallet connection clicked!");
   
   try {
-    // Show wallet selection
-    const walletChoice = confirm("Choose wallet:\nOK = MetaMask/Injected\nCancel = WalletConnect (Mobile wallets, Coinbase, Trust, etc.)");
+    // Show wallet selection with more options
+    let walletChoice;
+    if (typeof window.phantom !== 'undefined' && window.phantom.ethereum) {
+      walletChoice = prompt("Choose wallet:\n1 = MetaMask/Injected\n2 = Phantom\n3 = WalletConnect (Mobile wallets, Coinbase, Trust, etc.)", "1");
+    } else {
+      walletChoice = confirm("Choose wallet:\nOK = MetaMask/Injected\nCancel = WalletConnect (Mobile wallets, Coinbase, Trust, etc.)") ? "1" : "3";
+    }
     
     let provider;
     let accounts;
     
-    if (walletChoice) {
+    if (walletChoice === "1") {
       // MetaMask/Injected wallet
       if (typeof window.ethereum !== 'undefined') {
         console.log("🦊 Using injected wallet (MetaMask/etc)");
         provider = window.ethereum;
         window.atuonaState.walletType = "injected";
+      } else {
+        throw new Error("No injected wallet found. Please install MetaMask or try another option.");
+      }
+    } else if (walletChoice === "2") {
+      // Phantom wallet
+      if (typeof window.phantom !== 'undefined' && window.phantom.ethereum) {
+        console.log("👻 Using Phantom wallet");
+        provider = window.phantom.ethereum;
+        window.atuonaState.walletType = "phantom";
         
         if (typeof showCyberNotification === 'function') {
-          showCyberNotification("🔗 Connecting to injected wallet...");
+          showCyberNotification("🔗 Connecting to Phantom wallet...");
         } else {
-          alert("🔗 Connecting to injected wallet...");
+          alert("🔗 Connecting to Phantom wallet...");
         }
         
         accounts = await provider.request({ method: 'eth_requestAccounts' });
       } else {
-        throw new Error("No injected wallet found. Please install MetaMask or use WalletConnect.");
+        throw new Error("Phantom wallet not found. Please install Phantom or try another option.");
       }
     } else {
       // WalletConnect for mobile wallets, Coinbase, Trust, etc.
@@ -58,7 +72,41 @@ window.handleWalletConnection = async function() {
         chainId: 137,
         qrcode: true,
         qrcodeModalOptions: {
-          mobileLinks: ["metamask", "coinbase", "trust", "rainbow", "argent"],
+          mobileLinks: ["metamask", "coinbase", "trust", "rainbow", "argent", "phantom"],
+        },
+      });
+      
+      await provider.enable();
+      accounts = provider.accounts;
+      window.atuonaState.walletType = "walletconnect";
+    }
+    
+    // Get accounts based on wallet type
+    if (walletChoice === "1" || walletChoice === "2") {
+      // For injected wallets (MetaMask) and Phantom
+      if (typeof showCyberNotification === 'function') {
+        showCyberNotification(`🔗 Connecting to ${window.atuonaState.walletType} wallet...`);
+      } else {
+        alert(`🔗 Connecting to ${window.atuonaState.walletType} wallet...`);
+      }
+      
+      accounts = await provider.request({ method: 'eth_requestAccounts' });
+      console.log("📱 Using WalletConnect");
+      
+      if (typeof showCyberNotification === 'function') {
+        showCyberNotification("🔗 Connecting via WalletConnect - Choose your wallet...");
+      } else {
+        alert("🔗 Connecting via WalletConnect...");
+      }
+      
+      provider = new WalletConnectProvider({
+        rpc: {
+          137: "https://polygon-rpc.com/", // Polygon mainnet
+        },
+        chainId: 137,
+        qrcode: true,
+        qrcodeModalOptions: {
+          mobileLinks: ["metamask", "coinbase", "trust", "rainbow", "argent", "phantom"],
         },
       });
       
