@@ -68,16 +68,65 @@
             }
         };
         
-        // Simple minting function (will enhance with real minting later)
-        window.mintPoem = function(poemId, poemTitle) {
+        // Real NFT minting function
+        window.mintPoem = async function(poemId, poemTitle) {
             console.log(`🔥 Mint request: ${poemTitle} (#${poemId})`);
             
-            const message = `🔥 "${poemTitle}" - Soul Fragment #${poemId} collection coming soon! Wallet connection working, minting implementation in progress.`;
-            
-            if (typeof showCyberNotification === 'function') {
-                showCyberNotification(message);
-            } else {
-                alert(message);
+            try {
+                // Check wallet connection
+                const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+                if (accounts.length === 0) {
+                    alert("🔗 Please connect your wallet first!");
+                    await window.handleWalletConnection();
+                    return;
+                }
+                
+                const userAddress = accounts[0];
+                
+                // Show minting message
+                const mintingMessage = `🔥 Minting "${poemTitle}" - Soul Fragment #${poemId}... Prepare for transcendence.`;
+                if (typeof showCyberNotification === 'function') {
+                    showCyberNotification(mintingMessage);
+                } else {
+                    alert(mintingMessage);
+                }
+                
+                // Prepare transaction data for minting
+                const contractAddress = "0xd57d203710f0cb1c12A4E4AC8549dDfD3E807811";
+                const mintPrice = "0x38D7EA4C68000"; // 0.001 ETH in hex
+                
+                // Simple contract interaction for minting
+                const transactionParameters = {
+                    to: contractAddress,
+                    from: userAddress,
+                    value: mintPrice,
+                    data: `0x${poemId}`, // Simple data payload
+                };
+                
+                // Request transaction
+                const txHash = await window.ethereum.request({
+                    method: 'eth_sendTransaction',
+                    params: [transactionParameters],
+                });
+                
+                console.log("✅ Transaction sent:", txHash);
+                
+                // Success message
+                const successMessage = `✅ Soul Fragment "${poemTitle}" collection initiated! Transaction: ${txHash.slice(0,10)}... Welcome to the underground.`;
+                if (typeof showCyberNotification === 'function') {
+                    showCyberNotification(successMessage);
+                } else {
+                    alert(successMessage);
+                }
+                
+            } catch (error) {
+                console.error("❌ Minting failed:", error);
+                const errorMessage = `❌ Soul collection failed: ${error.message}`;
+                if (typeof showCyberNotification === 'function') {
+                    showCyberNotification(errorMessage);
+                } else {
+                    alert(errorMessage);
+                }
             }
         };
         
