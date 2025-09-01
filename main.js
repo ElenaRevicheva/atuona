@@ -6,10 +6,8 @@ import {
 import { mintTo } from "thirdweb/extensions/erc721";
 import { polygon } from "thirdweb/chains";
 import { 
-  metamaskWallet,
-  walletConnect,
-  coinbaseWallet,
-  inAppWallet
+  createWallet,
+  injectedProvider
 } from "thirdweb/wallets";
 
 console.log("🔥 ATUONA Blockchain module loading...");
@@ -49,14 +47,8 @@ window.handleWalletConnection = async function() {
       alert("🔗 Connecting wallet...");
     }
     
-    // Try MetaMask first (most common)
-    let wallet;
-    if (typeof window.ethereum !== 'undefined') {
-      wallet = metamaskWallet();
-    } else {
-      // Fallback to in-app wallet
-      wallet = inAppWallet();
-    }
+    // Create wallet instance
+    const wallet = createWallet("io.metamask");
     
     // Connect wallet
     const account = await wallet.connect({
