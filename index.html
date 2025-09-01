@@ -13,87 +13,99 @@
         import { createThirdwebClient, getContract, connect, inAppWallet, defineChain } from "https://unpkg.com/thirdweb@latest/dist/thirdweb.mjs";
         import { mintTo } from "https://unpkg.com/thirdweb@latest/dist/thirdweb.mjs";
         
-        // Initialize thirdweb client
-        const client = createThirdwebClient({
-            clientId: "816ab255dd4019069f7df4c5aafa492a",
-        });
-        
-        // Define Ethereum mainnet
-        const ethereum = defineChain(1);
-        
-        // Contract configuration
-        const contract = getContract({
-            client,
-            address: "0xd57d203710f0cb1c12A4E4AC8549dDfD3E807811",
-            chain: ethereum,
-        });
-        
-        // Wallet configuration
-        const wallet = inAppWallet();
-        
-        // Global blockchain state
-        window.blockchainState = {
-            client,
-            contract,
-            wallet,
-            isConnected: false,
-            userAddress: null
-        };
-        
-        // Make functions globally available
-        window.connectWallet = async function() {
+        // Initialize thirdweb when page loads
+        document.addEventListener('DOMContentLoaded', async function() {
             try {
-                await connect({ client, wallet });
-                window.blockchainState.isConnected = true;
-                window.blockchainState.userAddress = wallet.getAddress();
-                updateWalletStatus();
-                return true;
-            } catch (error) {
-                console.error("Wallet connection failed:", error);
-                showCyberNotification("Wallet connection failed. Please try again.");
-                return false;
-            }
-        };
-        
-        window.mintPoem = async function(poemId, poemTitle) {
-            try {
-                if (!window.blockchainState.isConnected) {
-                    const connected = await window.connectWallet();
-                    if (!connected) return;
-                }
-                
-                showCyberNotification(`Minting "${poemTitle}" - Soul Fragment #${poemId}...`);
-                
-                const transaction = await mintTo({
-                    contract: window.blockchainState.contract,
-                    to: window.blockchainState.userAddress,
-                    nft: {
-                        name: poemTitle,
-                        description: `Soul Fragment #${poemId} from ATUONA Underground Verse Vault`,
-                        image: `https://atuona.xyz/assets/poem-${poemId}.png`, // You can add poem images later
-                    }
+                // Initialize thirdweb client
+                const client = createThirdwebClient({
+                    clientId: "816ab255dd4019069f7df4c5aafa492a",
                 });
                 
-                showCyberNotification(`✅ Soul Fragment "${poemTitle}" collected successfully! Transaction: ${transaction.transactionHash.slice(0,10)}...`);
+                // Define Ethereum mainnet
+                const ethereum = defineChain(1);
+                
+                // Contract configuration
+                const contract = getContract({
+                    client,
+                    address: "0xd57d203710f0cb1c12A4E4AC8549dDfD3E807811",
+                    chain: ethereum,
+                });
+                
+                // Wallet configuration
+                const wallet = inAppWallet();
+                
+                // Global blockchain state
+                window.blockchainState = {
+                    client,
+                    contract,
+                    wallet,
+                    isConnected: false,
+                    userAddress: null
+                };
+                
+                // Make functions globally available
+                window.connectWallet = async function() {
+                    try {
+                        await connect({ client, wallet });
+                        window.blockchainState.isConnected = true;
+                        window.blockchainState.userAddress = await wallet.getAddress();
+                        updateWalletStatus();
+                        showCyberNotification("✅ Wallet connected successfully! Ready to collect soul fragments.");
+                        return true;
+                    } catch (error) {
+                        console.error("Wallet connection failed:", error);
+                        showCyberNotification("❌ Wallet connection failed. Please try again.");
+                        return false;
+                    }
+                };
+                
+                window.mintPoem = async function(poemId, poemTitle) {
+                    try {
+                        if (!window.blockchainState.isConnected) {
+                            showCyberNotification("🔗 Connecting wallet first...");
+                            const connected = await window.connectWallet();
+                            if (!connected) return;
+                        }
+                        
+                        showCyberNotification(`🔥 Minting "${poemTitle}" - Soul Fragment #${poemId}...`);
+                        
+                        const transaction = await mintTo({
+                            contract: window.blockchainState.contract,
+                            to: window.blockchainState.userAddress,
+                            nft: {
+                                name: poemTitle,
+                                description: `Soul Fragment #${poemId} from ATUONA Underground Verse Vault - A piece of consciousness trapped in code, screaming beauty into the void.`,
+                                image: `https://atuona.xyz/assets/poem-${poemId}.png`,
+                            }
+                        });
+                        
+                        showCyberNotification(`✅ Soul Fragment "${poemTitle}" collected successfully! Welcome to the underground.`);
+                        
+                    } catch (error) {
+                        console.error("Minting failed:", error);
+                        showCyberNotification(`❌ Collection failed: ${error.message}`);
+                    }
+                };
+                
+                function updateWalletStatus() {
+                    const statusElements = document.querySelectorAll('.wallet-status');
+                    statusElements.forEach(el => {
+                        if (window.blockchainState.isConnected) {
+                            el.textContent = `Connected: ${window.blockchainState.userAddress.slice(0,6)}...${window.blockchainState.userAddress.slice(-4)}`;
+                            el.style.color = 'var(--silver-grey)';
+                        } else {
+                            el.textContent = 'Connect Wallet';
+                            el.style.color = 'var(--red-dark)';
+                        }
+                    });
+                }
+                
+                console.log("🔥 ATUONA Blockchain functionality initialized - Ready for soul collection!");
                 
             } catch (error) {
-                console.error("Minting failed:", error);
-                showCyberNotification(`❌ Minting failed: ${error.message}`);
+                console.error("Blockchain initialization failed:", error);
             }
-        };
-        
-        function updateWalletStatus() {
-            const statusElements = document.querySelectorAll('.wallet-status');
-            statusElements.forEach(el => {
-                if (window.blockchainState.isConnected) {
-                    el.textContent = `Connected: ${window.blockchainState.userAddress.slice(0,6)}...${window.blockchainState.userAddress.slice(-4)}`;
-                    el.style.color = 'var(--silver-grey)';
-                } else {
-                    el.textContent = 'Connect Wallet';
-                    el.style.color = 'var(--red-dark)';
-                }
-            });
-        }
+        });
     </script>
     <style>
         /* Underground NFT Gallery Aesthetic - Dark Red and Silver Grey */
@@ -961,7 +973,7 @@
                 <a href="#home" class="nav-link active space" data-text="VAULT">VAULT</a>
                 <a href="#about" class="nav-link space" data-text="MANIFEST">MANIFEST</a>
                 <a href="#gallery" class="nav-link space" data-text="MINT">MINT</a>
-                <button class="nav-link space wallet-status" onclick="connectWallet()" data-text="CONNECT">Connect Wallet</button>
+                <button class="nav-link space wallet-status" onclick="handleWalletConnection()" data-text="CONNECT">Connect Wallet</button>
             </nav>
         </div>
     </header>
@@ -3477,6 +3489,25 @@
             
             // Initialize blockchain enhancements after page load
             setTimeout(enhanceAllMintingButtons, 1000);
+            
+            // Simple wallet connection handler for testing
+            window.handleWalletConnection = function() {
+                console.log("🔗 Wallet connection button clicked!");
+                showCyberNotification("🔗 Attempting wallet connection...");
+                
+                if (window.connectWallet) {
+                    window.connectWallet();
+                } else {
+                    console.error("❌ connectWallet function not available");
+                    showCyberNotification("❌ Blockchain functionality not loaded. Please refresh the page.");
+                }
+            };
+            
+            // Test function for debugging
+            window.testBlockchain = function() {
+                console.log("🧪 Testing blockchain state:", window.blockchainState);
+                showCyberNotification("🧪 Check console for blockchain state");
+            };
             
             // Parallax effect for particles
             window.addEventListener('scroll', function() {
