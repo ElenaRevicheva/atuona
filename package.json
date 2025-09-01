@@ -12,6 +12,9 @@
     "build": "vite build",
     "preview": "vite preview"
   },
+  "dependencies": {
+    "thirdweb": "latest"
+  },
   "devDependencies": {
     "vite": "^5.0.0"
   }
