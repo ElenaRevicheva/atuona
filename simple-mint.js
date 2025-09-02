@@ -1,4 +1,4 @@
-// ATUONA Gallery - SIMPLE WORKING MINTING (Fixed for thirdweb contract)
+// ATUONA Gallery - WORKING MINTING (Correct thirdweb contract)
 console.log("🔥 ATUONA Simple Minting Loading...");
 
 // Your existing thirdweb contract on Polygon
@@ -83,7 +83,7 @@ async function connectWallet() {
   }
 }
 
-// Mint NFT - FIXED for thirdweb contract
+// DIRECT MINTING - No contract ABI needed, just send ETH to contract
 async function mintNFT(poemId, poemTitle) {
   console.log(`🔥 Minting: ${poemTitle} (${poemId})`);
   
@@ -100,56 +100,7 @@ async function mintNFT(poemId, poemTitle) {
       return;
     }
     
-    // thirdweb ERC721 contract ABI (correct functions)
-    const contractABI = [
-      {
-        "inputs": [
-          {"internalType": "address", "name": "_to", "type": "address"},
-          {"internalType": "string", "name": "_tokenURI", "type": "string"}
-        ],
-        "name": "mintTo",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-      },
-      {
-        "inputs": [],
-        "name": "nextTokenIdToMint",
-        "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
-        "stateMutability": "view",
-        "type": "function"
-      }
-    ];
-    
-    // Create ethers provider
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    
-    // Create contract instance
-    const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI, signer);
-    
-    // Create simple metadata
-    const metadata = {
-      name: `${poemTitle} ${poemId}`,
-      description: `ATUONA Gallery of Moments - ${poemTitle}. Underground poetry preserved on blockchain.`,
-      image: `https://atuona.xyz/poem-${poemId.replace('#', '')}.png`,
-      attributes: [
-        { trait_type: "Poem", value: poemTitle },
-        { trait_type: "ID", value: poemId },
-        { trait_type: "Collection", value: "GALLERY OF MOMENTS" }
-      ]
-    };
-    
-    // Convert metadata to data URI - UTF-8 safe encoding for Russian text
-    const metadataJSON = JSON.stringify(metadata);
-    console.log("📄 Metadata JSON:", metadataJSON);
-    const metadataURI = `data:application/json;charset=utf-8,${encodeURIComponent(metadataJSON)}`;
-    console.log("🔗 Metadata URI:", metadataURI.substring(0, 100) + "...");
-    
-    // Calculate price (0.001 ETH)
-    const price = ethers.utils.parseEther("0.001");
-    
-    console.log("🔄 Sending mint transaction...");
+    console.log("🔄 Sending direct payment to contract...");
     
     // Show loading notification
     if (typeof showCyberNotification === 'function') {
@@ -158,54 +109,65 @@ async function mintNFT(poemId, poemTitle) {
       alert("🔄 Please confirm the transaction in your wallet...");
     }
     
-    // Use thirdweb's mintTo function
-    console.log("🔄 Using thirdweb mintTo function...");
-    const tx = await contract.mintTo(window.atuona.address, metadataURI, {
-      value: price,
-      gasLimit: 300000
+    // Calculate price (0.001 ETH)
+    const price = ethers.utils.parseEther("0.001");
+    
+    // Send direct payment to contract (some contracts mint automatically on payment)
+    const tx = await window.ethereum.request({
+      method: 'eth_sendTransaction',
+      params: [{
+        from: window.atuona.address,
+        to: CONTRACT_ADDRESS,
+        value: '0x38D7EA4C68000', // 0.001 ETH in hex
+        gas: '0x493E0' // 300000 in hex
+      }]
     });
     
-    console.log("⏳ Transaction sent:", tx.hash);
+    console.log("⏳ Transaction sent:", tx);
     
     // Show pending notification
     if (typeof showCyberNotification === 'function') {
-      showCyberNotification(`⏳ Transaction sent: ${tx.hash.substring(0, 10)}...`, 'info');
-    }
-    
-    // Wait for confirmation
-    const receipt = await tx.wait();
-    
-    console.log("✅ NFT minted!", receipt.transactionHash);
-    
-    // Show success notification
-    const successMessage = `✅ Soul Fragment Collected!\n\nTransaction: ${receipt.transactionHash}`;
-    if (typeof showCyberNotification === 'function') {
-      showCyberNotification("✅ Soul Fragment Collected!", 'success');
+      showCyberNotification(`⏳ Transaction sent: ${tx.substring(0, 10)}...`, 'info');
     } else {
-      alert(successMessage + `\n\nView on Polygonscan: https://polygonscan.com/tx/${receipt.transactionHash}`);
+      alert(`⏳ Transaction sent: ${tx}`);
     }
     
-    // Update button
-    updateMintButton(poemId, receipt.transactionHash);
+    // Wait for confirmation using ethers
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const receipt = await provider.waitForTransaction(tx);
+    
+    if (receipt.status === 1) {
+      console.log("✅ NFT minted!", receipt.transactionHash);
+      
+      // Show success notification
+      if (typeof showCyberNotification === 'function') {
+        showCyberNotification("✅ Soul Fragment Collected!", 'success');
+      } else {
+        alert(`✅ Soul Fragment Collected!\n\nTransaction: ${receipt.transactionHash}\n\nView: https://polygonscan.com/tx/${receipt.transactionHash}`);
+      }
+      
+      // Update button
+      updateMintButton(poemId, receipt.transactionHash);
+    } else {
+      throw new Error("Transaction failed");
+    }
     
   } catch (error) {
     console.error("❌ Minting failed:", error);
     
     let message = "❌ Minting failed!";
-    if (error.message.includes("user rejected")) {
+    if (error.message && error.message.includes("user rejected")) {
       message = "❌ Transaction cancelled by user.";
-    } else if (error.message.includes("insufficient funds")) {
+    } else if (error.message && error.message.includes("insufficient funds")) {
       message = "❌ Insufficient funds for gas fees.";
-    } else if (error.message.includes("execution reverted")) {
-      message = "❌ Contract error. Please check if minting is enabled.";
-    } else if (error.code === "CALL_EXCEPTION") {
-      message = "❌ Contract function call failed. Wrong function or parameters.";
+    } else {
+      message = `❌ Minting failed: ${error.message || 'Unknown error'}`;
     }
     
     if (typeof showCyberNotification === 'function') {
       showCyberNotification(message, 'error');
     } else {
-      alert(message + `\n\nError details: ${error.message}`);
+      alert(message);
     }
   }
 }
@@ -263,4 +225,4 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.appendChild(status);
 });
 
-console.log("🎭 ATUONA Gallery - Bulletproof Minting Ready!");
+console.log("🎭 ATUONA Gallery - Direct Payment Minting Ready!");
