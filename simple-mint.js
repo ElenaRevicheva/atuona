@@ -45,7 +45,7 @@ async function connectWallet() {
           params: [{
             chainId: POLYGON_CHAIN_ID,
             chainName: 'Polygon',
-            nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
+            nativeCurrency: { name: 'Polygon', symbol: 'POL', decimals: 18 },
             rpcUrls: ['https://polygon-rpc.com/', 'https://rpc.ankr.com/polygon'],
             blockExplorerUrls: ['https://polygonscan.com/']
           }]
@@ -109,7 +109,7 @@ async function mintNFT(poemId, poemTitle) {
       alert("🔄 Please confirm the transaction in your wallet...");
     }
     
-    // Calculate price (0.001 ETH)
+    // Calculate price (0.001 POL)
     const price = ethers.utils.parseEther("0.001");
     
     // Send direct payment to contract (some contracts mint automatically on payment)
@@ -118,7 +118,7 @@ async function mintNFT(poemId, poemTitle) {
       params: [{
         from: window.atuona.address,
         to: CONTRACT_ADDRESS,
-        value: '0x38D7EA4C68000', // 0.001 ETH in hex
+        value: '0x38D7EA4C68000', // 0.001 POL in hex
         gas: '0x493E0' // 300000 in hex
       }]
     });
@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
     🎭 ATUONA Gallery<br>
     📦 ${CONTRACT_ADDRESS.substring(0, 8)}...<br>
     🔗 Polygon Network<br>
-    💎 0.001 ETH per mint<br>
+    💎 0.001 POL per mint<br>
     ${typeof ethers !== 'undefined' ? '✅ Ethers.js Ready' : '⚠️ Library Missing'}
   `;
   document.body.appendChild(status);
