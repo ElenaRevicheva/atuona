@@ -1,4 +1,4 @@
-// ATUONA Gallery - FREE UNDERGROUND MINTING (True to your philosophy)
+// ATUONA Gallery - FREE UNDERGROUND MINTING (Final Working Version)
 console.log("🔥 ATUONA Free Minting Loading...");
 
 // Your thirdweb contract on Polygon
@@ -83,9 +83,9 @@ async function connectWallet() {
   }
 }
 
-// FREE MINTING - True underground approach
+// FREE MINTING - No payments, just gas
 async function mintNFT(poemId, poemTitle) {
-  console.log(`🔥 Free Minting: ${poemTitle} (${poemId})`);
+  console.log(`🔥 FREE Minting: ${poemTitle} (${poemId})`);
   
   if (!window.atuona.connected) {
     alert("❌ Please connect your wallet first!");
@@ -99,7 +99,7 @@ async function mintNFT(poemId, poemTitle) {
       return;
     }
     
-    console.log("🔄 Preparing FREE mint transaction...");
+    console.log("🔄 Preparing FREE mint transaction (no payment required)...");
     
     // Show loading notification
     if (typeof showCyberNotification === 'function') {
@@ -108,7 +108,7 @@ async function mintNFT(poemId, poemTitle) {
       alert("🔄 Collecting Soul Fragment for FREE!\n\nOnly gas fees apply - confirm in wallet...");
     }
     
-    // Correct thirdweb contract ABI (from your contract)
+    // Correct thirdweb contract ABI (nonpayable mintTo)
     const contractABI = [
       {
         "inputs": [
@@ -117,7 +117,7 @@ async function mintNFT(poemId, poemTitle) {
         ],
         "name": "mintTo",
         "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
-        "stateMutability": "nonpayable", // FREE - no payment required!
+        "stateMutability": "nonpayable",
         "type": "function"
       }
     ];
@@ -143,17 +143,18 @@ async function mintNFT(poemId, poemTitle) {
     const metadataURI = `data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(metadata))}`;
     console.log("📄 Metadata URI created:", metadataURI.substring(0, 100) + "...");
     
-    // FREE MINT - no payment, just gas
-    console.log("🔄 Calling mintTo function (FREE)...");
+    // FREE MINT - NO PAYMENT, just gas
+    console.log("🔄 Calling mintTo function (FREE - no payment)...");
     const tx = await contract.mintTo(window.atuona.address, metadataURI, {
-      gasLimit: 300000 // Only gas, no payment!
+      gasLimit: 300000
+      // NO VALUE PARAMETER - completely free!
     });
     
-    console.log("⏳ Transaction sent:", tx.hash);
+    console.log("⏳ FREE mint transaction sent:", tx.hash);
     
     // Show pending notification
     if (typeof showCyberNotification === 'function') {
-      showCyberNotification(`⏳ Transaction sent: ${tx.hash.substring(0, 10)}...`, 'info');
+      showCyberNotification(`⏳ FREE mint sent: ${tx.hash.substring(0, 10)}...`, 'info');
     }
     
     // Wait for confirmation
@@ -183,7 +184,7 @@ async function mintNFT(poemId, poemTitle) {
     } else if (error.message.includes("insufficient funds")) {
       message = "❌ Insufficient POL for gas fees.";
     } else if (error.message.includes("execution reverted")) {
-      message = "❌ Contract error. You might not have permission to mint.";
+      message = "❌ Contract error. You might not have minting permissions.";
     } else {
       message = `❌ Minting failed: ${error.message}`;
     }
