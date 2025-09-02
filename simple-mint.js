@@ -1,7 +1,7 @@
-// ATUONA Gallery - WORKING MINTING (Correct thirdweb contract)
+// ATUONA Gallery - WORKING MINTING (Multiple thirdweb patterns)
 console.log("🔥 ATUONA Simple Minting Loading...");
 
-// Your existing thirdweb contract on Polygon
+// Your thirdweb contract on Polygon
 const CONTRACT_ADDRESS = "0x8551EA2F46ee54A4AB2175bDb75ad2ef369d6115";
 const POLYGON_CHAIN_ID = "0x89"; // 137 in hex
 
@@ -83,7 +83,7 @@ async function connectWallet() {
   }
 }
 
-// DIRECT MINTING - No contract ABI needed, just send ETH to contract
+// TRY ALL POSSIBLE THIRDWEB MINT PATTERNS
 async function mintNFT(poemId, poemTitle) {
   console.log(`🔥 Minting: ${poemTitle} (${poemId})`);
   
@@ -94,13 +94,12 @@ async function mintNFT(poemId, poemTitle) {
   }
   
   try {
-    // Check if ethers is available
     if (typeof ethers === 'undefined') {
       alert("❌ Blockchain library not loaded. Please refresh the page and try again.");
       return;
     }
     
-    console.log("🔄 Sending direct payment to contract...");
+    console.log("🔄 Trying multiple thirdweb mint patterns...");
     
     // Show loading notification
     if (typeof showCyberNotification === 'function') {
@@ -109,66 +108,116 @@ async function mintNFT(poemId, poemTitle) {
       alert("🔄 Please confirm the transaction in your wallet...");
     }
     
-    // Calculate price (0.001 POL)
+    // Create metadata
+    const metadata = {
+      name: `${poemTitle} ${poemId}`,
+      description: `ATUONA Gallery of Moments - ${poemTitle}. Underground poetry preserved on blockchain.`,
+      image: `https://atuona.xyz/poem-${poemId.replace('#', '')}.png`,
+      attributes: [
+        { trait_type: "Poem", value: poemTitle },
+        { trait_type: "ID", value: poemId },
+        { trait_type: "Collection", value: "GALLERY OF MOMENTS" }
+      ]
+    };
+    
+    const metadataURI = `data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(metadata))}`;
     const price = ethers.utils.parseEther("0.001");
     
-    // Send direct payment to contract (some contracts mint automatically on payment)
-    const tx = await window.ethereum.request({
-      method: 'eth_sendTransaction',
-      params: [{
-        from: window.atuona.address,
-        to: CONTRACT_ADDRESS,
-        value: '0x38D7EA4C68000', // 0.001 POL in hex
-        gas: '0x493E0' // 300000 in hex
-      }]
-    });
-    
-    console.log("⏳ Transaction sent:", tx);
-    
-    // Show pending notification
-    if (typeof showCyberNotification === 'function') {
-      showCyberNotification(`⏳ Transaction sent: ${tx.substring(0, 10)}...`, 'info');
-    } else {
-      alert(`⏳ Transaction sent: ${tx}`);
-    }
-    
-    // Wait for confirmation using ethers
+    // Create provider and signer
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const receipt = await provider.waitForTransaction(tx);
+    const signer = provider.getSigner();
     
-    if (receipt.status === 1) {
-      console.log("✅ NFT minted!", receipt.transactionHash);
-      
-      // Show success notification
-      if (typeof showCyberNotification === 'function') {
-        showCyberNotification("✅ Soul Fragment Collected!", 'success');
-      } else {
-        alert(`✅ Soul Fragment Collected!\n\nTransaction: ${receipt.transactionHash}\n\nView: https://polygonscan.com/tx/${receipt.transactionHash}`);
-      }
-      
-      // Update button
-      updateMintButton(poemId, receipt.transactionHash);
-    } else {
-      throw new Error("Transaction failed");
+    // Try Pattern 1: Standard ERC721 mint
+    try {
+      console.log("🔄 Pattern 1: Standard ERC721 mint...");
+      const abi1 = [{"inputs":[{"internalType":"address","name":"to","type":"address"}],"name":"mint","outputs":[],"stateMutability":"payable","type":"function"}];
+      const contract1 = new ethers.Contract(CONTRACT_ADDRESS, abi1, signer);
+      const tx1 = await contract1.mint(window.atuona.address, { value: price, gasLimit: 300000 });
+      return await handleSuccess(tx1, poemId);
+    } catch (error1) {
+      console.log("❌ Pattern 1 failed:", error1.message);
     }
+    
+    // Try Pattern 2: thirdweb mintTo with URI
+    try {
+      console.log("🔄 Pattern 2: thirdweb mintTo...");
+      const abi2 = [{"inputs":[{"internalType":"address","name":"_to","type":"address"},{"internalType":"string","name":"_tokenURI","type":"string"}],"name":"mintTo","outputs":[],"stateMutability":"payable","type":"function"}];
+      const contract2 = new ethers.Contract(CONTRACT_ADDRESS, abi2, signer);
+      const tx2 = await contract2.mintTo(window.atuona.address, metadataURI, { value: price, gasLimit: 300000 });
+      return await handleSuccess(tx2, poemId);
+    } catch (error2) {
+      console.log("❌ Pattern 2 failed:", error2.message);
+    }
+    
+    // Try Pattern 3: claim function (common in thirdweb drops)
+    try {
+      console.log("🔄 Pattern 3: claim function...");
+      const abi3 = [{"inputs":[{"internalType":"address","name":"_receiver","type":"address"},{"internalType":"uint256","name":"_quantity","type":"uint256"}],"name":"claim","outputs":[],"stateMutability":"payable","type":"function"}];
+      const contract3 = new ethers.Contract(CONTRACT_ADDRESS, abi3, signer);
+      const tx3 = await contract3.claim(window.atuona.address, 1, { value: price, gasLimit: 300000 });
+      return await handleSuccess(tx3, poemId);
+    } catch (error3) {
+      console.log("❌ Pattern 3 failed:", error3.message);
+    }
+    
+    // Try Pattern 4: thirdweb mint with quantity
+    try {
+      console.log("🔄 Pattern 4: mint with quantity...");
+      const abi4 = [{"inputs":[{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_quantity","type":"uint256"}],"name":"mint","outputs":[],"stateMutability":"payable","type":"function"}];
+      const contract4 = new ethers.Contract(CONTRACT_ADDRESS, abi4, signer);
+      const tx4 = await contract4.mint(window.atuona.address, 1, { value: price, gasLimit: 300000 });
+      return await handleSuccess(tx4, poemId);
+    } catch (error4) {
+      console.log("❌ Pattern 4 failed:", error4.message);
+    }
+    
+    // All patterns failed
+    throw new Error("All mint patterns failed. Contract may not support public minting or requires different parameters.");
     
   } catch (error) {
-    console.error("❌ Minting failed:", error);
+    console.error("❌ All minting attempts failed:", error);
     
     let message = "❌ Minting failed!";
-    if (error.message && error.message.includes("user rejected")) {
+    if (error.message.includes("user rejected")) {
       message = "❌ Transaction cancelled by user.";
-    } else if (error.message && error.message.includes("insufficient funds")) {
-      message = "❌ Insufficient funds for gas fees.";
+    } else if (error.message.includes("insufficient funds")) {
+      message = "❌ Insufficient POL for gas fees.";
     } else {
-      message = `❌ Minting failed: ${error.message || 'Unknown error'}`;
+      message = `❌ Minting failed: ${error.message}`;
     }
     
     if (typeof showCyberNotification === 'function') {
       showCyberNotification(message, 'error');
     } else {
-      alert(message);
+      alert(message + `\n\nCheck transaction: https://polygonscan.com/tx/0xa6a862dcb314bc9e7c8eeb1101ea74a52618d4b9030e3b2af25c1c5b8ae1cbb2`);
     }
+  }
+}
+
+// Handle successful transaction
+async function handleSuccess(tx, poemId) {
+  console.log("⏳ Transaction sent:", tx.hash);
+  
+  if (typeof showCyberNotification === 'function') {
+    showCyberNotification(`⏳ Transaction sent: ${tx.hash.substring(0, 10)}...`, 'info');
+  }
+  
+  // Wait for confirmation
+  const receipt = await tx.wait();
+  
+  if (receipt.status === 1) {
+    console.log("✅ NFT minted!", receipt.transactionHash);
+    
+    if (typeof showCyberNotification === 'function') {
+      showCyberNotification("✅ Soul Fragment Collected!", 'success');
+    } else {
+      alert(`✅ Soul Fragment Collected!\n\nTransaction: ${receipt.transactionHash}\n\nView: https://polygonscan.com/tx/${receipt.transactionHash}`);
+    }
+    
+    updateMintButton(poemId, receipt.transactionHash);
+    return receipt;
+  } else {
+    throw new Error("Transaction failed");
   }
 }
 
@@ -225,4 +274,4 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.appendChild(status);
 });
 
-console.log("🎭 ATUONA Gallery - Direct Payment Minting Ready!");
+console.log("🎭 ATUONA Gallery - Multi-Pattern Minting Ready!");
