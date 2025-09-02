@@ -139,8 +139,11 @@ async function mintNFT(poemId, poemTitle) {
       ]
     };
     
-    // Convert metadata to data URI (no IPFS needed)
-    const metadataURI = `data:application/json;base64,${btoa(JSON.stringify(metadata))}`;
+    // Convert metadata to data URI - UTF-8 safe encoding for Russian text
+    const metadataJSON = JSON.stringify(metadata);
+    console.log("📄 Metadata JSON:", metadataJSON);
+    const metadataURI = `data:application/json;charset=utf-8,${encodeURIComponent(metadataJSON)}`;
+    console.log("🔗 Metadata URI:", metadataURI.substring(0, 100) + "...");
     
     // Calculate price (0.001 ETH)
     const price = ethers.utils.parseEther("0.001");
@@ -215,7 +218,7 @@ async function mintWithRawWeb3(poemId, poemTitle) {
       image: `https://atuona.xyz/poem-${poemId.replace('#', '')}.png`
     };
     
-    const metadataURI = `data:application/json;base64,${btoa(JSON.stringify(metadata))}`;
+    const metadataURI = `data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(metadata))}`;
     
     // Encode function call manually
     const functionSignature = "0x40d097c3"; // safeMint(address,string) signature
