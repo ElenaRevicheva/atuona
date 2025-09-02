@@ -1,15 +1,10 @@
 {
   "name": "atuona-gallery",
   "version": "1.0.0",
-  "type": "module",
+  "description": "ATUONA Gallery of Moments - Underground Verse Vault powered by Zora Protocol",
   "scripts": {
-    "build": "vite build",
-    "dev": "vite"
-  },
-  "dependencies": {
-    "thirdweb": "^5.68.0"
-  },
-  "devDependencies": {
-    "vite": "^5.4.19"
+    "dev": "python3 -m http.server 8080",
+    "build": "echo 'No build needed - static HTML with Zora Protocol' && mkdir -p dist && cp -r *.html *.css *.js *.md dist/",
+    "preview": "python3 -m http.server 8080 --directory dist"
   }
 }
