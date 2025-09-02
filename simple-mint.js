@@ -1,13 +1,7 @@
-// ATUONA Gallery - SIMPLE WORKING MINTING (Bulletproof Version)
+// ATUONA Gallery - SIMPLE WORKING MINTING (Fixed for thirdweb contract)
 console.log("🔥 ATUONA Simple Minting Loading...");
 
-// Check if ethers is available
-if (typeof ethers === 'undefined') {
-  console.error("❌ Ethers.js not loaded! Using Web3 fallback...");
-  alert("❌ Loading blockchain library... Please refresh if minting doesn't work.");
-}
-
-// Your existing Polygon contract that WORKS
+// Your existing thirdweb contract on Polygon
 const CONTRACT_ADDRESS = "0x8551EA2F46ee54A4AB2175bDb75ad2ef369d6115";
 const POLYGON_CHAIN_ID = "0x89"; // 137 in hex
 
@@ -89,7 +83,7 @@ async function connectWallet() {
   }
 }
 
-// Mint NFT - BULLETPROOF with fallbacks
+// Mint NFT - FIXED for thirdweb contract
 async function mintNFT(poemId, poemTitle) {
   console.log(`🔥 Minting: ${poemTitle} (${poemId})`);
   
@@ -102,20 +96,27 @@ async function mintNFT(poemId, poemTitle) {
   try {
     // Check if ethers is available
     if (typeof ethers === 'undefined') {
-      // Use raw Web3 calls if ethers is not available
-      return await mintWithRawWeb3(poemId, poemTitle);
+      alert("❌ Blockchain library not loaded. Please refresh the page and try again.");
+      return;
     }
     
-    // Simple contract ABI - just the mint function we need
+    // thirdweb ERC721 contract ABI (correct functions)
     const contractABI = [
       {
         "inputs": [
-          {"internalType": "address", "name": "to", "type": "address"},
-          {"internalType": "string", "name": "uri", "type": "string"}
+          {"internalType": "address", "name": "_to", "type": "address"},
+          {"internalType": "string", "name": "_tokenURI", "type": "string"}
         ],
-        "name": "safeMint",
+        "name": "mintTo",
         "outputs": [],
         "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "nextTokenIdToMint",
+        "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+        "stateMutability": "view",
         "type": "function"
       }
     ];
@@ -157,8 +158,9 @@ async function mintNFT(poemId, poemTitle) {
       alert("🔄 Please confirm the transaction in your wallet...");
     }
     
-    // Send mint transaction
-    const tx = await contract.safeMint(window.atuona.address, metadataURI, {
+    // Use thirdweb's mintTo function
+    console.log("🔄 Using thirdweb mintTo function...");
+    const tx = await contract.mintTo(window.atuona.address, metadataURI, {
       value: price,
       gasLimit: 300000
     });
@@ -180,7 +182,7 @@ async function mintNFT(poemId, poemTitle) {
     if (typeof showCyberNotification === 'function') {
       showCyberNotification("✅ Soul Fragment Collected!", 'success');
     } else {
-      alert(successMessage);
+      alert(successMessage + `\n\nView on Polygonscan: https://polygonscan.com/tx/${receipt.transactionHash}`);
     }
     
     // Update button
@@ -195,60 +197,16 @@ async function mintNFT(poemId, poemTitle) {
     } else if (error.message.includes("insufficient funds")) {
       message = "❌ Insufficient funds for gas fees.";
     } else if (error.message.includes("execution reverted")) {
-      message = "❌ Contract error. Please try again.";
+      message = "❌ Contract error. Please check if minting is enabled.";
+    } else if (error.code === "CALL_EXCEPTION") {
+      message = "❌ Contract function call failed. Wrong function or parameters.";
     }
     
     if (typeof showCyberNotification === 'function') {
       showCyberNotification(message, 'error');
     } else {
-      alert(message);
+      alert(message + `\n\nError details: ${error.message}`);
     }
-  }
-}
-
-// Raw Web3 fallback if ethers.js fails to load
-async function mintWithRawWeb3(poemId, poemTitle) {
-  console.log("🔄 Using raw Web3 fallback...");
-  
-  try {
-    // Create metadata
-    const metadata = {
-      name: `${poemTitle} ${poemId}`,
-      description: `ATUONA Gallery of Moments - ${poemTitle}. Underground poetry preserved on blockchain.`,
-      image: `https://atuona.xyz/poem-${poemId.replace('#', '')}.png`
-    };
-    
-    const metadataURI = `data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(metadata))}`;
-    
-    // Encode function call manually
-    const functionSignature = "0x40d097c3"; // safeMint(address,string) signature
-    const addressParam = window.atuona.address.toLowerCase().replace('0x', '').padStart(64, '0');
-    const stringOffset = (64).toString(16).padStart(64, '0'); // offset to string data
-    const stringLength = metadataURI.length.toString(16).padStart(64, '0');
-    const stringData = Array.from(metadataURI).map(c => c.charCodeAt(0).toString(16).padStart(2, '0')).join('').padEnd(Math.ceil(metadataURI.length / 32) * 64, '0');
-    
-    const callData = functionSignature + addressParam + stringOffset + stringLength + stringData;
-    
-    // Send transaction
-    const txHash = await window.ethereum.request({
-      method: 'eth_sendTransaction',
-      params: [{
-        from: window.atuona.address,
-        to: CONTRACT_ADDRESS,
-        value: '0x38D7EA4C68000', // 0.001 ETH in hex
-        data: callData,
-        gas: '0x493E0' // 300000 in hex
-      }]
-    });
-    
-    console.log("✅ Raw Web3 mint successful:", txHash);
-    alert(`✅ Soul Fragment Collected!\n\nTransaction: ${txHash}\n\nView: https://polygonscan.com/tx/${txHash}`);
-    
-    updateMintButton(poemId, txHash);
-    
-  } catch (error) {
-    console.error("❌ Raw Web3 mint failed:", error);
-    alert("❌ Minting failed. Please try again or contact support.");
   }
 }
 
@@ -277,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (typeof ethers !== 'undefined') {
     console.log("✅ Ethers.js loaded successfully");
   } else {
-    console.warn("⚠️ Ethers.js not loaded - will use Web3 fallback");
+    console.warn("⚠️ Ethers.js not loaded - please refresh page");
   }
   
   // Add simple status indicator
@@ -300,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
     📦 ${CONTRACT_ADDRESS.substring(0, 8)}...<br>
     🔗 Polygon Network<br>
     💎 0.001 ETH per mint<br>
-    ${typeof ethers !== 'undefined' ? '✅ Ethers.js Ready' : '⚠️ Web3 Fallback'}
+    ${typeof ethers !== 'undefined' ? '✅ Ethers.js Ready' : '⚠️ Library Missing'}
   `;
   document.body.appendChild(status);
 });
