@@ -1,18 +1,9 @@
-// ATUONA Gallery - thirdweb's EXACT Solution with ABI
-console.log("🔥 ATUONA thirdweb ABI Loading...");
+// ATUONA Gallery - thirdweb's EXACT Browser Solution (ethers.js)
+console.log("🔥 ATUONA ethers.js Browser Loading...");
 
-import {
-  createThirdwebClient,
-  getContract,
-} from "thirdweb";
-import { polygon } from "thirdweb/chains";
 import contractABI from "./contract-abi.json";
 
-// Initialize thirdweb client
-const client = createThirdwebClient({
-  clientId: "602cfa7b8c0b862d35f7cfa61c961a38",
-});
-
+// Contract details
 const contractAddress = "0x8551EA2F46ee54A4AB2175bDb75ad2ef369d6115";
 
 // Global state
@@ -21,7 +12,7 @@ window.atuona = {
   address: null
 };
 
-// Connect wallet
+// Connect wallet - thirdweb's browser approach
 async function connectWallet() {
   console.log("🔗 Connecting wallet...");
   
@@ -31,8 +22,8 @@ async function connectWallet() {
   }
   
   try {
-    // thirdweb's recommended wallet connection
-    const [userAddress] = await window.ethereum.request({
+    // Connect to MetaMask - thirdweb's exact pattern
+    await window.ethereum.request({
       method: "eth_requestAccounts",
     });
     
@@ -56,6 +47,11 @@ async function connectWallet() {
         });
       }
     }
+    
+    // Get user address
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    const userAddress = await signer.getAddress();
     
     // Update state
     window.atuona.connected = true;
@@ -83,9 +79,9 @@ async function connectWallet() {
   }
 }
 
-// FREE minting with ABI - thirdweb's exact solution
+// FREE minting - thirdweb's exact browser solution with ethers.js
 async function mintNFT(poemId, poemTitle) {
-  console.log(`🔥 FREE ABI Minting: ${poemTitle} (${poemId})`);
+  console.log(`🔥 FREE ethers.js Minting: ${poemTitle} (${poemId})`);
   
   if (!window.atuona.connected) {
     await connectWallet();
@@ -93,15 +89,7 @@ async function mintNFT(poemId, poemTitle) {
   }
   
   try {
-    console.log("🔄 Creating contract with ABI...");
-    console.log("📋 ABI loaded:", Array.isArray(contractABI) ? "✅ Valid array" : "❌ Not array");
-    
-    // Check if mintTo function exists in ABI
-    const mintToFunction = contractABI.find(item => item.name === "mintTo" && item.type === "function");
-    console.log("🔍 mintTo function in ABI:", !!mintToFunction);
-    if (mintToFunction) {
-      console.log("📋 mintTo function details:", mintToFunction);
-    }
+    console.log("🔄 Using ethers.js for browser minting...");
     
     if (typeof showCyberNotification === 'function') {
       showCyberNotification("🔄 Minting Soul Fragment for FREE...", 'info');
@@ -109,22 +97,21 @@ async function mintNFT(poemId, poemTitle) {
       alert("🔄 Minting Soul Fragment for FREE!\nConfirm in wallet...");
     }
     
-    // Get contract with ABI - thirdweb's exact pattern
-    const contract = getContract({
-      client,
-      address: contractAddress,
-      chain: polygon,
-      abi: contractABI, // <-- ABI provided as JSON!
-    });
+    // thirdweb's exact browser pattern with ethers.js
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    const contract = new ethers.Contract(
+      contractAddress,
+      contractABI,
+      signer,
+    );
     
-    console.log("✅ Contract created with ABI");
-    console.log("🔍 contract.write available:", !!contract.write);
-    console.log("🔍 contract.write.mintTo available:", !!contract.write?.mintTo);
+    console.log("✅ ethers.js contract created");
     
     // Create metadata URI
     const metadata = {
       name: `${poemTitle} ${poemId}`,
-      description: `ATUONA Gallery of Moments - ${poemTitle}. Underground poetry preserved on blockchain.`,
+      description: `ATUONA Gallery of Moments - ${poemTitle}. Underground poetry preserved on blockchain. Free collection - true to underground values.`,
       image: `https://atuona.xyz/poem-${poemId.replace('#', '')}.png`,
       attributes: [
         { trait_type: "Poem", value: poemTitle },
@@ -133,34 +120,53 @@ async function mintNFT(poemId, poemTitle) {
       ]
     };
     
-    // Use HTTPS metadata URL instead of data URI
     const metadataUri = `https://atuona.xyz/metadata/${poemId.replace('#', '')}.json`;
     console.log("📄 Metadata URI:", metadataUri);
     
-    console.log("🔄 Calling contract.write.mintTo...");
+    // thirdweb's exact browser call
+    console.log("🔄 Calling contract.mintTo with ethers.js...");
+    const tx = await contract.mintTo(
+      window.atuona.address,
+      metadataUri,
+    );
     
-    // thirdweb's exact pattern with ABI
-    const result = await contract.write.mintTo([window.atuona.address, metadataUri]);
+    console.log("⏳ Transaction sent:", tx.hash);
     
-    console.log("✅ mintTo completed:", result);
+    // Wait for confirmation
+    await tx.wait();
+    
+    console.log("✅ Soul Fragment minted for FREE!");
     
     if (typeof showCyberNotification === 'function') {
       showCyberNotification("✅ Soul Fragment Collected for FREE!", 'success');
     } else {
-      alert(`✅ Soul Fragment Collected for FREE!\n\nResult: ${JSON.stringify(result)}`);
+      alert(`✅ Soul Fragment Collected for FREE!\n\nTransaction: ${tx.hash}\n\nView: https://polygonscan.com/tx/${tx.hash}`);
     }
     
     // Update button
-    updateMintButton(poemId, result.transactionHash || "minted");
+    updateMintButton(poemId, tx.hash);
     
   } catch (error) {
-    console.error("❌ ABI minting failed:", error);
+    console.error("❌ ethers.js minting failed:", error);
     
     let message = "❌ Free minting failed!";
     if (error.message && error.message.includes("user rejected")) {
       message = "❌ Transaction cancelled by user.";
     } else if (error.message && error.message.includes("insufficient funds")) {
       message = "❌ Insufficient POL for gas fees.";
+    } else if (error.message && error.message.includes("NFTMetadataInvalidUrl")) {
+      message = "❌ Invalid metadata URL. Using data URI fallback.";
+      // Fallback to data URI
+      const metadataDataUri = `data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(metadata))}`;
+      try {
+        const tx = await contract.mintTo(window.atuona.address, metadataDataUri);
+        await tx.wait();
+        console.log("✅ Fallback minting succeeded!");
+        updateMintButton(poemId, tx.hash);
+        return;
+      } catch (fallbackError) {
+        message = `❌ Both HTTPS and data URI failed: ${fallbackError.message}`;
+      }
     } else {
       message = `❌ Minting failed: ${error.message}`;
     }
@@ -181,9 +187,7 @@ function updateMintButton(poemId, txHash) {
       button.textContent = 'COLLECTED ✅';
       button.style.background = '#4CAF50';
       button.style.cursor = 'pointer';
-      if (txHash && txHash !== "minted") {
-        button.onclick = () => window.open(`https://polygonscan.com/tx/${txHash}`, '_blank');
-      }
+      button.onclick = () => window.open(`https://polygonscan.com/tx/${txHash}`, '_blank');
     }
   });
 }
@@ -194,7 +198,7 @@ window.mintPoem = mintNFT;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
-  console.log("✅ ATUONA thirdweb ABI Ready!");
+  console.log("✅ ATUONA ethers.js Browser Ready!");
   
   // Add status indicator
   const status = document.createElement('div');
@@ -216,9 +220,9 @@ document.addEventListener('DOMContentLoaded', function() {
     📦 ${contractAddress.substring(0, 8)}...<br>
     🔗 Polygon Network<br>
     💎 FREE Collection (Gas Only)<br>
-    📋 Contract ABI Loaded
+    ⚡ ethers.js Direct Calls
   `;
   document.body.appendChild(status);
 });
 
-console.log("🎭 ATUONA Gallery - thirdweb ABI Solution Ready!");
+console.log("🎭 ATUONA Gallery - ethers.js Browser Solution Ready!");
