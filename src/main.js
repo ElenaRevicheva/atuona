@@ -6,7 +6,7 @@ import {
   getContract,
 } from "thirdweb";
 import { polygon } from "thirdweb/chains";
-import { contractABI } from "./contract-abi.js";
+import contractABI from "./contract-abi.json";
 
 // Initialize thirdweb client
 const client = createThirdwebClient({
@@ -94,6 +94,7 @@ async function mintNFT(poemId, poemTitle) {
   
   try {
     console.log("🔄 Creating contract with ABI...");
+    console.log("📋 ABI loaded:", Array.isArray(contractABI) ? "✅ Valid array" : "❌ Not array");
     
     if (typeof showCyberNotification === 'function') {
       showCyberNotification("🔄 Minting Soul Fragment for FREE...", 'info');
@@ -106,10 +107,12 @@ async function mintNFT(poemId, poemTitle) {
       client,
       address: contractAddress,
       chain: polygon,
-      abi: contractABI, // <-- ABI provided!
+      abi: contractABI, // <-- ABI provided as JSON!
     });
     
     console.log("✅ Contract created with ABI");
+    console.log("🔍 contract.write available:", !!contract.write);
+    console.log("🔍 contract.write.mintTo available:", !!contract.write?.mintTo);
     
     // Create metadata URI
     const metadata = {
