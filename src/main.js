@@ -62,16 +62,26 @@ async function claimPoem(poemId, poemTitle) {
   try {
     console.log(`🔥 Claiming NFT: ${poemTitle} (${poemId})`);
     
-    // Use claimTo function for NFT Drop - simplified approach
+    // Use claimTo function for NFT Drop - debug what it returns
+    console.log("🔄 Calling claimTo...");
     const result = await claimTo({
       contract,
       to: currentAccount.address,
       quantity: 1n,
-      account: currentAccount, // Pass account directly to claimTo
+      account: currentAccount,
     });
     
-    console.log("✅ NFT claimed successfully!", result.transactionHash);
-    alert(`🎭 Soul Fragment claimed!\n\nTransaction: ${result.transactionHash}\n\nCheck your wallet and Polygonscan!`);
+    console.log("🔍 ClaimTo result:", result);
+    console.log("🔍 Result type:", typeof result);
+    console.log("🔍 Result keys:", result ? Object.keys(result) : 'null');
+    
+    if (result && result.transactionHash) {
+      console.log("✅ NFT claimed successfully!", result.transactionHash);
+      alert(`🎭 Soul Fragment claimed!\n\nTransaction: ${result.transactionHash}\n\nCheck your wallet and Polygonscan!`);
+    } else {
+      console.log("❌ No transaction hash - this might be a simulation");
+      alert("⚠️ Claiming completed but no transaction hash received.\nThis might be a simulation, not real minting.");
+    }
     
   } catch (error) {
     console.error("❌ Claim failed:", error);
