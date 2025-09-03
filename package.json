@@ -1,10 +1,17 @@
 {
   "name": "atuona-gallery",
   "version": "1.0.0",
-  "description": "ATUONA Gallery of Moments - Underground Verse Vault with Direct Contract Calls",
+  "description": "ATUONA Gallery of Moments - Underground Verse Vault with thirdweb ABI",
+  "type": "module",
   "scripts": {
-    "dev": "python3 -m http.server 8080",
-    "build": "mkdir -p dist && cp *.html *.css *.js dist/",
-    "preview": "python3 -m http.server 8080 --directory dist"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "thirdweb": "^5.105.41"
+  },
+  "devDependencies": {
+    "vite": "^5.4.19"
   }
 }
