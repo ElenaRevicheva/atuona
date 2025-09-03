@@ -1,13 +1,12 @@
-// ATUONA Gallery - Simple thirdweb Vanilla JS (Following thirdweb's exact guidance)
+// ATUONA Gallery - thirdweb's Exact Vanilla JS Solution
 console.log("🔥 ATUONA Simple thirdweb Loading...");
 
 import {
   createThirdwebClient,
   getContract,
 } from "thirdweb";
-import { mintTo } from "thirdweb/extensions/erc721";
+import { claim } from "thirdweb/extensions/erc721";
 import { polygon } from "thirdweb/chains";
-import { createWallet } from "thirdweb/wallets";
 
 // Initialize thirdweb client
 const client = createThirdwebClient({
@@ -15,105 +14,138 @@ const client = createThirdwebClient({
 });
 
 const contractAddress = "0x8551EA2F46ee54A4AB2175bDb75ad2ef369d6115";
-let wallet;
-let account;
 
-// Connect wallet - Simple thirdweb approach
+// Global state
+window.atuona = {
+  connected: false,
+  address: null
+};
+
+// Connect wallet - Simple MetaMask approach
 async function connectWallet() {
   console.log("🔗 Connecting wallet...");
   
+  if (!window.ethereum) {
+    alert("❌ Please install MetaMask!");
+    return;
+  }
+  
   try {
-    // Create wallet (auto-detect MetaMask/injected)
-    wallet = createWallet("io.metamask");
-    account = await wallet.connect({ client, chain: polygon });
+    // Request account access
+    const accounts = await window.ethereum.request({
+      method: 'eth_requestAccounts'
+    });
     
-    console.log("✅ Wallet connected:", account.address);
+    // Switch to Polygon
+    try {
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: "0x89" }]
+      });
+    } catch (switchError) {
+      if (switchError.code === 4902) {
+        await window.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [{
+            chainId: "0x89",
+            chainName: 'Polygon',
+            nativeCurrency: { name: 'Polygon', symbol: 'POL', decimals: 18 },
+            rpcUrls: ['https://polygon-rpc.com/'],
+            blockExplorerUrls: ['https://polygonscan.com/']
+          }]
+        });
+      }
+    }
+    
+    // Update state
+    window.atuona.connected = true;
+    window.atuona.address = accounts[0];
     
     // Update UI
     const walletButton = document.querySelector('.wallet-status');
     if (walletButton) {
-      walletButton.textContent = `${account.address.substring(0, 6)}...${account.address.substring(38)}`;
+      walletButton.textContent = `${accounts[0].substring(0, 6)}...${accounts[0].substring(38)}`;
       walletButton.setAttribute('data-text', 'CONNECTED');
       walletButton.style.background = '#4CAF50';
     }
     
-    // Show success notification
+    console.log("✅ Wallet connected:", accounts[0]);
+    
     if (typeof showCyberNotification === 'function') {
-      showCyberNotification("✅ Wallet Connected - Ready for FREE minting!", 'success');
+      showCyberNotification("✅ Ready for FREE minting!", 'success');
     } else {
-      alert(`✅ Wallet Connected!\n${account.address}\n\nReady for FREE Soul Fragment collection!`);
+      alert("✅ Wallet Connected!\nReady for FREE Soul Fragment collection!");
     }
     
   } catch (error) {
     console.error("❌ Connection failed:", error);
-    
-    if (typeof showCyberNotification === 'function') {
-      showCyberNotification("❌ Wallet connection failed. Please try again.", 'error');
-    } else {
-      alert(`❌ Connection failed: ${error.message}`);
-    }
+    alert(`❌ Connection failed: ${error.message}`);
   }
 }
 
-// Simple FREE minting - thirdweb's exact approach
+// FREE minting - thirdweb's exact pattern
 async function mintNFT(poemId, poemTitle) {
-  console.log(`🔥 Simple FREE Minting: ${poemTitle} (${poemId})`);
+  console.log(`🔥 FREE Claim Minting: ${poemTitle} (${poemId})`);
   
-  if (!wallet || !account) {
-    alert("❌ Please connect your wallet first!");
+  if (!window.atuona.connected) {
     await connectWallet();
     return;
   }
   
   try {
-    console.log("🔄 Preparing simple FREE mint...");
+    console.log("🔄 Preparing FREE claim...");
     
-    // Show loading notification
     if (typeof showCyberNotification === 'function') {
-      showCyberNotification("🔄 Collecting Soul Fragment for FREE... Confirm in wallet.", 'info');
+      showCyberNotification("🔄 Claiming Soul Fragment for FREE...", 'info');
     } else {
-      alert("🔄 Collecting Soul Fragment for FREE!\n\nOnly gas fees - confirm in wallet...");
+      alert("🔄 Claiming Soul Fragment for FREE!\nConfirm in wallet...");
     }
     
-    // Get contract instance
+    // Get contract
     const contract = getContract({
       client,
       address: contractAddress,
       chain: polygon,
     });
     
-    // Simple FREE mint - thirdweb's exact pattern
-    const transaction = mintTo({
+    // thirdweb's exact claim pattern
+    const transaction = claim({
       contract,
-      to: account.address,
-      // No metadata needed - keeping it simple!
+      quantity: 1n,
+      to: window.atuona.address,
     });
     
-    // Send the transaction
-    const tx = await account.sendTransaction(transaction);
+    console.log("🔄 Sending claim transaction...");
     
-    console.log("✅ FREE mint transaction sent:", tx.transactionHash);
+    // Send transaction using thirdweb's recommended approach
+    await transaction.send({
+      account: {
+        address: window.atuona.address,
+        signer: window.ethereum,
+      },
+    });
     
-    // Show success notification
+    console.log("✅ Soul Fragment claimed for FREE!");
+    
     if (typeof showCyberNotification === 'function') {
       showCyberNotification("✅ Soul Fragment Collected for FREE!", 'success');
     } else {
-      alert(`✅ Soul Fragment Collected for FREE!\n\nTransaction: ${tx.transactionHash}\n\nView: https://polygonscan.com/tx/${tx.transactionHash}`);
+      alert("✅ Soul Fragment Collected for FREE!");
     }
     
     // Update button UI
-    updateMintButton(poemId, tx.transactionHash);
+    updateMintButton(poemId, "claimed");
     
   } catch (error) {
-    console.error("❌ Simple minting failed:", error);
+    console.error("❌ Claim failed:", error);
     
-    let message = "❌ Free minting failed!";
+    let message = "❌ Free claim failed!";
     if (error.message.includes("user rejected")) {
       message = "❌ Transaction cancelled by user.";
     } else if (error.message.includes("insufficient funds")) {
       message = "❌ Insufficient POL for gas fees.";
     } else {
-      message = `❌ Minting failed: ${error.message}`;
+      message = `❌ Claim failed: ${error.message}`;
     }
     
     if (typeof showCyberNotification === 'function') {
@@ -125,23 +157,25 @@ async function mintNFT(poemId, poemTitle) {
 }
 
 // Update button after successful mint
-function updateMintButton(poemId, txHash) {
+function updateMintButton(poemId, status) {
   const buttons = document.querySelectorAll('.nft-action');
   buttons.forEach(button => {
     if (button.onclick && button.onclick.toString().includes(poemId)) {
       button.textContent = 'COLLECTED ✅';
       button.style.background = '#4CAF50';
       button.style.cursor = 'pointer';
-      button.onclick = () => window.open(`https://polygonscan.com/tx/${txHash}`, '_blank');
+      if (status !== "claimed") {
+        button.onclick = () => window.open(`https://polygonscan.com/tx/${status}`, '_blank');
+      }
     }
   });
 }
 
-// Make functions globally available for HTML onclick handlers
+// Make functions globally available
 window.handleWalletConnection = connectWallet;
 window.mintPoem = mintNFT;
 
-// Initialize when DOM loads
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
   console.log("✅ ATUONA Simple thirdweb Ready!");
   
@@ -165,9 +199,9 @@ document.addEventListener('DOMContentLoaded', function() {
     📦 ${contractAddress.substring(0, 8)}...<br>
     🔗 Polygon Network<br>
     💎 FREE Collection (Gas Only)<br>
-    ⚡ Simple thirdweb SDK
+    ⚡ thirdweb Claim Function
   `;
   document.body.appendChild(status);
 });
 
-console.log("🎭 ATUONA Gallery - Simple thirdweb FREE Minting Ready!");
+console.log("🎭 ATUONA Gallery - thirdweb Claim FREE Minting Ready!");
