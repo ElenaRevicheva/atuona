@@ -346,6 +346,19 @@ document.addEventListener('DOMContentLoaded', async function() {
         localStorage.setItem('atuona-setup-complete', 'true');
         console.log("🎉 Direct setup completed!");
         
+        // Wait a moment for blockchain indexing
+        console.log("⏳ Waiting for blockchain indexing...");
+        setTimeout(async () => {
+          try {
+            const newSupply = await totalSupply({ 
+              contract: getContract({ client, address: NFT_DROP_CONTRACT, chain: polygon })
+            });
+            console.log("📊 Updated supply after setup:", Number(newSupply));
+          } catch (e) {
+            console.log("Could not check updated supply:", e.message);
+          }
+        }, 5000); // Wait 5 seconds
+        
         if (typeof showCyberNotification === 'function') {
           showCyberNotification("🎉 Underground Gallery is LIVE! FREE claiming enabled!", 'success');
         } else {
