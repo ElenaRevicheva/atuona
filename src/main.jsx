@@ -1,14 +1,10 @@
-// ATUONA Gallery - React Entry Point (thirdweb's exact pattern)
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
+// src/main.jsx - thirdweb's EXACT working example
+import React from "react";
+import ReactDOM from "react-dom/client";
+import WrappedApp from "./App";
 
-console.log("🔥 ATUONA React + thirdweb Loading...");
-
-ReactDOM.createRoot(document.getElementById('react-nft-app')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <WrappedApp />
+  </React.StrictMode>,
 );
-
-console.log("✅ ATUONA React + thirdweb Ready!");

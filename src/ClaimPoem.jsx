@@ -1,30 +1,45 @@
-// ATUONA Gallery - thirdweb's EXACT ClaimButton Implementation
-import { ClaimButton } from "thirdweb/react";
+// src/ClaimPoem.jsx - thirdweb's EXACT working example
+import { createThirdwebClient } from "thirdweb";
+import { ConnectButton, ClaimButton } from "thirdweb/react";
 import { polygon } from "thirdweb/chains";
 
-// thirdweb's exact ClaimButton pattern
-export function ClaimPoem({ poemId, poemTitle }) {
+// Create the client ONCE at the top level
+const client = createThirdwebClient({
+  clientId: "602cfa7b8c0b862d35f7cfa61c961a38", // Your actual clientId
+});
+
+export default function ClaimPoem() {
   return (
-    <div className="claim-container">
-      <h3>🎭 {poemTitle} #{poemId}</h3>
+    <div
+      style={{
+        maxWidth: 400,
+        margin: "2rem auto",
+        textAlign: "center",
+      }}
+    >
+      <h2>Claim Your Poetry NFT</h2>
+      {/* Wallet Connect Button */}
+      <ConnectButton client={client} />
+
+      {/* NFT Claim Button */}
       <ClaimButton
+        client={client}
         contract={{
-          address: "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8",
+          address:
+            "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8", // Your NFT Drop contract address
           chain: polygon,
         }}
         quantity={1}
-        style={{
-          background: '#4CAF50',
-          color: 'white',
-          border: 'none',
-          padding: '10px 20px',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          fontFamily: 'monospace'
+        onClaimed={(result) => {
+          alert(
+            `NFT claimed! Tx hash: ${result.transactionHash}`,
+          );
         }}
-      >
-        COLLECT SOUL
-      </ClaimButton>
+        onError={(error) => {
+          alert(`Claim failed: ${error.message}`);
+        }}
+        style={{ marginTop: "2rem" }}
+      />
     </div>
   );
 }
