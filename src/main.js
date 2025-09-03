@@ -157,7 +157,8 @@ async function mintNFT(poemId, poemTitle) {
     // Direct transaction send without complex wallet setup
     const result = await transaction;
     
-    console.log("✅ Soul Fragment claimed for FREE!", result);
+    console.log("✅ Soul Fragment claimed for FREE!");
+    console.log("📋 Transaction result:", result);
     
     if (typeof showCyberNotification === 'function') {
       showCyberNotification("✅ Soul Fragment Collected for FREE!", 'success');
