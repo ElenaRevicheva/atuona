@@ -13,7 +13,7 @@ import { polygon } from "thirdweb/chains";
 
 // Use secretKey for backend scripts (thirdweb's exact guidance)
 const client = createThirdwebClient({
-  secretKey: "YOUR_SECRET_KEY", // You need to add your secret key here
+  secretKey: "RWytSIaZs6h6i2-TvxN72RJzvY769qiADAIbORQCNQYITuasMGFFpxpCVX0MXu0yOtLIpaeSLq0XePRxm2Wxxw",
   // Alternative: Use clientId if secretKey not available
   clientId: "602cfa7b8c0b862d35f7cfa61c961a38",
 });
@@ -34,7 +34,7 @@ async function setupNFTDrop() {
     await lazyMint({
       contract,
       metadatas: Array.from({ length: 45 }, (_, i) => ({
-        uri: `ipfs://YOUR_BASE_URI/${i + 1}.json`, // Replace with actual IPFS base URI
+        uri: `ipfs://Qmb4ZUgdBJjH8Y2moadMPX8GDo3upYoPBQZvHpprd72Mxp/${i + 1}.json`,
       })),
     });
     
