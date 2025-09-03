@@ -1,18 +1,29 @@
-// ATUONA Gallery - thirdweb's EXACT Browser Solution (ethers.js)
-console.log("🔥 ATUONA ethers.js Browser Loading...");
+// ATUONA Gallery - NFT Drop Claim Implementation
+console.log("🔥 ATUONA NFT Drop Loading...");
 
-import contractABI from "./contract-abi.json";
+import {
+  createThirdwebClient,
+  getContract,
+} from "thirdweb";
+import { claimTo } from "thirdweb/extensions/erc721";
+import { polygon } from "thirdweb/chains";
 
-// Contract details
-const contractAddress = "0x8551EA2F46ee54A4AB2175bDb75ad2ef369d6115";
+// Initialize thirdweb client
+const client = createThirdwebClient({
+  clientId: "602cfa7b8c0b862d35f7cfa61c961a38",
+});
+
+// You'll replace this with your new NFT Drop contract address
+const NFT_DROP_CONTRACT = "YOUR_NEW_NFT_DROP_CONTRACT_ADDRESS"; // Update after deployment
 
 // Global state
 window.atuona = {
   connected: false,
-  address: null
+  address: null,
+  contract: null
 };
 
-// Connect wallet - thirdweb's browser approach
+// Connect wallet
 async function connectWallet() {
   console.log("🔗 Connecting wallet...");
   
@@ -22,8 +33,8 @@ async function connectWallet() {
   }
   
   try {
-    // Connect to MetaMask - thirdweb's exact pattern
-    await window.ethereum.request({
+    // Connect to MetaMask
+    const [userAddress] = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
     
@@ -48,14 +59,17 @@ async function connectWallet() {
       }
     }
     
-    // Get user address
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const signer = await provider.getSigner();
-    const userAddress = await signer.getAddress();
+    // Get NFT Drop contract
+    const contract = getContract({
+      client,
+      address: NFT_DROP_CONTRACT,
+      chain: polygon,
+    });
     
     // Update state
     window.atuona.connected = true;
     window.atuona.address = userAddress;
+    window.atuona.contract = contract;
     
     // Update UI
     const walletButton = document.querySelector('.wallet-status');
@@ -68,9 +82,9 @@ async function connectWallet() {
     console.log("✅ Wallet connected:", userAddress);
     
     if (typeof showCyberNotification === 'function') {
-      showCyberNotification("✅ Ready for FREE minting!", 'success');
+      showCyberNotification("✅ Ready for FREE claiming!", 'success');
     } else {
-      alert("✅ Wallet Connected!\nReady for FREE Soul Fragment collection!");
+      alert("✅ Wallet Connected!\nReady for FREE Soul Fragment claiming!");
     }
     
   } catch (error) {
@@ -79,96 +93,59 @@ async function connectWallet() {
   }
 }
 
-// FREE minting - thirdweb's exact browser solution with ethers.js
+// FREE claiming from NFT Drop
 async function mintNFT(poemId, poemTitle) {
-  console.log(`🔥 FREE ethers.js Minting: ${poemTitle} (${poemId})`);
+  console.log(`🔥 FREE Claiming: ${poemTitle} (${poemId})`);
   
-  if (!window.atuona.connected) {
+  if (!window.atuona.connected || !window.atuona.contract) {
     await connectWallet();
     return;
   }
   
   try {
-    console.log("🔄 Using ethers.js for browser minting...");
+    console.log("🔄 Claiming from NFT Drop...");
     
     if (typeof showCyberNotification === 'function') {
-      showCyberNotification("🔄 Minting Soul Fragment for FREE...", 'info');
+      showCyberNotification("🔄 Claiming Soul Fragment for FREE...", 'info');
     } else {
-      alert("🔄 Minting Soul Fragment for FREE!\nConfirm in wallet...");
+      alert("🔄 Claiming Soul Fragment for FREE!\nConfirm in wallet...");
     }
     
-    // thirdweb's exact browser pattern with ethers.js
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const signer = await provider.getSigner();
-    const contract = new ethers.Contract(
-      contractAddress,
-      contractABI,
-      signer,
-    );
+    // Claim from NFT Drop - thirdweb's exact pattern
+    const transaction = claimTo({
+      contract: window.atuona.contract,
+      to: window.atuona.address,
+      quantity: 1n,
+    });
     
-    console.log("✅ ethers.js contract created");
+    console.log("🔄 Sending claim transaction...");
     
-    // Create metadata URI
-    const metadata = {
-      name: `${poemTitle} ${poemId}`,
-      description: `ATUONA Gallery of Moments - ${poemTitle}. Underground poetry preserved on blockchain. Free collection - true to underground values.`,
-      image: `https://atuona.xyz/poem-${poemId.replace('#', '')}.png`,
-      attributes: [
-        { trait_type: "Poem", value: poemTitle },
-        { trait_type: "ID", value: poemId },
-        { trait_type: "Collection", value: "GALLERY OF MOMENTS" }
-      ]
-    };
+    // Send transaction (this should work with NFT Drop)
+    const result = await transaction;
     
-    const metadataUri = `https://atuona.xyz/metadata/${poemId.replace('#', '')}.json`;
-    console.log("📄 Metadata URI:", metadataUri);
-    
-    // thirdweb's exact browser call
-    console.log("🔄 Calling contract.mintTo with ethers.js...");
-    const tx = await contract.mintTo(
-      window.atuona.address,
-      metadataUri,
-    );
-    
-    console.log("⏳ Transaction sent:", tx.hash);
-    
-    // Wait for confirmation
-    await tx.wait();
-    
-    console.log("✅ Soul Fragment minted for FREE!");
+    console.log("✅ Soul Fragment claimed for FREE!", result);
     
     if (typeof showCyberNotification === 'function') {
       showCyberNotification("✅ Soul Fragment Collected for FREE!", 'success');
     } else {
-      alert(`✅ Soul Fragment Collected for FREE!\n\nTransaction: ${tx.hash}\n\nView: https://polygonscan.com/tx/${tx.hash}`);
+      alert(`✅ Soul Fragment Collected for FREE!\n\nTransaction: ${result.transactionHash || result}`);
     }
     
     // Update button
-    updateMintButton(poemId, tx.hash);
+    updateMintButton(poemId, result.transactionHash || "claimed");
     
   } catch (error) {
-    console.error("❌ ethers.js minting failed:", error);
+    console.error("❌ Claiming failed:", error);
     
-    let message = "❌ Free minting failed!";
+    let message = "❌ Free claiming failed!";
     if (error.message && error.message.includes("user rejected")) {
       message = "❌ Transaction cancelled by user.";
     } else if (error.message && error.message.includes("insufficient funds")) {
       message = "❌ Insufficient POL for gas fees.";
-    } else if (error.message && error.message.includes("NFTMetadataInvalidUrl")) {
-      message = "❌ Invalid metadata URL. Using data URI fallback.";
-      // Fallback to data URI
-      const metadataDataUri = `data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(metadata))}`;
-      try {
-        const tx = await contract.mintTo(window.atuona.address, metadataDataUri);
-        await tx.wait();
-        console.log("✅ Fallback minting succeeded!");
-        updateMintButton(poemId, tx.hash);
-        return;
-      } catch (fallbackError) {
-        message = `❌ Both HTTPS and data URI failed: ${fallbackError.message}`;
-      }
+    } else if (error.message && error.message.includes("No active claim condition")) {
+      message = "❌ Claim conditions not set yet. Please wait for setup to complete.";
     } else {
-      message = `❌ Minting failed: ${error.message}`;
+      message = `❌ Claiming failed: ${error.message}`;
     }
     
     if (typeof showCyberNotification === 'function') {
@@ -179,7 +156,7 @@ async function mintNFT(poemId, poemTitle) {
   }
 }
 
-// Update button after successful mint
+// Update button after successful claim
 function updateMintButton(poemId, txHash) {
   const buttons = document.querySelectorAll('.nft-action');
   buttons.forEach(button => {
@@ -187,7 +164,9 @@ function updateMintButton(poemId, txHash) {
       button.textContent = 'COLLECTED ✅';
       button.style.background = '#4CAF50';
       button.style.cursor = 'pointer';
-      button.onclick = () => window.open(`https://polygonscan.com/tx/${txHash}`, '_blank');
+      if (txHash && txHash !== "claimed") {
+        button.onclick = () => window.open(`https://polygonscan.com/tx/${txHash}`, '_blank');
+      }
     }
   });
 }
@@ -198,7 +177,7 @@ window.mintPoem = mintNFT;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
-  console.log("✅ ATUONA ethers.js Browser Ready!");
+  console.log("✅ ATUONA NFT Drop Ready!");
   
   // Add status indicator
   const status = document.createElement('div');
@@ -217,12 +196,38 @@ document.addEventListener('DOMContentLoaded', function() {
   `;
   status.innerHTML = `
     🎭 ATUONA Gallery<br>
-    📦 ${contractAddress.substring(0, 8)}...<br>
+    📦 NFT Drop Contract<br>
     🔗 Polygon Network<br>
     💎 FREE Collection (Gas Only)<br>
-    ⚡ ethers.js Direct Calls
+    🎯 Claim-Based Minting
   `;
   document.body.appendChild(status);
+  
+  // Show setup message if contract not set
+  if (NFT_DROP_CONTRACT === "YOUR_NEW_NFT_DROP_CONTRACT_ADDRESS") {
+    const setupNotice = document.createElement('div');
+    setupNotice.style.cssText = `
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 0, 0, 0.9);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      z-index: 10000;
+      font-family: monospace;
+      text-align: center;
+      max-width: 400px;
+    `;
+    setupNotice.innerHTML = `
+      🚧 NFT DROP SETUP IN PROGRESS 🚧<br><br>
+      Deploy your NFT Drop contract and<br>
+      update the contract address in main.js<br><br>
+      <button onclick="this.parentNode.remove()" style="background: #4CAF50; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">OK</button>
+    `;
+    document.body.appendChild(setupNotice);
+  }
 });
 
-console.log("🎭 ATUONA Gallery - ethers.js Browser Solution Ready!");
+console.log("🎭 ATUONA Gallery - NFT Drop Claim Solution Ready!");

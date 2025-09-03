@@ -1,0 +1,31 @@
+{
+  "name": "Digital Despair #005",
+  "description": "ATUONA Gallery of Moments - Digital Despair. Underground poetry preserved on blockchain. Free collection - true to underground values. Exploring the intersection of technology and human emotion in the modern age.",
+  "image": "https://atuona.xyz/images/poem-005.png",
+  "attributes": [
+    {
+      "trait_type": "Poem",
+      "value": "Digital Despair"
+    },
+    {
+      "trait_type": "ID",
+      "value": "005"
+    },
+    {
+      "trait_type": "Collection",
+      "value": "GALLERY OF MOMENTS"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Free Underground Poetry"
+    },
+    {
+      "trait_type": "Language",
+      "value": "English"
+    },
+    {
+      "trait_type": "Year",
+      "value": "2019-2025"
+    }
+  ]
+}

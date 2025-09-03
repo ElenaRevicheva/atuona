@@ -1,0 +1,31 @@
+{
+  "name": "Vesenneye #004",
+  "description": "ATUONA Gallery of Moments - Vesenneye. Underground poetry preserved on blockchain. Free collection - true to underground values. Spring awakening and renewal, written with underground intensity and raw emotion.",
+  "image": "https://atuona.xyz/images/poem-004.png",
+  "attributes": [
+    {
+      "trait_type": "Poem",
+      "value": "Vesenneye"
+    },
+    {
+      "trait_type": "ID",
+      "value": "004"
+    },
+    {
+      "trait_type": "Collection",
+      "value": "GALLERY OF MOMENTS"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Free Underground Poetry"
+    },
+    {
+      "trait_type": "Language",
+      "value": "Russian"
+    },
+    {
+      "trait_type": "Year",
+      "value": "2019-2025"
+    }
+  ]
+}
