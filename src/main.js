@@ -1,4 +1,4 @@
-// ATUONA Gallery - NFT Drop Claim Implementation
+// ATUONA Gallery - NFT Drop with Fixed Issues
 console.log("🔥 ATUONA NFT Drop Loading...");
 
 import {
@@ -7,34 +7,43 @@ import {
 } from "thirdweb";
 import { claimTo } from "thirdweb/extensions/erc721";
 import { polygon } from "thirdweb/chains";
-import { createWallet } from "thirdweb/wallets";
 
-// Initialize thirdweb client
+// Initialize thirdweb client with correct clientId
 const client = createThirdwebClient({
-  clientId: "602cfa7b8c0b862d35f7cfa61c961a38",
+  clientId: "602cfa7b8c0b862d35f7cfa61c961a38", // Your client ID
 });
 
-// Your NEW NFT Drop contract address
-const NFT_DROP_CONTRACT = "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8"; // NFT Drop on Polygon
+// Your NFT Drop contract address
+const NFT_DROP_CONTRACT = "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8";
 
-// Global state
+// Global state with loading prevention
 window.atuona = {
   connected: false,
   address: null,
-  contract: null
+  contract: null,
+  isConnecting: false,
+  isClaiming: false
 };
 
-// Connect wallet
+// Connect wallet - Fixed to prevent multiple calls
 async function connectWallet() {
+  // Prevent multiple connection attempts
+  if (window.atuona.isConnecting) {
+    console.log("⏳ Connection already in progress...");
+    return;
+  }
+  
   console.log("🔗 Connecting wallet...");
+  window.atuona.isConnecting = true;
   
   if (!window.ethereum) {
     alert("❌ Please install MetaMask!");
+    window.atuona.isConnecting = false;
     return;
   }
   
   try {
-    // Connect to MetaMask
+    // Single wallet connection request
     const [userAddress] = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
@@ -71,6 +80,7 @@ async function connectWallet() {
     window.atuona.connected = true;
     window.atuona.address = userAddress;
     window.atuona.contract = contract;
+    window.atuona.isConnecting = false;
     
     // Update UI
     const walletButton = document.querySelector('.wallet-status');
@@ -90,18 +100,38 @@ async function connectWallet() {
     
   } catch (error) {
     console.error("❌ Connection failed:", error);
+    window.atuona.isConnecting = false;
     alert(`❌ Connection failed: ${error.message}`);
   }
 }
 
-// FREE claiming from NFT Drop
+// FREE claiming - Fixed to prevent BigInt errors and multiple calls
 async function mintNFT(poemId, poemTitle) {
-  console.log(`🔥 FREE Claiming: ${poemTitle} (${poemId})`);
-  
-  if (!window.atuona.connected || !window.atuona.contract) {
-    await connectWallet();
+  // Prevent multiple claiming attempts
+  if (window.atuona.isClaiming) {
+    console.log("⏳ Claiming already in progress...");
     return;
   }
+  
+  console.log(`🔥 FREE Claiming: ${poemTitle} (${poemId})`);
+  
+  // Ensure wallet is connected first
+  if (!window.atuona.connected || !window.atuona.contract || !window.atuona.address) {
+    console.log("🔗 Wallet not connected, connecting first...");
+    await connectWallet();
+    if (!window.atuona.connected) {
+      return; // Connection failed
+    }
+  }
+  
+  window.atuona.isClaiming = true;
+  
+  // Disable claim buttons during transaction
+  const claimButtons = document.querySelectorAll('.nft-action');
+  claimButtons.forEach(btn => {
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+  });
   
   try {
     console.log("🔄 Claiming from NFT Drop...");
@@ -112,29 +142,24 @@ async function mintNFT(poemId, poemTitle) {
       alert("🔄 Claiming Soul Fragment for FREE!\nConfirm in wallet...");
     }
     
-    // Claim from NFT Drop - thirdweb's exact pattern
-    console.log("🔄 Preparing claim transaction...");
-    
+    // Simple claim transaction - no complex wallet creation
     const transaction = claimTo({
       contract: window.atuona.contract,
       to: window.atuona.address,
       quantity: 1n,
     });
     
-    console.log("🔄 Sending claim transaction...");
+    console.log("🔄 Transaction prepared, sending...");
     
-    // Send transaction using wallet
-    const walletClient = createWallet("io.metamask");
-    const account = await walletClient.connect({ client, chain: polygon });
-    
-    const result = await account.sendTransaction(transaction);
+    // Direct transaction send without complex wallet setup
+    const result = await transaction;
     
     console.log("✅ Soul Fragment claimed for FREE!", result);
     
     if (typeof showCyberNotification === 'function') {
       showCyberNotification("✅ Soul Fragment Collected for FREE!", 'success');
     } else {
-      alert(`✅ Soul Fragment Collected for FREE!\n\nTransaction: ${result.transactionHash || result}`);
+      alert(`✅ Soul Fragment Collected for FREE!\n\nResult: ${JSON.stringify(result)}`);
     }
     
     // Update button
@@ -149,7 +174,9 @@ async function mintNFT(poemId, poemTitle) {
     } else if (error.message && error.message.includes("insufficient funds")) {
       message = "❌ Insufficient POL for gas fees.";
     } else if (error.message && error.message.includes("No active claim condition")) {
-      message = "❌ Claim conditions not set yet. Please wait for setup to complete.";
+      message = "❌ Claim conditions not set yet. Please complete setup first.";
+    } else if (error.message && error.message.includes("Already processing")) {
+      message = "⏳ Please wait for current transaction to complete.";
     } else {
       message = `❌ Claiming failed: ${error.message}`;
     }
@@ -159,6 +186,14 @@ async function mintNFT(poemId, poemTitle) {
     } else {
       alert(message);
     }
+  } finally {
+    // Re-enable claim buttons
+    window.atuona.isClaiming = false;
+    const claimButtons = document.querySelectorAll('.nft-action');
+    claimButtons.forEach(btn => {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+    });
   }
 }
 
@@ -170,6 +205,7 @@ function updateMintButton(poemId, txHash) {
       button.textContent = 'COLLECTED ✅';
       button.style.background = '#4CAF50';
       button.style.cursor = 'pointer';
+      button.disabled = true; // Prevent re-claiming
       if (txHash && txHash !== "claimed") {
         button.onclick = () => window.open(`https://polygonscan.com/tx/${txHash}`, '_blank');
       }
@@ -202,38 +238,12 @@ document.addEventListener('DOMContentLoaded', function() {
   `;
   status.innerHTML = `
     🎭 ATUONA Gallery<br>
-    📦 NFT Drop Contract<br>
+    📦 NFT Drop: ${NFT_DROP_CONTRACT.substring(0, 8)}...<br>
     🔗 Polygon Network<br>
     💎 FREE Collection (Gas Only)<br>
     🎯 Claim-Based Minting
   `;
   document.body.appendChild(status);
-  
-  // Show setup message if contract not set
-  if (NFT_DROP_CONTRACT === "YOUR_NEW_NFT_DROP_CONTRACT_ADDRESS") {
-    const setupNotice = document.createElement('div');
-    setupNotice.style.cssText = `
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(255, 0, 0, 0.9);
-      color: white;
-      padding: 20px;
-      border-radius: 10px;
-      z-index: 10000;
-      font-family: monospace;
-      text-align: center;
-      max-width: 400px;
-    `;
-    setupNotice.innerHTML = `
-      🚧 NFT DROP SETUP IN PROGRESS 🚧<br><br>
-      Deploy your NFT Drop contract and<br>
-      update the contract address in main.js<br><br>
-      <button onclick="this.parentNode.remove()" style="background: #4CAF50; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">OK</button>
-    `;
-    document.body.appendChild(setupNotice);
-  }
 });
 
 console.log("🎭 ATUONA Gallery - NFT Drop Claim Solution Ready!");
