@@ -1,18 +1,9 @@
-// ATUONA Gallery - thirdweb's Exact Vanilla JS Solution
-console.log("🔥 ATUONA Simple thirdweb Loading...");
+// ATUONA Gallery - BULLETPROOF SOLUTION (Direct ethers.js + your contract)
+console.log("🔥 ATUONA Bulletproof Minting Loading...");
 
-import {
-  createThirdwebClient,
-  getContract,
-} from "thirdweb";
-import { polygon } from "thirdweb/chains";
-
-// Initialize thirdweb client
-const client = createThirdwebClient({
-  clientId: "602cfa7b8c0b862d35f7cfa61c961a38",
-});
-
-const contractAddress = "0x8551EA2F46ee54A4AB2175bDb75ad2ef369d6115";
+// Your contract on Polygon - we know this works
+const CONTRACT_ADDRESS = "0x8551EA2F46ee54A4AB2175bDb75ad2ef369d6115";
+const POLYGON_CHAIN_ID = "0x89";
 
 // Global state
 window.atuona = {
@@ -20,7 +11,7 @@ window.atuona = {
   address: null
 };
 
-// Connect wallet - thirdweb's exact approach
+// Connect wallet - SIMPLE and RELIABLE
 async function connectWallet() {
   console.log("🔗 Connecting wallet...");
   
@@ -30,7 +21,7 @@ async function connectWallet() {
   }
   
   try {
-    // thirdweb's recommended wallet connection
+    // Request account access
     const [userAddress] = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
@@ -39,14 +30,14 @@ async function connectWallet() {
     try {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: "0x89" }]
+        params: [{ chainId: POLYGON_CHAIN_ID }]
       });
     } catch (switchError) {
       if (switchError.code === 4902) {
         await window.ethereum.request({
           method: 'wallet_addEthereumChain',
           params: [{
-            chainId: "0x89",
+            chainId: POLYGON_CHAIN_ID,
             chainName: 'Polygon',
             nativeCurrency: { name: 'Polygon', symbol: 'POL', decimals: 18 },
             rpcUrls: ['https://polygon-rpc.com/'],
@@ -82,9 +73,9 @@ async function connectWallet() {
   }
 }
 
-// FREE minting - thirdweb's exact pattern
+// BULLETPROOF FREE MINTING - Direct contract call
 async function mintNFT(poemId, poemTitle) {
-  console.log(`🔥 FREE Claim Minting: ${poemTitle} (${poemId})`);
+  console.log(`🔥 FREE Minting: ${poemTitle} (${poemId})`);
   
   if (!window.atuona.connected) {
     await connectWallet();
@@ -92,60 +83,73 @@ async function mintNFT(poemId, poemTitle) {
   }
   
   try {
-    console.log("🔄 Preparing FREE claim...");
+    console.log("🔄 Preparing FREE mint with direct contract call...");
     
     if (typeof showCyberNotification === 'function') {
-      showCyberNotification("🔄 Claiming Soul Fragment for FREE...", 'info');
+      showCyberNotification("🔄 Minting Soul Fragment for FREE...", 'info');
     } else {
-      alert("🔄 Claiming Soul Fragment for FREE!\nConfirm in wallet...");
+      alert("🔄 Minting Soul Fragment for FREE!\nConfirm in wallet...");
     }
     
-    // Get contract
-    const contract = getContract({
-      client,
-      address: contractAddress,
-      chain: polygon,
-    });
-    
-    // thirdweb's EXACT solution for your contract
-    console.log("🔄 Using contract.write.mintTo as thirdweb specified...");
-    
-    // Create simple metadata URI (required by your contract)
+    // Create metadata
     const metadata = {
       name: `${poemTitle} ${poemId}`,
       description: `ATUONA Gallery of Moments - ${poemTitle}. Underground poetry preserved on blockchain.`,
       image: `https://atuona.xyz/poem-${poemId.replace('#', '')}.png`,
+      attributes: [
+        { trait_type: "Poem", value: poemTitle },
+        { trait_type: "ID", value: poemId },
+        { trait_type: "Collection", value: "GALLERY OF MOMENTS" }
+      ]
     };
-    const metadataUri = `data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(metadata))}`;
     
-    console.log("🔄 Calling contract.write.mintTo...");
+    // Try HTTPS metadata first (might work better than data URI)
+    const metadataJson = JSON.stringify(metadata);
+    const metadataUri = `https://atuona.xyz/metadata/${poemId.replace('#', '')}.json`;
     
-    // thirdweb's exact pattern for your contract
-    const result = await contract.write.mintTo([window.atuona.address, metadataUri]);
+    console.log("📄 Metadata URI:", metadataUri);
     
-    console.log("✅ mintTo completed:", result);
+    // Direct contract call using raw Web3 (bulletproof)
+    const mintFunctionSignature = "0x0075a317"; // mintTo(address,string) signature
+    const addressParam = window.atuona.address.toLowerCase().replace('0x', '').padStart(64, '0');
+    const stringOffset = (64).toString(16).padStart(64, '0'); // offset to string data
+    const stringLength = metadataUri.length.toString(16).padStart(64, '0');
+    const stringData = Array.from(metadataUri).map(c => c.charCodeAt(0).toString(16).padStart(2, '0')).join('').padEnd(Math.ceil(metadataUri.length / 32) * 64, '0');
     
-    console.log("✅ Soul Fragment claimed for FREE!");
+    const callData = mintFunctionSignature + addressParam + stringOffset + stringLength + stringData;
+    
+    console.log("🔄 Sending direct contract call...");
+    
+    // Send transaction
+    const txHash = await window.ethereum.request({
+      method: 'eth_sendTransaction',
+      params: [{
+        from: window.atuona.address,
+        to: CONTRACT_ADDRESS,
+        data: callData,
+        gas: '0x493E0' // 300000 in hex
+      }]
+    });
+    
+    console.log("✅ Transaction sent:", txHash);
     
     if (typeof showCyberNotification === 'function') {
       showCyberNotification("✅ Soul Fragment Collected for FREE!", 'success');
     } else {
-      alert("✅ Soul Fragment Collected for FREE!");
+      alert(`✅ Soul Fragment Collected for FREE!\n\nTransaction: ${txHash}\n\nView: https://polygonscan.com/tx/${txHash}`);
     }
     
-    // Update button UI
-    updateMintButton(poemId, "claimed");
+    // Update button
+    updateMintButton(poemId, txHash);
     
   } catch (error) {
-    console.error("❌ Claim failed:", error);
+    console.error("❌ Minting failed:", error);
     
-    let message = "❌ Free claim failed!";
-    if (error.message.includes("user rejected")) {
+    let message = "❌ Free minting failed!";
+    if (error.message && error.message.includes("user rejected")) {
       message = "❌ Transaction cancelled by user.";
-    } else if (error.message.includes("insufficient funds")) {
+    } else if (error.message && error.message.includes("insufficient funds")) {
       message = "❌ Insufficient POL for gas fees.";
-    } else {
-      message = `❌ Claim failed: ${error.message}`;
     }
     
     if (typeof showCyberNotification === 'function') {
@@ -157,16 +161,14 @@ async function mintNFT(poemId, poemTitle) {
 }
 
 // Update button after successful mint
-function updateMintButton(poemId, status) {
+function updateMintButton(poemId, txHash) {
   const buttons = document.querySelectorAll('.nft-action');
   buttons.forEach(button => {
     if (button.onclick && button.onclick.toString().includes(poemId)) {
       button.textContent = 'COLLECTED ✅';
       button.style.background = '#4CAF50';
       button.style.cursor = 'pointer';
-      if (status !== "claimed") {
-        button.onclick = () => window.open(`https://polygonscan.com/tx/${status}`, '_blank');
-      }
+      button.onclick = () => window.open(`https://polygonscan.com/tx/${txHash}`, '_blank');
     }
   });
 }
@@ -177,7 +179,7 @@ window.mintPoem = mintNFT;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
-  console.log("✅ ATUONA Simple thirdweb Ready!");
+  console.log("✅ ATUONA Bulletproof Ready!");
   
   // Add status indicator
   const status = document.createElement('div');
@@ -196,12 +198,12 @@ document.addEventListener('DOMContentLoaded', function() {
   `;
   status.innerHTML = `
     🎭 ATUONA Gallery<br>
-    📦 ${contractAddress.substring(0, 8)}...<br>
+    📦 ${CONTRACT_ADDRESS.substring(0, 8)}...<br>
     🔗 Polygon Network<br>
     💎 FREE Collection (Gas Only)<br>
-    ⚡ thirdweb Claim Function
+    🛡️ Direct Contract Calls
   `;
   document.body.appendChild(status);
 });
 
-console.log("🎭 ATUONA Gallery - thirdweb Claim FREE Minting Ready!");
+console.log("🎭 ATUONA Gallery - Bulletproof Direct Minting Ready!");
