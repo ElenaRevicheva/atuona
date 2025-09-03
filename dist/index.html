@@ -8,9 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     
-    <!-- SIMPLE MINTING - No complex SDKs, just works! -->
-    <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
-    <script src="/simple-mint.js"></script>
+    <!-- Simple thirdweb Vanilla JS Solution -->
     <style>
         /* Underground NFT Gallery Aesthetic - Dark Red and Silver Grey */
         :root {
@@ -862,6 +860,7 @@
             background: var(--neon-magenta);
         }
     </style>
+  <script type="module" crossorigin src="/assets/main-BPX88kkk.js"></script>
 </head>
 <body>
     <div class="particles"></div>
@@ -930,7 +929,7 @@
                                 caught between memory and reality.
                             </p>
                             <div class="nft-meta">
-                                <div class="nft-price">0.001 ETH</div>
+                                <div class="nft-price">FREE (Gas Only)</div>
                                 <button class="nft-action" onclick="mintPoem('001', 'На память')">COLLECT SOUL</button>
                                 <small style="color: var(--silver-grey); font-size: 0.7rem; margin-top: 0.5rem; display: block; font-family: 'JetBrains Mono', monospace;">Minimal fee covers blockchain preservation costs</small>
                             </div>
@@ -975,7 +974,7 @@
                                 Raw emotion meets underground poetry in this powerful piece.
                             </p>
                             <div class="nft-meta">
-                                <div class="nft-price">0.001 ETH</div>
+                                <div class="nft-price">FREE (Gas Only)</div>
                                 <button class="nft-action" onclick="mintPoem('002', 'To Beautrix')">COLLECT SOUL</button>
                                 <small style="color: var(--silver-grey); font-size: 0.7rem; margin-top: 0.5rem; display: block; font-family: 'JetBrains Mono', monospace;">This is art collection, not investment</small>
                             </div>
@@ -3364,7 +3363,7 @@
                 // Update all prices to minimal symbolic fee
                 const priceElements = document.querySelectorAll('.nft-price');
                 priceElements.forEach(el => {
-                    el.textContent = '0.001 ETH';
+                    el.textContent = 'FREE (Gas Only)';
                 });
                 
                 // Connect all NFT action buttons to minting
