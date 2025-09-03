@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     
-    <!-- thirdweb Vite Solution - Following their guidance -->
+    <!-- FINAL SIMPLE SOLUTION - No complex SDKs -->
     <style>
         /* Underground NFT Gallery Aesthetic - Dark Red and Silver Grey */
         :root {
@@ -860,7 +860,7 @@
             background: var(--neon-magenta);
         }
     </style>
-  <script type="module" crossorigin src="/assets/main-Dn28zJ6C.js"></script>
+  <script type="module" crossorigin src="/assets/main-DAjelYsw.js"></script>
 </head>
 <body>
     <div class="particles"></div>
@@ -930,7 +930,7 @@
                             </p>
                             <div class="nft-meta">
                                 <div class="nft-price">FREE (Gas Only)</div>
-                                <button class="nft-action" onclick="mintPoem('001', 'На память')">COLLECT SOUL</button>
+                                <button class="nft-action" onclick="claimPoem('001', 'На память')">COLLECT SOUL</button>
                                 <small style="color: var(--silver-grey); font-size: 0.7rem; margin-top: 0.5rem; display: block; font-family: 'JetBrains Mono', monospace;">Minimal fee covers blockchain preservation costs</small>
                             </div>
                         </div>
@@ -975,7 +975,7 @@
                             </p>
                             <div class="nft-meta">
                                 <div class="nft-price">FREE (Gas Only)</div>
-                                <button class="nft-action" onclick="mintPoem('002', 'To Beautrix')">COLLECT SOUL</button>
+                                <button class="nft-action" onclick="claimPoem('002', 'To Beautrix')">COLLECT SOUL</button>
                                 <small style="color: var(--silver-grey); font-size: 0.7rem; margin-top: 0.5rem; display: block; font-family: 'JetBrains Mono', monospace;">This is art collection, not investment</small>
                             </div>
                         </div>
@@ -3379,7 +3379,7 @@
                         
                         // Preserve original button text but add minting functionality
                         const originalText = buttonElement.textContent.trim();
-                        buttonElement.setAttribute('onclick', `mintPoem('${poemId}', '${poemTitle}')`);
+                        buttonElement.setAttribute('onclick', `claimPoem('${poemId}', '${poemTitle}')`);
                         
                         // Add anti-commercial message if not already present
                         if (!metaElement.querySelector('small')) {
