@@ -157,29 +157,46 @@ async function mintNFT(poemId, poemTitle) {
     console.log("🔍 Transaction keys:", Object.keys(transaction));
     console.log("🔄 Attempting to send...");
     
-    // Actually SEND the transaction to blockchain (not just prepare)
-    console.log("🔄 Sending transaction to blockchain...");
+    // Use thirdweb's proper transaction sending method
+    console.log("🔄 Using thirdweb transaction sending...");
     
-    // Create wallet connection for signing
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const signer = await provider.getSigner();
+    // Import sendTransaction from thirdweb
+    const { sendTransaction } = await import("thirdweb");
     
-    // Send the prepared transaction
-    const txResponse = await signer.sendTransaction({
-      to: transaction.to,
-      data: transaction.data,
-      value: transaction.value || 0,
-      gasLimit: transaction.gas || 300000
-    });
+    // Create account object for thirdweb
+    const account = {
+      address: window.atuona.address,
+      async sendTransaction(tx) {
+        // Use MetaMask to send
+        const txHash = await window.ethereum.request({
+          method: 'eth_sendTransaction',
+          params: [{
+            from: window.atuona.address,
+            to: tx.to,
+            data: tx.data,
+            value: tx.value ? `0x${BigInt(tx.value).toString(16)}` : '0x0',
+            gas: '0x493E0' // Fixed gas limit
+          }]
+        });
+        
+        // Wait for confirmation using ethers
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const receipt = await provider.waitForTransaction(txHash);
+        
+        return {
+          transactionHash: receipt.hash,
+          blockNumber: receipt.blockNumber,
+          status: receipt.status
+        };
+      }
+    };
     
-    console.log("⏳ Transaction sent to blockchain:", txResponse.hash);
-    
-    // Wait for confirmation
-    const receipt = await txResponse.wait();
+    // Send transaction properly
+    const result = await account.sendTransaction(transaction);
     
     console.log("✅ Transaction confirmed on blockchain!");
-    console.log("📋 Transaction hash:", receipt.transactionHash);
-    console.log("📋 Block number:", receipt.blockNumber);
+    console.log("📋 Transaction hash:", result.transactionHash);
+    console.log("📋 Block number:", result.blockNumber);
     
     // Try to extract token ID from result
     if (result && result.logs) {
