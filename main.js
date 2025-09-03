@@ -5,7 +5,7 @@ import {
   createThirdwebClient,
   getContract,
 } from "thirdweb";
-import { claim } from "thirdweb/extensions/erc721";
+import { claimTo } from "thirdweb/extensions/erc721";
 import { polygon } from "thirdweb/chains";
 
 // Initialize thirdweb client
@@ -108,8 +108,8 @@ async function mintNFT(poemId, poemTitle) {
       chain: polygon,
     });
     
-    // thirdweb's exact claim pattern (corrected)
-    const tx = claim({
+    // thirdweb's exact claimTo pattern (corrected)
+    const tx = claimTo({
       contract,
       quantity: 1n,
       to: window.atuona.address,
