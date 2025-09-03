@@ -930,7 +930,7 @@
                             </p>
                             <div class="nft-meta">
                                 <div class="nft-price">FREE (Gas Only)</div>
-                                <button class="nft-action" onclick="mintPoem('001', 'На память')">COLLECT SOUL</button>
+                                <button class="nft-action" onclick="claimPoem('001', 'На память')">COLLECT SOUL</button>
                                 <small style="color: var(--silver-grey); font-size: 0.7rem; margin-top: 0.5rem; display: block; font-family: 'JetBrains Mono', monospace;">Minimal fee covers blockchain preservation costs</small>
                             </div>
                         </div>
@@ -975,7 +975,7 @@
                             </p>
                             <div class="nft-meta">
                                 <div class="nft-price">FREE (Gas Only)</div>
-                                <button class="nft-action" onclick="mintPoem('002', 'To Beautrix')">COLLECT SOUL</button>
+                                <button class="nft-action" onclick="claimPoem('002', 'To Beautrix')">COLLECT SOUL</button>
                                 <small style="color: var(--silver-grey); font-size: 0.7rem; margin-top: 0.5rem; display: block; font-family: 'JetBrains Mono', monospace;">This is art collection, not investment</small>
                             </div>
                         </div>
@@ -3379,7 +3379,7 @@
                         
                         // Preserve original button text but add minting functionality
                         const originalText = buttonElement.textContent.trim();
-                        buttonElement.setAttribute('onclick', `mintPoem('${poemId}', '${poemTitle}')`);
+                        buttonElement.setAttribute('onclick', `claimPoem('${poemId}', '${poemTitle}')`);
                         
                         // Add anti-commercial message if not already present
                         if (!metaElement.querySelector('small')) {
