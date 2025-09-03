@@ -316,12 +316,15 @@ window.mintPoem = mintNFT;
 document.addEventListener('DOMContentLoaded', async function() {
   console.log("✅ ATUONA NFT Drop Ready!");
   
-  // Run automated setup with direct metadata (no IPFS upload)
+  // Check if automated setup is needed
   if (!localStorage.getItem('atuona-setup-complete')) {
     console.log("🚀 Running direct metadata setup...");
+    console.log("📋 Contract address:", NFT_DROP_CONTRACT);
     
     try {
       const setupResult = await setupWithDirectMetadata();
+      console.log("📋 Setup result:", setupResult);
+      
       if (setupResult.success) {
         localStorage.setItem('atuona-setup-complete', 'true');
         console.log("🎉 Direct setup completed!");
@@ -331,10 +334,16 @@ document.addEventListener('DOMContentLoaded', async function() {
         } else {
           alert("🎉 Setup Complete!\nUsers can now claim poetry NFTs for FREE!");
         }
+      } else {
+        console.log("❌ Setup failed:", setupResult.error);
+        console.log("📋 You may need to complete setup manually in thirdweb dashboard");
       }
     } catch (error) {
-      console.log("⚠️ Setup failed, will retry:", error.message);
+      console.log("❌ Setup error:", error);
+      console.log("📋 Manual setup may be required");
     }
+  } else {
+    console.log("✅ Setup already completed (cached)");
   }
   
   // Add status indicator
