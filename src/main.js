@@ -6,33 +6,7 @@ import {
   getContract,
 } from "thirdweb";
 import { polygon } from "thirdweb/chains";
-// Use thirdweb's minimal ABI test
-const contractABI = [
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_to",
-        type: "address",
-      },
-      {
-        internalType: "string",
-        name: "_uri",
-        type: "string",
-      },
-    ],
-    name: "mintTo",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-];
+import contractABI from "./contract-abi.json";
 
 // Initialize thirdweb client
 const client = createThirdwebClient({
@@ -121,6 +95,13 @@ async function mintNFT(poemId, poemTitle) {
   try {
     console.log("🔄 Creating contract with ABI...");
     console.log("📋 ABI loaded:", Array.isArray(contractABI) ? "✅ Valid array" : "❌ Not array");
+    
+    // Check if mintTo function exists in ABI
+    const mintToFunction = contractABI.find(item => item.name === "mintTo" && item.type === "function");
+    console.log("🔍 mintTo function in ABI:", !!mintToFunction);
+    if (mintToFunction) {
+      console.log("📋 mintTo function details:", mintToFunction);
+    }
     
     if (typeof showCyberNotification === 'function') {
       showCyberNotification("🔄 Minting Soul Fragment for FREE...", 'info');
