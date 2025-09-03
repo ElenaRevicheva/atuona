@@ -225,24 +225,9 @@ window.mintPoem = mintNFT;
 document.addEventListener('DOMContentLoaded', async function() {
   console.log("✅ ATUONA NFT Drop Ready!");
   
-  // Run automated setup on first load
-  if (!localStorage.getItem('atuona-setup-complete')) {
-    console.log("🚀 Running automated NFT Drop setup...");
-    
-    try {
-      const setupResult = await autoSetupNFTDrop();
-      if (setupResult.success) {
-        localStorage.setItem('atuona-setup-complete', 'true');
-        console.log("🎉 Automated setup completed!");
-        
-        if (typeof showCyberNotification === 'function') {
-          showCyberNotification("🎉 Underground Gallery is LIVE! FREE claiming enabled!", 'success');
-        }
-      }
-    } catch (error) {
-      console.log("⚠️ Setup will retry on next page load:", error.message);
-    }
-  }
+  // Automated setup disabled - complete setup manually in thirdweb dashboard
+  console.log("📋 Complete setup at: https://thirdweb.com/polygon/0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8");
+  console.log("🎯 Steps: Upload metadata → Lazy mint → Set claim conditions (price = 0)");
   
   // Add status indicator
   const status = document.createElement('div');
