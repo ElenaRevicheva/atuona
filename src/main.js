@@ -316,6 +316,23 @@ window.mintPoem = mintNFT;
 document.addEventListener('DOMContentLoaded', async function() {
   console.log("✅ ATUONA NFT Drop Ready!");
   
+  // Force setup check - clear cache if supply is 0
+  const currentSupply = await totalSupply({ 
+    contract: getContract({
+      client,
+      address: NFT_DROP_CONTRACT, 
+      chain: polygon
+    })
+  });
+  
+  console.log("📊 Current contract supply:", Number(currentSupply));
+  
+  // If supply is 0, force setup regardless of cache
+  if (Number(currentSupply) === 0) {
+    console.log("🔄 Supply is 0, forcing setup...");
+    localStorage.removeItem('atuona-setup-complete'); // Clear cache
+  }
+  
   // Check if automated setup is needed
   if (!localStorage.getItem('atuona-setup-complete')) {
     console.log("🚀 Running direct metadata setup...");
