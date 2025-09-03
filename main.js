@@ -5,8 +5,9 @@ import {
   createThirdwebClient,
   getContract,
 } from "thirdweb";
-import { claimTo } from "thirdweb/extensions/erc721";
+import { mintTo } from "thirdweb/extensions/erc721";
 import { polygon } from "thirdweb/chains";
+import { createWallet } from "thirdweb/wallets";
 
 // Initialize thirdweb client
 const client = createThirdwebClient({
@@ -108,25 +109,24 @@ async function mintNFT(poemId, poemTitle) {
       chain: polygon,
     });
     
-    // thirdweb's confirmed claimTo pattern
-    console.log("🔄 Calling claimTo function...");
+    // Use mintTo - the function we know works from your permissions
+    console.log("🔄 Using mintTo function (you have public minting permissions)...");
     
-    const tx = claimTo({
+    const transaction = mintTo({
       contract,
       to: window.atuona.address,
-      quantity: 1n,
+      // No metadata needed for free mint
     });
     
-    console.log("🔄 Sending transaction...");
+    console.log("🔄 Sending transaction with wallet...");
     
-    await tx.send({
-      account: {
-        address: window.atuona.address,
-        signer: window.ethereum,
-      },
-    });
+    // Use wallet to send transaction
+    const walletClient = createWallet("io.metamask");
+    const account = await walletClient.connect({ client, chain: polygon });
     
-    console.log("✅ Transaction completed!");
+    const result = await account.sendTransaction(transaction);
+    
+    console.log("✅ Transaction sent:", result.transactionHash);
     
     console.log("✅ Soul Fragment claimed for FREE!");
     
