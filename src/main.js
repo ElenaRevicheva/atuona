@@ -8,7 +8,7 @@ import {
   createThirdwebClient,
   getContract,
 } from "thirdweb";
-import { claimTo, totalSupply, ownerOf } from "thirdweb/extensions/erc721";
+import { claimTo, totalSupply, ownerOf, getNFT } from "thirdweb/extensions/erc721";
 import { polygon } from "thirdweb/chains";
 
 // Initialize thirdweb client with correct clientId
@@ -183,10 +183,19 @@ async function mintNFT(poemId, poemTitle) {
       const currentSupply = await totalSupply({ contract: window.atuona.contract });
       const tokenId = Number(currentSupply) - 1; // Last minted token
       
+      // Verify ownership
+      const owner = await ownerOf({ contract: window.atuona.contract, tokenId: BigInt(tokenId) });
+      
       console.log("🎭 CLAIMED TOKEN ID:", tokenId);
+      console.log("👤 Token Owner:", owner);
+      console.log("👤 Your Address:", window.atuona.address);
+      console.log("✅ Ownership Match:", owner.toLowerCase() === window.atuona.address.toLowerCase());
+      
       console.log("📱 MetaMask Import Info:");
       console.log("   Contract: 0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8");
       console.log("   Token ID:", tokenId);
+      console.log("   Network: Polygon");
+      console.log("   Make sure you're using the same wallet that claimed!");
       
       if (typeof showCyberNotification === 'function') {
         showCyberNotification(`✅ Soul Fragment Collected! Token ID: ${tokenId}`, 'success');
