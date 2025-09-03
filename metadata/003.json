@@ -1,0 +1,31 @@
+{
+  "name": "Atuona #003",
+  "description": "ATUONA Gallery of Moments - Atuona. Underground poetry preserved on blockchain. Free collection - true to underground values. Named after the remote village where Gauguin found his final inspiration, this piece explores artistic exile and creative rebellion.",
+  "image": "https://atuona.xyz/images/poem-003.png", 
+  "attributes": [
+    {
+      "trait_type": "Poem",
+      "value": "Atuona"
+    },
+    {
+      "trait_type": "ID",
+      "value": "003"
+    },
+    {
+      "trait_type": "Collection",
+      "value": "GALLERY OF MOMENTS"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Free Underground Poetry"
+    },
+    {
+      "trait_type": "Language",
+      "value": "Mixed"
+    },
+    {
+      "trait_type": "Year",
+      "value": "2019-2025"
+    }
+  ]
+}

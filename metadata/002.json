@@ -1,0 +1,31 @@
+{
+  "name": "To Beautrix #002", 
+  "description": "ATUONA Gallery of Moments - To Beautrix. Underground poetry preserved on blockchain. Free collection - true to underground values. A passionate dedication exploring love, desire, and human connection in the digital age.",
+  "image": "https://atuona.xyz/images/poem-002.png",
+  "attributes": [
+    {
+      "trait_type": "Poem",
+      "value": "To Beautrix"
+    },
+    {
+      "trait_type": "ID",
+      "value": "002"
+    },
+    {
+      "trait_type": "Collection", 
+      "value": "GALLERY OF MOMENTS"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Free Underground Poetry"
+    },
+    {
+      "trait_type": "Language",
+      "value": "English"
+    },
+    {
+      "trait_type": "Year",
+      "value": "2019-2025"
+    }
+  ]
+}

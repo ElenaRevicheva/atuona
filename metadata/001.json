@@ -1,0 +1,31 @@
+{
+  "name": "На память #001",
+  "description": "ATUONA Gallery of Moments - На память. Underground poetry preserved on blockchain. Free collection - true to underground values. Written with raw intensity, this poem captures memory, loss, and the brutal machinery of existence.",
+  "image": "https://atuona.xyz/images/poem-001.png",
+  "attributes": [
+    {
+      "trait_type": "Poem",
+      "value": "На память"
+    },
+    {
+      "trait_type": "ID", 
+      "value": "001"
+    },
+    {
+      "trait_type": "Collection",
+      "value": "GALLERY OF MOMENTS"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Free Underground Poetry"
+    },
+    {
+      "trait_type": "Language",
+      "value": "Russian"
+    },
+    {
+      "trait_type": "Year",
+      "value": "2019-2025"
+    }
+  ]
+}
