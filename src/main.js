@@ -7,6 +7,7 @@ import {
 } from "thirdweb";
 import { claimTo } from "thirdweb/extensions/erc721";
 import { polygon } from "thirdweb/chains";
+import { createWallet } from "thirdweb/wallets";
 
 // Initialize thirdweb client
 const client = createThirdwebClient({
@@ -112,6 +113,8 @@ async function mintNFT(poemId, poemTitle) {
     }
     
     // Claim from NFT Drop - thirdweb's exact pattern
+    console.log("🔄 Preparing claim transaction...");
+    
     const transaction = claimTo({
       contract: window.atuona.contract,
       to: window.atuona.address,
@@ -120,8 +123,11 @@ async function mintNFT(poemId, poemTitle) {
     
     console.log("🔄 Sending claim transaction...");
     
-    // Send transaction (this should work with NFT Drop)
-    const result = await transaction;
+    // Send transaction using wallet
+    const walletClient = createWallet("io.metamask");
+    const account = await walletClient.connect({ client, chain: polygon });
+    
+    const result = await account.sendTransaction(transaction);
     
     console.log("✅ Soul Fragment claimed for FREE!", result);
     

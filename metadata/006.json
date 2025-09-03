@@ -1,15 +1,15 @@
 {
-  "name": "Маме #005",
-  "description": "ATUONA Gallery of Moments - Маме. Underground poetry preserved on blockchain. Free collection - true to underground values. Tribute to maternal love and family bonds",
-  "image": "https://atuona.xyz/images/poem-005.png",
+  "name": "Первоснежье #006",
+  "description": "ATUONA Gallery of Moments - Первоснежье. Underground poetry preserved on blockchain. Free collection - true to underground values. First snow and winter's embrace",
+  "image": "https://atuona.xyz/images/poem-006.png",
   "attributes": [
     {
       "trait_type": "Poem",
-      "value": "Маме"
+      "value": "Первоснежье"
     },
     {
       "trait_type": "ID",
-      "value": "005"
+      "value": "006"
     },
     {
       "trait_type": "Collection",

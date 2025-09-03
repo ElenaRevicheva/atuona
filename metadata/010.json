@@ -1,15 +1,15 @@
 {
-  "name": "To Beautrix #002",
-  "description": "ATUONA Gallery of Moments - To Beautrix. Underground poetry preserved on blockchain. Free collection - true to underground values. Passionate dedication exploring love, desire, and human connection",
-  "image": "https://atuona.xyz/images/poem-002.png",
+  "name": "Underground Manifesto #010",
+  "description": "ATUONA Gallery of Moments - Underground Manifesto. Underground poetry preserved on blockchain. Free collection - true to underground values. The core philosophy of underground poetry resistance",
+  "image": "https://atuona.xyz/images/poem-010.png",
   "attributes": [
     {
       "trait_type": "Poem",
-      "value": "To Beautrix"
+      "value": "Underground Manifesto"
     },
     {
       "trait_type": "ID",
-      "value": "002"
+      "value": "010"
     },
     {
       "trait_type": "Collection",
