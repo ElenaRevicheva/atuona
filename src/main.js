@@ -6,7 +6,33 @@ import {
   getContract,
 } from "thirdweb";
 import { polygon } from "thirdweb/chains";
-import contractABI from "./contract-abi.json";
+// Use thirdweb's minimal ABI test
+const contractABI = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_to",
+        type: "address",
+      },
+      {
+        internalType: "string",
+        name: "_uri",
+        type: "string",
+      },
+    ],
+    name: "mintTo",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
 
 // Initialize thirdweb client
 const client = createThirdwebClient({
