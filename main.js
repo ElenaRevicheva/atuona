@@ -5,9 +5,7 @@ import {
   createThirdwebClient,
   getContract,
 } from "thirdweb";
-import { mintTo } from "thirdweb/extensions/erc721";
 import { polygon } from "thirdweb/chains";
-import { createWallet } from "thirdweb/wallets";
 
 // Initialize thirdweb client
 const client = createThirdwebClient({
@@ -109,24 +107,23 @@ async function mintNFT(poemId, poemTitle) {
       chain: polygon,
     });
     
-    // Use mintTo - the function we know works from your permissions
-    console.log("🔄 Using mintTo function (you have public minting permissions)...");
+    // thirdweb's EXACT solution for your contract
+    console.log("🔄 Using contract.write.mintTo as thirdweb specified...");
     
-    const transaction = mintTo({
-      contract,
-      to: window.atuona.address,
-      // No metadata needed for free mint
-    });
+    // Create simple metadata URI (required by your contract)
+    const metadata = {
+      name: `${poemTitle} ${poemId}`,
+      description: `ATUONA Gallery of Moments - ${poemTitle}. Underground poetry preserved on blockchain.`,
+      image: `https://atuona.xyz/poem-${poemId.replace('#', '')}.png`,
+    };
+    const metadataUri = `data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(metadata))}`;
     
-    console.log("🔄 Sending transaction with wallet...");
+    console.log("🔄 Calling contract.write.mintTo...");
     
-    // Use wallet to send transaction
-    const walletClient = createWallet("io.metamask");
-    const account = await walletClient.connect({ client, chain: polygon });
+    // thirdweb's exact pattern for your contract
+    const result = await contract.write.mintTo([window.atuona.address, metadataUri]);
     
-    const result = await account.sendTransaction(transaction);
-    
-    console.log("✅ Transaction sent:", result.transactionHash);
+    console.log("✅ mintTo completed:", result);
     
     console.log("✅ Soul Fragment claimed for FREE!");
     
