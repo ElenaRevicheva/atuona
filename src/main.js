@@ -62,15 +62,13 @@ async function claimPoem(poemId, poemTitle) {
   try {
     console.log(`🔥 Claiming NFT: ${poemTitle} (${poemId})`);
     
-    // Use claimTo function for NFT Drop
-    const transaction = claimTo({
+    // Use claimTo function for NFT Drop - simplified approach
+    const result = await claimTo({
       contract,
       to: currentAccount.address,
       quantity: 1n,
+      account: currentAccount, // Pass account directly to claimTo
     });
-    
-    // Send transaction
-    const result = await currentAccount.sendTransaction(transaction);
     
     console.log("✅ NFT claimed successfully!", result.transactionHash);
     alert(`🎭 Soul Fragment claimed!\n\nTransaction: ${result.transactionHash}\n\nCheck your wallet and Polygonscan!`);
