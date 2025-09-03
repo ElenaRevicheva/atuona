@@ -1,8 +1,8 @@
 // ATUONA Gallery - thirdweb IPFS Upload Solution
 console.log("🔥 ATUONA thirdweb IPFS Loading...");
 
-import { createThirdwebClient, upload } from "thirdweb";
-import { getContract } from "thirdweb";
+import { createThirdwebClient, getContract } from "thirdweb";
+import { upload } from "thirdweb/storage";
 import { polygon } from "thirdweb/chains";
 
 // Initialize thirdweb client
