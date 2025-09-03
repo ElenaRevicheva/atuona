@@ -152,13 +152,34 @@ async function mintNFT(poemId, poemTitle) {
       quantity: 1n,
     });
     
-    console.log("🔄 Transaction prepared, sending...");
+    console.log("🔄 Transaction prepared:", transaction);
+    console.log("🔍 Transaction type:", typeof transaction);
+    console.log("🔍 Transaction keys:", Object.keys(transaction));
+    console.log("🔄 Attempting to send...");
     
-    // Direct transaction send without complex wallet setup
-    const result = await transaction;
+    // Actually SEND the transaction to blockchain (not just prepare)
+    console.log("🔄 Sending transaction to blockchain...");
     
-    console.log("✅ Soul Fragment claimed for FREE!");
-    console.log("📋 Transaction result:", result);
+    // Create wallet connection for signing
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    
+    // Send the prepared transaction
+    const txResponse = await signer.sendTransaction({
+      to: transaction.to,
+      data: transaction.data,
+      value: transaction.value || 0,
+      gasLimit: transaction.gas || 300000
+    });
+    
+    console.log("⏳ Transaction sent to blockchain:", txResponse.hash);
+    
+    // Wait for confirmation
+    const receipt = await txResponse.wait();
+    
+    console.log("✅ Transaction confirmed on blockchain!");
+    console.log("📋 Transaction hash:", receipt.transactionHash);
+    console.log("📋 Block number:", receipt.blockNumber);
     
     // Try to extract token ID from result
     if (result && result.logs) {
