@@ -8,7 +8,7 @@ import {
   createThirdwebClient,
   getContract,
 } from "thirdweb";
-import { claimTo } from "thirdweb/extensions/erc721";
+import { claimTo, totalSupply, ownerOf } from "thirdweb/extensions/erc721";
 import { polygon } from "thirdweb/chains";
 
 // Initialize thirdweb client with correct clientId
@@ -160,14 +160,54 @@ async function mintNFT(poemId, poemTitle) {
     console.log("✅ Soul Fragment claimed for FREE!");
     console.log("📋 Transaction result:", result);
     
-    if (typeof showCyberNotification === 'function') {
-      showCyberNotification("✅ Soul Fragment Collected for FREE!", 'success');
-    } else {
-      alert(`✅ Soul Fragment Collected for FREE!\n\nResult: ${JSON.stringify(result)}`);
+    // Try to extract token ID from result
+    if (result && result.logs) {
+      const transferEvent = result.logs.find(log => 
+        log.topics && log.topics[0] === '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
+      );
+      if (transferEvent && transferEvent.topics[3]) {
+        const tokenId = parseInt(transferEvent.topics[3], 16);
+        console.log("🎭 TOKEN ID:", tokenId);
+        console.log("📱 Import to MetaMask:");
+        console.log("   Contract: 0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8");
+        console.log("   Token ID:", tokenId);
+        
+        if (typeof showCyberNotification === 'function') {
+          showCyberNotification(`✅ Token ID: ${tokenId} - Import to MetaMask!`, 'success');
+        }
+      }
     }
     
-    // Update button
-    updateMintButton(poemId, result.transactionHash || "claimed");
+    // Try to get the token ID for MetaMask import
+    try {
+      const currentSupply = await totalSupply({ contract: window.atuona.contract });
+      const tokenId = Number(currentSupply) - 1; // Last minted token
+      
+      console.log("🎭 CLAIMED TOKEN ID:", tokenId);
+      console.log("📱 MetaMask Import Info:");
+      console.log("   Contract: 0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8");
+      console.log("   Token ID:", tokenId);
+      
+      if (typeof showCyberNotification === 'function') {
+        showCyberNotification(`✅ Soul Fragment Collected! Token ID: ${tokenId}`, 'success');
+      } else {
+        alert(`✅ Soul Fragment Collected for FREE!\n\nTo import to MetaMask:\nContract: 0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8\nToken ID: ${tokenId}`);
+      }
+      
+      // Update button with token ID
+      updateMintButton(poemId, `token-${tokenId}`);
+      
+    } catch (error) {
+      console.log("Could not get token ID:", error);
+      
+      if (typeof showCyberNotification === 'function') {
+        showCyberNotification("✅ Soul Fragment Collected for FREE!", 'success');
+      } else {
+        alert("✅ Soul Fragment Collected for FREE!");
+      }
+      
+      updateMintButton(poemId, "claimed");
+    }
     
   } catch (error) {
     console.error("❌ Claiming failed:", error);
