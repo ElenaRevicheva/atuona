@@ -1,4 +1,4 @@
-// ATUONA Gallery - NFT Drop with Automated Setup
+// ATUONA Gallery - FIXED Transaction Sending (No Async Functions)
 console.log("🔥 ATUONA NFT Drop Loading...");
 
 // Import automated setup (no IPFS upload needed)
@@ -17,7 +17,7 @@ const client = createThirdwebClient({
 });
 
 // Your NFT Drop contract address
-const NFT_DROP_CONTRACT = "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8";
+const NFT_DROP_CONTRACT = "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8"; // NFT Drop on Polygon
 
 // Global state with loading prevention
 window.atuona = {
@@ -108,7 +108,7 @@ async function connectWallet() {
   }
 }
 
-// FREE claiming - Fixed to prevent BigInt errors and multiple calls
+// FIXED FREE claiming - thirdweb's exact pattern (no async functions)
 async function mintNFT(poemId, poemTitle) {
   // Prevent multiple claiming attempts
   if (window.atuona.isClaiming) {
@@ -145,154 +145,37 @@ async function mintNFT(poemId, poemTitle) {
       alert("🔄 Claiming Soul Fragment for FREE!\nConfirm in wallet...");
     }
     
-    // Simple claim transaction - no complex wallet creation
-    const transaction = claimTo({
+    // thirdweb's exact pattern - just call claimTo directly
+    console.log("🔄 Calling claimTo directly (no manual sending)...");
+    
+    const result = await claimTo({
       contract: window.atuona.contract,
       to: window.atuona.address,
       quantity: 1n,
     });
     
-    console.log("🔄 Transaction prepared:", transaction);
-    console.log("🔍 Transaction type:", typeof transaction);
-    console.log("🔍 Transaction keys:", Object.keys(transaction));
-    console.log("🔄 Attempting to send...");
+    console.log("✅ claimTo result:", result);
+    console.log("🔍 Result type:", typeof result);
     
-    // Use thirdweb's proper transaction sending method
-    console.log("🔄 Using thirdweb transaction sending...");
-    
-    // Import sendTransaction from thirdweb
-    const { sendTransaction } = await import("thirdweb");
-    
-    // Create account object for thirdweb
-    const account = {
-      address: window.atuona.address,
-      async sendTransaction(tx) {
-        // Use MetaMask to send
-        const txHash = await window.ethereum.request({
-          method: 'eth_sendTransaction',
-          params: [{
-            from: window.atuona.address,
-            to: tx.to,
-            data: tx.data,
-            value: tx.value ? `0x${BigInt(tx.value).toString(16)}` : '0x0',
-            gas: '0x493E0' // Fixed gas limit
-          }]
-        });
-        
-        // Wait for confirmation using ethers
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const receipt = await provider.waitForTransaction(txHash);
-        
-        return {
-          transactionHash: receipt.hash,
-          blockNumber: receipt.blockNumber,
-          status: receipt.status
-        };
-      }
-    };
-    
-    // Send transaction properly
-    const result = await account.sendTransaction(transaction);
-    
-    console.log("✅ Transaction confirmed on blockchain!");
-    console.log("📋 Transaction hash:", result.transactionHash);
-    console.log("📋 Block number:", result.blockNumber);
-    
-    // Try to extract token ID from result
-    if (result && result.logs) {
-      const transferEvent = result.logs.find(log => 
-        log.topics && log.topics[0] === '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
-      );
-      if (transferEvent && transferEvent.topics[3]) {
-        const tokenId = parseInt(transferEvent.topics[3], 16);
-        console.log("🎭 TOKEN ID:", tokenId);
-        console.log("📱 Import to MetaMask:");
-        console.log("   Contract: 0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8");
-        console.log("   Token ID:", tokenId);
-        
-        if (typeof showCyberNotification === 'function') {
-          showCyberNotification(`✅ Token ID: ${tokenId} - Import to MetaMask!`, 'success');
-        }
-      }
-    }
-    
-    // Get token ID safely
-    try {
-      const currentSupply = await totalSupply({ contract: window.atuona.contract });
-      const supplyNumber = Number(currentSupply);
+    // Check if we got a transaction hash
+    if (result && (result.transactionHash || result.hash)) {
+      const txHash = result.transactionHash || result.hash;
+      console.log("📋 Transaction hash:", txHash);
       
-      console.log("📊 Total supply:", supplyNumber);
-      
-      if (supplyNumber > 0) {
-        // Check the last few tokens to find user's NFT
-        let userTokenId = null;
-        
-        // Check last 5 tokens
-        for (let i = Math.max(0, supplyNumber - 5); i < supplyNumber; i++) {
-          try {
-            const owner = await ownerOf({ contract: window.atuona.contract, tokenId: BigInt(i) });
-            console.log(`🔍 Token ${i} owner:`, owner);
-            
-            if (owner.toLowerCase() === window.atuona.address.toLowerCase()) {
-              userTokenId = i;
-              console.log("🎭 FOUND YOUR TOKEN ID:", userTokenId);
-              break;
-            }
-          } catch (e) {
-            console.log(`Token ${i} not found or error:`, e.message);
-          }
-        }
-        
-        if (userTokenId !== null) {
-          console.log("📱 MetaMask Import Info:");
-          console.log("   Contract: 0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8");
-          console.log("   Token ID:", userTokenId);
-          console.log("   Network: Polygon Mainnet");
-          console.log("   Owner:", window.atuona.address);
-          
-          if (typeof showCyberNotification === 'function') {
-            showCyberNotification(`✅ Token ID: ${userTokenId} - Import to MetaMask!`, 'success');
-          } else {
-            alert(`✅ Soul Fragment Collected!\n\nMetaMask Import:\nContract: 0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8\nToken ID: ${userTokenId}\nNetwork: Polygon`);
-          }
-          
-          updateMintButton(poemId, `token-${userTokenId}`);
-        } else {
-          console.log("⏳ Token not found yet, may need to wait for indexing");
-          
-          if (typeof showCyberNotification === 'function') {
-            showCyberNotification("✅ Soul Fragment Collected! Check wallet in a moment.", 'success');
-          } else {
-            alert("✅ Soul Fragment Collected!\nNFT should appear in your wallet shortly.\nTry importing after a minute.");
-          }
-          
-          updateMintButton(poemId, "claimed");
-        }
+      if (typeof showCyberNotification === 'function') {
+        showCyberNotification(`✅ Soul Fragment Collected! TX: ${txHash}`, 'success');
       } else {
-        console.log("📊 No tokens minted yet, supply is 0");
-        
-        if (typeof showCyberNotification === 'function') {
-          showCyberNotification("✅ Soul Fragment Collected! Wait for indexing.", 'success');
-        } else {
-          alert("✅ Soul Fragment Collected!\nWait a moment for blockchain indexing.");
-        }
-        
-        updateMintButton(poemId, "claimed");
+        alert(`✅ Soul Fragment Collected for FREE!\n\nTransaction: ${txHash}\n\nView: https://polygonscan.com/tx/${txHash}`);
       }
       
-    } catch (error) {
-      console.log("Could not verify token ownership:", error);
-      
-      // Provide general import info
-      console.log("📱 General MetaMask Import Info:");
-      console.log("   Contract: 0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8");
-      console.log("   Network: Polygon");
-      console.log("   Try token IDs: 0, 1, 2, 3, 4...");
+      updateMintButton(poemId, txHash);
+    } else {
+      console.log("⚠️ No transaction hash in result, but claimTo completed");
       
       if (typeof showCyberNotification === 'function') {
         showCyberNotification("✅ Soul Fragment Collected for FREE!", 'success');
       } else {
-        alert("✅ Soul Fragment Collected!\nTry importing with token IDs 0, 1, 2, etc.");
+        alert("✅ Soul Fragment Collected for FREE!\nCheck your wallet!");
       }
       
       updateMintButton(poemId, "claimed");
@@ -310,6 +193,8 @@ async function mintNFT(poemId, poemTitle) {
       message = "❌ Claim conditions not set yet. Please complete setup first.";
     } else if (error.message && error.message.includes("Already processing")) {
       message = "⏳ Please wait for current transaction to complete.";
+    } else if (error.message && error.message.includes("BigInt")) {
+      message = "❌ Transaction parameter error. Please try again.";
     } else {
       message = `❌ Claiming failed: ${error.message}`;
     }
@@ -434,9 +319,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     📦 NFT Drop: ${NFT_DROP_CONTRACT.substring(0, 8)}...<br>
     🔗 Polygon Network<br>
     💎 FREE Collection (Gas Only)<br>
-    🎯 Claim-Based Minting
+    🎯 Direct Claim Calls
   `;
   document.body.appendChild(status);
 });
 
-console.log("🎭 ATUONA Gallery - NFT Drop Claim Solution Ready!");
+console.log("🎭 ATUONA Gallery - FIXED NFT Drop Solution Ready!");
