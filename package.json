@@ -1,11 +1,17 @@
 {
   "name": "atuona-gallery",
   "version": "1.0.0",
-  "description": "ATUONA Gallery of Moments - Underground Verse Vault (Final Simple Version)",
+  "description": "ATUONA Gallery of Moments - Underground Verse Vault with REAL NFT Minting",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build", 
     "preview": "vite preview"
+  },
+  "dependencies": {
+    "thirdweb": "^5.105.41"
+  },
+  "devDependencies": {
+    "vite": "^5.4.19"
   }
 }

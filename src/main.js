@@ -1,66 +1,77 @@
-// ATUONA Gallery - FINAL SIMPLE SOLUTION (No More Complexity!)
-console.log("🔥 ATUONA Final Solution Loading...");
+// ATUONA Gallery - REAL NFT MINTING (Following thirdweb's exact guidance)
+console.log("🔥 ATUONA Real NFT Minting Loading...");
 
-// Simple global state
+import {
+  createThirdwebClient,
+  getContract,
+} from "thirdweb";
+import { claimTo, totalSupply } from "thirdweb/extensions/erc721";
+import { polygon } from "thirdweb/chains";
+import { createWallet } from "thirdweb/wallets";
+
+// Initialize thirdweb client
+const client = createThirdwebClient({
+  clientId: "602cfa7b8c0b862d35f7cfa61c961a38",
+});
+
+// Your NFT Drop contract
+const NFT_DROP_CONTRACT = "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8";
+
+// Global state
 window.atuona = {
   connected: false,
-  address: null
+  address: null,
+  wallet: null,
+  account: null,
+  contract: null,
+  isClaiming: false
 };
 
-// Connect wallet - SIMPLE
+// Connect wallet - thirdweb's exact pattern
 async function connectWallet() {
   console.log("🔗 Connecting wallet...");
   
-  if (!window.ethereum) {
-    alert("❌ Please install MetaMask!");
+  if (window.atuona.connected) {
+    console.log("✅ Already connected");
     return;
   }
   
   try {
-    // Request account access
-    const accounts = await window.ethereum.request({
-      method: 'eth_requestAccounts'
+    // Create thirdweb wallet
+    const wallet = createWallet("io.metamask");
+    const account = await wallet.connect({
+      client,
+      chain: polygon,
     });
     
-    // Switch to Polygon
-    try {
-      await window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: "0x89" }]
-      });
-    } catch (switchError) {
-      if (switchError.code === 4902) {
-        await window.ethereum.request({
-          method: 'wallet_addEthereumChain',
-          params: [{
-            chainId: "0x89",
-            chainName: 'Polygon',
-            nativeCurrency: { name: 'Polygon', symbol: 'POL', decimals: 18 },
-            rpcUrls: ['https://polygon-rpc.com/'],
-            blockExplorerUrls: ['https://polygonscan.com/']
-          }]
-        });
-      }
-    }
+    // Get contract
+    const contract = getContract({
+      client,
+      address: NFT_DROP_CONTRACT,
+      chain: polygon,
+    });
     
     // Update state
     window.atuona.connected = true;
-    window.atuona.address = accounts[0];
+    window.atuona.address = account.address;
+    window.atuona.wallet = wallet;
+    window.atuona.account = account;
+    window.atuona.contract = contract;
     
     // Update UI
     const walletButton = document.querySelector('.wallet-status');
     if (walletButton) {
-      walletButton.textContent = `${accounts[0].substring(0, 6)}...${accounts[0].substring(38)}`;
+      walletButton.textContent = `${account.address.substring(0, 6)}...${account.address.substring(38)}`;
       walletButton.setAttribute('data-text', 'CONNECTED');
       walletButton.style.background = '#4CAF50';
     }
     
-    console.log("✅ Wallet connected:", accounts[0]);
+    console.log("✅ Wallet connected:", account.address);
     
     if (typeof showCyberNotification === 'function') {
-      showCyberNotification("✅ Wallet Connected - Ready for collecting!", 'success');
+      showCyberNotification("✅ Ready for REAL NFT claiming!", 'success');
     } else {
-      alert(`✅ Wallet Connected!\n${accounts[0]}\n\nYou can now collect Soul Fragments!`);
+      alert("✅ Wallet Connected!\nReady for REAL NFT claiming!");
     }
     
   } catch (error) {
@@ -69,54 +80,110 @@ async function connectWallet() {
   }
 }
 
-// SIMPLE "MINTING" - Just show collected status (no blockchain complexity)
+// REAL NFT MINTING - thirdweb's exact working pattern
 async function mintNFT(poemId, poemTitle) {
-  console.log(`🎭 Collecting: ${poemTitle} (${poemId})`);
-  
-  if (!window.atuona.connected) {
-    await connectWallet();
+  if (window.atuona.isClaiming) {
+    console.log("⏳ Claiming already in progress...");
     return;
   }
   
+  console.log(`🔥 REAL NFT Claiming: ${poemTitle} (${poemId})`);
+  
+  if (!window.atuona.connected || !window.atuona.account) {
+    await connectWallet();
+    if (!window.atuona.connected) return;
+  }
+  
+  window.atuona.isClaiming = true;
+  
   try {
-    console.log("🔄 Collecting Soul Fragment...");
+    console.log("🔄 Claiming REAL NFT from drop...");
     
     if (typeof showCyberNotification === 'function') {
-      showCyberNotification("🔄 Collecting Soul Fragment...", 'info');
+      showCyberNotification("🔄 Claiming REAL NFT... Confirm in wallet!", 'info');
     } else {
-      alert("🔄 Collecting Soul Fragment...");
+      alert("🔄 Claiming REAL NFT!\nConfirm in MetaMask...");
     }
     
-    // Simulate collection (no complex blockchain calls)
-    await new Promise(resolve => setTimeout(resolve, 2000)); // 2 second delay
+    // thirdweb's exact pattern - this should trigger MetaMask
+    const transaction = claimTo({
+      contract: window.atuona.contract,
+      to: window.atuona.account.address,
+      quantity: 1n,
+    });
     
-    console.log("✅ Soul Fragment collected!");
+    console.log("🔄 Sending transaction via thirdweb wallet...");
     
-    if (typeof showCyberNotification === 'function') {
-      showCyberNotification(`✅ ${poemTitle} collected!`, 'success');
+    // Send via thirdweb account (this should work!)
+    const result = await window.atuona.account.sendTransaction(transaction);
+    
+    console.log("✅ REAL NFT transaction sent:", result);
+    
+    if (result.transactionHash) {
+      console.log("📋 Transaction hash:", result.transactionHash);
+      
+      // Check supply after successful mint
+      setTimeout(async () => {
+        try {
+          const newSupply = await totalSupply({ contract: window.atuona.contract });
+          console.log("📊 Updated supply after mint:", Number(newSupply));
+        } catch (e) {
+          console.log("Could not check supply:", e.message);
+        }
+      }, 3000);
+      
+      if (typeof showCyberNotification === 'function') {
+        showCyberNotification(`✅ REAL NFT Minted! TX: ${result.transactionHash}`, 'success');
+      } else {
+        alert(`✅ REAL NFT Minted!\n\nTransaction: ${result.transactionHash}\n\nView: https://polygonscan.com/tx/${result.transactionHash}\n\nNFT should appear in your wallet!`);
+      }
+      
+      updateMintButton(poemId, result.transactionHash);
     } else {
-      alert(`✅ Soul Fragment "${poemTitle}" collected!\n\nThis poem is now part of your underground collection.`);
+      console.log("⚠️ No transaction hash but claim completed");
+      
+      if (typeof showCyberNotification === 'function') {
+        showCyberNotification("✅ NFT claim completed!", 'success');
+      } else {
+        alert("✅ NFT claim completed!\nCheck your wallet!");
+      }
+      
+      updateMintButton(poemId, "minted");
     }
-    
-    // Update button
-    updateMintButton(poemId, "collected");
     
   } catch (error) {
-    console.error("❌ Collection failed:", error);
-    alert("❌ Collection failed. Please try again.");
+    console.error("❌ REAL claiming failed:", error);
+    
+    let message = "❌ NFT claiming failed!";
+    if (error.message && error.message.includes("user rejected")) {
+      message = "❌ Transaction cancelled by user.";
+    } else if (error.message && error.message.includes("insufficient funds")) {
+      message = "❌ Insufficient POL for gas fees.";
+    } else {
+      message = `❌ NFT claiming failed: ${error.message}`;
+    }
+    
+    if (typeof showCyberNotification === 'function') {
+      showCyberNotification(message, 'error');
+    } else {
+      alert(message);
+    }
+  } finally {
+    window.atuona.isClaiming = false;
   }
 }
 
-// Update button after collection
-function updateMintButton(poemId, status) {
+// Update button after successful mint
+function updateMintButton(poemId, txHash) {
   const buttons = document.querySelectorAll('.nft-action');
   buttons.forEach(button => {
     if (button.onclick && button.onclick.toString().includes(poemId)) {
       button.textContent = 'COLLECTED ✅';
       button.style.background = '#4CAF50';
-      button.style.cursor = 'default';
-      button.disabled = true;
-      button.onclick = null;
+      button.style.cursor = 'pointer';
+      if (txHash && txHash !== "minted" && txHash !== "claimed") {
+        button.onclick = () => window.open(`https://polygonscan.com/tx/${txHash}`, '_blank');
+      }
     }
   });
 }
@@ -127,7 +194,7 @@ window.mintPoem = mintNFT;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
-  console.log("✅ ATUONA Final Solution Ready!");
+  console.log("✅ ATUONA Real NFT Minting Ready!");
   
   // Add status indicator
   const status = document.createElement('div');
@@ -146,11 +213,12 @@ document.addEventListener('DOMContentLoaded', function() {
   `;
   status.innerHTML = `
     🎭 ATUONA Gallery<br>
+    📦 NFT Drop: ${NFT_DROP_CONTRACT.substring(0, 8)}...<br>
     🔗 Polygon Network<br>
-    💎 Underground Poetry Collection<br>
-    ✨ Simple & Working
+    💎 REAL NFT Minting<br>
+    🎯 Users Get Actual NFTs
   `;
   document.body.appendChild(status);
 });
 
-console.log("🎭 ATUONA Gallery - Final Simple Solution Ready!");
+console.log("🎭 ATUONA Gallery - REAL NFT Minting Ready!");
