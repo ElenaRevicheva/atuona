@@ -83,11 +83,14 @@ async function mintNFT(poemId, poemTitle) {
     });
     
     // Simple FREE mint - thirdweb's exact pattern
-    const tx = await mintTo({
+    const transaction = mintTo({
       contract,
       to: account.address,
       // No metadata needed - keeping it simple!
     });
+    
+    // Send the transaction
+    const tx = await account.sendTransaction(transaction);
     
     console.log("✅ FREE mint transaction sent:", tx.transactionHash);
     
