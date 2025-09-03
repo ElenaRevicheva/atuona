@@ -178,41 +178,83 @@ async function mintNFT(poemId, poemTitle) {
       }
     }
     
-    // Try to get the token ID for MetaMask import
+    // Get token ID safely
     try {
       const currentSupply = await totalSupply({ contract: window.atuona.contract });
-      const tokenId = Number(currentSupply) - 1; // Last minted token
+      const supplyNumber = Number(currentSupply);
       
-      // Verify ownership
-      const owner = await ownerOf({ contract: window.atuona.contract, tokenId: BigInt(tokenId) });
+      console.log("📊 Total supply:", supplyNumber);
       
-      console.log("🎭 CLAIMED TOKEN ID:", tokenId);
-      console.log("👤 Token Owner:", owner);
-      console.log("👤 Your Address:", window.atuona.address);
-      console.log("✅ Ownership Match:", owner.toLowerCase() === window.atuona.address.toLowerCase());
-      
-      console.log("📱 MetaMask Import Info:");
-      console.log("   Contract: 0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8");
-      console.log("   Token ID:", tokenId);
-      console.log("   Network: Polygon");
-      console.log("   Make sure you're using the same wallet that claimed!");
-      
-      if (typeof showCyberNotification === 'function') {
-        showCyberNotification(`✅ Soul Fragment Collected! Token ID: ${tokenId}`, 'success');
+      if (supplyNumber > 0) {
+        // Check the last few tokens to find user's NFT
+        let userTokenId = null;
+        
+        // Check last 5 tokens
+        for (let i = Math.max(0, supplyNumber - 5); i < supplyNumber; i++) {
+          try {
+            const owner = await ownerOf({ contract: window.atuona.contract, tokenId: BigInt(i) });
+            console.log(`🔍 Token ${i} owner:`, owner);
+            
+            if (owner.toLowerCase() === window.atuona.address.toLowerCase()) {
+              userTokenId = i;
+              console.log("🎭 FOUND YOUR TOKEN ID:", userTokenId);
+              break;
+            }
+          } catch (e) {
+            console.log(`Token ${i} not found or error:`, e.message);
+          }
+        }
+        
+        if (userTokenId !== null) {
+          console.log("📱 MetaMask Import Info:");
+          console.log("   Contract: 0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8");
+          console.log("   Token ID:", userTokenId);
+          console.log("   Network: Polygon Mainnet");
+          console.log("   Owner:", window.atuona.address);
+          
+          if (typeof showCyberNotification === 'function') {
+            showCyberNotification(`✅ Token ID: ${userTokenId} - Import to MetaMask!`, 'success');
+          } else {
+            alert(`✅ Soul Fragment Collected!\n\nMetaMask Import:\nContract: 0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8\nToken ID: ${userTokenId}\nNetwork: Polygon`);
+          }
+          
+          updateMintButton(poemId, `token-${userTokenId}`);
+        } else {
+          console.log("⏳ Token not found yet, may need to wait for indexing");
+          
+          if (typeof showCyberNotification === 'function') {
+            showCyberNotification("✅ Soul Fragment Collected! Check wallet in a moment.", 'success');
+          } else {
+            alert("✅ Soul Fragment Collected!\nNFT should appear in your wallet shortly.\nTry importing after a minute.");
+          }
+          
+          updateMintButton(poemId, "claimed");
+        }
       } else {
-        alert(`✅ Soul Fragment Collected for FREE!\n\nTo import to MetaMask:\nContract: 0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8\nToken ID: ${tokenId}`);
+        console.log("📊 No tokens minted yet, supply is 0");
+        
+        if (typeof showCyberNotification === 'function') {
+          showCyberNotification("✅ Soul Fragment Collected! Wait for indexing.", 'success');
+        } else {
+          alert("✅ Soul Fragment Collected!\nWait a moment for blockchain indexing.");
+        }
+        
+        updateMintButton(poemId, "claimed");
       }
       
-      // Update button with token ID
-      updateMintButton(poemId, `token-${tokenId}`);
-      
     } catch (error) {
-      console.log("Could not get token ID:", error);
+      console.log("Could not verify token ownership:", error);
+      
+      // Provide general import info
+      console.log("📱 General MetaMask Import Info:");
+      console.log("   Contract: 0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8");
+      console.log("   Network: Polygon");
+      console.log("   Try token IDs: 0, 1, 2, 3, 4...");
       
       if (typeof showCyberNotification === 'function') {
         showCyberNotification("✅ Soul Fragment Collected for FREE!", 'success');
       } else {
-        alert("✅ Soul Fragment Collected for FREE!");
+        alert("✅ Soul Fragment Collected!\nTry importing with token IDs 0, 1, 2, etc.");
       }
       
       updateMintButton(poemId, "claimed");
