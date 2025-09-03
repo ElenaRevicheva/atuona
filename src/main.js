@@ -1,8 +1,8 @@
 // ATUONA Gallery - NFT Drop with Automated Setup
 console.log("🔥 ATUONA NFT Drop Loading...");
 
-// Import automated setup
-import { autoSetupNFTDrop } from "../auto-setup.js";
+// Import automated setup (no IPFS upload needed)
+import { setupWithDirectMetadata } from "./automated-nft-setup.js";
 
 import {
   createThirdwebClient,
@@ -225,9 +225,26 @@ window.mintPoem = mintNFT;
 document.addEventListener('DOMContentLoaded', async function() {
   console.log("✅ ATUONA NFT Drop Ready!");
   
-  // Automated setup disabled - complete setup manually in thirdweb dashboard
-  console.log("📋 Complete setup at: https://thirdweb.com/polygon/0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8");
-  console.log("🎯 Steps: Upload metadata → Lazy mint → Set claim conditions (price = 0)");
+  // Run automated setup with direct metadata (no IPFS upload)
+  if (!localStorage.getItem('atuona-setup-complete')) {
+    console.log("🚀 Running direct metadata setup...");
+    
+    try {
+      const setupResult = await setupWithDirectMetadata();
+      if (setupResult.success) {
+        localStorage.setItem('atuona-setup-complete', 'true');
+        console.log("🎉 Direct setup completed!");
+        
+        if (typeof showCyberNotification === 'function') {
+          showCyberNotification("🎉 Underground Gallery is LIVE! FREE claiming enabled!", 'success');
+        } else {
+          alert("🎉 Setup Complete!\nUsers can now claim poetry NFTs for FREE!");
+        }
+      }
+    } catch (error) {
+      console.log("⚠️ Setup failed, will retry:", error.message);
+    }
+  }
   
   // Add status indicator
   const status = document.createElement('div');
