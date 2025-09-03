@@ -108,22 +108,16 @@ async function mintNFT(poemId, poemTitle) {
       chain: polygon,
     });
     
-    // thirdweb's exact claimTo pattern (corrected)
-    const tx = claimTo({
+    // Use claimTo (the function that actually exists)
+    console.log("🔄 Calling claimTo function...");
+    
+    const result = await claimTo({
       contract,
       quantity: 1n,
       to: window.atuona.address,
     });
     
-    console.log("🔄 Sending claim transaction...");
-    
-    // Send transaction using thirdweb's exact approach
-    await tx.send({
-      account: {
-        address: window.atuona.address,
-        signer: window.ethereum,
-      },
-    });
+    console.log("✅ claimTo result:", result);
     
     console.log("✅ Soul Fragment claimed for FREE!");
     
