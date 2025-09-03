@@ -1,5 +1,8 @@
-// ATUONA Gallery - NFT Drop with Fixed Issues
+// ATUONA Gallery - NFT Drop with Automated Setup
 console.log("🔥 ATUONA NFT Drop Loading...");
+
+// Import automated setup
+import { autoSetupNFTDrop } from "../auto-setup.js";
 
 import {
   createThirdwebClient,
@@ -217,9 +220,28 @@ function updateMintButton(poemId, txHash) {
 window.handleWalletConnection = connectWallet;
 window.mintPoem = mintNFT;
 
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
+// Initialize with automated setup
+document.addEventListener('DOMContentLoaded', async function() {
   console.log("✅ ATUONA NFT Drop Ready!");
+  
+  // Run automated setup on first load
+  if (!localStorage.getItem('atuona-setup-complete')) {
+    console.log("🚀 Running automated NFT Drop setup...");
+    
+    try {
+      const setupResult = await autoSetupNFTDrop();
+      if (setupResult.success) {
+        localStorage.setItem('atuona-setup-complete', 'true');
+        console.log("🎉 Automated setup completed!");
+        
+        if (typeof showCyberNotification === 'function') {
+          showCyberNotification("🎉 Underground Gallery is LIVE! FREE claiming enabled!", 'success');
+        }
+      }
+    } catch (error) {
+      console.log("⚠️ Setup will retry on next page load:", error.message);
+    }
+  }
   
   // Add status indicator
   const status = document.createElement('div');
