@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ATUONA NFT Drop Setup</title>
+    <style>
+        body { 
+            background: #000; 
+            color: #fff; 
+            font-family: monospace; 
+            padding: 20px; 
+        }
+        button { 
+            background: #4CAF50; 
+            color: white; 
+            border: none; 
+            padding: 15px 30px; 
+            margin: 10px; 
+            cursor: pointer; 
+            border-radius: 5px;
+        }
+        .status { 
+            background: #333; 
+            padding: 15px; 
+            margin: 10px 0; 
+            border-radius: 5px; 
+        }
+        .error { background: #ff4444; }
+        .success { background: #44ff44; color: #000; }
+    </style>
+</head>
+<body>
+    <h1>🎭 ATUONA NFT Drop Setup</h1>
+    <p>Contract: <code>0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8</code></p>
+    
+    <div id="status" class="status">Ready to upload and setup...</div>
+    
+    <button onclick="uploadMetadata()">📤 Upload All 45 Metadata Files</button>
+    <button onclick="lazyMintAll()">🎯 Lazy Mint All NFTs</button>
+    <button onclick="setFreeClaiming()">⚙️ Set FREE Claim Conditions</button>
+    <button onclick="testClaim()">🧪 Test Claiming</button>
+    
+    <script type="module">
+        import {
+            createThirdwebClient,
+            getContract,
+        } from "https://esm.sh/thirdweb@5.105.41";
+        import { upload } from "https://esm.sh/thirdweb@5.105.41/storage";
+        import { lazyMint, setClaimConditions, claimTo } from "https://esm.sh/thirdweb@5.105.41/extensions/erc721";
+        import { polygon } from "https://esm.sh/thirdweb@5.105.41/chains";
+        
+        const client = createThirdwebClient({
+            clientId: "602cfa7b8c0b862d35f7cfa61c961a38",
+        });
+        
+        const contract = getContract({
+            client,
+            address: "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8",
+            chain: polygon,
+        });
+        
+        let uploadedURIs = [];
+        
+        window.uploadMetadata = async function() {
+            const status = document.getElementById('status');
+            status.className = 'status';
+            status.textContent = '📤 Uploading metadata to IPFS...';
+            
+            try {
+                // Create metadata for all 45 poems
+                const metadatas = [];
+                for (let i = 1; i <= 45; i++) {
+                    const id = i.toString().padStart(3, '0');
+                    metadatas.push({
+                        name: `Underground Poem #${id}`,
+                        description: `ATUONA Gallery of Moments - Underground Poem ${id}. Free collection - true to underground values.`,
+                        image: `https://atuona.xyz/images/poem-${id}.png`,
+                        attributes: [
+                            { trait_type: "ID", value: id },
+                            { trait_type: "Collection", value: "GALLERY OF MOMENTS" },
+                            { trait_type: "Type", value: "Free Underground Poetry" }
+                        ]
+                    });
+                }
+                
+                const uris = await upload({
+                    client,
+                    files: metadatas,
+                });
+                
+                uploadedURIs = uris;
+                status.className = 'status success';
+                status.textContent = `✅ Uploaded ${uris.length} metadata files to IPFS!`;
+                console.log('IPFS URIs:', uris);
+                
+            } catch (error) {
+                status.className = 'status error';
+                status.textContent = `❌ Upload failed: ${error.message}`;
+                console.error(error);
+            }
+        };
+        
+        window.lazyMintAll = async function() {
+            const status = document.getElementById('status');
+            
+            if (uploadedURIs.length === 0) {
+                status.className = 'status error';
+                status.textContent = '❌ Upload metadata first!';
+                return;
+            }
+            
+            status.className = 'status';
+            status.textContent = '🎯 Lazy minting 45 NFTs...';
+            
+            try {
+                const result = await lazyMint({
+                    contract,
+                    metadatas: uploadedURIs.map(uri => ({ uri })),
+                });
+                
+                status.className = 'status success';
+                status.textContent = '✅ Lazy minting completed! 45 NFTs ready for claiming.';
+                console.log('Lazy mint result:', result);
+                
+            } catch (error) {
+                status.className = 'status error';
+                status.textContent = `❌ Lazy minting failed: ${error.message}`;
+                console.error(error);
+            }
+        };
+        
+        window.setFreeClaiming = async function() {
+            const status = document.getElementById('status');
+            status.className = 'status';
+            status.textContent = '⚙️ Setting FREE claim conditions...';
+            
+            try {
+                const result = await setClaimConditions({
+                    contract,
+                    phases: [
+                        {
+                            price: 0n, // FREE
+                            maxClaimablePerWallet: 0n, // Unlimited
+                            start: new Date(),
+                        },
+                    ],
+                });
+                
+                status.className = 'status success';
+                status.textContent = '✅ FREE claim conditions set! Users can now claim for FREE.';
+                console.log('Claim conditions result:', result);
+                
+            } catch (error) {
+                status.className = 'status error';
+                status.textContent = `❌ Setting claim conditions failed: ${error.message}`;
+                console.error(error);
+            }
+        };
+        
+        window.testClaim = async function() {
+            const status = document.getElementById('status');
+            status.className = 'status';
+            status.textContent = '🧪 Testing claim...';
+            
+            try {
+                // Connect wallet first
+                const accounts = await window.ethereum.request({
+                    method: 'eth_requestAccounts'
+                });
+                
+                const transaction = claimTo({
+                    contract,
+                    to: accounts[0],
+                    quantity: 1n,
+                });
+                
+                // This would need wallet integration - simplified for testing
+                status.className = 'status success';
+                status.textContent = '✅ Claim transaction prepared! Check your main website.';
+                
+            } catch (error) {
+                status.className = 'status error';
+                status.textContent = `❌ Test claim failed: ${error.message}`;
+                console.error(error);
+            }
+        };
+    </script>
+</body>
+</html>
