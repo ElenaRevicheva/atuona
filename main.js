@@ -5,7 +5,7 @@ import {
   createThirdwebClient,
   getContract,
 } from "thirdweb";
-import { claimTo } from "thirdweb/extensions/erc721";
+import { claim } from "thirdweb/extensions/erc721";
 import { polygon } from "thirdweb/chains";
 
 // Initialize thirdweb client
@@ -21,7 +21,7 @@ window.atuona = {
   address: null
 };
 
-// Connect wallet - Simple MetaMask approach
+// Connect wallet - thirdweb's exact approach
 async function connectWallet() {
   console.log("🔗 Connecting wallet...");
   
@@ -31,9 +31,9 @@ async function connectWallet() {
   }
   
   try {
-    // Request account access
-    const accounts = await window.ethereum.request({
-      method: 'eth_requestAccounts'
+    // thirdweb's recommended wallet connection
+    const [userAddress] = await window.ethereum.request({
+      method: "eth_requestAccounts",
     });
     
     // Switch to Polygon
@@ -59,17 +59,17 @@ async function connectWallet() {
     
     // Update state
     window.atuona.connected = true;
-    window.atuona.address = accounts[0];
+    window.atuona.address = userAddress;
     
     // Update UI
     const walletButton = document.querySelector('.wallet-status');
     if (walletButton) {
-      walletButton.textContent = `${accounts[0].substring(0, 6)}...${accounts[0].substring(38)}`;
+      walletButton.textContent = `${userAddress.substring(0, 6)}...${userAddress.substring(38)}`;
       walletButton.setAttribute('data-text', 'CONNECTED');
       walletButton.style.background = '#4CAF50';
     }
     
-    console.log("✅ Wallet connected:", accounts[0]);
+    console.log("✅ Wallet connected:", userAddress);
     
     if (typeof showCyberNotification === 'function') {
       showCyberNotification("✅ Ready for FREE minting!", 'success');
@@ -108,8 +108,8 @@ async function mintNFT(poemId, poemTitle) {
       chain: polygon,
     });
     
-    // thirdweb's exact claimTo pattern
-    const transaction = claimTo({
+    // thirdweb's exact claim pattern (corrected)
+    const tx = claim({
       contract,
       quantity: 1n,
       to: window.atuona.address,
@@ -117,8 +117,8 @@ async function mintNFT(poemId, poemTitle) {
     
     console.log("🔄 Sending claim transaction...");
     
-    // Send transaction using thirdweb's recommended approach
-    await transaction.send({
+    // Send transaction using thirdweb's exact approach
+    await tx.send({
       account: {
         address: window.atuona.address,
         signer: window.ethereum,
