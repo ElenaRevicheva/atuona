@@ -8,16 +8,29 @@ const client = createThirdwebClient({
   clientId: "602cfa7b8c0b862d35f7cfa61c961a38", // Your actual clientId
 });
 
+// Contract address as constant (thirdweb's exact pattern)
+const CONTRACT_ADDRESS = "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8";
+
 export default function ClaimPoem() {
   return (
     <div
       style={{
-        maxWidth: 400,
-        margin: "2rem auto",
+        position: 'fixed',
+        bottom: '20px',
+        right: '20px',
+        background: 'rgba(0,0,0,0.9)',
+        border: '2px solid #ff0066',
+        borderRadius: '10px',
+        padding: '15px',
+        color: 'white',
+        fontFamily: 'JetBrains Mono, monospace',
+        fontSize: '12px',
+        maxWidth: '300px',
+        zIndex: 10000,
         textAlign: "center",
       }}
     >
-      <h2>Claim Your Poetry NFT</h2>
+      <h3 style={{ margin: '0 0 10px 0', fontSize: '14px' }}>🎭 REAL NFT CLAIMING</h3>
       {/* Wallet Connect Button */}
       <ConnectButton client={client} />
 
@@ -25,8 +38,7 @@ export default function ClaimPoem() {
       <ClaimButton
         client={client}
         contract={{
-          address:
-            "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8", // Your NFT Drop contract address
+          address: CONTRACT_ADDRESS, // Using constant to prevent undefined
           chain: polygon,
         }}
         quantity={1}
@@ -38,7 +50,7 @@ export default function ClaimPoem() {
         onError={(error) => {
           alert(`Claim failed: ${error.message}`);
         }}
-        style={{ marginTop: "2rem" }}
+        style={{ marginTop: "10px", fontSize: "12px" }}
       />
     </div>
   );

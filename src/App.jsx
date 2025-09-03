@@ -5,7 +5,6 @@ import ClaimPoem from "./ClaimPoem";
 function App() {
   return (
     <div>
-      <h1>ATUONA Underground Poetry Gallery</h1>
       <ClaimPoem />
     </div>
   );
