@@ -7,16 +7,20 @@ import {
 } from "thirdweb";
 import { lazyMint, setClaimConditions } from "thirdweb/extensions/erc721";
 import { polygon } from "thirdweb/chains";
+import dotenv from 'dotenv';
+
+// Load env when running via Node (ignored in browser)
+try { dotenv.config(); } catch {}
 
 // Client with your credentials
 const client = createThirdwebClient({
-  clientId: "602cfa7b8c0b862d35f7cfa61c961a38",
+  clientId: import.meta?.env?.VITE_THIRDWEB_CLIENT_ID ?? process.env.VITE_THIRDWEB_CLIENT_ID,
 });
 
 // Your NFT Drop contract
 const contract = getContract({
   client,
-  address: "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8",
+  address: import.meta?.env?.VITE_CONTRACT_ADDRESS ?? process.env.VITE_CONTRACT_ADDRESS,
   chain: polygon,
 });
 

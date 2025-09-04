@@ -11,13 +11,13 @@ import { polygon } from "thirdweb/chains";
 
 // Initialize client
 const client = createThirdwebClient({
-  clientId: "602cfa7b8c0b862d35f7cfa61c961a38",
+  clientId: import.meta.env.VITE_THIRDWEB_CLIENT_ID,
 });
 
 // Get contract (NFT Drop with 45 lazy-minted NFTs)
 const contract = getContract({
   client,
-  address: "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8",
+  address: import.meta.env.VITE_CONTRACT_ADDRESS,
   chain: polygon,
 });
 
