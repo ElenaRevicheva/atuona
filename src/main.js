@@ -83,6 +83,7 @@ async function claimPoem(poemId, poemTitle) {
     
     // Prepare the claim transaction
     console.log("🔄 Preparing claimTo transaction...");
+    console.log(`⚠️  NOTE: ERC721 Drop assigns next available NFT, not specific ID ${poemId}`);
     const preparedTransaction = claimTo({
       contract,
       to: currentAccount.address,
@@ -102,7 +103,7 @@ async function claimPoem(poemId, poemTitle) {
     
     if (result && result.transactionHash) {
       console.log("✅ NFT claimed successfully!", result.transactionHash);
-      alert(`🎭 Soul Fragment claimed!\n\nTransaction: ${result.transactionHash}\n\nCheck your wallet and Polygonscan!\n\nhttps://polygonscan.com/tx/${result.transactionHash}`);
+      alert(`🎭 Underground Poetry NFT Claimed!\n\nYou received a random poem from the collection.\nTransaction: ${result.transactionHash}\n\nCheck your wallet to see which poem you got!\n\nhttps://polygonscan.com/tx/${result.transactionHash}`);
     } else {
       console.log("❌ No transaction hash received");
       alert("⚠️ Transaction was sent but no hash received. Please check your wallet.");
