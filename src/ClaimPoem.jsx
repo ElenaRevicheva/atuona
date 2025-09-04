@@ -12,6 +12,8 @@ const client = createThirdwebClient({
 const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8";
 
 export default function ClaimPoem() {
+  const isValidAddress = typeof CONTRACT_ADDRESS === 'string' && /^0x[a-fA-F0-9]{40}$/.test(CONTRACT_ADDRESS);
+
   return (
     <div
       style={{
@@ -35,23 +37,29 @@ export default function ClaimPoem() {
       <ConnectButton client={client} />
 
       {/* NFT Claim Button */}
-      <ClaimButton
-        client={client}
-        contract={{
-          address: CONTRACT_ADDRESS, // Using constant to prevent undefined
-          chain: polygon,
-        }}
-        quantity={1}
-        onClaimed={(result) => {
-          alert(
-            `NFT claimed! Tx hash: ${result.transactionHash}`,
-          );
-        }}
-        onError={(error) => {
-          alert(`Claim failed: ${error.message}`);
-        }}
-        style={{ marginTop: "10px", fontSize: "12px" }}
-      />
+      {isValidAddress ? (
+        <ClaimButton
+          client={client}
+          contract={{
+            address: CONTRACT_ADDRESS,
+            chain: polygon,
+          }}
+          quantity={1}
+          onClaimed={(result) => {
+            alert(
+              `NFT claimed! Tx hash: ${result.transactionHash}`,
+            );
+          }}
+          onError={(error) => {
+            alert(`Claim failed: ${error.message}`);
+          }}
+          style={{ marginTop: "10px", fontSize: "12px" }}
+        />
+      ) : (
+        <div style={{ marginTop: "10px", fontSize: "12px", color: "#ff6666" }}>
+          Contract address not configured. Please set VITE_CONTRACT_ADDRESS.
+        </div>
+      )}
     </div>
   );
 }
