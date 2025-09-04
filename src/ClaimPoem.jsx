@@ -3,23 +3,41 @@ import { createThirdwebClient } from "thirdweb";
 import { ConnectButton, ClaimButton } from "thirdweb/react";
 import { polygon } from "thirdweb/chains";
 
+// Client ID validation
+const CLIENT_ID = import.meta.env.VITE_THIRDWEB_CLIENT_ID || "602cfa7b8c0b862d35f7cfa61c961a38";
+
+if (!CLIENT_ID || CLIENT_ID === "undefined") {
+  throw new Error("Thirdweb Client ID is undefined! Please set VITE_THIRDWEB_CLIENT_ID.");
+}
+
 // Create the client ONCE at the top level
 const client = createThirdwebClient({
-  clientId: import.meta.env.VITE_THIRDWEB_CLIENT_ID || "602cfa7b8c0b862d35f7cfa61c961a38",
+  clientId: CLIENT_ID,
 });
 
-// Contract address as constant (thirdweb's exact pattern)
+// Contract address with strict validation
 const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8";
 
+// Validate before any component renders
+if (!CONTRACT_ADDRESS || CONTRACT_ADDRESS === "undefined") {
+  throw new Error("Contract address is undefined! Please set VITE_CONTRACT_ADDRESS.");
+}
+
 export default function ClaimPoem() {
-  // Validate contract address
+  // Double-check contract address validation
   const isValidAddress = typeof CONTRACT_ADDRESS === 'string' && 
                         CONTRACT_ADDRESS !== "undefined" && 
+                        CONTRACT_ADDRESS !== "" &&
                         /^0x[a-fA-F0-9]{40}$/.test(CONTRACT_ADDRESS);
   
   // Log contract info for debugging
   console.log("🎭 ClaimPoem - Contract Address:", CONTRACT_ADDRESS);
   console.log("🎭 ClaimPoem - Is Valid:", isValidAddress);
+  
+  // Fail fast if address is invalid
+  if (!isValidAddress) {
+    throw new Error(`Invalid contract address: ${CONTRACT_ADDRESS}`);
+  }
 
   return (
     <div
