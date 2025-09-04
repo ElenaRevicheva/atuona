@@ -5,11 +5,11 @@ import { polygon } from "thirdweb/chains";
 
 // Create the client ONCE at the top level
 const client = createThirdwebClient({
-  clientId: import.meta.env.VITE_THIRDWEB_CLIENT_ID,
+  clientId: import.meta.env.VITE_THIRDWEB_CLIENT_ID || "602cfa7b8c0b862d35f7cfa61c961a38",
 });
 
 // Contract address as constant (thirdweb's exact pattern)
-const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS;
+const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8";
 
 export default function ClaimPoem() {
   return (
