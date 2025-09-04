@@ -9,6 +9,25 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- FINAL SIMPLE SOLUTION - No complex SDKs -->
+            <script>
+                // Ensure functions are available before DOM loads
+                window.handleWalletConnection = window.handleWalletConnection || function() {
+                    console.log('Wallet connection loading...');
+                    setTimeout(() => {
+                        if (window.handleWalletConnection && typeof window.handleWalletConnection === 'function') {
+                            window.handleWalletConnection();
+                        }
+                    }, 100);
+                };
+                window.claimPoem = window.claimPoem || function(id, title) {
+                    console.log('NFT claiming loading...');
+                    setTimeout(() => {
+                        if (window.claimPoem && typeof window.claimPoem === 'function') {
+                            window.claimPoem(id, title);
+                        }
+                    }, 100);
+                };
+            </script>
     <style>
         /* Underground NFT Gallery Aesthetic - Dark Red and Silver Grey */
         :root {
@@ -883,7 +902,7 @@
             background: var(--neon-magenta);
         }
     </style>
-  <script type="module" crossorigin src="/assets/main-CyTHdQh8.js"></script>
+  <script type="module" crossorigin src="/assets/main-DwyrSW8F.js"></script>
 </head>
 <body>
     <div class="particles"></div>
