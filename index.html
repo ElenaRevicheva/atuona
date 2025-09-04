@@ -788,17 +788,18 @@
 
         .claim-button {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             color: var(--red-dark);
             border: 1px solid var(--red-dark);
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             background: rgba(139, 0, 0, 0.1);
             transition: all 0.3s ease;
             cursor: pointer;
             border-radius: 3px;
+            line-height: 1.1;
         }
 
         .claim-button:hover {
@@ -2947,10 +2948,26 @@
             <section id="gallery" class="section hidden">
                 <div class="gallery-content">
                     <h2 class="section-title">MINTING VAULT</h2>
-                    <p style="text-align: center; color: var(--light-grey); font-size: 1.1rem; margin-bottom: 3rem; font-style: italic;">
-                        45 underground poetry NFTs spanning 2019-2025. Each contains complete Russian text with English analysis. 
-                        <span style="color: var(--red-dark);">Click any slot to claim a random poem NFT for FREE</span> (only gas fees).
-                    </p>
+                    <div style="text-align: center; margin-bottom: 3rem;">
+                        <p style="color: var(--light-grey); font-size: 1.2rem; font-style: italic; margin-bottom: 1.5rem;">
+                            <span style="color: var(--red-dark);">45 soul fragments</span> scattered across the blockchain void.<br>
+                            Each moment chooses its keeper. Each keeper receives their destined verse.
+                        </p>
+                        <p style="color: var(--silver-grey); font-size: 0.95rem; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+                            The underground speaks in riddles. You see all titles as <span style="color: var(--red-dark);">inspiration</span>,<br>
+                            but the blockchain decides which <span style="color: var(--silver-grey);">moment finds you</span>.<br>
+                            <br>
+                            <span style="color: var(--red-dark);">• Touch any slot</span> → Summon a soul fragment<br>
+                            <span style="color: var(--red-dark);">• Receive mystery</span> → One of 45 authentic verses (2019-2025)<br>
+                            <span style="color: var(--red-dark);">• Check wallet</span> → Discover your destined poem<br>
+                            <span style="color: var(--red-dark);">• Collect more</span> → Build your underground anthology<br>
+                            <br>
+                            <em style="color: var(--silver-grey); font-size: 0.85rem;">
+                                "The moment chooses you. You do not choose the moment."<br>
+                                — Underground Manifesto
+                            </em>
+                        </p>
+                    </div>
                     
                     <div class="gallery-grid">
                         <div class="gallery-slot" onclick="claimPoem(1, 'На память')">
