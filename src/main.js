@@ -14,10 +14,22 @@ const client = createThirdwebClient({
   clientId: import.meta.env.VITE_THIRDWEB_CLIENT_ID || "602cfa7b8c0b862d35f7cfa61c961a38",
 });
 
+// Contract address with validation
+const NFT_DROP_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8";
+
+// Validate contract address before using it
+if (!NFT_DROP_ADDRESS || NFT_DROP_ADDRESS === "undefined") {
+  throw new Error("NFT Drop contract address is not set! Please set VITE_CONTRACT_ADDRESS environment variable.");
+}
+
+// Log contract details for debugging
+console.log("🔗 Contract Address:", NFT_DROP_ADDRESS);
+console.log("🌐 Chain:", polygon.name);
+
 // Get contract (NFT Drop with 45 lazy-minted NFTs)
 const contract = getContract({
   client,
-  address: import.meta.env.VITE_CONTRACT_ADDRESS || "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8",
+  address: NFT_DROP_ADDRESS,
   chain: polygon,
 });
 
@@ -95,9 +107,21 @@ window.claimPoem = claimPoem;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
+  console.log(`
+    ╔══════════════════════════════════════════════════════════════╗
+    ║  🔮 SILVER LINES UNDERGROUND NFT GALLERY INITIALIZED 🔮     ║
+    ║                                                              ║
+    ║  » Blockchain: Ready                                         ║
+    ║  » Soul Fragments: Loading...                                ║
+    ║  » Digital Poetry: Active                                    ║
+    ║  » Underground Mode: ENGAGED                                 ║
+    ║                                                              ║
+    ║  Press 1-3 to navigate, ESC to close notifications          ║
+    ╚══════════════════════════════════════════════════════════════╝
+            `);
   console.log("✅ ATUONA Simple NFT Claiming Ready!");
   console.log("🎭 Backend setup completed - 45 NFTs ready for claiming!");
-  console.log("📋 Contract: 0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8");
+  console.log("📋 Contract:", NFT_DROP_ADDRESS);
   console.log("🔗 Network: Polygon");
   console.log("💎 FREE claiming (only gas fees)!");
 });

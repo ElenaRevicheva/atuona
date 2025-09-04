@@ -9,9 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- FINAL SIMPLE SOLUTION - No complex SDKs -->
-            <script>
-                window.handleWalletConnection = window.handleWalletConnection || function(){ console.log('handleWalletConnection stub'); };
-            </script>
+            <script type="module" src="/src/main.js"></script>
             <script type="module" src="/src/main.jsx"></script>
     <style>
         /* Underground NFT Gallery Aesthetic - Dark Red and Silver Grey */
@@ -750,8 +748,31 @@
         .slot-label {
             font-size: 0.9rem;
             text-transform: uppercase;
+            margin-bottom: 1rem;
             letter-spacing: 2px;
             color: var(--grey-light);
+        }
+
+        .claim-button {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--red-dark);
+            border: 1px solid var(--red-dark);
+            padding: 0.5rem 1rem;
+            background: rgba(139, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .claim-button:hover {
+            background: var(--red-dark);
+            color: white;
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.5);
+            transform: scale(1.05);
         }
 
         /* Footer */
@@ -2898,40 +2919,46 @@
                     </p>
                     
                     <div class="gallery-grid">
-                        <div class="gallery-slot">
+                        <div class="gallery-slot" onclick="claimPoem(1, 'Digital Shadows')">
                             <div class="slot-content">
                                 <div class="slot-id">001</div>
-                                <div class="slot-label">Ready to Mint</div>
+                                <div class="slot-label">Digital Shadows</div>
+                                <div class="claim-button">CLAIM NFT</div>
                             </div>
                         </div>
-                        <div class="gallery-slot">
+                        <div class="gallery-slot" onclick="claimPoem(2, 'Underground Verses')">
                             <div class="slot-content">
                                 <div class="slot-id">002</div>
-                                <div class="slot-label">In Progress</div>
+                                <div class="slot-label">Underground Verses</div>
+                                <div class="claim-button">CLAIM NFT</div>
                             </div>
                         </div>
-                        <div class="gallery-slot">
+                        <div class="gallery-slot" onclick="claimPoem(3, 'Silver Lines')">
                             <div class="slot-content">
                                 <div class="slot-id">003</div>
-                                <div class="slot-label">Conceptualizing</div>
+                                <div class="slot-label">Silver Lines</div>
+                                <div class="claim-button">CLAIM NFT</div>
                             </div>
                         </div>
-                        <div class="gallery-slot">
+                        <div class="gallery-slot" onclick="claimPoem(4, 'Neon Dreams')">
                             <div class="slot-content">
                                 <div class="slot-id">004</div>
-                                <div class="slot-label">Soul Loading...</div>
+                                <div class="slot-label">Neon Dreams</div>
+                                <div class="claim-button">CLAIM NFT</div>
                             </div>
                         </div>
-                        <div class="gallery-slot">
+                        <div class="gallery-slot" onclick="claimPoem(5, 'Electric Poetry')">
                             <div class="slot-content">
                                 <div class="slot-id">005</div>
-                                <div class="slot-label">Encrypted</div>
+                                <div class="slot-label">Electric Poetry</div>
+                                <div class="claim-button">CLAIM NFT</div>
                             </div>
                         </div>
-                        <div class="gallery-slot">
+                        <div class="gallery-slot" onclick="claimPoem(6, 'Soul Fragments')">
                             <div class="slot-content">
                                 <div class="slot-id">006</div>
-                                <div class="slot-label">Awaiting Vision</div>
+                                <div class="slot-label">Soul Fragments</div>
+                                <div class="claim-button">CLAIM NFT</div>
                             </div>
                         </div>
                     </div>

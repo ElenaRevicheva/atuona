@@ -12,7 +12,14 @@ const client = createThirdwebClient({
 const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8";
 
 export default function ClaimPoem() {
-  const isValidAddress = typeof CONTRACT_ADDRESS === 'string' && /^0x[a-fA-F0-9]{40}$/.test(CONTRACT_ADDRESS);
+  // Validate contract address
+  const isValidAddress = typeof CONTRACT_ADDRESS === 'string' && 
+                        CONTRACT_ADDRESS !== "undefined" && 
+                        /^0x[a-fA-F0-9]{40}$/.test(CONTRACT_ADDRESS);
+  
+  // Log contract info for debugging
+  console.log("🎭 ClaimPoem - Contract Address:", CONTRACT_ADDRESS);
+  console.log("🎭 ClaimPoem - Is Valid:", isValidAddress);
 
   return (
     <div
