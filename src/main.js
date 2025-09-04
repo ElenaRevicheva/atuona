@@ -4,14 +4,21 @@ console.log("🔥 ATUONA Simple NFT Claiming Loading...");
 import {
   createThirdwebClient,
   getContract,
+  sendTransaction,
 } from "thirdweb";
 import { claimTo } from "thirdweb/extensions/erc721";
 import { createWallet } from "thirdweb/wallets";
 import { polygon } from "thirdweb/chains";
 
-// Initialize client
+// Initialize client with validation
+const CLIENT_ID = import.meta.env.VITE_THIRDWEB_CLIENT_ID || "602cfa7b8c0b862d35f7cfa61c961a38";
+
+if (!CLIENT_ID) {
+  throw new Error("Thirdweb Client ID is not set! Please set VITE_THIRDWEB_CLIENT_ID environment variable.");
+}
+
 const client = createThirdwebClient({
-  clientId: import.meta.env.VITE_THIRDWEB_CLIENT_ID || "602cfa7b8c0b862d35f7cfa61c961a38",
+  clientId: CLIENT_ID,
 });
 
 // Contract address with validation
@@ -74,25 +81,31 @@ async function claimPoem(poemId, poemTitle) {
   try {
     console.log(`🔥 Claiming NFT: ${poemTitle} (${poemId})`);
     
-    // Use claimTo function for NFT Drop - debug what it returns
-    console.log("🔄 Calling claimTo...");
-    const result = await claimTo({
+    // Prepare the claim transaction
+    console.log("🔄 Preparing claimTo transaction...");
+    const preparedTransaction = claimTo({
       contract,
       to: currentAccount.address,
       quantity: 1n,
+    });
+    
+    console.log("🚀 Sending transaction to blockchain...");
+    
+    // Actually send the transaction to the blockchain
+    const result = await sendTransaction({
+      transaction: preparedTransaction,
       account: currentAccount,
     });
     
-    console.log("🔍 ClaimTo result:", result);
-    console.log("🔍 Result type:", typeof result);
-    console.log("🔍 Result keys:", result ? Object.keys(result) : 'null');
+    console.log("✅ Transaction sent!", result);
+    console.log("🔍 Transaction hash:", result.transactionHash);
     
     if (result && result.transactionHash) {
       console.log("✅ NFT claimed successfully!", result.transactionHash);
-      alert(`🎭 Soul Fragment claimed!\n\nTransaction: ${result.transactionHash}\n\nCheck your wallet and Polygonscan!`);
+      alert(`🎭 Soul Fragment claimed!\n\nTransaction: ${result.transactionHash}\n\nCheck your wallet and Polygonscan!\n\nhttps://polygonscan.com/tx/${result.transactionHash}`);
     } else {
-      console.log("❌ No transaction hash - this might be a simulation");
-      alert("⚠️ Claiming completed but no transaction hash received.\nThis might be a simulation, not real minting.");
+      console.log("❌ No transaction hash received");
+      alert("⚠️ Transaction was sent but no hash received. Please check your wallet.");
     }
     
   } catch (error) {

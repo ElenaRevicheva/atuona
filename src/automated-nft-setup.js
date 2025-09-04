@@ -17,10 +17,18 @@ const client = createThirdwebClient({
   clientId: import.meta?.env?.VITE_THIRDWEB_CLIENT_ID ?? process.env.VITE_THIRDWEB_CLIENT_ID,
 });
 
+// Contract address with validation
+const NFT_DROP_ADDRESS = import.meta?.env?.VITE_CONTRACT_ADDRESS ?? process.env.VITE_CONTRACT_ADDRESS;
+
+// Validate contract address before using it
+if (!NFT_DROP_ADDRESS || NFT_DROP_ADDRESS === "undefined") {
+  throw new Error("NFT Drop contract address is not set! Please set VITE_CONTRACT_ADDRESS environment variable.");
+}
+
 // Your NFT Drop contract
 const contract = getContract({
   client,
-  address: import.meta?.env?.VITE_CONTRACT_ADDRESS ?? process.env.VITE_CONTRACT_ADDRESS,
+  address: NFT_DROP_ADDRESS,
   chain: polygon,
 });
 
