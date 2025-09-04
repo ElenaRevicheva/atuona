@@ -1,0 +1,542 @@
+[
+  {
+    "name": "Digital Shadows #001",
+    "description": "ATUONA Gallery of Moments - Underground Poem 001. Raw, unfiltered poetry preserved on blockchain. Free collection - true to underground values. Part of the 45-piece collection spanning addiction recovery, family trauma, spiritual rebellion, and human consciousness.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-001.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Digital Shadows"},
+      {"trait_type": "ID", "value": "001"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Digital Consciousness"}
+    ]
+  },
+  {
+    "name": "Underground Verses #002", 
+    "description": "ATUONA Gallery of Moments - Underground Poem 002. Poetry from the depths of human experience, exploring the raw truth of underground culture.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-002.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Underground Verses"},
+      {"trait_type": "ID", "value": "002"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Raw Truth"}
+    ]
+  },
+  {
+    "name": "Silver Lines #003",
+    "description": "ATUONA Gallery of Moments - Underground Poem 003. Finding light in darkness through verse, silver lines cutting through the underground.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-003.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Silver Lines"},
+      {"trait_type": "ID", "value": "003"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Hope"}
+    ]
+  },
+  {
+    "name": "Neon Dreams #004",
+    "description": "ATUONA Gallery of Moments - Underground Poem 004. Electric visions of urban consciousness, neon-lit dreams of the underground scene.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-004.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Neon Dreams"},
+      {"trait_type": "ID", "value": "004"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Urban Vision"}
+    ]
+  },
+  {
+    "name": "Electric Poetry #005",
+    "description": "ATUONA Gallery of Moments - Underground Poem 005. Charged words from the underground scene, electric poetry that sparks consciousness.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-005.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Electric Poetry"},
+      {"trait_type": "ID", "value": "005"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Energy"}
+    ]
+  },
+  {
+    "name": "Soul Fragments #006",
+    "description": "ATUONA Gallery of Moments - Underground Poem 006. Pieces of the human soul preserved in verse, fragments of underground consciousness.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-006.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Soul Fragments"},
+      {"trait_type": "ID", "value": "006"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Soul"}
+    ]
+  },
+  {
+    "name": "Broken Mirrors #007",
+    "description": "ATUONA Gallery of Moments - Underground Poem 007. Reflections shattered by reality, broken mirrors of the underground experience.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-007.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Broken Mirrors"},
+      {"trait_type": "ID", "value": "007"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Reality"}
+    ]
+  },
+  {
+    "name": "Street Wisdom #008",
+    "description": "ATUONA Gallery of Moments - Underground Poem 008. Knowledge gained from the streets, wisdom born in the underground.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-008.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Street Wisdom"},
+      {"trait_type": "ID", "value": "008"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Wisdom"}
+    ]
+  },
+  {
+    "name": "Midnight Confessions #009",
+    "description": "ATUONA Gallery of Moments - Underground Poem 009. Secrets whispered in the darkness, midnight confessions of the underground soul.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-009.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Midnight Confessions"},
+      {"trait_type": "ID", "value": "009"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Secrets"}
+    ]
+  },
+  {
+    "name": "Concrete Dreams #010",
+    "description": "ATUONA Gallery of Moments - Underground Poem 010. Dreams built from concrete and steel, visions of the urban underground.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-010.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Concrete Dreams"},
+      {"trait_type": "ID", "value": "010"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Urban Dreams"}
+    ]
+  },
+  {
+    "name": "Lost Frequencies #011",
+    "description": "ATUONA Gallery of Moments - Underground Poem 011. Signals from another dimension, lost frequencies of underground communication.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-011.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Lost Frequencies"},
+      {"trait_type": "ID", "value": "011"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Communication"}
+    ]
+  },
+  {
+    "name": "Underground Anthem #012",
+    "description": "ATUONA Gallery of Moments - Underground Poem 012. The battle cry of the underground movement, an anthem for the dispossessed.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-012.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Underground Anthem"},
+      {"trait_type": "ID", "value": "012"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Rebellion"}
+    ]
+  },
+  {
+    "name": "Rebel Hearts #013",
+    "description": "ATUONA Gallery of Moments - Underground Poem 013. Hearts that refuse to conform, rebel spirits of the underground.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-013.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Rebel Hearts"},
+      {"trait_type": "ID", "value": "013"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Rebellion"}
+    ]
+  },
+  {
+    "name": "City Scars #014",
+    "description": "ATUONA Gallery of Moments - Underground Poem 014. Wounds left by urban decay, scars that tell the story of the underground.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-014.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "City Scars"},
+      {"trait_type": "ID", "value": "014"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Urban Decay"}
+    ]
+  },
+  {
+    "name": "Neon Nights #015",
+    "description": "ATUONA Gallery of Moments - Underground Poem 015. Illuminated darkness of the underground night scene, neon-soaked consciousness.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-015.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Neon Nights"},
+      {"trait_type": "ID", "value": "015"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Night"}
+    ]
+  },
+  {
+    "name": "Digital Ghosts #016",
+    "description": "ATUONA Gallery of Moments - Underground Poem 016. Spirits in the machine, digital ghosts haunting the underground networks.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-016.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Digital Ghosts"},
+      {"trait_type": "ID", "value": "016"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Digital"}
+    ]
+  },
+  {
+    "name": "Raw Emotions #017",
+    "description": "ATUONA Gallery of Moments - Underground Poem 017. Unfiltered feelings from the depths, raw emotions of underground existence.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-017.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Raw Emotions"},
+      {"trait_type": "ID", "value": "017"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Emotion"}
+    ]
+  },
+  {
+    "name": "Street Philosophy #018",
+    "description": "ATUONA Gallery of Moments - Underground Poem 018. Deep thoughts born on concrete, street philosophy of the underground mind.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-018.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Street Philosophy"},
+      {"trait_type": "ID", "value": "018"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Philosophy"}
+    ]
+  },
+  {
+    "name": "Underground Kings #019",
+    "description": "ATUONA Gallery of Moments - Underground Poem 019. Rulers of the unseen realm, underground kings of the forgotten world.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-019.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Underground Kings"},
+      {"trait_type": "ID", "value": "019"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Power"}
+    ]
+  },
+  {
+    "name": "Broken Systems #020",
+    "description": "ATUONA Gallery of Moments - Underground Poem 020. Critique of failing structures, broken systems seen from underground perspective.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-020.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Broken Systems"},
+      {"trait_type": "ID", "value": "020"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "System Critique"}
+    ]
+  },
+  {
+    "name": "Truth Seekers #021",
+    "description": "ATUONA Gallery of Moments - Underground Poem 021. Those who search for authenticity, truth seekers of the underground movement.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-021.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Truth Seekers"},
+      {"trait_type": "ID", "value": "021"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Truth"}
+    ]
+  },
+  {
+    "name": "Night Visions #022",
+    "description": "ATUONA Gallery of Moments - Underground Poem 022. Visions that come in darkness, night visions of underground prophets.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-022.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Night Visions"},
+      {"trait_type": "ID", "value": "022"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Visions"}
+    ]
+  },
+  {
+    "name": "Urban Legends #023",
+    "description": "ATUONA Gallery of Moments - Underground Poem 023. Stories passed through underground networks, urban legends of the hidden city.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-023.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Urban Legends"},
+      {"trait_type": "ID", "value": "023"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Legends"}
+    ]
+  },
+  {
+    "name": "Digital Rebellion #024",
+    "description": "ATUONA Gallery of Moments - Underground Poem 024. Uprising in the digital realm, rebellion against digital oppression.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-024.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Digital Rebellion"},
+      {"trait_type": "ID", "value": "024"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Digital Rebellion"}
+    ]
+  },
+  {
+    "name": "Soul Searching #025",
+    "description": "ATUONA Gallery of Moments - Underground Poem 025. Journey into the depths of consciousness, soul searching in underground spaces.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-025.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Soul Searching"},
+      {"trait_type": "ID", "value": "025"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Introspection"}
+    ]
+  },
+  {
+    "name": "Street Poetry #026",
+    "description": "ATUONA Gallery of Moments - Underground Poem 026. Verses written on walls and in hearts, street poetry of the underground culture.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-026.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Street Poetry"},
+      {"trait_type": "ID", "value": "026"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Street Art"}
+    ]
+  },
+  {
+    "name": "Underground Voices #027",
+    "description": "ATUONA Gallery of Moments - Underground Poem 027. Voices from below the surface, underground voices speaking truth to power.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-027.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Underground Voices"},
+      {"trait_type": "ID", "value": "027"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Voice"}
+    ]
+  },
+  {
+    "name": "Neon Prophets #028",
+    "description": "ATUONA Gallery of Moments - Underground Poem 028. Seers of the electric age, neon prophets of underground wisdom.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-028.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Neon Prophets"},
+      {"trait_type": "ID", "value": "028"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Prophecy"}
+    ]
+  },
+  {
+    "name": "Digital Warriors #029",
+    "description": "ATUONA Gallery of Moments - Underground Poem 029. Fighters in the digital battlefield, warriors of underground resistance.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-029.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Digital Warriors"},
+      {"trait_type": "ID", "value": "029"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Digital War"}
+    ]
+  },
+  {
+    "name": "Street Dreams #030",
+    "description": "ATUONA Gallery of Moments - Underground Poem 030. Aspirations born on asphalt, street dreams of underground visionaries.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-030.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Street Dreams"},
+      {"trait_type": "ID", "value": "030"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Dreams"}
+    ]
+  },
+  {
+    "name": "Underground Truth #031",
+    "description": "ATUONA Gallery of Moments - Underground Poem 031. Unvarnished reality from below, underground truth that surfaces rarely.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-031.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Underground Truth"},
+      {"trait_type": "ID", "value": "031"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Truth"}
+    ]
+  },
+  {
+    "name": "City Lights #032",
+    "description": "ATUONA Gallery of Moments - Underground Poem 032. Illumination in urban darkness, city lights guiding underground wanderers.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-032.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "City Lights"},
+      {"trait_type": "ID", "value": "032"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Urban Light"}
+    ]
+  },
+  {
+    "name": "Digital Souls #033",
+    "description": "ATUONA Gallery of Moments - Underground Poem 033. Consciousness in the digital age, souls navigating underground networks.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-033.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Digital Souls"},
+      {"trait_type": "ID", "value": "033"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Digital Soul"}
+    ]
+  },
+  {
+    "name": "Street Wisdom #034",
+    "description": "ATUONA Gallery of Moments - Underground Poem 034. Ancient knowledge preserved in urban spaces, street wisdom of underground culture.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-034.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Street Wisdom"},
+      {"trait_type": "ID", "value": "034"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Ancient Wisdom"}
+    ]
+  },
+  {
+    "name": "Underground Fire #035",
+    "description": "ATUONA Gallery of Moments - Underground Poem 035. Burning passion of the underground spirit, fire that cannot be extinguished.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-035.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Underground Fire"},
+      {"trait_type": "ID", "value": "035"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Fire"}
+    ]
+  },
+  {
+    "name": "Neon Poetry #036",
+    "description": "ATUONA Gallery of Moments - Underground Poem 036. Verses written in electric light, neon poetry of the underground aesthetic.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-036.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Neon Poetry"},
+      {"trait_type": "ID", "value": "036"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Neon"}
+    ]
+  },
+  {
+    "name": "Digital Hearts #037",
+    "description": "ATUONA Gallery of Moments - Underground Poem 037. Love in the age of technology, digital hearts beating in underground rhythm.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-037.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Digital Hearts"},
+      {"trait_type": "ID", "value": "037"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Digital Love"}
+    ]
+  },
+  {
+    "name": "Street Rebels #038",
+    "description": "ATUONA Gallery of Moments - Underground Poem 038. Revolutionaries of the pavement, street rebels fighting underground wars.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-038.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Street Rebels"},
+      {"trait_type": "ID", "value": "038"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Revolution"}
+    ]
+  },
+  {
+    "name": "Underground Dreams #039",
+    "description": "ATUONA Gallery of Moments - Underground Poem 039. Visions from the depths, underground dreams that surface in verse.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-039.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Underground Dreams"},
+      {"trait_type": "ID", "value": "039"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Underground Dreams"}
+    ]
+  },
+  {
+    "name": "City Voices #040",
+    "description": "ATUONA Gallery of Moments - Underground Poem 040. The collective voice of urban consciousness, city voices from underground spaces.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-040.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "City Voices"},
+      {"trait_type": "ID", "value": "040"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Urban Voice"}
+    ]
+  },
+  {
+    "name": "Digital Truth #041",
+    "description": "ATUONA Gallery of Moments - Underground Poem 041. Truth revealed through technology, digital truth of underground networks.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-041.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Digital Truth"},
+      {"trait_type": "ID", "value": "041"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Digital Truth"}
+    ]
+  },
+  {
+    "name": "Street Legends #042",
+    "description": "ATUONA Gallery of Moments - Underground Poem 042. Mythical figures of urban lore, street legends born in underground culture.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-042.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Street Legends"},
+      {"trait_type": "ID", "value": "042"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Street Legends"}
+    ]
+  },
+  {
+    "name": "Underground Spirit #043",
+    "description": "ATUONA Gallery of Moments - Underground Poem 043. The essence of underground movement, spirit that cannot be contained.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-043.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Underground Spirit"},
+      {"trait_type": "ID", "value": "043"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Spirit"}
+    ]
+  },
+  {
+    "name": "Neon Souls #044",
+    "description": "ATUONA Gallery of Moments - Underground Poem 044. Souls illuminated by electric light, neon souls of underground consciousness.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-044.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Neon Souls"},
+      {"trait_type": "ID", "value": "044"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Neon Soul"}
+    ]
+  },
+  {
+    "name": "Digital Fire #045",
+    "description": "ATUONA Gallery of Moments - Underground Poem 045. The final flame of digital consciousness, underground fire that burns eternal.",
+    "image": "https://fast-yottabyte-noisy.on-fleek.app/images/poem-045.png",
+    "attributes": [
+      {"trait_type": "Poem", "value": "Digital Fire"},
+      {"trait_type": "ID", "value": "045"},
+      {"trait_type": "Collection", "value": "GALLERY OF MOMENTS"},
+      {"trait_type": "Type", "value": "Free Underground Poetry"},
+      {"trait_type": "Theme", "value": "Digital Fire"}
+    ]
+  }
+]
