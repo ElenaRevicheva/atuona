@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const postTitle = postCard.querySelector('.post-title').textContent;
             
             // Create a poetic notification
-            showNotification(`"${postTitle}" откроется в полной версии журнала...`);
+            showNotification(`"${postTitle}" will open in the full journal version...`);
         });
         
         // Add hover effect for read more links
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
     gallerySlots.forEach((slot, index) => {
         slot.addEventListener('click', function() {
             const slotNumber = index + 1;
-            showNotification(`Слот ${slotNumber}: Здесь будет размещено цифровое произведение искусства...`);
+            showNotification(`Slot ${slotNumber}: Digital artwork will be placed here...`);
         });
         
         // Add elegant hover animations
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="post-excerpt">
                         <p class="${isVerse ? 'verse' : ''}">${excerpt}</p>
                     </div>
-                    <a href="#" class="read-more">Читать далее</a>
+                    <a href="#" class="read-more">Read more</a>
                 </div>
                 <div class="post-ornament">${randomOrnament}</div>
             `;
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const readMore = newPost.querySelector('.read-more');
             readMore.addEventListener('click', function(e) {
                 e.preventDefault();
-                showNotification(`"${title}" откроется в полной версии журнала...`);
+                showNotification(`"${title}" will open in the full journal version...`);
             });
             
             postsGrid.insertBefore(newPost, postsGrid.firstChild);
@@ -248,14 +248,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="slot-frame">
                         <div class="slot-content">
                             <span class="slot-roman">${romanNumerals[i]}</span>
-                            <span class="slot-label">Готов к размещению</span>
+                            <span class="slot-label">Ready for placement</span>
                         </div>
                     </div>
                 `;
                 
                 // Add click handler for thirdweb integration
                 slot.addEventListener('click', function() {
-                    showNotification(`Слот ${romanNumerals[i]}: Готов для интеграции с thirdweb...`);
+                    showNotification(`Slot ${romanNumerals[i]}: Ready for thirdweb integration...`);
                 });
                 
                 galleryGrid.appendChild(slot);

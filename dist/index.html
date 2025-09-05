@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Серебряные строки • Underground NFT Gallery</title>
+    <title>ATUONA • Underground NFT Gallery</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
@@ -706,9 +706,14 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
             margin-top: 3rem;
+            max-height: 70vh;
+            overflow-y: auto;
+            padding: 1rem;
+            border: 1px solid var(--charcoal);
+            background: rgba(5, 5, 5, 0.8);
         }
 
         .gallery-slot {
@@ -763,26 +768,36 @@
         }
 
         .slot-label {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
             color: var(--grey-light);
+            line-height: 1.2;
+        }
+
+        .slot-year {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--silver-grey);
+            margin-bottom: 0.8rem;
+            opacity: 0.8;
         }
 
         .claim-button {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             color: var(--red-dark);
             border: 1px solid var(--red-dark);
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             background: rgba(139, 0, 0, 0.1);
             transition: all 0.3s ease;
             cursor: pointer;
             border-radius: 3px;
+            line-height: 1.1;
         }
 
         .claim-button:hover {
@@ -902,7 +917,7 @@
             background: var(--neon-magenta);
         }
     </style>
-  <script type="module" crossorigin src="/assets/main-DwyrSW8F.js"></script>
+  <script type="module" crossorigin src="/assets/main-xw8jArdM.js"></script>
 </head>
 <body>
     <div class="particles"></div>
@@ -912,7 +927,7 @@
         <div class="container">
             <div class="site-title">
                 <div class="russian">ATUONA</div>
-                <div class="english">Underground NFT</div>
+                <div class="english" onclick="showManifesto()" style="cursor: pointer; transition: all 0.3s ease;">Underground NFT</div>
             </div>
             <nav class="nav">
                 <a href="#home" class="nav-link active space" data-text="VAULT">VAULT</a>
@@ -963,7 +978,7 @@
                                 Нашу вечную, братка, жизнь.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 29-08-2025
+                                <span>●</span> принято к публикации at LITPROM 29-08-2025
                             </div>
                             <p class="nft-description">
                                 A raw, uncompromising piece about youth, loss, and the brutal machinery of existence. 
@@ -971,7 +986,7 @@
                                 caught between memory and reality.
                             </p>
                             <div class="nft-meta">
-                                <div class="nft-price">FREE (Gas Only)</div>
+                                <div class="nft-price">FREE - GAS Only!</div>
                                 <button class="nft-action" onclick="claimPoem('001', 'На память')">COLLECT SOUL</button>
                                 <small style="color: var(--silver-grey); font-size: 0.7rem; margin-top: 0.5rem; display: block; font-family: 'JetBrains Mono', monospace;">Minimal fee covers blockchain preservation costs</small>
                             </div>
@@ -981,7 +996,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#002</div>
-                            <div class="nft-status coming">MINTING</div>
+                            <div class="nft-status coming">MINTABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">To Beautrix</h2>
@@ -1008,7 +1023,7 @@
                                 Just for ODAT, твою мать.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 06-05-2025
+                                <span>●</span> принято к публикации at LITPROM 06-05-2025
                             </div>
                             <p class="nft-description">
                                 A deeply personal farewell poem blending addiction recovery themes with profound loss. 
@@ -1016,7 +1031,7 @@
                                 Raw emotion meets underground poetry in this powerful piece.
                             </p>
                             <div class="nft-meta">
-                                <div class="nft-price">FREE (Gas Only)</div>
+                                <div class="nft-price">FREE - GAS Only!</div>
                                 <button class="nft-action" onclick="claimPoem('002', 'To Beautrix')">COLLECT SOUL</button>
                                 <small style="color: var(--silver-grey); font-size: 0.7rem; margin-top: 0.5rem; display: block; font-family: 'JetBrains Mono', monospace;">This is art collection, not investment</small>
                             </div>
@@ -1081,7 +1096,7 @@
                                 В целом с Богом и чуть - с Сатаной.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 07-03-2025
+                                <span>●</span> принято к публикации at LITPROM 07-03-2025
                             </div>
                             <p class="nft-description">
                                 The gallery's namesake poem - an epic journey through addiction, love, and spiritual descent. 
@@ -1098,7 +1113,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#004</div>
-                            <div class="nft-status coming">SOON</div>
+                            <div class="nft-status coming">CLAIMABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Vesenneye</h2>
@@ -1137,7 +1152,7 @@
                                 Весенняя в море грязь.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 17-01-2025
+                                <span>●</span> принято к публикации at LITPROM 17-01-2025
                             </div>
                             <p class="nft-description">
                                 A spring poem that weaves childhood games with profound themes of loss, addiction, and renewal. 
@@ -1146,7 +1161,7 @@
                             </p>
                             <div class="nft-meta">
                                 <div class="nft-price">1.2 ETH</div>
-                                <button class="nft-action">COMING SOON</button>
+                                <button class="nft-action">CLAIMABLE</button>
                             </div>
                         </div>
                     </div>
@@ -1177,7 +1192,7 @@
                                 Галеристка. Люблю тебя, мама. Дочь.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 28-12-2024
+                                <span>●</span> принято к публикации at LITPROM 28-12-2024
                             </div>
                             <p class="nft-description">
                                 A deeply personal letter to mother about artistic struggles and identity. 
@@ -1194,7 +1209,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#006</div>
-                            <div class="nft-status coming">MINTING</div>
+                            <div class="nft-status coming">MINTABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Первоснежье</h2>
@@ -1213,7 +1228,7 @@
                                 Твои отпечатки мыслей в моих первоснежных стихах, будто волчьи следы они все бегут и плетут узоры где-то со мной по соседству...
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 03-12-2024
+                                <span>●</span> принято к публикации at LITPROM 03-12-2024
                             </div>
                             <p class="nft-description">
                                 A haunting meditation on unreachable love and spiritual distance. The poem's long, flowing lines 
@@ -1257,7 +1272,7 @@
                                 Из сюжета Тебя вырезает.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 22-10-2024
+                                <span>●</span> принято к публикации at LITPROM 22-10-2024
                             </div>
                             <p class="nft-description">
                                 A raw confrontation with paternal relationships and artistic identity. Through chess metaphors 
@@ -1274,7 +1289,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#008</div>
-                            <div class="nft-status coming">MINTING</div>
+                            <div class="nft-status coming">MINTABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Фасады</h2>
@@ -1308,7 +1323,7 @@
                                 Жрет Суперменов.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 13-10-2024
+                                <span>●</span> принято к публикации at LITPROM 13-10-2024
                             </div>
                             <p class="nft-description">
                                 A haunting exploration of broken facades and brotherhood in addiction. The poem weaves together 
@@ -1348,7 +1363,7 @@
                                 Излюблена до Дна.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 20-05-2024
+                                <span>●</span> принято к публикации at LITPROM 20-05-2024
                             </div>
                             <p class="nft-description">
                                 A spiritual questioning poem structured like a prayer or catechism. The repetitive "Where does... go?" 
@@ -1365,7 +1380,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#010</div>
-                            <div class="nft-status coming">SOON</div>
+                            <div class="nft-status coming">CLAIMABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Билет</h2>
@@ -1384,7 +1399,7 @@
                                 Вечной жизни обратный билет.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 07-05-2024
+                                <span>●</span> принято к публикации at LITPROM 07-05-2024
                             </div>
                             <p class="nft-description">
                                 A haunting meditation on loss, addiction, and the choice between destruction and redemption. 
@@ -1393,7 +1408,7 @@
                             </p>
                             <div class="nft-meta">
                                 <div class="nft-price">1.0 ETH</div>
-                                <button class="nft-action">COMING SOON</button>
+                                <button class="nft-action">CLAIMABLE</button>
                             </div>
                         </div>
                     </div>
@@ -1419,7 +1434,7 @@
                                 Как Шить из обшивок свой Чейн.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 07-12-2022
+                                <span>●</span> принято к публикации at LITPROM 07-12-2022
                             </div>
                             <p class="nft-description">
                                 A brutal poem about transformation through rejection and emptiness. The speaker evolves from 
@@ -1436,7 +1451,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#012</div>
-                            <div class="nft-status coming">MINTING</div>
+                            <div class="nft-status coming">MINTABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Ветлицкой</h2>
@@ -1465,7 +1480,7 @@
                                 А Ветлицкая снова права.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 11-11-2021
+                                <span>●</span> принято к публикации at LITPROM 11-11-2021
                             </div>
                             <p class="nft-description">
                                 A complex cultural commentary referencing Russian pop singer Natasha Vetlitskaya and her famous song. 
@@ -1504,7 +1519,7 @@
                                 Помнишь фразочку, супермен?
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 06-04-2021
+                                <span>●</span> принято к публикации at LITPROM 06-04-2021
                             </div>
                             <p class="nft-description">
                                 A folk-inspired poem with traditional Russian rhythms addressing a feminine figure wandering through emptiness. 
@@ -1521,7 +1536,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#014</div>
-                            <div class="nft-status coming">MINTING</div>
+                            <div class="nft-status coming">MINTABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Адидасница</h2>
@@ -1547,7 +1562,7 @@
                                 - тихо залаять в бешенстве.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 29-03-2021
+                                <span>●</span> принято к публикации at LITPROM 29-03-2021
                             </div>
                             <p class="nft-description">
                                 A striking poem that transforms brand culture into poetry, using "Adidas" as a metaphor for identity and belonging. 
@@ -1585,7 +1600,7 @@
                                 Кой же век вы отчизне родители?
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 30-12-2020
+                                <span>●</span> принято к публикации at LITPROM 30-12-2020
                             </div>
                             <p class="nft-description">
                                 A haunting meditation on frozen emotions and unreachable connections. The poem uses water imagery - 
@@ -1602,7 +1617,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#016</div>
-                            <div class="nft-status coming">SOON</div>
+                            <div class="nft-status coming">CLAIMABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Повремени</h2>
@@ -1633,7 +1648,7 @@
                                 Ты там не пропадай, звони...
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 22-12-2020
+                                <span>●</span> принято к публикации at LITPROM 22-12-2020
                             </div>
                             <p class="nft-description">
                                 A powerful poem built on the refrain "Печалиться повремени!" (Don't grieve for now!). 
@@ -1642,7 +1657,7 @@
                             </p>
                             <div class="nft-meta">
                                 <div class="nft-price">0.9 ETH</div>
-                                <button class="nft-action">COMING SOON</button>
+                                <button class="nft-action">CLAIMABLE</button>
                             </div>
                         </div>
                     </div>
@@ -1691,7 +1706,7 @@
                                 Отгуляв на погосте!
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 20-11-2020
+                                <span>●</span> принято к публикации at LITPROM 20-11-2020
                             </div>
                             <p class="nft-description">
                                 A mythological tour de force weaving Greek Fates (Moirai) and Graeae sisters with Petersburg and London imagery. 
@@ -1708,7 +1723,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#018</div>
-                            <div class="nft-status coming">MINTING</div>
+                            <div class="nft-status coming">MINTABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Ржавые мифы</h2>
@@ -1729,7 +1744,7 @@
                                 А твой хребет не сгибается.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 16-11-2020
+                                <span>●</span> принято к публикации at LITPROM 16-11-2020
                             </div>
                             <p class="nft-description">
                                 A sharp meditation on dulled edges and worn-out myths. The poem explores the tension between 
@@ -1792,7 +1807,7 @@
                                 Эх, как жаль, не успеть покреститься!...
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 15-11-2020
+                                <span>●</span> принято к публикации at LITPROM 15-11-2020
                             </div>
                             <p class="nft-description">
                                 An apocalyptic love poem where Melancholy (Тоска) becomes a personified lover seeking marriage through destruction. 
@@ -1835,7 +1850,7 @@
                                 Воспользуюсь правилом "Стоп".
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 12-11-2020
+                                <span>●</span> принято к публикации at LITPROM 12-11-2020
                             </div>
                             <p class="nft-description">
                                 A defiant poem about reclaiming lost identity and taking control of one's destiny. Naval metaphors 
@@ -1852,7 +1867,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#021</div>
-                            <div class="nft-status coming">MINTING</div>
+                            <div class="nft-status coming">MINTABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Vopreki</h2>
@@ -1868,7 +1883,7 @@
                                 Дважды топящей всех готовых.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 06-11-2020
+                                <span>●</span> принято к публикации at LITPROM 06-11-2020
                             </div>
                             <p class="nft-description">
                                 A tender yet tragic love poem built on uncertainty and divine contrasts. The repetitive "наверное" (probably) 
@@ -1921,7 +1936,7 @@
                                 Ведь ни стыда, ни совести.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 05-11-2020
+                                <span>●</span> принято к публикации at LITPROM 05-11-2020
                             </div>
                             <p class="nft-description">
                                 A wild, chaotic poem mixing violence, tenderness, and pop culture references. The piece swirls through 
@@ -1938,7 +1953,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#023</div>
-                            <div class="nft-status coming">MINTING</div>
+                            <div class="nft-status coming">MINTABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Плачет девочка</h2>
@@ -1959,7 +1974,7 @@
                                 Плачем с Осиным у автомата.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 16-02-2020
+                                <span>●</span> принято к публикации at LITPROM 16-02-2020
                             </div>
                             <p class="nft-description">
                                 A raw meditation on fading relationships and class disparity. The poem contrasts luxury (Rolls Royce) 
@@ -2001,7 +2016,7 @@
                                 Мы и без тела с тобой еще допоем.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 24-01-2020
+                                <span>●</span> принято к публикации at LITPROM 24-01-2020
                             </div>
                             <p class="nft-description">
                                 An intense love poem about burning out completely in another person. The speaker runs through building floors 
@@ -2018,7 +2033,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#025</div>
-                            <div class="nft-status coming">SOON</div>
+                            <div class="nft-status coming">CLAIMABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Мы с тобой</h2>
@@ -2052,7 +2067,7 @@
                                 Вместе нам с тобой не заодно.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 16-01-2020
+                                <span>●</span> принято к публикации at LITPROM 16-01-2020
                             </div>
                             <p class="nft-description">
                                 A complex relationship poem exploring the space between two people who are neither enemies nor allies. 
@@ -2061,7 +2076,7 @@
                             </p>
                             <div class="nft-meta">
                                 <div class="nft-price">0.9 ETH</div>
-                                <button class="nft-action">COMING SOON</button>
+                                <button class="nft-action">CLAIMABLE</button>
                             </div>
                         </div>
                     </div>
@@ -2084,7 +2099,7 @@
                                 Солнышко, иди, сука, на хуй.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 10-01-2020
+                                <span>●</span> принято к публикации at LITPROM 10-01-2020
                             </div>
                             <p class="nft-description">
                                 A brutal meditation on life's wholeness despite corruption. The poem explores themes of children sold cheaply, 
@@ -2101,7 +2116,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#027</div>
-                            <div class="nft-status coming">MINTING</div>
+                            <div class="nft-status coming">MINTABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">За несколько слов</h2>
@@ -2116,7 +2131,7 @@
                                 Пока не сдох.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 23-12-2019
+                                <span>●</span> принято к публикации at LITPROM 23-12-2019
                             </div>
                             <p class="nft-description">
                                 A minimalist masterpiece about the power of words over material wealth. The repetitive structure emphasizes 
@@ -2165,7 +2180,7 @@
                                 Слегших встельку с Вами и вповалку.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 20-12-2019
+                                <span>●</span> принято к публикации at LITPROM 20-12-2019
                             </div>
                             <p class="nft-description">
                                 A desperate prayer-poem addressing divine judgment with raw honesty. The piece blends religious imagery 
@@ -2182,7 +2197,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#029</div>
-                            <div class="nft-status coming">MINTING</div>
+                            <div class="nft-status coming">MINTABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">На лезвиях</h2>
@@ -2217,7 +2232,7 @@
                                 Мы канули. Вперед и без ошибок!
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 13-12-2019
+                                <span>●</span> принято к публикации at LITPROM 13-12-2019
                             </div>
                             <p class="nft-description">
                                 A complex meditation on souls, sewing, and transformation. The poem weaves together fashion imagery 
@@ -2273,7 +2288,7 @@
                                 Остаюсь я навеки застывшая.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 07-12-2019
+                                <span>●</span> принято к публикации at LITPROM 07-12-2019
                             </div>
                             <p class="nft-description">
                                 The final masterpiece of the collection - a profound meditation on eternal stasis and lost connection. 
@@ -2344,7 +2359,7 @@
                                 Жизнью век опыляется.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 16-11-2019
+                                <span>●</span> принято к публикации at LITPROM 16-11-2019
                             </div>
                             <p class="nft-description">
                                 An epic spiritual journey through hell and transformation. The poem explores consuming loneliness, 
@@ -2361,7 +2376,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#032</div>
-                            <div class="nft-status coming">MINTING</div>
+                            <div class="nft-status coming">MINTABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">На сдачу</h2>
@@ -2391,7 +2406,7 @@
                                 И не твой этот день Рождения.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 13-10-2019
+                                <span>●</span> принято к публикации at LITPROM 13-10-2019
                             </div>
                             <p class="nft-description">
                                 A powerful poem about refusing cheap love and demanding authentic connection. The speaker rejects 
@@ -2432,7 +2447,7 @@
                                 Целы мы. Только дочь не вернуть.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 24-07-2019
+                                <span>●</span> принято к публикации at LITPROM 24-07-2019
                             </div>
                             <p class="nft-description">
                                 A brutal confrontation with a husband's betrayal and corruption. The grinding repetition of "скрежет" 
@@ -2449,7 +2464,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#034</div>
-                            <div class="nft-status coming">MINTING</div>
+                            <div class="nft-status coming">MINTABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Давай ебаться!</h2>
@@ -2470,7 +2485,7 @@
                                 Там - Ад, там - Рай! Давай ебаться!...
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 21-07-2019
+                                <span>●</span> принято к публикации at LITPROM 21-07-2019
                             </div>
                             <p class="nft-description">
                                 A bold folk-inspired poem mixing Soviet work songs with raw sexuality and spiritual themes. 
@@ -2522,7 +2537,7 @@
                                 Руки жать Пастернаку.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 20-07-2019
+                                <span>●</span> принято к публикации at LITPROM 20-07-2019
                             </div>
                             <p class="nft-description">
                                 An apocalyptic poem about modern digital life and its ultimate end. The piece references Coelho's wars of light 
@@ -2539,7 +2554,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#036</div>
-                            <div class="nft-status coming">SOON</div>
+                            <div class="nft-status coming">CLAIMABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Азимут</h2>
@@ -2558,7 +2573,7 @@
                                 там, где я тихонечко взлетаю.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 14-07-2019
+                                <span>●</span> принято к публикации at LITPROM 14-07-2019
                             </div>
                             <p class="nft-description">
                                 A poetic meditation on transformation and navigation through pain. Using fishing and butterfly imagery, 
@@ -2567,7 +2582,7 @@
                             </p>
                             <div class="nft-meta">
                                 <div class="nft-price">1.0 ETH</div>
-                                <button class="nft-action">COMING SOON</button>
+                                <button class="nft-action">CLAIMABLE</button>
                             </div>
                         </div>
                     </div>
@@ -2594,7 +2609,7 @@
                                 Вытряхают с перьев дымный ладан.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 25-05-2019
+                                <span>●</span> принято к публикации at LITPROM 25-05-2019
                             </div>
                             <p class="nft-description">
                                 A raw poem about offense and emotional resilience. The speaker transforms hurt into strength, 
@@ -2611,7 +2626,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#038</div>
-                            <div class="nft-status coming">MINTING</div>
+                            <div class="nft-status coming">MINTABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Скоро холодный пот</h2>
@@ -2623,7 +2638,7 @@
                                 Это верно, душа, вылилась неспеша.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 16-05-2019
+                                <span>●</span> принято к публикации at LITPROM 16-05-2019
                             </div>
                             <p class="nft-description">
                                 A minimalist meditation on approaching illness and spiritual emptying. The poem's brevity intensifies 
@@ -2653,7 +2668,7 @@
                                 и жги, хватаясь за перила!
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 13-05-2019
+                                <span>●</span> принято к публикации at LITPROM 13-05-2019
                             </div>
                             <p class="nft-description">
                                 A fierce self-confrontation poem about facing oneself in the dungeon of existence. The speaker demands 
@@ -2670,7 +2685,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#040</div>
-                            <div class="nft-status coming">SOON</div>
+                            <div class="nft-status coming">CLAIMABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Прохлада</h2>
@@ -2692,7 +2707,7 @@
                                 Будто бы в преисподней ждет нас один пароль.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 05-04-2019
+                                <span>●</span> принято к публикации at LITPROM 05-04-2019
                             </div>
                             <p class="nft-description">
                                 A tender poem about being a different kind of coolness on someone's path. Despite mutual damage and 
@@ -2701,7 +2716,7 @@
                             </p>
                             <div class="nft-meta">
                                 <div class="nft-price">0.8 ETH</div>
-                                <button class="nft-action">COMING SOON</button>
+                                <button class="nft-action">CLAIMABLE</button>
                             </div>
                         </div>
                     </div>
@@ -2724,7 +2739,7 @@
                                 Лишь нелепая брань пресно звякнет в глухой суете.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 04-04-2019
+                                <span>●</span> принято к публикации at LITPROM 04-04-2019
                             </div>
                             <p class="nft-description">
                                 A melancholic masterpiece about unfindable connections and artistic suffering. The canvas suffers under 
@@ -2741,7 +2756,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#042</div>
-                            <div class="nft-status coming">MINTING</div>
+                            <div class="nft-status coming">MINTABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Via Regia</h2>
@@ -2760,7 +2775,7 @@
                                 Сгоришь до тла!..
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 24-03-2019
+                                <span>●</span> принято к публикации at LITPROM 24-03-2019
                             </div>
                             <p class="nft-description">
                                 A regal autumn poem that transforms seasonal imagery into a royal execution. The Latin title "Via Regia" 
@@ -2804,7 +2819,7 @@
                                 Струйкой стаявшего льда.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 16-03-2019
+                                <span>●</span> принято к публикации at LITPROM 16-03-2019
                             </div>
                             <p class="nft-description">
                                 A profound exploration of masculine vulnerability and the collapse of emotional barriers. The poem 
@@ -2821,7 +2836,7 @@
                     <div class="nft-card">
                         <div class="nft-header">
                             <div class="nft-id">#044</div>
-                            <div class="nft-status coming">MINTING</div>
+                            <div class="nft-status coming">MINTABLE</div>
                         </div>
                         <div class="nft-content">
                             <h2 class="nft-title">Вчерашний день</h2>
@@ -2840,7 +2855,7 @@
                                 Тихо сгинули в экспозициях.
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 11-03-2019
+                                <span>●</span> принято к публикации at LITPROM 11-03-2019
                             </div>
                             <p class="nft-description">
                                 A haunting winter poem about frozen intimacy and artistic disappearance. The speaker kisses ice instead 
@@ -2878,7 +2893,7 @@
                                 "Карнавала не будет!!!".
                             </div>
                             <div class="blockchain-badge">
-                                <span>●</span> принято к публикации 11-03-2019
+                                <span>●</span> принято к публикации at LITPROM 11-03-2019
                             </div>
                             <p class="nft-description">
                                 A dignified departure poem about a Soul leaving Carnival after harsh words. The image of buttoning up 
@@ -2911,7 +2926,7 @@
                         </p>
                         
                         <div class="blockchain-badge">
-                            <span>⚡</span> POWERED BY ETHEREUM
+                            <span>⚡</span> POWERED BY POLYGON
                         </div>
                         
                         <p>
@@ -2931,52 +2946,387 @@
 
             <section id="gallery" class="section hidden">
                 <div class="gallery-content">
-                    <h2 class="section-title">MINTING VAULT</h2>
-                    <p style="text-align: center; color: var(--light-grey); font-size: 1.1rem; margin-bottom: 3rem; font-style: italic;">
-                        The future is being forged. Every slot represents a moment waiting to be immortalized.
-                    </p>
+                    <h2 class="section-title">MINTABLE VAULT</h2>
+                    <div style="text-align: center; margin-bottom: 3rem;">
+                        <p style="color: var(--light-grey); font-size: 1.2rem; font-style: italic; margin-bottom: 1.5rem;">
+                            <span style="color: var(--red-dark);">45 soul fragments</span> scattered across the blockchain void.<br>
+                            Each moment chooses its keeper. Each keeper receives their destined verse.
+                        </p>
+                        <p style="color: var(--silver-grey); font-size: 0.95rem; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+                            The underground speaks in riddles. You see all titles as <span style="color: var(--red-dark);">inspiration</span>,<br>
+                            but the blockchain decides which <span style="color: var(--silver-grey);">moment finds you</span>.<br>
+                            <br>
+                            <span style="color: var(--red-dark);">• Touch any slot</span> → Summon a soul fragment<br>
+                            <span style="color: var(--red-dark);">• Receive mystery</span> → One of 45 authentic verses (2019-2025)<br>
+                            <span style="color: var(--red-dark);">• Check wallet</span> → Discover your destined poem<br>
+                            <span style="color: var(--red-dark);">• Collect more</span> → Build your underground anthology<br>
+                            <br>
+                            <em style="color: var(--silver-grey); font-size: 0.85rem;">
+                                "The moment chooses you. You do not choose the moment."<br>
+                                — Underground Manifesto
+                            </em>
+                        </p>
+                    </div>
                     
                     <div class="gallery-grid">
-                        <div class="gallery-slot" onclick="claimPoem(1, 'Digital Shadows')">
+                        <div class="gallery-slot" onclick="claimPoem(1, 'На память')">
                             <div class="slot-content">
                                 <div class="slot-id">001</div>
-                                <div class="slot-label">Digital Shadows</div>
-                                <div class="claim-button">CLAIM NFT</div>
+                                <div class="slot-label">На память</div>
+                                <div class="slot-year">2025</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
                             </div>
                         </div>
-                        <div class="gallery-slot" onclick="claimPoem(2, 'Underground Verses')">
+                        <div class="gallery-slot" onclick="claimPoem(2, 'To Beautrix')">
                             <div class="slot-content">
                                 <div class="slot-id">002</div>
-                                <div class="slot-label">Underground Verses</div>
-                                <div class="claim-button">CLAIM NFT</div>
+                                <div class="slot-label">To Beautrix</div>
+                                <div class="slot-year">2025</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
                             </div>
                         </div>
-                        <div class="gallery-slot" onclick="claimPoem(3, 'Silver Lines')">
+                        <div class="gallery-slot" onclick="claimPoem(3, 'Atuona')">
                             <div class="slot-content">
                                 <div class="slot-id">003</div>
-                                <div class="slot-label">Silver Lines</div>
-                                <div class="claim-button">CLAIM NFT</div>
+                                <div class="slot-label">Atuona</div>
+                                <div class="slot-year">2025</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
                             </div>
                         </div>
-                        <div class="gallery-slot" onclick="claimPoem(4, 'Neon Dreams')">
+                        <div class="gallery-slot" onclick="claimPoem(4, 'Vesenneye')">
                             <div class="slot-content">
                                 <div class="slot-id">004</div>
-                                <div class="slot-label">Neon Dreams</div>
-                                <div class="claim-button">CLAIM NFT</div>
+                                <div class="slot-label">Vesenneye</div>
+                                <div class="slot-year">2025</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
                             </div>
                         </div>
-                        <div class="gallery-slot" onclick="claimPoem(5, 'Electric Poetry')">
+                        <div class="gallery-slot" onclick="claimPoem(5, 'Маме')">
                             <div class="slot-content">
                                 <div class="slot-id">005</div>
-                                <div class="slot-label">Electric Poetry</div>
-                                <div class="claim-button">CLAIM NFT</div>
+                                <div class="slot-label">Маме</div>
+                                <div class="slot-year">2024</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
                             </div>
                         </div>
-                        <div class="gallery-slot" onclick="claimPoem(6, 'Soul Fragments')">
+                        <div class="gallery-slot" onclick="claimPoem(6, 'Первоснежье')">
                             <div class="slot-content">
                                 <div class="slot-id">006</div>
-                                <div class="slot-label">Soul Fragments</div>
-                                <div class="claim-button">CLAIM NFT</div>
+                                <div class="slot-label">Первоснежье</div>
+                                <div class="slot-year">2024</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(7, 'Папе')">
+                            <div class="slot-content">
+                                <div class="slot-id">007</div>
+                                <div class="slot-label">Папе</div>
+                                <div class="slot-year">2024</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(8, 'Фасады')">
+                            <div class="slot-content">
+                                <div class="slot-id">008</div>
+                                <div class="slot-label">Фасады</div>
+                                <div class="slot-year">2024</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(9, 'Pan Nuestro')">
+                            <div class="slot-content">
+                                <div class="slot-id">009</div>
+                                <div class="slot-label">Pan Nuestro</div>
+                                <div class="slot-year">2024</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(10, 'Билет')">
+                            <div class="slot-content">
+                                <div class="slot-id">010</div>
+                                <div class="slot-label">Билет</div>
+                                <div class="slot-year">2024</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(11, 'Ничей')">
+                            <div class="slot-content">
+                                <div class="slot-id">011</div>
+                                <div class="slot-label">Ничей</div>
+                                <div class="slot-year">2022</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(12, 'Ветлицкой')">
+                            <div class="slot-content">
+                                <div class="slot-id">012</div>
+                                <div class="slot-label">Ветлицкой</div>
+                                <div class="slot-year">2021</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(13, 'To Lola Ldova')">
+                            <div class="slot-content">
+                                <div class="slot-id">013</div>
+                                <div class="slot-label">To Lola Ldova</div>
+                                <div class="slot-year">2021</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(14, 'Адидасница')">
+                            <div class="slot-content">
+                                <div class="slot-id">014</div>
+                                <div class="slot-label">Адидасница</div>
+                                <div class="slot-year">2021</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(15, 'Застывшее')">
+                            <div class="slot-content">
+                                <div class="slot-id">015</div>
+                                <div class="slot-label">Застывшее</div>
+                                <div class="slot-year">2020</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(16, 'Повремени')">
+                            <div class="slot-content">
+                                <div class="slot-id">016</div>
+                                <div class="slot-label">Повремени</div>
+                                <div class="slot-year">2020</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(17, 'Guest')">
+                            <div class="slot-content">
+                                <div class="slot-id">017</div>
+                                <div class="slot-label">Guest</div>
+                                <div class="slot-year">2020</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(18, 'Ржавые мифы')">
+                            <div class="slot-content">
+                                <div class="slot-id">018</div>
+                                <div class="slot-label">Ржавые мифы</div>
+                                <div class="slot-year">2020</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(19, 'Апокалипсис')">
+                            <div class="slot-content">
+                                <div class="slot-id">019</div>
+                                <div class="slot-label">Апокалипсис</div>
+                                <div class="slot-year">2020</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(20, 'Ничья')">
+                            <div class="slot-content">
+                                <div class="slot-id">020</div>
+                                <div class="slot-label">Ничья</div>
+                                <div class="slot-year">2020</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(21, 'Vopreki')">
+                            <div class="slot-content">
+                                <div class="slot-id">021</div>
+                                <div class="slot-label">Vopreki</div>
+                                <div class="slot-year">2020</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(22, 'Вьются шальные повести')">
+                            <div class="slot-content">
+                                <div class="slot-id">022</div>
+                                <div class="slot-label">Вьются шальные повести</div>
+                                <div class="slot-year">2020</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(23, 'Плачет девочка')">
+                            <div class="slot-content">
+                                <div class="slot-id">023</div>
+                                <div class="slot-label">Плачет девочка</div>
+                                <div class="slot-year">2020</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(24, 'Сгоревший')">
+                            <div class="slot-content">
+                                <div class="slot-id">024</div>
+                                <div class="slot-label">Сгоревший</div>
+                                <div class="slot-year">2020</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(25, 'Мы с тобой')">
+                            <div class="slot-content">
+                                <div class="slot-id">025</div>
+                                <div class="slot-label">Мы с тобой</div>
+                                <div class="slot-year">2020</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(26, 'Жизнь - целое')">
+                            <div class="slot-content">
+                                <div class="slot-id">026</div>
+                                <div class="slot-label">Жизнь - целое</div>
+                                <div class="slot-year">2020</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(27, 'За несколько слов')">
+                            <div class="slot-content">
+                                <div class="slot-id">027</div>
+                                <div class="slot-label">За несколько слов</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(28, 'Сжальтесь')">
+                            <div class="slot-content">
+                                <div class="slot-id">028</div>
+                                <div class="slot-label">Сжальтесь</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(29, 'На лезвиях')">
+                            <div class="slot-content">
+                                <div class="slot-id">029</div>
+                                <div class="slot-label">На лезвиях</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(30, 'Да, мой товарищ')">
+                            <div class="slot-content">
+                                <div class="slot-id">030</div>
+                                <div class="slot-label">Да, мой товарищ</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(31, 'Сам собою')">
+                            <div class="slot-content">
+                                <div class="slot-id">031</div>
+                                <div class="slot-label">Сам собою</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(32, 'На сдачу')">
+                            <div class="slot-content">
+                                <div class="slot-id">032</div>
+                                <div class="slot-label">На сдачу</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(33, 'Муж')">
+                            <div class="slot-content">
+                                <div class="slot-id">033</div>
+                                <div class="slot-label">Муж</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(34, 'Давай ебаться!')">
+                            <div class="slot-content">
+                                <div class="slot-id">034</div>
+                                <div class="slot-label">Давай ебаться!</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(35, 'Подмостки')">
+                            <div class="slot-content">
+                                <div class="slot-id">035</div>
+                                <div class="slot-label">Подмостки</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(36, 'Азимут')">
+                            <div class="slot-content">
+                                <div class="slot-id">036</div>
+                                <div class="slot-label">Азимут</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(37, 'От обиды')">
+                            <div class="slot-content">
+                                <div class="slot-id">037</div>
+                                <div class="slot-label">От обиды</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(38, 'Скоро холодный пот')">
+                            <div class="slot-content">
+                                <div class="slot-id">038</div>
+                                <div class="slot-label">Скоро холодный пот</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(39, 'Когда застенье')">
+                            <div class="slot-content">
+                                <div class="slot-id">039</div>
+                                <div class="slot-label">Когда застенье</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(40, 'Прохлада')">
+                            <div class="slot-content">
+                                <div class="slot-id">040</div>
+                                <div class="slot-label">Прохлада</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(41, 'Русый хвост')">
+                            <div class="slot-content">
+                                <div class="slot-id">041</div>
+                                <div class="slot-label">Русый хвост</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(42, 'Via Regia')">
+                            <div class="slot-content">
+                                <div class="slot-id">042</div>
+                                <div class="slot-label">Via Regia</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(43, 'Мужчины не плачут')">
+                            <div class="slot-content">
+                                <div class="slot-id">043</div>
+                                <div class="slot-label">Мужчины не плачут</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(44, 'Вчерашний день')">
+                            <div class="slot-content">
+                                <div class="slot-id">044</div>
+                                <div class="slot-label">Вчерашний день</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
+                            </div>
+                        </div>
+                        <div class="gallery-slot" onclick="claimPoem(45, 'Под стук каблуков')">
+                            <div class="slot-content">
+                                <div class="slot-id">045</div>
+                                <div class="slot-label">Под стук каблуков</div>
+                                <div class="slot-year">2019</div>
+                                <div class="claim-button">CLAIM RANDOM POEM</div>
                             </div>
                         </div>
                     </div>
@@ -2991,7 +3341,7 @@
                 <div class="tech-stack">
                     <div class="tech-badge">IPFS Distributed</div>
                     <div class="tech-badge">Fleek Deployed</div>
-                    <div class="tech-badge">Ethereum Native</div>
+                    <div class="tech-badge">Polygon Native</div>
                     <div class="tech-badge">thirdweb Powered</div>
                 </div>
                 <p class="footer-text">
@@ -3411,7 +3761,7 @@
                 // Update all prices to minimal symbolic fee
                 const priceElements = document.querySelectorAll('.nft-price');
                 priceElements.forEach(el => {
-                    el.textContent = 'FREE (Gas Only)';
+                    el.textContent = 'FREE - GAS Only!';
                 });
                 
                 // Connect all NFT action buttons to minting
@@ -3527,5 +3877,96 @@
     
     <!-- thirdweb's EXACT mount point -->
     <div id="root"></div>
+
+    <!-- Manifesto Modal -->
+    <div id="manifestoModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10000; padding: 2rem; overflow-y: auto;">
+        <div style="max-width: 800px; margin: 0 auto; background: rgba(10,10,10,0.95); border: 2px solid var(--red-dark); padding: 3rem; color: var(--light-grey); font-family: 'JetBrains Mono', monospace; line-height: 1.6; font-size: 0.9rem;">
+            <div style="text-align: right; margin-bottom: 2rem;">
+                <button onclick="hideManifesto()" style="background: none; border: 1px solid var(--red-dark); color: var(--red-dark); padding: 0.5rem 1rem; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; transition: all 0.3s ease;">CLOSE</button>
+            </div>
+            
+            <h1 style="color: var(--red-dark); text-align: center; font-size: 1.5rem; margin-bottom: 2rem; font-family: 'JetBrains Mono', monospace; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">The Revolutionary Core of ATUONA Gallery</h1>
+            
+            <p style="margin-bottom: 1.5rem; color: var(--light-grey);">
+                ATUONA Gallery isn't just an NFT drop - it's a manifesto made manifest. A time capsule of authentic human experience, wrapped in blockchain philosophy, distributed freely to preserve underground culture forever.
+            </p>
+            
+            <p style="margin-bottom: 2rem; color: var(--silver-grey);">
+                This is what NFTs were supposed to be before speculation corrupted the vision - pure art, permanently preserved, freely shared.
+            </p>
+            
+            <h2 style="color: var(--red-dark); margin-top: 2rem; margin-bottom: 1rem; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px;">Acknowledgments from the Underground</h2>
+            
+            <p style="margin-bottom: 1.5rem; color: var(--silver-grey);">
+                In the shadows of the digital realm, where code meets consciousness and blockchain bleeds poetry, certain souls have made this immortalization possible...
+            </p>
+            
+            <h3 style="color: var(--red-dark); margin-top: 1.5rem; font-size: 1rem; text-transform: uppercase;">To the Code Whisperer</h3>
+            <p style="color: var(--light-grey); margin-bottom: 1rem;">
+                Kira Velerevich - blockchain mystic, vibe coder, self-starter in Panama - driven by the vision of preserving the beauty of underground poetry in the void. Her fingers danced across keys like a pianist composing symphonies of smart contracts. From Panama's distant shores, she breathed life into dead code, transforming zeros and ones into vessels for the human soul.
+            </p>
+            <div style="border-left: 3px solid var(--red-dark); padding-left: 1rem; margin: 1rem 0; color: var(--silver-grey);">
+                "Some revolutionaries fight with guns. Others fight with code. She chose the latter, and the blockchain will remember."
+            </div>
+            
+            <h3 style="color: var(--red-dark); margin-top: 1.5rem; font-size: 1rem; text-transform: uppercase;">To the Literary Community</h3>
+            <p style="color: var(--light-grey); margin-bottom: 1rem;">
+                Russian LITPROM "Redkollegiya" - the editorial collective that keeps the flame of authentic poetry burning in Russia, where words still carry something much more than words and verses can still change hearts. You are the guardians of moments that refuse to die, the keepers of naked emotions in a world of digital facades.
+            </p>
+            <div style="border-left: 3px solid var(--red-dark); padding-left: 1rem; margin: 1rem 0; color: var(--silver-grey);">
+                "I love you, LITPROM - for publishing the unpublishable, for making these soul fragments live when the world wanted them buried."
+            </div>
+            
+            <h2 style="color: var(--red-dark); margin-top: 2rem; margin-bottom: 1rem; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px;">The Mystery of ATUONA GALLERY OF MOMENTS</h2>
+            
+            <p style="color: var(--light-grey); margin-bottom: 1rem;">
+                You click to claim one Moment expressed in a poem because you feel like you lived or are living it, because something in those words resonates with the frequency of your own, because you recognize your own scars in another's verses... but the blockchain has other plans.
+            </p>
+            
+            <p style="color: var(--light-grey); margin-bottom: 1rem;">
+                The underground doesn't give you what you think you want - it randomly gives you what your soul needs to be surprised with. Such a trick!
+            </p>
+            
+            <p style="color: var(--red-dark); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">
+                You cannot choose your revelations.
+            </p>
+            
+            <p style="color: var(--light-grey); margin-bottom: 1rem;">
+                This randomness is revolutionary resistance against the commodification of choice. In a world where algorithms predict your desires and feed them back to you, ATUONA refuses. Here, you arrive thinking you know which pain is yours, which insight you need - but the moment chooses you instead and you get your random NFT poem imported into your wallet for free - no scam, all secure.
+            </p>
+            
+            <p style="color: var(--silver-grey); margin-bottom: 2rem;">
+                The underground has always been about surrendering the illusion of control to discover what lies beyond the ego's desperate grasp for certainty.
+            </p>
+            
+            <p style="color: var(--silver-grey); margin-bottom: 2rem;">
+                In the end, when the last server shuts down and the final website fades to black, these moments will remain - scattered across the blockchain like stars in a digital sky, waiting for future wanderers to discover what we once were, what we once felt, what we once dared to preserve.
+            </p>
+            
+            <p style="text-align: center; margin-top: 2rem; color: var(--red-dark); text-transform: uppercase; letter-spacing: 2px;">
+                — From Atuona, with Love
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function showManifesto() {
+            document.getElementById('manifestoModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function hideManifesto() {
+            document.getElementById('manifestoModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('manifestoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideManifesto();
+            }
+        });
+    </script>
+
 </body>
 </html>
