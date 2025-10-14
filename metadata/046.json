@@ -1,0 +1,31 @@
+{
+  "name": "Underground Poem #046",
+  "description": "ATUONA Gallery of Moments - Underground Poem 046. Raw, unfiltered poetry preserved on blockchain. Free collection - true to underground values. Part of the expanding collection exploring toxic relationships, self-preservation, and the courage to maintain distance.",
+  "image": "https://atuona.xyz/images/poem-046.png",
+  "attributes": [
+    {
+      "trait_type": "Poem",
+      "value": "Underground Poem 046"
+    },
+    {
+      "trait_type": "ID",
+      "value": "046"
+    },
+    {
+      "trait_type": "Collection",
+      "value": "GALLERY OF MOMENTS"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Free Underground Poetry"
+    },
+    {
+      "trait_type": "Language",
+      "value": "Russian"
+    },
+    {
+      "trait_type": "Year",
+      "value": "2025"
+    }
+  ]
+}
