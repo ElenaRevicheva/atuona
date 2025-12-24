@@ -1,96 +1,39 @@
-# 🎭 ATUONA Underground NFT Gallery
+<div align="center">
+  
+# 🎨 Atuona NFT Gallery
 
-**Revolutionary Digital Art • Blockchain Poetry • Soul Fragments**
+### *Where Poetry Meets Blockchain*
 
-A beautiful underground aesthetic website where users can claim free NFT poems directly from your deployed thirdweb NFT Drop contract.
+[![Built with Vite](https://img.shields.io/badge/Built%20with-Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Powered by ThirdWeb](https://img.shields.io/badge/Powered%20by-ThirdWeb-F213A4?style=for-the-badge&logo=ethereum&logoColor=white)](https://thirdweb.com/)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
 
-## 🚀 Quick Start
+[**Live Demo**](https://atuona.vercel.app) • [**View Collection**](https://thirdweb.com/base/collection) • [**AIdeazz**](https://aideazz.com)
 
-### 1. Configure Environment
-Copy `.env` and add your thirdweb secret key:
-```bash
-# Get secret key from: https://thirdweb.com/dashboard/settings/api-keys
-THIRDWEB_SECRET_KEY=your_secret_key_here
-```
-
-### 2. Setup NFT Contract
-```bash
-npm install
-npm run setup-nfts
-```
-
-### 3. Deploy Website
-```bash
-npm run build
-```
-
-## 🎯 Features
-
-- ✅ **Free NFT claiming** (users only pay gas fees)
-- ✅ **Real blockchain transactions** on Polygon
-- ✅ **MetaMask wallet integration**
-- ✅ **Beautiful underground aesthetic**
-- ✅ **45 unique poetry NFTs**
-- ✅ **1 NFT per wallet limit**
-
-## 📋 Contract Details
-
-- **Network**: Polygon
-- **Contract**: `0x9cD95Ad5e6A6DAdF206545E90895A2AEF11Ee4D8`
-- **Type**: ERC721 Drop (thirdweb)
-- **Supply**: 45 Underground Poetry NFTs
-
-## 🎭 User Experience
-
-1. **Visit website** → Underground aesthetic loads
-2. **Connect wallet** → MetaMask integration
-3. **Navigate to MINT** → 6 poetry slots displayed
-4. **Click "CLAIM NFT"** → Real blockchain transaction
-5. **Get NFT in wallet** → Free (only gas fees)
-
-## 🛠️ Technical Stack
-
-- **Frontend**: Vite + React + Vanilla JS
-- **Blockchain**: Polygon network
-- **NFT Standard**: ERC721 Drop
-- **Wallet**: thirdweb SDK + MetaMask
-- **Deployment**: Fleek.xyz
-- **Styling**: Custom CSS (underground aesthetic)
-
-## 🔧 Development
-
-```bash
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Setup NFT contract (one-time)
-npm run setup-nfts
-```
-
-## 📁 Project Structure
-
-```
-├── src/
-│   ├── main.js          # Main wallet & claiming logic
-│   ├── main.jsx         # React app entry point
-│   ├── App.jsx          # React app wrapper
-│   └── ClaimPoem.jsx    # NFT claiming component
-├── index.html           # Main website with gallery
-├── automated-lazy-mint.js # NFT setup script
-├── .env                 # Environment configuration
-└── package.json         # Dependencies & scripts
-```
-
-## 🎉 Result
-
-A fully functional underground poetry NFT gallery where any user with any wallet can claim free NFT poems through real blockchain transactions.
+</div>
 
 ---
 
-**Built with 🎭 for the underground poetry community**
+## 🌟 Overview
+
+**Atuona** is an innovative NFT gallery that transforms 45 original poems into digital art pieces on the Base blockchain. Each poem is a unique NFT with custom metadata, showcasing the intersection of literature and Web3 technology.
+
+### ✨ Key Features
+
+- 🖼️ **45 Unique NFT Poems** - Original poetry transformed into collectible digital art
+- ⚡ **Lightning Fast** - Built with Vite for optimal performance
+- 🔗 **Base Blockchain** - Low-cost, high-speed transactions on Base L2
+- 🎯 **Lazy Minting** - Cost-efficient minting process via ThirdWeb
+- 📱 **Responsive Design** - Beautiful on all devices
+- 🔐 **Wallet Integration** - Seamless connection with MetaMask & WalletConnect
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+- MetaMask wallet
+- ThirdWeb API credentials
+
+### 🏃‍♂️ One-Click Setup
+
