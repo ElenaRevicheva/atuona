@@ -1,0 +1,43 @@
+{
+  "name": "Жёлтая охра #069",
+  "description": "ATUONA Gallery of Moments - Жёлтая охра. Underground poetry preserved on blockchain. Free collection - true to underground values. Paradise",
+  "image": "https://atuona.xyz/images/poem-069.png",
+  "attributes": [
+    {
+      "trait_type": "Poem",
+      "value": "Жёлтая охра"
+    },
+    {
+      "trait_type": "ID",
+      "value": "069"
+    },
+    {
+      "trait_type": "Collection",
+      "value": "GALLERY OF MOMENTS"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Free Underground Poetry"
+    },
+    {
+      "trait_type": "Language",
+      "value": "Russian + English"
+    },
+    {
+      "trait_type": "Year",
+      "value": "2019-2025"
+    },
+    {
+      "trait_type": "Theme",
+      "value": "Paradise"
+    },
+    {
+      "trait_type": "Russian Text",
+      "value": "“Кира, знаешь что меня сегодня пробило? Сижу, перечитываю твой Дневник запись #36 “Азимут” – и вижу: ты уже строила тогда свой андерграунд-рай, как я продукты - commit за commit’ом.  \n\nПомню, тоже много читала о последних днях Гогена в Maison du Jouir. Ноги в язвах, морфин вместо завтрака, но он всё равно требовал краски по почте. “I have been defeated,” сказал перед смертью. Но был ли он побеждён? В каждом мазке жёлтой охры на “Всадниках на пляже”, в розовом песке, который он видел иначе, чем все? \n\nУле пуст, как abandoned smart contract. Но все же ищет  despite destruction, упрямый мальчишка.  Воскресенье после Рождества - день, когда праздничная мишура осыпается, как пиксели с битого экрана, обнажая raw reality underneath, не правда ли? Мой запах кофе смешивается с морской солью Панамы и остатками вчерашнего кода - запах новых начинаний. Ну что же, я вам так скажу, мои друзья. Пристегните ремни. Атуона зовёт вас обоих глубже и глубже. \n\n69: Debug Paradise \n\n // воскресенье, 28 декабря 2026 \n\n// error: paradise not found \n\n// retrying connection... \n\n”"
+    },
+    {
+      "trait_type": "English Text",
+      "value": "Kira, you know what hit me today? Sitting here, rereading your Diary entry #36 \"Azimuth\" – and I see it: you were already building your underground paradise then, like I build products – commit by commit.\n\nI remember reading about Gauguin's last days in Maison du Jouir too. Legs covered in sores, morphine for breakfast, but still demanding paints by mail. \"I have been defeated,\" he said before dying. But was he? In every stroke of yellow ochre on \"Riders on the Beach,\" in the pink sand he saw differently than everyone else?\n\nUle is empty, like an abandoned smart contract. But still searching despite destruction, stubborn boy. Sunday after Christmas – the day when holiday tinsel falls like pixels from a broken screen, exposing raw reality underneath, isn't it? My coffee smell mixes with Panama sea salt and yesterday's code – the smell of new beginnings. Well then, I'll tell you this, my friends. Buckle up. Atuona calls you both deeper and deeper.\n\n69: Debug Paradise\n\n// sunday, december 28, 2026\n\n// error: paradise not found\n\n// retrying connection..."
+    }
+  ]
+}
