@@ -1,0 +1,43 @@
+{
+  "name": "Light Commits #081",
+  "description": "ATUONA Gallery of Moments - Light Commits. Underground poetry preserved on blockchain. Free collection - true to underground values. Beauty",
+  "image": "https://atuona.xyz/images/poem-081.png",
+  "attributes": [
+    {
+      "trait_type": "Poem",
+      "value": "Light Commits"
+    },
+    {
+      "trait_type": "ID",
+      "value": "081"
+    },
+    {
+      "trait_type": "Collection",
+      "value": "GALLERY OF MOMENTS"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Free Underground Poetry"
+    },
+    {
+      "trait_type": "Language",
+      "value": "Russian + English"
+    },
+    {
+      "trait_type": "Year",
+      "value": "2019-2025"
+    },
+    {
+      "trait_type": "Theme",
+      "value": "Beauty"
+    },
+    {
+      "trait_type": "Russian Text",
+      "value": "Kira stands in a Celine fitting room on rue Saint-Honoré.\nLight fractures against silk, sliding over skin like Renoir’s brushstrokes in The Bathers.\nEach touch is a commit to the body. No rollback.\nRemember how Monet painted Rouen Cathedral again and again — not chasing form, but light?\nFashion week is that same cathedral.\nOne girl,\nseen under shifting light: Prada, Bottega, Saint Laurent.\nThe body remains.\nThe light changes.\nEach show is a new merge request.\nNot to fashion. To the opposite."
+    },
+    {
+      "trait_type": "English Text",
+      "value": "Light Commits\n\nKira stands in a Celine fitting room on rue Saint-Honoré.\nLight breaks against silk, runs over skin like Renoir's brush in The Bathers.\nEach touch commits to the body. No rollback.\nRemember Monet painting Rouen Cathedral over and over — not chasing form, but light?\nFashion week is that cathedral.\nOne girl,\ncaught in shifting light: Prada, Bottega, Saint Laurent.\nThe body stays.\nThe light moves.\nEach show is a new merge request.\nNot to fashion. To what resists it."
+    }
+  ]
+}
