@@ -5876,7 +5876,7 @@
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     // Skip navigation logic for wallet button
-                    if (this.classList.contains('wallet-status')) {
+                    if (this.classList.contains('wallet-status') || (this.getAttribute('href')||'').charAt(0) === '/') {
                         return; // Let the wallet button handle its own click
                     }
                     
