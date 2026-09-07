@@ -8,10 +8,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/verify-vault.mjs",
+    "prebuild": "npm run vault:build",
     "build": "vite build",
     "preview": "vite preview",
-    "vault:build": "node scripts/build-vault.mjs && node scripts/build-dna.mjs && node scripts/verify-vault.mjs",
+    "vault:build": "node scripts/extract-poems.mjs && node scripts/build-vault.mjs && node scripts/build-dna.mjs && node scripts/verify-vault.mjs",
     "vault:verify": "node scripts/verify-vault.mjs",
     "vault:lock": "node scripts/verify-vault.mjs --lock",
     "vault:test": "node scripts/test-vault-guards.mjs",

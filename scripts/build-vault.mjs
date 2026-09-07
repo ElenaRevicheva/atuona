@@ -182,6 +182,7 @@ ${run.map(poemRow).join('\n')}`;
         </h3>
         <div class="part-body" id="part-${part.key}-body">
           <div class="part-in">
+            <!-- VAULT:INSERT:${part.title} -->
 ${body}
           </div>
         </div>

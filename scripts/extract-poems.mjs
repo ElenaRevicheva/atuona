@@ -22,9 +22,13 @@ const OUT = join(ROOT, 'content', 'poems.json');
 const html = readFileSync(HTML, 'utf8');
 
 const homeStart = html.indexOf('<section id="home"');
-const aboutStart = html.indexOf('<section id="about"');
-if (homeStart < 0 || aboutStart < 0) throw new Error('cannot find #home / #about section boundaries');
-const home = html.slice(homeStart, aboutStart);
+if (homeStart < 0) throw new Error('cannot find the #home section');
+// The DNA section now sits between the vault and MANIFEST, so bound on whichever
+// boundary comes first. Bounding on #about alone would sweep DNA into the vault.
+const ends = ['<!-- DNA:START -->', '<section id="dna"', '<section id="about"']
+  .map((t) => html.indexOf(t, homeStart)).filter((i) => i > 0);
+if (!ends.length) throw new Error('cannot find the end of the vault (#dna / #about)');
+const home = html.slice(homeStart, Math.min(...ends));
 
 // The cards are uniform: header (id + status), then content (title, verse, badge,
 // description, meta). Anchored on `<div class="nft-card">` so a malformed card fails

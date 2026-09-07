@@ -177,10 +177,19 @@ else {
 }
 
 /* 6 — the rest of the drop is untouched. */
+/* The locked counts are a FLOOR, not an exact match. The vault gains a poem
+   whenever Atuona publishes, and each one legitimately brings a claim button and
+   a MINT slot with it — the first version failed the daily publish for growing.
+   What must never happen is the count going DOWN: that is a poem, a button or a
+   slot that has gone missing. */
 const facts = mintFacts(html);
-if (facts.gallerySlots !== lock.mint.gallerySlots) fail.push(`MINT slots changed: ${lock.mint.gallerySlots} → ${facts.gallerySlots}`);
-if (facts.gallerySlotClaims !== lock.mint.gallerySlotClaims) fail.push(`MINT slot claim handlers changed: ${lock.mint.gallerySlotClaims} → ${facts.gallerySlotClaims}`);
-if (facts.actionButtons !== lock.mint.actionButtons) fail.push(`claim buttons changed: ${lock.mint.actionButtons} → ${facts.actionButtons}`);
+const floor = (now, was, label) => {
+  if (now < was) fail.push(`${label} changed: ${was} → ${now}`);
+  else if (now > was) warn.push(`${label}: ${was} → ${now} (new since the lock — re-lock deliberately)`);
+};
+floor(facts.gallerySlots, lock.mint.gallerySlots, 'MINT slots');
+floor(facts.gallerySlotClaims, lock.mint.gallerySlotClaims, 'MINT slot claim handlers');
+floor(facts.actionButtons, lock.mint.actionButtons, 'claim buttons');
 for (const a of lock.mint.anchors) if (!html.includes(a)) fail.push(`drop anchor lost: ${a}`);
 
 /* 7 — the text must still be in the document, not fetched. This is the GEO
