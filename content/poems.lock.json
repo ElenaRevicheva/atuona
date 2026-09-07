@@ -1,0 +1,1707 @@
+{
+  "baseline": "atuona-pre-vault-tree-20260907",
+  "lockedAt": "2026-09-07",
+  "note": "Ground truth for atuona.xyz poem content and mint paths. Generated from the git tag, never from a working file. Do not hand-edit.",
+  "count": 99,
+  "verseChars": 142142,
+  "mint": {
+    "gallerySlots": 99,
+    "gallerySlotClaims": 99,
+    "actionButtons": 99,
+    "anchors": [
+      "<div id=\"root\">",
+      "src=\"/src/main.js\"",
+      "src=\"/src/main.jsx\"",
+      "class=\"nav-link space wallet-status\"",
+      "handleWalletConnection",
+      "window.claimPoem",
+      "id=\"manifestoModal\"",
+      "enhanceAllMintingButtons"
+    ]
+  },
+  "poems": [
+    {
+      "id": "001",
+      "fingerprint": "ca6d4238997efbca",
+      "fields": {
+        "id": "7a3e6b16cb75f48f",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "f12b689389ef23f1",
+        "verseHtml": "768ae35906a23326",
+        "badgeHtml": "0d6f1c58f062b6f8",
+        "descriptionHtml": "cecc214a80d85955",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "f12744d365eef8ab"
+      },
+      "mints": true
+    },
+    {
+      "id": "002",
+      "fingerprint": "7e2d6e8d5660be8c",
+      "fields": {
+        "id": "a1dd6837f284625b",
+        "status": "2cff90d160fc22bb",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "43e85861a3cd8f05",
+        "verseHtml": "d1a0c9a6f7a73c8b",
+        "badgeHtml": "50b27631cb2ceb07",
+        "descriptionHtml": "63ab732556bda016",
+        "price": "c175c8e6c28ad409",
+        "note": "561a115e4b249e0e",
+        "buttonHtml": "0afb5a46df149d62"
+      },
+      "mints": true
+    },
+    {
+      "id": "003",
+      "fingerprint": "f0bc5f021721a684",
+      "fields": {
+        "id": "88c0413bfef1d057",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "858707b1e652d3ee",
+        "verseHtml": "5a6c08fceb48bdf1",
+        "badgeHtml": "d698d3541300f3b4",
+        "descriptionHtml": "de77f2efe491c5c5",
+        "price": "3e92280b747f8be5",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f24bd3e1e60ecce5"
+      },
+      "mints": false
+    },
+    {
+      "id": "004",
+      "fingerprint": "10c3265add28a642",
+      "fields": {
+        "id": "9c1850fcaa632f21",
+        "status": "e9dc29b0cc3e5088",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "35a218e940165cdc",
+        "verseHtml": "433b6af81ea3cc99",
+        "badgeHtml": "de6af2b9fc38f2d3",
+        "descriptionHtml": "6328f5772a0cf948",
+        "price": "88996c087a977919",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "e760ab2062e266bf"
+      },
+      "mints": false
+    },
+    {
+      "id": "005",
+      "fingerprint": "9447bd2b3f42a5ea",
+      "fields": {
+        "id": "5a96acc64c72c5b2",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "3a8cb630322919ba",
+        "verseHtml": "78b38d8a9fdd1f18",
+        "badgeHtml": "601edbf92bde9452",
+        "descriptionHtml": "277455bff5d36c63",
+        "price": "c2f153b8b980de3e",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "8e5e7802869684b7"
+      },
+      "mints": false
+    },
+    {
+      "id": "006",
+      "fingerprint": "b3e18fa40562796b",
+      "fields": {
+        "id": "c0f890f2fd6b0581",
+        "status": "2cff90d160fc22bb",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "259072ed767b42e7",
+        "verseHtml": "13bf709548729bd7",
+        "badgeHtml": "5201df1d819ba6b6",
+        "descriptionHtml": "0faafdc2b050cf57",
+        "price": "116cd9af351c1cef",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f80db8b5991c147f"
+      },
+      "mints": false
+    },
+    {
+      "id": "007",
+      "fingerprint": "6e3754b848dd82ec",
+      "fields": {
+        "id": "629f4cf9337b0d0c",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "15405e6355c2ab3c",
+        "verseHtml": "e32493b3119ec302",
+        "badgeHtml": "69c3c452a179646c",
+        "descriptionHtml": "b039630385252a3b",
+        "price": "3e92280b747f8be5",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f24bd3e1e60ecce5"
+      },
+      "mints": false
+    },
+    {
+      "id": "008",
+      "fingerprint": "870bd1588b6dddc3",
+      "fields": {
+        "id": "cc1af790b8e0c746",
+        "status": "2cff90d160fc22bb",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "7aa2b02ec2e0db8f",
+        "verseHtml": "eac3e73f842ec739",
+        "badgeHtml": "1eb575b16813b91a",
+        "descriptionHtml": "6a2cba0d59fb7356",
+        "price": "8ad49642ef80e341",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f80db8b5991c147f"
+      },
+      "mints": false
+    },
+    {
+      "id": "009",
+      "fingerprint": "74691ce1b20e9849",
+      "fields": {
+        "id": "5371e1a064f3cfff",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "cbeebc7191aaff3e",
+        "verseHtml": "7814e6b0bace60c6",
+        "badgeHtml": "1e9423f8c66e9492",
+        "descriptionHtml": "acc8f8b7a3808f16",
+        "price": "dda14909f742ce4c",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "8e5e7802869684b7"
+      },
+      "mints": false
+    },
+    {
+      "id": "010",
+      "fingerprint": "f8107f1b735cbe6a",
+      "fields": {
+        "id": "13715f6c8b48ed1b",
+        "status": "e9dc29b0cc3e5088",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "4d18c82c842a7e74",
+        "verseHtml": "aadbb967a5f2f256",
+        "badgeHtml": "b915f0fddfc62d05",
+        "descriptionHtml": "d610cc85a0705a0f",
+        "price": "55e347279732cc5a",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "e760ab2062e266bf"
+      },
+      "mints": false
+    },
+    {
+      "id": "011",
+      "fingerprint": "1c81e156b15d4c89",
+      "fields": {
+        "id": "8a080cea809d1b9d",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "fdfa9af0d3f801ed",
+        "verseHtml": "8a975078cc0af281",
+        "badgeHtml": "0c64ce8237e378c9",
+        "descriptionHtml": "8ab0378ec1f4cf21",
+        "price": "116cd9af351c1cef",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f24bd3e1e60ecce5"
+      },
+      "mints": false
+    },
+    {
+      "id": "012",
+      "fingerprint": "8d0825b25e1d8710",
+      "fields": {
+        "id": "bf6aaaab7c143ca1",
+        "status": "2cff90d160fc22bb",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "aaaefbdbf4597903",
+        "verseHtml": "c5620c53f525c5fe",
+        "badgeHtml": "2fbb780cfbf21eb6",
+        "descriptionHtml": "040f7f487335c922",
+        "price": "3e92280b747f8be5",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f80db8b5991c147f"
+      },
+      "mints": false
+    },
+    {
+      "id": "013",
+      "fingerprint": "7beebcd2ea29df9e",
+      "fields": {
+        "id": "b16d9e2bb44a4b72",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "ddccd67173af8ed8",
+        "verseHtml": "f458907a6594164f",
+        "badgeHtml": "1043ad0ffb09adb7",
+        "descriptionHtml": "17a2ab0e987bfa09",
+        "price": "c2f153b8b980de3e",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "8e5e7802869684b7"
+      },
+      "mints": false
+    },
+    {
+      "id": "014",
+      "fingerprint": "dec8241c9dd3d028",
+      "fields": {
+        "id": "72abdfcd75400cfe",
+        "status": "2cff90d160fc22bb",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "4ff4697e31530ad6",
+        "verseHtml": "4c49f8f4dc661cf4",
+        "badgeHtml": "deb7f740e679666c",
+        "descriptionHtml": "7ffb37c5833c37c6",
+        "price": "dda14909f742ce4c",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f80db8b5991c147f"
+      },
+      "mints": false
+    },
+    {
+      "id": "015",
+      "fingerprint": "c8c18cdc4db93f08",
+      "fields": {
+        "id": "2d54ab36581c7e90",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "f2af89c7b2c846d1",
+        "verseHtml": "4125d69ee29a8fec",
+        "badgeHtml": "05e91ab455b77088",
+        "descriptionHtml": "c01a02117e3224c5",
+        "price": "3e92280b747f8be5",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f24bd3e1e60ecce5"
+      },
+      "mints": false
+    },
+    {
+      "id": "016",
+      "fingerprint": "4e8ae1bc0389e1aa",
+      "fields": {
+        "id": "8449c20ed663992d",
+        "status": "e9dc29b0cc3e5088",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "08251ade65a488f9",
+        "verseHtml": "d56a96cb7bfc9d96",
+        "badgeHtml": "4aadcdf28323ed66",
+        "descriptionHtml": "b3a0774b1fc6fcae",
+        "price": "dda14909f742ce4c",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "e760ab2062e266bf"
+      },
+      "mints": false
+    },
+    {
+      "id": "017",
+      "fingerprint": "83a6849f7616ec6a",
+      "fields": {
+        "id": "9309f67fd6480663",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "5ed8944a85a9763f",
+        "verseHtml": "6dedc066d9f88890",
+        "badgeHtml": "6d0b4b9f081a0f3d",
+        "descriptionHtml": "9f55bc40cac14e99",
+        "price": "6772da0671b5599d",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "8e5e7802869684b7"
+      },
+      "mints": false
+    },
+    {
+      "id": "018",
+      "fingerprint": "0f607b422e5fa933",
+      "fields": {
+        "id": "45dd9586f26a3cf4",
+        "status": "2cff90d160fc22bb",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "ec97b7d4f3b36f67",
+        "verseHtml": "70ddfe2dd557366d",
+        "badgeHtml": "89ed58ed8c95a8ed",
+        "descriptionHtml": "d7fe0162f8d85589",
+        "price": "3e92280b747f8be5",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f80db8b5991c147f"
+      },
+      "mints": false
+    },
+    {
+      "id": "019",
+      "fingerprint": "5e01120c70c4ffce",
+      "fields": {
+        "id": "8eba3ded9f5f3cbb",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "84decc1d57c235d7",
+        "verseHtml": "b83c6ea936332a3f",
+        "badgeHtml": "7f1cb80e3d30770b",
+        "descriptionHtml": "79c4b4b511473d5d",
+        "price": "88996c087a977919",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f24bd3e1e60ecce5"
+      },
+      "mints": false
+    },
+    {
+      "id": "020",
+      "fingerprint": "5d9a8a3f34218dc5",
+      "fields": {
+        "id": "c75f53bdcc638b0f",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "269b950995dbf1e4",
+        "verseHtml": "44c065c44722491f",
+        "badgeHtml": "c01cb24bc01ad116",
+        "descriptionHtml": "32c12b046083a96a",
+        "price": "3e92280b747f8be5",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "8e5e7802869684b7"
+      },
+      "mints": false
+    },
+    {
+      "id": "021",
+      "fingerprint": "079abd4c969f5260",
+      "fields": {
+        "id": "cad02af28a101dfc",
+        "status": "2cff90d160fc22bb",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "832448336345be3a",
+        "verseHtml": "e8dd3bc6b73207ae",
+        "badgeHtml": "88aab95abd1849e9",
+        "descriptionHtml": "9e8ecf9b69c9667e",
+        "price": "c2f153b8b980de3e",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f80db8b5991c147f"
+      },
+      "mints": false
+    },
+    {
+      "id": "022",
+      "fingerprint": "ef3e34b771318e6c",
+      "fields": {
+        "id": "d970990220a1e7e9",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "dc63b2f96d0536db",
+        "verseHtml": "d4999865b5471490",
+        "badgeHtml": "fda7b110916a14f1",
+        "descriptionHtml": "2ef73e4f8b4b2df7",
+        "price": "116cd9af351c1cef",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "8e5e7802869684b7"
+      },
+      "mints": false
+    },
+    {
+      "id": "023",
+      "fingerprint": "b7cf29fbb2545d9f",
+      "fields": {
+        "id": "168167b979b5fbf4",
+        "status": "2cff90d160fc22bb",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "cd9970a69bc21e83",
+        "verseHtml": "043150843c30404f",
+        "badgeHtml": "ba89b1625f49fc04",
+        "descriptionHtml": "1eef45b4a82dc51d",
+        "price": "3e92280b747f8be5",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f80db8b5991c147f"
+      },
+      "mints": false
+    },
+    {
+      "id": "024",
+      "fingerprint": "fe766a40cc6777ba",
+      "fields": {
+        "id": "66a3c6db23417d04",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "e904303475672df0",
+        "verseHtml": "9aa513de35ff7eed",
+        "badgeHtml": "d7328c594b756864",
+        "descriptionHtml": "9cf3dfa06571696c",
+        "price": "55e347279732cc5a",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f24bd3e1e60ecce5"
+      },
+      "mints": false
+    },
+    {
+      "id": "025",
+      "fingerprint": "c93fdb5c701cb1ab",
+      "fields": {
+        "id": "4f46578a5c392cc9",
+        "status": "e9dc29b0cc3e5088",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "704223f8adcb2a36",
+        "verseHtml": "99bac8f267c7eb26",
+        "badgeHtml": "8835e53686402690",
+        "descriptionHtml": "8b2ffc478d3fc484",
+        "price": "dda14909f742ce4c",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "e760ab2062e266bf"
+      },
+      "mints": false
+    },
+    {
+      "id": "026",
+      "fingerprint": "7d5597d27f225646",
+      "fields": {
+        "id": "343cacd3827e6de6",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "b0d7654ae7a9d3fd",
+        "verseHtml": "6a99a97bdbbda251",
+        "badgeHtml": "afc3bfba4e7127b9",
+        "descriptionHtml": "db83f4b38c5000bb",
+        "price": "3e92280b747f8be5",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f24bd3e1e60ecce5"
+      },
+      "mints": false
+    },
+    {
+      "id": "027",
+      "fingerprint": "910fbf2c249151b3",
+      "fields": {
+        "id": "79f918029276a994",
+        "status": "2cff90d160fc22bb",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "dbf993150175d7a8",
+        "verseHtml": "d9e14f691e24281f",
+        "badgeHtml": "c450efb13effec1e",
+        "descriptionHtml": "a564ea32a899aa04",
+        "price": "116cd9af351c1cef",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f80db8b5991c147f"
+      },
+      "mints": false
+    },
+    {
+      "id": "028",
+      "fingerprint": "807020b806392349",
+      "fields": {
+        "id": "76a00ed73f38046e",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "0c29e449375dd7f7",
+        "verseHtml": "c90e5ccb73ce6c1f",
+        "badgeHtml": "be4d9bc23eaee90c",
+        "descriptionHtml": "5663fccc9e4cd242",
+        "price": "55e347279732cc5a",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "8e5e7802869684b7"
+      },
+      "mints": false
+    },
+    {
+      "id": "029",
+      "fingerprint": "3764e73c517a120b",
+      "fields": {
+        "id": "406b783f721b16ff",
+        "status": "2cff90d160fc22bb",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "f6a394afd10a1c0e",
+        "verseHtml": "75990a7a8bf05874",
+        "badgeHtml": "aa4f345ce0afd4bc",
+        "descriptionHtml": "a231ca7c8a9c6a94",
+        "price": "6772da0671b5599d",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f80db8b5991c147f"
+      },
+      "mints": false
+    },
+    {
+      "id": "030",
+      "fingerprint": "0a06c802a885905f",
+      "fields": {
+        "id": "78b4c871b95d95f5",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "48891c92fecdad55",
+        "verseHtml": "38944053a4e4bf43",
+        "badgeHtml": "203aa6fe37b958bc",
+        "descriptionHtml": "67cd4e28ee400ff7",
+        "price": "9503a659ef2a3677",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f24bd3e1e60ecce5"
+      },
+      "mints": false
+    },
+    {
+      "id": "031",
+      "fingerprint": "4f103d95354b7e8d",
+      "fields": {
+        "id": "23c86fe0b82751dd",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "2aa49e83fc7f1876",
+        "verseHtml": "12a38f60e5556675",
+        "badgeHtml": "ffdd74d126b5554f",
+        "descriptionHtml": "ff223879b9418530",
+        "price": "6017dfc4b3161fcf",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f24bd3e1e60ecce5"
+      },
+      "mints": false
+    },
+    {
+      "id": "032",
+      "fingerprint": "827f7ebf140d7c03",
+      "fields": {
+        "id": "721574dd157b4459",
+        "status": "2cff90d160fc22bb",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "5cc7ccdc4e1e694a",
+        "verseHtml": "7fae057e88f9cb08",
+        "badgeHtml": "ad0349c07c28a680",
+        "descriptionHtml": "9f956a9a475504ce",
+        "price": "dda14909f742ce4c",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f80db8b5991c147f"
+      },
+      "mints": false
+    },
+    {
+      "id": "033",
+      "fingerprint": "e4e5b30e34806780",
+      "fields": {
+        "id": "842d0b270c035fb2",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "7f2cdd6c41830e15",
+        "verseHtml": "b1038b9aa9eb9161",
+        "badgeHtml": "32a6dfd8efe65c4a",
+        "descriptionHtml": "16184a6667d00a60",
+        "price": "6772da0671b5599d",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "8e5e7802869684b7"
+      },
+      "mints": false
+    },
+    {
+      "id": "034",
+      "fingerprint": "d88d4ee2a16cb88f",
+      "fields": {
+        "id": "4071e750b4727116",
+        "status": "2cff90d160fc22bb",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "9091a005387df469",
+        "verseHtml": "0d1bb8c54faec1ae",
+        "badgeHtml": "452fd20b775e7370",
+        "descriptionHtml": "de0ecc2b6562589e",
+        "price": "3e92280b747f8be5",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f80db8b5991c147f"
+      },
+      "mints": false
+    },
+    {
+      "id": "035",
+      "fingerprint": "ee5e978d3b0df05d",
+      "fields": {
+        "id": "41a8c9a10cdfce0a",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "0f12036e0658f0f2",
+        "verseHtml": "5689ff3aa4a82283",
+        "badgeHtml": "7bd71e62a62e0801",
+        "descriptionHtml": "5f3ec7e2cdd6c6f2",
+        "price": "88996c087a977919",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "8e5e7802869684b7"
+      },
+      "mints": false
+    },
+    {
+      "id": "036",
+      "fingerprint": "87b45f8255ff8b6f",
+      "fields": {
+        "id": "58ec1b25c481b2c2",
+        "status": "e9dc29b0cc3e5088",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "1695dcbbabb9ee8f",
+        "verseHtml": "9c399c05490c89c9",
+        "badgeHtml": "d70d54fac95f58ac",
+        "descriptionHtml": "7c5d9e7159c4501c",
+        "price": "55e347279732cc5a",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "e760ab2062e266bf"
+      },
+      "mints": false
+    },
+    {
+      "id": "037",
+      "fingerprint": "01408933da97ff06",
+      "fields": {
+        "id": "48a212a91e6da95f",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "810954ec61d74f6e",
+        "verseHtml": "5d456da6988e390a",
+        "badgeHtml": "27d0931a721f898e",
+        "descriptionHtml": "184c45e426be2f01",
+        "price": "3e92280b747f8be5",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f24bd3e1e60ecce5"
+      },
+      "mints": false
+    },
+    {
+      "id": "038",
+      "fingerprint": "39740387918583d9",
+      "fields": {
+        "id": "515ca6ef2552077a",
+        "status": "2cff90d160fc22bb",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "852ebf99d1ef5076",
+        "verseHtml": "2751ab01b5380e78",
+        "badgeHtml": "2b364eea112406b3",
+        "descriptionHtml": "cfccf3108d3aef72",
+        "price": "c2f153b8b980de3e",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f80db8b5991c147f"
+      },
+      "mints": false
+    },
+    {
+      "id": "039",
+      "fingerprint": "bcece76eab7d5003",
+      "fields": {
+        "id": "e1981523bc0228de",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "1cfe35f7b96617da",
+        "verseHtml": "6e8be04564d36959",
+        "badgeHtml": "f707f4f97115994a",
+        "descriptionHtml": "1e74b801a6429e0a",
+        "price": "116cd9af351c1cef",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "8e5e7802869684b7"
+      },
+      "mints": false
+    },
+    {
+      "id": "040",
+      "fingerprint": "8706229dea9cf7b2",
+      "fields": {
+        "id": "3500318f75ad20f0",
+        "status": "e9dc29b0cc3e5088",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "1839cf749ecbf48a",
+        "verseHtml": "7ffdc2b068b2e3c0",
+        "badgeHtml": "a983e78cfd163884",
+        "descriptionHtml": "dfa50a9910d3e5e4",
+        "price": "3e92280b747f8be5",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "e760ab2062e266bf"
+      },
+      "mints": false
+    },
+    {
+      "id": "041",
+      "fingerprint": "69b455445585559d",
+      "fields": {
+        "id": "879ce2257ab3468f",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "953a24b22fba1231",
+        "verseHtml": "78863690a1f3ff3b",
+        "badgeHtml": "529080d561ae0388",
+        "descriptionHtml": "5c361a454084c9c4",
+        "price": "dda14909f742ce4c",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f24bd3e1e60ecce5"
+      },
+      "mints": false
+    },
+    {
+      "id": "042",
+      "fingerprint": "0aaea88b1e47c4b2",
+      "fields": {
+        "id": "19158c4a7252e121",
+        "status": "2cff90d160fc22bb",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "683c1570f8dd584a",
+        "verseHtml": "fd1ac0085f6abb71",
+        "badgeHtml": "8e38378e115fc322",
+        "descriptionHtml": "2d078daa0266d346",
+        "price": "55e347279732cc5a",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f80db8b5991c147f"
+      },
+      "mints": false
+    },
+    {
+      "id": "043",
+      "fingerprint": "f382c6b6831c183e",
+      "fields": {
+        "id": "82ad92612238288c",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "3e1d10c22ff61c4a",
+        "verseHtml": "0a329909244efc31",
+        "badgeHtml": "6d3b646349bb901a",
+        "descriptionHtml": "2ec7107b0b16c877",
+        "price": "6772da0671b5599d",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "8e5e7802869684b7"
+      },
+      "mints": false
+    },
+    {
+      "id": "044",
+      "fingerprint": "3ceeb1f25a6312d7",
+      "fields": {
+        "id": "2ba3f4781ce765d0",
+        "status": "2cff90d160fc22bb",
+        "statusClass": "ffbfabc54ca8a26e",
+        "titleHtml": "d9e38b16d1192f27",
+        "verseHtml": "3b1dc8d59f980953",
+        "badgeHtml": "4bbcbf5434600dcc",
+        "descriptionHtml": "6e2abdb9d488d214",
+        "price": "dda14909f742ce4c",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "f80db8b5991c147f"
+      },
+      "mints": false
+    },
+    {
+      "id": "045",
+      "fingerprint": "341b8a95bbf872d5",
+      "fields": {
+        "id": "2bf64fd8ac1f696d",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "dd85030428612b61",
+        "verseHtml": "65d1784800fee777",
+        "badgeHtml": "4bbcbf5434600dcc",
+        "descriptionHtml": "9783fd619c1e2fd5",
+        "price": "3e92280b747f8be5",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "8e5e7802869684b7"
+      },
+      "mints": false
+    },
+    {
+      "id": "046",
+      "fingerprint": "850cab4881a72e0e",
+      "fields": {
+        "id": "b2d084ae2bd0f4b3",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "ec960db219638d05",
+        "verseHtml": "1eed188cbe08fce4",
+        "badgeHtml": "df37841c95fedd82",
+        "descriptionHtml": "d07b7eca9ce2cce1",
+        "price": "dda14909f742ce4c",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "8e5e7802869684b7"
+      },
+      "mints": false
+    },
+    {
+      "id": "047",
+      "fingerprint": "35f1c54080453e55",
+      "fields": {
+        "id": "e6489353932b602d",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "295d4a25ae5982e6",
+        "verseHtml": "d4fca43238f822f4",
+        "badgeHtml": "eb673e3f82ceb615",
+        "descriptionHtml": "ff5cfa5e803b23dd",
+        "price": "c175c8e6c28ad409",
+        "note": "e3b0c44298fc1c14",
+        "buttonHtml": "8fd2895dc9903be4"
+      },
+      "mints": true
+    },
+    {
+      "id": "048",
+      "fingerprint": "c282dad0c18a7ab6",
+      "fields": {
+        "id": "a585004ef456dd04",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "526c266aa179fc8a",
+        "verseHtml": "a9ac2af8f1fca044",
+        "badgeHtml": "8908e10f48dcacfd",
+        "descriptionHtml": "5a6cc5fdd0fb4389",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "3ceada346c7738ce"
+      },
+      "mints": true
+    },
+    {
+      "id": "049",
+      "fingerprint": "6ba33e934b446859",
+      "fields": {
+        "id": "3c241d2674142a5f",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "1222a8dfd5e61e1e",
+        "verseHtml": "8b86c42e3a142f6f",
+        "badgeHtml": "de110be36e949a1f",
+        "descriptionHtml": "53d529f5a12938fa",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "1794c66c95944d06"
+      },
+      "mints": true
+    },
+    {
+      "id": "050",
+      "fingerprint": "cd8353ed92830daa",
+      "fields": {
+        "id": "1dd68a2d273df991",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "29fcaf2489e76f06",
+        "verseHtml": "442097249006945b",
+        "badgeHtml": "de110be36e949a1f",
+        "descriptionHtml": "1ca245058c821742",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "b77c95017e5aa2e1"
+      },
+      "mints": true
+    },
+    {
+      "id": "051",
+      "fingerprint": "375cefd1b293fbaf",
+      "fields": {
+        "id": "d2f4eb77ffb11b01",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "679946faad78f61c",
+        "verseHtml": "ca09672ff34c6856",
+        "badgeHtml": "9e8f8cbc44fed65a",
+        "descriptionHtml": "e9fbaf9725e96dee",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "f970e8e56cf34817"
+      },
+      "mints": true
+    },
+    {
+      "id": "052",
+      "fingerprint": "0d291122e1d92af8",
+      "fields": {
+        "id": "cfbca725ff83b01a",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "be446eb83cd86a28",
+        "verseHtml": "fec0ec85617de289",
+        "badgeHtml": "9e8f8cbc44fed65a",
+        "descriptionHtml": "94ad8aa5488c27c4",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "2bf025466a06c26b"
+      },
+      "mints": true
+    },
+    {
+      "id": "053",
+      "fingerprint": "710af3548512351d",
+      "fields": {
+        "id": "9b23c0760f95b2c9",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "a2c9402864ea3ebd",
+        "verseHtml": "caf686b255f7e9aa",
+        "badgeHtml": "9e8f8cbc44fed65a",
+        "descriptionHtml": "212541ae45f82cd2",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "33e5b2a891e9c15a"
+      },
+      "mints": true
+    },
+    {
+      "id": "054",
+      "fingerprint": "92e083c1064f8a97",
+      "fields": {
+        "id": "d86c993d110ef800",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "51649efac0546271",
+        "verseHtml": "abb798ea3ce9a4e5",
+        "badgeHtml": "9e8f8cbc44fed65a",
+        "descriptionHtml": "8355063a370e0065",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "a4fed1791517f5e6"
+      },
+      "mints": true
+    },
+    {
+      "id": "055",
+      "fingerprint": "b91829e5a00af32d",
+      "fields": {
+        "id": "6d4d381fad546406",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "776cd3a0650fd499",
+        "verseHtml": "6f11b108bc92139a",
+        "badgeHtml": "9e8f8cbc44fed65a",
+        "descriptionHtml": "9966c0ba0a347f12",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "6a65e8cad5ae72f7"
+      },
+      "mints": true
+    },
+    {
+      "id": "056",
+      "fingerprint": "402c154db65a9ca3",
+      "fields": {
+        "id": "b86e34f45be0f49c",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "b9f9c85a4c9f2df2",
+        "verseHtml": "2715158e90028c98",
+        "badgeHtml": "9e8f8cbc44fed65a",
+        "descriptionHtml": "372f6ddd9be9d0e6",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "cf5167f31ae934fb"
+      },
+      "mints": true
+    },
+    {
+      "id": "057",
+      "fingerprint": "f916489b1a72bfa0",
+      "fields": {
+        "id": "0230a7f0e3ccb489",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "bb09bdfff4218240",
+        "verseHtml": "5649f3be8d766b69",
+        "badgeHtml": "9e8f8cbc44fed65a",
+        "descriptionHtml": "1f60319ead3d62b5",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "f6399b7a7dbbe49f"
+      },
+      "mints": true
+    },
+    {
+      "id": "058",
+      "fingerprint": "e574d0dd062b20bd",
+      "fields": {
+        "id": "18873905ac1540b7",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "daee4eebbd881c21",
+        "verseHtml": "c6562ddf7d0f00f1",
+        "badgeHtml": "dd2983b55c9f7757",
+        "descriptionHtml": "f488fab3167a14fd",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "3249365e54890244"
+      },
+      "mints": true
+    },
+    {
+      "id": "059",
+      "fingerprint": "b95a66889d469d10",
+      "fields": {
+        "id": "33de253288ec0ae8",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "86ad520655ea8707",
+        "verseHtml": "28fbec3df4d60f2b",
+        "badgeHtml": "7f03564bd18f15eb",
+        "descriptionHtml": "9189889c51568300",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "8cbd32bf3446e55e"
+      },
+      "mints": true
+    },
+    {
+      "id": "060",
+      "fingerprint": "932542927bf2c3c3",
+      "fields": {
+        "id": "b301d8e98abdfad6",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "3fa28463eb233d32",
+        "verseHtml": "63d98750abb2bea8",
+        "badgeHtml": "9e8f8cbc44fed65a",
+        "descriptionHtml": "c2ccfb1c4c270722",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "4a6495f489591f9b"
+      },
+      "mints": true
+    },
+    {
+      "id": "061",
+      "fingerprint": "3dae4f990ef11e0f",
+      "fields": {
+        "id": "f135e1799003db61",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "7e31126fa1884b3f",
+        "verseHtml": "53b2b5add8885dc9",
+        "badgeHtml": "9e8f8cbc44fed65a",
+        "descriptionHtml": "6d549c21d40e0b3c",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "2f8ff2bfabdbfde8"
+      },
+      "mints": true
+    },
+    {
+      "id": "062",
+      "fingerprint": "7ac2095e43fbdabd",
+      "fields": {
+        "id": "ffdb47b70fde8d22",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "20ee049727186de8",
+        "verseHtml": "36c6e808e4790c69",
+        "badgeHtml": "9e8f8cbc44fed65a",
+        "descriptionHtml": "452a589fac418a0b",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "4863740be956ab76"
+      },
+      "mints": true
+    },
+    {
+      "id": "063",
+      "fingerprint": "2bc0bf93caefc66d",
+      "fields": {
+        "id": "060823f51b592344",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "b4eba44b5307c63d",
+        "verseHtml": "ce300b4fab10cb03",
+        "badgeHtml": "dc7f5f76391bfbfe",
+        "descriptionHtml": "dea185f387944e95",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "cbddb59ed537211e"
+      },
+      "mints": true
+    },
+    {
+      "id": "064",
+      "fingerprint": "51337bbf94ed2758",
+      "fields": {
+        "id": "5e18d34a87ed6c9b",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "e8517e5b9a7d2e3f",
+        "verseHtml": "0448e6d5c9f1f191",
+        "badgeHtml": "c4f68716ca479538",
+        "descriptionHtml": "39c8b6c145d49e67",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "f15f572934c6b1d7"
+      },
+      "mints": true
+    },
+    {
+      "id": "065",
+      "fingerprint": "f786410d54a71979",
+      "fields": {
+        "id": "b64706e7a27319da",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "858707b1e652d3ee",
+        "verseHtml": "69df5f57b3585e53",
+        "badgeHtml": "c4f68716ca479538",
+        "descriptionHtml": "c688fa9bfc2cf6b4",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "5df1fa6a47d6956a"
+      },
+      "mints": true
+    },
+    {
+      "id": "066",
+      "fingerprint": "c66d31fada0f52e5",
+      "fields": {
+        "id": "dcfc099d43f38697",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "ec138794a7d9ca79",
+        "verseHtml": "3806f0b05a95d916",
+        "badgeHtml": "dc7f5f76391bfbfe",
+        "descriptionHtml": "a09367b39cced9a8",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "408dc7faba03d59d"
+      },
+      "mints": true
+    },
+    {
+      "id": "067",
+      "fingerprint": "e887c8ab2aca8869",
+      "fields": {
+        "id": "a7a8ddd54b83931a",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "5c7c9ec5ddac397f",
+        "verseHtml": "de059b01c2a3a23c",
+        "badgeHtml": "dd2983b55c9f7757",
+        "descriptionHtml": "104dd9fbb8206038",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "43ebfa15b1f6d67a"
+      },
+      "mints": true
+    },
+    {
+      "id": "068",
+      "fingerprint": "6ec9fbf115676e56",
+      "fields": {
+        "id": "28a14b90b4cb23b9",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "835e92fe7d03107d",
+        "verseHtml": "f5c20b163dcdfd01",
+        "badgeHtml": "473d7b803d7b4ca1",
+        "descriptionHtml": "6c1d17b6272378d6",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "e1c94b918bb5f373"
+      },
+      "mints": true
+    },
+    {
+      "id": "069",
+      "fingerprint": "d6d220571de1e0ac",
+      "fields": {
+        "id": "e650739e99af18e1",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "ab16c94bf0a76107",
+        "verseHtml": "e8fe4597dca80bfc",
+        "badgeHtml": "d7bc9923f6a9c1cf",
+        "descriptionHtml": "0527df6fd4f1cabb",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "3c8b458a1988397e"
+      },
+      "mints": true
+    },
+    {
+      "id": "070",
+      "fingerprint": "695fc82dab983fe0",
+      "fields": {
+        "id": "4536bca8d82be070",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "26a5a6839b3d9998",
+        "verseHtml": "4f8fdb6d9d05d28e",
+        "badgeHtml": "0ee4c7f3b18af71a",
+        "descriptionHtml": "b99ece56211bbd8f",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "de11e18cb3bb52a8"
+      },
+      "mints": true
+    },
+    {
+      "id": "071",
+      "fingerprint": "017be8af6579eea1",
+      "fields": {
+        "id": "5afbd86adcb5b7f9",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "441430a4fc315618",
+        "verseHtml": "b8681df1367ebea5",
+        "badgeHtml": "d3c0da603a6c64e6",
+        "descriptionHtml": "97988d7d185dfd04",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "f1e013d9ca1008b7"
+      },
+      "mints": true
+    },
+    {
+      "id": "072",
+      "fingerprint": "9ec629b860f12c61",
+      "fields": {
+        "id": "bc7d001b725557c7",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "5b2ae91307d10bad",
+        "verseHtml": "3f11f06287c3bf22",
+        "badgeHtml": "d3c0da603a6c64e6",
+        "descriptionHtml": "ac7735d81141b505",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "d481841cbb07097e"
+      },
+      "mints": true
+    },
+    {
+      "id": "073",
+      "fingerprint": "0715f2ae4acc4f3d",
+      "fields": {
+        "id": "37ff4d2021d1bb2d",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "6849924074231e2f",
+        "verseHtml": "4c4561c56b674943",
+        "badgeHtml": "327e9ee644f20c1d",
+        "descriptionHtml": "b70249c4a2d2ab6c",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "11438572532b4428"
+      },
+      "mints": true
+    },
+    {
+      "id": "074",
+      "fingerprint": "de0375a31857cd63",
+      "fields": {
+        "id": "6a353c281b4b65e4",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "8873066e52a183d0",
+        "verseHtml": "7da3e001fe5160c9",
+        "badgeHtml": "1cc340ef3fa321c3",
+        "descriptionHtml": "9d1e720d45a45827",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "da134c6cb5603508"
+      },
+      "mints": true
+    },
+    {
+      "id": "075",
+      "fingerprint": "93e80446a87d5dbd",
+      "fields": {
+        "id": "32cd1acb86cd1ab3",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "ee8fb29e090f3710",
+        "verseHtml": "72ef6aa0e70eda2b",
+        "badgeHtml": "226bb232f7025944",
+        "descriptionHtml": "36da6cc0cc260734",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "7acc6cb9b56dd59d"
+      },
+      "mints": true
+    },
+    {
+      "id": "076",
+      "fingerprint": "a8e0008f8a0eee48",
+      "fields": {
+        "id": "36094ed4fbe8579b",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "1eb8620dad3b7ca3",
+        "verseHtml": "bc09990339355819",
+        "badgeHtml": "5128027a4e2cab3d",
+        "descriptionHtml": "089ba06a900516a5",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "4fd4cc9e4bcf5022"
+      },
+      "mints": true
+    },
+    {
+      "id": "077",
+      "fingerprint": "41b3c09a9b95f5b2",
+      "fields": {
+        "id": "aca8d347d8c11954",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "3824a9f4dafe92c6",
+        "verseHtml": "7bd3f3e7243b6f36",
+        "badgeHtml": "9d92db0cf5a0f538",
+        "descriptionHtml": "9b239dcbc135a500",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "a0ddac8cc7b5f70d"
+      },
+      "mints": true
+    },
+    {
+      "id": "078",
+      "fingerprint": "82461b2ed3f97d56",
+      "fields": {
+        "id": "5e7f2276a9a8269f",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "b3c1bb32c071503c",
+        "verseHtml": "8a27a74f9663eb21",
+        "badgeHtml": "53a319182f6b75af",
+        "descriptionHtml": "250eea22fd17b745",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "1872a00b0b34729b"
+      },
+      "mints": true
+    },
+    {
+      "id": "079",
+      "fingerprint": "d8a5f66ba297f98c",
+      "fields": {
+        "id": "9c8a49e5cd96b622",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "9dcefd14ed11ae5d",
+        "verseHtml": "cee21faa99f9442d",
+        "badgeHtml": "971d7d8eb36c29c4",
+        "descriptionHtml": "5cff0a7c5b2d6704",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "1d4b85822e32c096"
+      },
+      "mints": true
+    },
+    {
+      "id": "080",
+      "fingerprint": "ec81007b1436c14f",
+      "fields": {
+        "id": "6138545581201372",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "5153f32372589478",
+        "verseHtml": "a1c6101dd9e37d4b",
+        "badgeHtml": "971d7d8eb36c29c4",
+        "descriptionHtml": "fa6399d24bc7abd6",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "deabbe33d12122d3"
+      },
+      "mints": true
+    },
+    {
+      "id": "081",
+      "fingerprint": "7076cd3c416f7ecc",
+      "fields": {
+        "id": "8daea4d2b044cd2b",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "b652184ab047369d",
+        "verseHtml": "1cf041b804cbf166",
+        "badgeHtml": "4820303170011822",
+        "descriptionHtml": "bdc2b483a95655ca",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "54798037aed2baa9"
+      },
+      "mints": true
+    },
+    {
+      "id": "082",
+      "fingerprint": "b51844f4815c5206",
+      "fields": {
+        "id": "ffc3fb0bddd8a607",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "68b70eb12f31f2e6",
+        "verseHtml": "a7fe3def01e6e5fc",
+        "badgeHtml": "e3c6c48aa8deff5e",
+        "descriptionHtml": "2af71ef756c9a333",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "c9baa00a5a73b23c"
+      },
+      "mints": true
+    },
+    {
+      "id": "083",
+      "fingerprint": "71bbd4d73f254195",
+      "fields": {
+        "id": "9c60ff016521ee3f",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "8d007ff2abd06aab",
+        "verseHtml": "879ee1988b217391",
+        "badgeHtml": "d8514efd15bcd727",
+        "descriptionHtml": "7bf8478527d86994",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "3d677acdeec140fd"
+      },
+      "mints": true
+    },
+    {
+      "id": "084",
+      "fingerprint": "eb07285fa34a50cf",
+      "fields": {
+        "id": "26d9f77aa7b5e821",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "cb26ca5095b8dfae",
+        "verseHtml": "358f7064a5faade6",
+        "badgeHtml": "8643cedf0b8b9e5d",
+        "descriptionHtml": "c508c6571c385253",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "5dd0ab564abf0791"
+      },
+      "mints": true
+    },
+    {
+      "id": "085",
+      "fingerprint": "882c2467a57b61f8",
+      "fields": {
+        "id": "9e767c1df8684b3e",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "a3376f9f1d33f09c",
+        "verseHtml": "01e3515bfc4f0f24",
+        "badgeHtml": "8eeccc9eead5f4dc",
+        "descriptionHtml": "a1c4516b92a6d474",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "9adbc0c822e0eacd"
+      },
+      "mints": true
+    },
+    {
+      "id": "086",
+      "fingerprint": "85a153783b4312f1",
+      "fields": {
+        "id": "1977d36003629a9a",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "d97308604dcedd24",
+        "verseHtml": "f818ce53b30817ee",
+        "badgeHtml": "7f03564bd18f15eb",
+        "descriptionHtml": "a6165a0711b044a5",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "2b77de23965a8959"
+      },
+      "mints": true
+    },
+    {
+      "id": "087",
+      "fingerprint": "bda6721a9fbd6a34",
+      "fields": {
+        "id": "8ebced264174028f",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "4cd48493e2893546",
+        "verseHtml": "7c09ae2c42fb0c2e",
+        "badgeHtml": "c9fdc39bc1715e48",
+        "descriptionHtml": "4cec2ffb02ac6143",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "1ac81d4c7cfa2652"
+      },
+      "mints": true
+    },
+    {
+      "id": "088",
+      "fingerprint": "28509d553f3b0541",
+      "fields": {
+        "id": "7a874734355315df",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "998880a4cc6a08bf",
+        "verseHtml": "f2f271f649368c3e",
+        "badgeHtml": "b13433efe54ee5d7",
+        "descriptionHtml": "bfa55f611fe126b1",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "931fa4f9cc07b1cd"
+      },
+      "mints": true
+    },
+    {
+      "id": "089",
+      "fingerprint": "95d47820bfa35a5a",
+      "fields": {
+        "id": "0c08340630224ed1",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "becd2d24dc0523fd",
+        "verseHtml": "66d9affe9a26972a",
+        "badgeHtml": "b13433efe54ee5d7",
+        "descriptionHtml": "73df72ef11a46da5",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "3b7d9892d1259aa2"
+      },
+      "mints": true
+    },
+    {
+      "id": "090",
+      "fingerprint": "664fd2b6cd76b2be",
+      "fields": {
+        "id": "81aac7f5ae2e7fdd",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "9ff7156f14935387",
+        "verseHtml": "84617e5f8829fea1",
+        "badgeHtml": "7d2543e44d123d31",
+        "descriptionHtml": "c57cbe7b06ef6212",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "a99594004039e9ab"
+      },
+      "mints": true
+    },
+    {
+      "id": "091",
+      "fingerprint": "29c64e6d40b109cb",
+      "fields": {
+        "id": "eb95621b209ad8b0",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "a857c396f3d2a9f9",
+        "verseHtml": "90e82a63c6c172c3",
+        "badgeHtml": "75368cd574a7a440",
+        "descriptionHtml": "c57cbe7b06ef6212",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "d273264bbae129de"
+      },
+      "mints": true
+    },
+    {
+      "id": "092",
+      "fingerprint": "d2c1a0555de4361d",
+      "fields": {
+        "id": "16e5cb32123fe4bf",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "75258095e8a46cb3",
+        "verseHtml": "37ab19aa34d6b4b8",
+        "badgeHtml": "75368cd574a7a440",
+        "descriptionHtml": "4a03cb2641c488b4",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "279b4cd5d02f9b59"
+      },
+      "mints": true
+    },
+    {
+      "id": "093",
+      "fingerprint": "aebd03c5379a2291",
+      "fields": {
+        "id": "891a3e6bc9f5be4c",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "fb6ec26ce5146113",
+        "verseHtml": "2d19a1ec9a2df122",
+        "badgeHtml": "11ca1fc0f4d66e3d",
+        "descriptionHtml": "c57cbe7b06ef6212",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "beb453c106001cce"
+      },
+      "mints": true
+    },
+    {
+      "id": "094",
+      "fingerprint": "1e412439646c6334",
+      "fields": {
+        "id": "5261a1516ce818f8",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "ce04166af616dd00",
+        "verseHtml": "7b30de7daeceed54",
+        "badgeHtml": "e8cbedfc3954bbb1",
+        "descriptionHtml": "b57558234785b80c",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "3a7c6b0c3c9855b5"
+      },
+      "mints": true
+    },
+    {
+      "id": "095",
+      "fingerprint": "e7914837c8d036ff",
+      "fields": {
+        "id": "115c85c54ec48b81",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "3831638313caa14f",
+        "verseHtml": "2eecf1f380b64103",
+        "badgeHtml": "0af004af4c4676bb",
+        "descriptionHtml": "dae07443a58b8eac",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "fd7fe42f4be7e208"
+      },
+      "mints": true
+    },
+    {
+      "id": "096",
+      "fingerprint": "612701dee5bcf212",
+      "fields": {
+        "id": "f8c0a071f38cbea8",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "a374322e98b003c0",
+        "verseHtml": "fb1fdaa33a374b46",
+        "badgeHtml": "0af004af4c4676bb",
+        "descriptionHtml": "4cf72c81acc96135",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "9203226676a48db0"
+      },
+      "mints": true
+    },
+    {
+      "id": "097",
+      "fingerprint": "aa982418b0cd1c75",
+      "fields": {
+        "id": "23f9194bae2863c6",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "7a7ed04cf8a36d06",
+        "verseHtml": "46a4340ccfc15498",
+        "badgeHtml": "0af004af4c4676bb",
+        "descriptionHtml": "0f487b3b35bbb464",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "07da64465e4a0245"
+      },
+      "mints": true
+    },
+    {
+      "id": "098",
+      "fingerprint": "9d370edd12a15527",
+      "fields": {
+        "id": "35e1d1aeed3f7179",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "88939fa793a3e796",
+        "verseHtml": "801dcba18bd751ff",
+        "badgeHtml": "e11670e9214934b3",
+        "descriptionHtml": "0897e04a6fdf503e",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "af8252e1fa5be048"
+      },
+      "mints": true
+    },
+    {
+      "id": "099",
+      "fingerprint": "4ce9ddf82f4854ed",
+      "fields": {
+        "id": "495e31529a5c65b6",
+        "status": "35e0d0360a0af6d1",
+        "statusClass": "247610f4dedd4ab7",
+        "titleHtml": "ba11be881101feb2",
+        "verseHtml": "ac2b28ead6053c8d",
+        "badgeHtml": "039afc9e8e3d13a0",
+        "descriptionHtml": "ba11be881101feb2",
+        "price": "c175c8e6c28ad409",
+        "note": "210d77cfd8c19bff",
+        "buttonHtml": "794512f5df6f093b"
+      },
+      "mints": true
+    }
+  ]
+}

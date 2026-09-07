@@ -8,8 +8,14 @@
   },
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/verify-vault.mjs",
     "build": "vite build",
     "preview": "vite preview",
+    "vault:build": "node scripts/build-vault.mjs && node scripts/build-dna.mjs && node scripts/verify-vault.mjs",
+    "vault:verify": "node scripts/verify-vault.mjs",
+    "vault:lock": "node scripts/verify-vault.mjs --lock",
+    "vault:test": "node scripts/test-vault-guards.mjs",
+    "verify": "node scripts/verify-vault.mjs && node scripts/test-vault-guards.mjs",
     "lazy-mint": "node automated-lazy-mint.js",
     "setup-nfts": "node automated-lazy-mint.js"
   },
