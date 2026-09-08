@@ -7507,8 +7507,20 @@ Just for ODAT, твою мать.</div>
     .dna-pull{border-left:2px solid var(--red-dark);padding:.4rem 0 .4rem 1.6rem;margin:0 0 3rem;}
     .dna-pull q{font-family:var(--font-display,'Space Grotesk','Inter',sans-serif);font-size:clamp(1.3rem,3.2vw,1.9rem);
       font-weight:300;font-style:italic;color:var(--silver-bright);line-height:1.35;quotes:none;}
-    .dna-body p{color:var(--silver-medium);font-size:1.02rem;line-height:1.85;margin:0 0 1.6rem;}
-    .dna-body p.lede{font-size:1.18rem;color:var(--silver-bright);}
+    /* Set exactly like the poems. This page is the same voice as the vault —
+       her own — so it should not arrive in a different typeface from the work it
+       is introducing. Same family, weight, size, leading and tracking as
+       .nft-verse; only the colour and the measure differ. */
+    .dna-body p{font-family:var(--font-verse,'Geist Mono',monospace);font-weight:400;
+      font-size:.95rem;line-height:1.78;letter-spacing:-.005em;
+      color:var(--silver-medium);margin:0 0 1.6rem;}
+    .dna-body p.lede{font-size:1.06rem;line-height:1.72;color:var(--silver-bright);}
+    .dna-said p{font-family:var(--font-verse,'Geist Mono',monospace);font-size:.92rem;
+      line-height:1.75;letter-spacing:-.005em;}
+    @media (max-width:760px){
+      .dna-body p{font-size:.88rem;line-height:1.72;}
+      .dna-body p.lede{font-size:.98rem;}
+    }
     .dna-body .highlight{color:var(--red-crimson);}
     .dna-body a{color:var(--red-crimson);text-decoration:none;border-bottom:1px solid var(--red-dark);
       transition:color .25s,border-color .25s;}
@@ -8498,7 +8510,7 @@ Just for ODAT, твою мать.</div>
                     <div class="tech-badge">thirdweb Powered</div>
                 </div>
                 <p class="footer-text">
-                    Underground • Uncompromising • Unforgettable • 2025
+                    Underground • Uncompromising • Unforgettable • 2026
                 </p>
             </div>
         </div>

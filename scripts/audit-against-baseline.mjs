@@ -54,6 +54,10 @@ const EXPECTED = [
  * to be written down, because it is also what every real regression would say.
  */
 const RETIRED_TEXT = new Map([
+  ['Underground • Uncompromising • Unforgettable • 2025',
+   'the footer year had gone stale — it read 2025 through September 2026. Bumped to ' +
+   '2026 by request. If it goes stale again, the fix is to generate it at build ' +
+   'time rather than type it.'],
   ['Fleek Deployed',
    'factually wrong. atuona.xyz is hosted on 4everland, deploying from GitHub main — ' +
    'stated three times in ORACLE_ALL_PRODUCTS_RESILIENCE.md, and the word "Fleek" appears ' +
