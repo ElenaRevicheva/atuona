@@ -279,7 +279,7 @@ const CSS = `
     .poem.open .poem-num{color:var(--red-crimson);}
     .poem-txt{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:.24rem;}
     /* Her ask: every row carries the poem's NAME, the way a wiki chapter does. */
-    .poem-title{font-family:var(--font-display,'Space Grotesk','Inter',sans-serif);font-size:1.06rem;font-weight:600;
+    .poem-title{font-family:var(--font-title,'Geologica','Inter',sans-serif);font-size:1.06rem;font-weight:600;
       color:var(--silver-bright);letter-spacing:-.015em;}
     .poem.open .poem-title{color:var(--red-crimson);}
     .poem-sub{font-size:.8rem;color:var(--grey-light);line-height:1.45;

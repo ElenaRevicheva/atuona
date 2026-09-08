@@ -18,7 +18,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { FONTS_HREF, DISPLAY, MONO, TRACK } from './lib/type.mjs';
+import { FONTS_HREF, DISPLAY, MONO, TITLE, VERSE, TRACK } from './lib/type.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const HTML = join(ROOT, 'index.html');
@@ -38,6 +38,8 @@ const block = `${START}
         :root{
             --font-display:${DISPLAY};
             --font-mono:${MONO};
+            --font-title:${TITLE};
+            --font-verse:${VERSE};
         }
         body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 
@@ -46,9 +48,27 @@ const block = `${START}
         .hero-glitch{font-family:var(--font-display);font-weight:800;letter-spacing:${TRACK.hero};}
         .site-title .russian{font-family:var(--font-display);font-weight:800;letter-spacing:-.04em;}
         .section-title{font-family:var(--font-display);font-weight:800;letter-spacing:${TRACK.display};}
-        .nft-title{font-family:var(--font-display);font-weight:700;letter-spacing:${TRACK.title};}
-        .vault-title,.part-title,.poem-title,.dna-pull q,.dna-n{
+        /* Poem titles use the CYRILLIC-CAPABLE face, not the display face. Syne
+           has no Cyrillic, so 43 Russian titles were falling back to Inter while
+           the English ones set in Syne — half the vault looking unstyled. */
+        .nft-title{font-family:var(--font-title);font-weight:600;letter-spacing:${TRACK.title};}
+
+        /* ── The poems themselves ────────────────────────────────────────────
+           Inter italic is an oblique of a UI typeface: soft, and the same shapes
+           as every dashboard. Geist Mono is sharper, current, and honest about
+           what this is — poetry committed to a chain by someone who codes. Set
+           upright, because mono italic is a slant rather than a design. Full
+           Cyrillic, so the Russian half sets exactly like the English half.
+           The red rule, the colour and the spacing around it are untouched. */
+        .nft-verse{font-family:var(--font-verse);font-style:normal;font-weight:400;
+            font-size:.95rem;line-height:1.78;letter-spacing:-.005em;}
+        @media (max-width:760px){ .nft-verse{font-size:.88rem;line-height:1.72;} }
+        /* .poem-title is deliberately NOT here — it is bilingual and belongs to
+           --font-title. Listing it under the display face would contradict the
+           vault's own sheet and confuse whoever reads this next. */
+        .vault-title,.part-title,.dna-pull q,.dna-n{
             font-family:var(--font-display);letter-spacing:${TRACK.title};}
+        .poem-title{font-family:var(--font-title);letter-spacing:${TRACK.title};}
         .vault-title{font-weight:700;letter-spacing:${TRACK.display};}
         .part-title{font-weight:800;}
         .dna-n{font-weight:700;letter-spacing:-.04em;}
