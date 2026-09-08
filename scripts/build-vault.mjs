@@ -197,23 +197,29 @@ const CSS = `
        been hand-edited for a year and had already drifted. */
     .vault{max-width:1080px;margin:0 auto;padding:0 1rem 4rem;}
     .vault-head{border-top:2px solid var(--red-dark);padding-top:1.6rem;margin-bottom:.6rem;}
-    .vault-kicker{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.34em;
+    .vault-kicker{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.66rem;letter-spacing:.34em;
       text-transform:uppercase;color:var(--red-crimson);margin-bottom:.7rem;}
-    .vault-title{font-family:'Space Grotesk','Inter',sans-serif;font-weight:300;font-size:clamp(1.7rem,4vw,2.5rem);
-      letter-spacing:.02em;color:var(--silver-bright);margin:0 0 .7rem;}
+    .vault-title{font-family:var(--font-display,'Space Grotesk','Inter',sans-serif);font-weight:700;font-size:clamp(1.8rem,4.2vw,2.7rem);
+      letter-spacing:-.03em;color:var(--silver-bright);margin:0 0 .7rem;}
     .vault-note{color:var(--silver-dark);font-size:.92rem;line-height:1.65;max-width:60ch;margin:0 0 1.4rem;}
     .vault-tools{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;
       padding-bottom:1.3rem;border-bottom:1px solid var(--grey-dark);}
     .vault-find{flex:1 1 260px;min-width:0;background:rgba(0,0,0,.5);border:1px solid var(--grey-medium);
-      color:var(--silver-bright);font-family:'JetBrains Mono',monospace;font-size:.78rem;
+      color:var(--silver-bright);font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.78rem;
       padding:.68rem .9rem;letter-spacing:.04em;transition:border-color .25s;}
     .vault-find::placeholder{color:var(--grey-light);}
     .vault-find:focus{outline:none;border-color:var(--red-crimson);}
-    .vault-tally{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.16em;
+    .vault-tally{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.68rem;letter-spacing:.16em;
       text-transform:uppercase;color:var(--silver-dark);white-space:nowrap;}
-    .vault-empty{display:none;padding:2.4rem 0;color:var(--silver-dark);font-family:'JetBrains Mono',monospace;
+    .vault-empty{display:none;padding:2.4rem 0;color:var(--silver-dark);font-family:var(--font-mono,'JetBrains Mono',monospace);
       font-size:.8rem;letter-spacing:.06em;}
     .vault.finding .vault-empty.on{display:block;}
+
+    /* Numerals in true columns: #045, the dates and the tallies stop shimmering
+       by a pixel from row to row. Set here rather than in the type layer because
+       this sheet ships inside the body and would otherwise win against it. */
+    .poem-num,.poem-date,.part-count,.run-y,.run-n,.vault-tally,.nft-id{
+      font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;}
 
     /* ── Level one: the parts ───────────────────────────────────────────── */
     .part{border-bottom:1px solid var(--grey-dark);}
@@ -223,15 +229,15 @@ const CSS = `
       transition:background .3s,padding-left .3s;}
     .part-btn:hover{background:rgba(139,0,0,.09);padding-left:.75rem;}
     .part-btn:focus-visible{outline:2px solid var(--red-crimson);outline-offset:2px;}
-    .part-num{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.24em;
+    .part-num{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.66rem;letter-spacing:.24em;
       color:var(--red-crimson);flex:0 0 auto;min-width:4.6rem;}
     .part-txt{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:.34rem;}
-    .part-title{font-family:'Space Grotesk','Inter',sans-serif;font-size:clamp(1.25rem,2.6vw,1.75rem);
-      font-weight:400;letter-spacing:.12em;color:var(--silver-bright);}
-    .part-note{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.08em;
+    .part-title{font-family:var(--font-display,'Space Grotesk','Inter',sans-serif);font-size:clamp(1.3rem,2.8vw,1.9rem);
+      font-weight:800;letter-spacing:.08em;color:var(--silver-bright);}
+    .part-note{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.68rem;letter-spacing:.08em;
       color:var(--silver-dark);}
     .part-side{flex:0 0 auto;display:flex;align-items:center;gap:.9rem;}
-    .part-count{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;
+    .part-count{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.66rem;letter-spacing:.14em;
       color:var(--grey-light);white-space:nowrap;}
     /* A plus that becomes a minus. It says "this contains things", not "go here". */
     .part-mark{position:relative;width:22px;height:22px;border:1px solid var(--grey-medium);flex:0 0 auto;}
@@ -254,9 +260,9 @@ const CSS = `
 
     /* ── The year runs ──────────────────────────────────────────────────── */
     .run{display:flex;align-items:center;gap:.9rem;padding:1.5rem .3rem .6rem;}
-    .run-y{font-family:'JetBrains Mono',monospace;font-size:.8rem;letter-spacing:.2em;color:var(--red-crimson);}
+    .run-y{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.8rem;letter-spacing:.2em;color:var(--red-crimson);}
     .run-rule{flex:1 1 auto;height:1px;background:var(--grey-dark);}
-    .run-n{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;color:var(--grey-light);}
+    .run-n{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.62rem;letter-spacing:.14em;color:var(--grey-light);}
     .vault.finding .run{display:none;}
 
     /* ── Level two: one poem, one row ───────────────────────────────────── */
@@ -268,25 +274,25 @@ const CSS = `
       transition:background .28s,padding-left .28s;}
     .poem-btn:hover{background:rgba(139,0,0,.07);padding-left:.7rem;}
     .poem-btn:focus-visible{outline:2px solid var(--red-crimson);outline-offset:2px;}
-    .poem-num{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.08em;
+    .poem-num{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.72rem;letter-spacing:.08em;
       color:var(--grey-light);flex:0 0 auto;min-width:3.1rem;}
     .poem.open .poem-num{color:var(--red-crimson);}
     .poem-txt{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:.24rem;}
     /* Her ask: every row carries the poem's NAME, the way a wiki chapter does. */
-    .poem-title{font-family:'Space Grotesk','Inter',sans-serif;font-size:1.02rem;font-weight:400;
-      color:var(--silver-bright);letter-spacing:.01em;}
+    .poem-title{font-family:var(--font-display,'Space Grotesk','Inter',sans-serif);font-size:1.06rem;font-weight:600;
+      color:var(--silver-bright);letter-spacing:-.015em;}
     .poem.open .poem-title{color:var(--red-crimson);}
     .poem-sub{font-size:.8rem;color:var(--grey-light);line-height:1.45;
       overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
     .poem-side{flex:0 0 auto;display:flex;align-items:center;gap:.75rem;}
-    .poem-status{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.14em;
+    .poem-status{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.55rem;letter-spacing:.14em;
       padding:.2rem .45rem;border:1px solid var(--grey-medium);color:var(--grey-light);}
     .poem-status.live{border-color:var(--red-dark);color:var(--red-crimson);}
-    .poem-lang{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;color:var(--grey-light);}
-    .poem-date{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.06em;
+    .poem-lang{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.58rem;letter-spacing:.14em;color:var(--grey-light);}
+    .poem-date{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.63rem;letter-spacing:.06em;
       color:var(--silver-dark);white-space:nowrap;min-width:6.4rem;text-align:right;}
     .poem-leader{width:2.2rem;height:1px;background:var(--grey-dark);}
-    .poem-open{display:inline-flex;align-items:center;gap:.3rem;font-family:'JetBrains Mono',monospace;
+    .poem-open{display:inline-flex;align-items:center;gap:.3rem;font-family:var(--font-mono,'JetBrains Mono',monospace);
       font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red-crimson);white-space:nowrap;}
     .poem.open .poem-open svg{transform:rotate(90deg);}
     .poem-open svg{transition:transform .35s cubic-bezier(.2,.8,.2,1);}
@@ -297,7 +303,7 @@ const CSS = `
        overrides it. A transform does not affect scrollHeight, so the lift cannot
        disturb the measured panel either. */
     .poem-in{padding:.4rem 0 2rem 3.1rem;}
-    .poem-permalink{display:inline-block;margin-top:1.1rem;font-family:'JetBrains Mono',monospace;
+    .poem-permalink{display:inline-block;margin-top:1.1rem;font-family:var(--font-mono,'JetBrains Mono',monospace);
       font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grey-light);
       text-decoration:none;border-bottom:1px solid var(--grey-dark);transition:color .25s,border-color .25s;}
     .poem-permalink:hover{color:var(--red-crimson);border-color:var(--red-dark);}
