@@ -32,6 +32,7 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
+import { UNIT, count as unitCount } from './lib/words.mjs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -159,7 +160,7 @@ function partBlock(part, idx) {
   const years = [...new Set(mine.map((p) => p.year))].sort((a, b) => Number(b) - Number(a));
   const body = years.map((y) => {
     const run = mine.filter((p) => p.year === y);
-    return `        <div class="run"><span class="run-y">${esc(y)}</span><span class="run-rule" aria-hidden="true"></span><span class="run-n">${run.length} moment${run.length === 1 ? '' : 's'}</span></div>
+    return `        <div class="run"><span class="run-y">${esc(y)}</span><span class="run-rule" aria-hidden="true"></span><span class="run-n">${unitCount(run.length)}</span></div>
 ${run.map(poemRow).join('\n')}`;
   }).join('\n');
 
@@ -175,7 +176,7 @@ ${run.map(poemRow).join('\n')}`;
               <span class="part-note">${esc(part.note)} · #${pad(lo)}–#${pad(hi)} · ${langNote}</span>
             </span>
             <span class="part-side">
-              <span class="part-count">${mine.length} moments</span>
+              <span class="part-count">${unitCount(mine.length)}</span>
               <span class="part-mark" aria-hidden="true"></span>
             </span>
           </button>
@@ -429,7 +430,7 @@ const JS = `
           }
         });
         if (empty) empty.classList.toggle('on', hits === 0);
-        if (tally) tally.textContent = q ? hits + ' of ' + TOTAL + ' moments' : TOTAL + ' moments';
+        if (tally) tally.textContent = q ? hits + ' of ' + TOTAL + ' ${UNIT.many}' : TOTAL + ' ${UNIT.many}';
         vault.querySelectorAll('.part.open > .part-body').forEach(function (p) {
           if (p.style.maxHeight !== 'none') open(p);
         });
@@ -455,15 +456,15 @@ const tree = `${MARK_START}
 
       <div class="vault-head">
         <div class="vault-kicker">Contents</div>
-        <h3 class="vault-title">Gallery of Moments</h3>
-        <p class="vault-note">${total} moments, in two parts. Each one opens where it stands — the full
+        <h3 class="vault-title">Gallery of ${UNIT.Many}</h3>
+        <p class="vault-note">${total} ${UNIT.many}, in two parts. Each one opens where it stands — the full
           text is on this page whether it is open or shut. Type a number or a word to find one.</p>
         <div class="vault-tools">
           <input id="vault-find" class="vault-find" type="search" autocomplete="off" spellcheck="false"
-            placeholder="find a moment — 045, каблук, eternity…" aria-label="Find a moment by number, title or line">
-          <span id="vault-tally" class="vault-tally">${total} moments</span>
+            placeholder="find ${UNIT.article} ${UNIT.one} — 045, каблук, eternity…" aria-label="Find ${UNIT.article} ${UNIT.one} by number, title or line">
+          <span id="vault-tally" class="vault-tally">${total} ${UNIT.many}</span>
         </div>
-        <div id="vault-empty" class="vault-empty">No moment matches that. Try a number — 001 to ${String(total).padStart(3, '0')}.</div>
+        <div id="vault-empty" class="vault-empty">No ${UNIT.one} matches that. Try a number — 001 to ${String(total).padStart(3, '0')}.</div>
       </div>
 
 ${PARTS.map(partBlock).join('\n')}
@@ -597,7 +598,7 @@ if (CHECK) {
   console.log(`build-vault: ${total} poems in ${PARTS.length} parts → index.html`);
   PARTS.forEach((p) => {
     const n = poems.filter((x) => x.venue === p.venue).length;
-    console.log(`  ${p.num.padEnd(8)} ${p.title.padEnd(9)} ${n} moments`);
+    console.log(`  ${p.num.padEnd(8)} ${p.title.padEnd(9)} ${unitCount(n)}`);
   });
   console.log(`  claim buttons preserved: ${nowBtn.length} (${poems.filter((p) => p.mints).length} carry an onclick)`);
 }

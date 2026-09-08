@@ -24,6 +24,7 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
+import { UNIT } from './lib/words.mjs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -114,7 +115,7 @@ const section = `${DNA_START}
                         <div class="dna-ledger">
                             <div class="dna-cell">
                                 <div class="dna-n">${total}</div>
-                                <div class="dna-l">Moments<br>in the vault</div>
+                                <div class="dna-l">${UNIT.Many}<br>in the vault</div>
                             </div>
                             <div class="dna-cell">
                                 <div class="dna-n">${litprom.length}</div>
@@ -132,15 +133,15 @@ const section = `${DNA_START}
 
                         <p>
                             Roughly half of them are in Russian and half in English. I do not translate
-                            myself for anyone's comfort — the moment picks its language and I follow it.
+                            myself for anyone's comfort — the ${UNIT.one} picks its language and I follow it.
                         </p>
 
                         <p>
-                            <span class="highlight">Nothing here is for sale.</span> Claiming a moment costs
+                            <span class="highlight">Nothing here is for sale.</span> Claiming ${UNIT.article} ${UNIT.one} costs
                             gas and nothing else, and the chain hands you one you did not pick. That is
                             deliberate. In a world where the algorithm predicts what you want and feeds it
                             back to you, this gallery refuses: you arrive thinking you know which pain is
-                            yours, and the moment chooses you instead.
+                            yours, and the ${UNIT.one} chooses you instead.
                         </p>
 
                         <p>
@@ -156,7 +157,7 @@ const section = `${DNA_START}
                             You send a text in and the <em lang="ru">редколлегия</em> — the editorial board —
                             decides whether it runs at all, and which section it belongs in. No feed, no
                             algorithm, no follower count. A verdict, from people who read it.
-                            <span class="highlight">${litprom.length} of the moments in this vault carry the line
+                            <span class="highlight">${litprom.length} of the ${UNIT.many} in this vault carry the line
                             <em lang="ru">принято к публикации</em> — accepted for publication.</span>
                             ${litprom.length} times the verdict was yes. My name there is
                             <a href="http://litprom.ru/profil69387.html" target="_blank" rel="noopener" lang="ru">Атуона</a>.
@@ -233,4 +234,4 @@ if ((html.match(/<section id="dna"/g) || []).length !== 1) throw new Error('DNA 
 writeFileSync(HTML, html, 'utf8');
 console.log('build-dna: #dna section + nav → index.html');
 console.log('  nav order:', got.join(' · '));
-console.log(`  ledger: ${total} moments · LITPROM ${litprom.length} (${lp.from}–${lp.to}) · ATUONA ${atuona.length} (${at.from}–${at.to})`);
+console.log(`  ledger: ${total} ${UNIT.many} · LITPROM ${litprom.length} (${lp.from}–${lp.to}) · ATUONA ${atuona.length} (${at.from}–${at.to})`);
