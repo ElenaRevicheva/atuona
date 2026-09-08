@@ -48,6 +48,19 @@ const EXPECTED = [
  * Each needs a reason, because "we meant to" is the excuse every real regression
  * also gives.
  */
+/**
+ * Text from the old page that is gone ON PURPOSE, each with its reason. The
+ * audit will not pass a missing line without an entry here — "we meant to" has
+ * to be written down, because it is also what every real regression would say.
+ */
+const RETIRED_TEXT = new Map([
+  ['Fleek Deployed',
+   'factually wrong. atuona.xyz is hosted on 4everland, deploying from GitHub main — ' +
+   'stated three times in ORACLE_ALL_PRODUCTS_RESILIENCE.md, and the word "Fleek" appears ' +
+   'nowhere in it. Replaced with "4everland Deployed". A public page should not claim a ' +
+   'vendor it does not use.'],
+]);
+
 const RETIRED_CLASSES = new Map([
   ['nft-grid', 'the flat 99-card grid container, replaced by the vault tree. Its CSS rule ' +
                'is retained but unused, and the one script that queried it — the hero ' +
@@ -86,7 +99,8 @@ const survives = (l) =>
   nowSet.has(l) || nowText.includes(l) ||
   nowSet.has(applyRenames(l)) || nowText.includes(applyRenames(l));
 
-const lostText = baseLines.filter((l) => !survives(l));
+const retiredText = baseLines.filter((l) => !survives(l) && RETIRED_TEXT.has(l));
+const lostText = baseLines.filter((l) => !survives(l) && !RETIRED_TEXT.has(l));
 
 /* ── Structural handles ───────────────────────────────────────────────────── */
 const grab = (html, re, g = 1) => {
@@ -151,6 +165,7 @@ let bad = 0;
 console.log('── TEXT ────────────────────────────────────────────────');
 if (!lostText.length) {
   console.log(`  ✓ every one of the ${baseLines.length} text lines from the old site is still present`);
+  for (const r of retiredText) console.log(`      corrected on purpose — "${r}": ${RETIRED_TEXT.get(r)}`);
 } else {
   bad += lostText.length;
   console.log(`  ✗ ${lostText.length} line(s) from the old site are GONE:`);
