@@ -15,9 +15,10 @@
     "vault:verify": "node scripts/verify-vault.mjs",
     "vault:lock": "node scripts/verify-vault.mjs --lock",
     "vault:test": "node scripts/test-vault-guards.mjs",
-    "verify": "node scripts/verify-vault.mjs && node scripts/test-vault-guards.mjs",
+    "verify": "node scripts/verify-vault.mjs && node scripts/test-vault-guards.mjs && node scripts/audit-against-baseline.mjs",
     "lazy-mint": "node automated-lazy-mint.js",
-    "setup-nfts": "node automated-lazy-mint.js"
+    "setup-nfts": "node automated-lazy-mint.js",
+    "vault:audit": "node scripts/audit-against-baseline.mjs"
   },
   "dependencies": {
     "dotenv": "^16.6.1",

@@ -505,6 +505,35 @@ function patchRuntimeIds(src) {
   return src.replace(OLD, NEW);
 }
 
+/* ── The hero button pointed at the container this tree replaced ─────────────
+   "EXPLORE THE VOID" scrolled the reader to the poems with:
+
+       const nftGrid = document.querySelector('.nft-grid');
+       nftGrid.scrollIntoView(...);
+
+   The flat grid is gone, so that query returns null and the click throws a
+   TypeError on the line after the notification fires — the button lights up and
+   does nothing. Caught by audit-against-baseline.mjs, which noticed the class
+   `nft-grid` existed in the old page and in no element of the new one.
+
+   Repointed at the vault, with the old grid kept as a fallback and a null guard
+   so it degrades to doing nothing rather than throwing. */
+function patchHeroScroll(src) {
+  // Matched by regex, not by a literal: index.html is checked out with CRLF on
+  // this machine, so a multi-line literal written with \n silently matches
+  // nothing. That is the same class of bug as the publisher's whitespace splice.
+  const OLD = /const nftGrid = document\.querySelector\('\.nft-grid'\);\s*\r?\n\s*nftGrid\.scrollIntoView\(\{ behavior: 'smooth', block: 'start' \}\);/;
+  const NEW = `// The vault replaced the old flat .nft-grid container.
+                    const nftGrid = document.querySelector('#vault, .vault, .nft-grid');
+                    if (nftGrid) nftGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });`;
+  if (src.includes(`document.querySelector('#vault, .vault, .nft-grid')`)) return src;
+  const hits = (src.match(new RegExp(OLD.source, 'g')) || []).length;
+  if (hits !== 1) {
+    throw new Error(`expected exactly 1 hero scroll target, found ${hits} — refusing to guess at the hero button`);
+  }
+  return src.replace(OLD, NEW);
+}
+
 /* ── Splice ──────────────────────────────────────────────────────────────────
    First build replaces the original flat `.nft-grid`; every build after that
    replaces between the markers. Either way the region is fully generated, so
@@ -531,6 +560,7 @@ if (html.includes(MARK_START) && html.includes(MARK_END)) {
 }
 
 html = patchRuntimeIds(html);
+html = patchHeroScroll(html);
 
 /* ── Proof, not hope ─────────────────────────────────────────────────────────
    This is an NFT drop. Every claim button that was in the old region must be in

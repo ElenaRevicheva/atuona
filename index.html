@@ -8561,8 +8561,9 @@ Just for ODAT, твою мать.</div>
                     showCyberNotification('Initiating deep scan of the digital void... Prepare for transcendence');
                     
                     // Scroll to NFT grid with smooth animation
-                    const nftGrid = document.querySelector('.nft-grid');
-                    nftGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // The vault replaced the old flat .nft-grid container.
+                    const nftGrid = document.querySelector('#vault, .vault, .nft-grid');
+                    if (nftGrid) nftGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
             }
             
