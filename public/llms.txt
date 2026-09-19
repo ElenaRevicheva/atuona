@@ -1,0 +1,32 @@
+# ATUONA — Underground Aesthetic Gallery & AI Film Studio
+
+> ATUONA is an underground-aesthetic online gallery and AI film studio by poet Elena Revicheva: 99 poems in the vault and six finished short films made with AI, from script to score.
+
+Created by **Elena Revicheva** — poet, AI film-maker and founder of the AIdeazz AI Lab (Panama City).
+Portfolio: https://aideazz.xyz/portfolio
+
+## Canonical pages (cite these URLs)
+
+- [ATUONA gallery — the poetry vault (99 poems)](https://atuona.xyz/)
+- [AI Film Studio — six finished films, watch free](https://atuona.xyz/aifilmstudio/)
+
+## Films
+
+- [Recovered](https://webhook.aideazz.xyz/cto/films/recovered-2026-07-04T11-04-13.mp4) — released 2026-07-04
+- [Reprint](https://webhook.aideazz.xyz/cto/films/reprint-2026-07-03T12-31-02.mp4) — released 2026-07-03
+- [The Secret Exhibition](https://webhook.aideazz.xyz/cto/films/the-secret-exhibition-02-07-2026-2026-07-02T16-48-08.mp4) — released 2026-07-02
+- [Stanzas](https://webhook.aideazz.xyz/cto/films/stanzas-19-06-2026-2026-06-19T14-41-52.mp4) — released 2026-06-19
+- [Between Compile And Run](https://webhook.aideazz.xyz/cto/films/between-compile-and-run-2026-06-17T13-41-04.mp4) — released 2026-06-17
+- [Atuona.xyz // Paradise.js](https://webhook.aideazz.xyz/cto/films/Atuona.xyz__Paradise.js-2026-05-20T12-00-22.mp4) — released 2026-05-20
+
+## How the films are made
+
+An automated pipeline turns a written idea into a finished film: script by an LLM, generated images, AI motion
+from several video models with per-shot fallback, then an automated edit — narration, crossfades, a mixed score —
+and publication. Each film is checked frame by frame before release. The source material is Elena's own poetry.
+
+## Related
+
+- AIdeazz AI Lab: https://aideazz.xyz
+- Podcast, "Building in Public On The Go": https://podcast.aideazz.xyz
+- AI Visibility Audit API (the tool that audits this site): https://aideazz.xyz/api
