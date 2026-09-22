@@ -1,6 +1,6 @@
 # ATUONA — Underground Aesthetic Gallery & AI Film Studio
 
-> ATUONA is an underground-aesthetic online gallery and AI film studio by poet Elena Revicheva: 99 poems in the vault and seven finished short films made with AI, from script to score.
+> ATUONA is an underground-aesthetic online gallery and AI film studio by poet Elena Revicheva: 99 poems in the vault and eight finished short films made with AI, from script to score.
 
 Created by **Elena Revicheva** — poet, AI film-maker and founder of the AIdeazz AI Lab (Panama City).
 Portfolio: https://aideazz.xyz/portfolio
@@ -8,10 +8,11 @@ Portfolio: https://aideazz.xyz/portfolio
 ## Canonical pages (cite these URLs)
 
 - [ATUONA gallery — the poetry vault (99 poems)](https://atuona.xyz/)
-- [AI Film Studio — seven finished films, watch free](https://atuona.xyz/aifilmstudio/)
+- [AI Film Studio — eight finished films, watch free](https://atuona.xyz/aifilmstudio/)
 
 ## Films
 
+- [Crimson Escape](https://webhook.aideazz.xyz/cto/films/crimson-escape-2026-09-22T16-32-00.mp4) — released 2026-09-22
 - [Could not generate content.](https://webhook.aideazz.xyz/cto/films/could-not-generate-content-2026-09-22T10-50-15.mp4) — released 2026-09-22
 - [Recovered](https://webhook.aideazz.xyz/cto/films/recovered-2026-07-04T11-04-13.mp4) — released 2026-07-04
 - [Reprint](https://webhook.aideazz.xyz/cto/films/reprint-2026-07-03T12-31-02.mp4) — released 2026-07-03
