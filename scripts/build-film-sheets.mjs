@@ -21,6 +21,162 @@ const FILMS_BASE = 'https://webhook.aideazz.xyz/cto/films/';
 
 const FILMS = [
   {
+    "slug": "atuona",
+    "title": "ATUONA",
+    "file": "atuona-2026-10-10T23-24-23.mp4",
+    "seconds": 158,
+    "released": "2026-10-10",
+    "number": 9,
+    "logline": "A woman who will not whiten, a witness who is not a lover, and an island that sells everything, even a tear, by the lot.",
+    "synopsis": [
+      "Kira and Ule stand apart before a bare gallery wall where Paradise should hang. She kisses the frost on a window, floats on black water and goes under, wakes, and finds her reflection living a different hour in the mirror.",
+      "On the jetty Jean-Marc Dupont walks in with Mila, the face of a Saint Laurent campaign, his palm on her waist like a lot with a pre-sale estimate. A storm, an emerald clasp, a cage built for two, a tear that falls and becomes an auction lot. Salt on Ule’s skin like maps of countries that don’t exist. Not a lover. A witness. It ends on black volcanic sand: “I will not whiten.”"
+    ],
+    "poems": [
+      [
+        "#092",
+        "Hungry Earth",
+        "ATUONA"
+      ],
+      [
+        "#072",
+        "Vanilla Network",
+        "ATUONA"
+      ],
+      [
+        "#048",
+        "The Meeting",
+        "ATUONA"
+      ],
+      [
+        "#054",
+        "I'll Drown",
+        "ATUONA"
+      ],
+      [
+        "#049",
+        "French Snow",
+        "ATUONA"
+      ],
+      [
+        "#065",
+        "Atuona",
+        "ATUONA"
+      ],
+      [
+        "#071",
+        "Crimson Escape",
+        "ATUONA"
+      ],
+      [
+        "#078",
+        "Atuona Morning",
+        "ATUONA"
+      ],
+      [
+        "#068",
+        "Digital Exile",
+        "ATUONA"
+      ],
+      [
+        "#082",
+        "Landing",
+        "ATUONA"
+      ],
+      [
+        "#064",
+        "Code Paradise",
+        "ATUONA"
+      ],
+      [
+        "#096",
+        "Nocturnal Silence",
+        "ATUONA"
+      ],
+      [
+        "#083",
+        "Ultramarine Absence",
+        "ATUONA"
+      ],
+      [
+        "#047",
+        "Лабиринты зрачков",
+        "ATUONA"
+      ],
+      [
+        "#073",
+        "Desert Blooms",
+        "ATUONA"
+      ],
+      [
+        "#076",
+        "Composing",
+        "ATUONA"
+      ],
+      [
+        "#088",
+        "Three Notes",
+        "ATUONA"
+      ],
+      [
+        "#097",
+        "The Yellow Christ",
+        "ATUONA"
+      ],
+      [
+        "#089",
+        "The Contract",
+        "ATUONA"
+      ],
+      [
+        "#091",
+        "Код и Холст",
+        "ATUONA"
+      ],
+      [
+        "#095",
+        "The Secret Exhibition",
+        "ATUONA"
+      ]
+    ],
+    "credits": [
+      [
+        "Poems, direction, edit",
+        "Kira Velerevich (Elena Revicheva)"
+      ],
+      [
+        "Characters",
+        "Kira; Ule, a Norwegian collector; Mila and Jean-Marc"
+      ],
+      [
+        "Image",
+        "Keyframes from the cast’s reference portraits: Seedream v5 Pro, GPT Image, Nano Banana Pro, Grok Imagine (Venice)"
+      ],
+      [
+        "Motion",
+        "Kling O3 Pro (Venice) · one shot by Luma"
+      ],
+      [
+        "Voice",
+        "OpenAI tts-1 (onyx), the studio’s narrator"
+      ],
+      [
+        "Music",
+        "“Basement” — an original track generated for the film with ElevenLabs Music"
+      ],
+      [
+        "Text and glitch",
+        "Every stanza whole, in the poet’s words, set in Syne and arriving with the voice; a glitch that tears across every shot"
+      ]
+    ],
+    "specs": "23 shots · English · 16:9 · stereo · 1080p master",
+    "stills": [
+      "Before a bare gallery wall: “What about the painting?” she asked. “Paradise?”",
+      "Mila on the window seat: “I remember Modigliani’s line: When I know your soul, I will paint your eyes.”",
+      "“Ule wiped his face. Salt left white trails on his skin — like maps of countries that don’t exist.”"
+    ]
+  },
+  {
     slug: 'crimson-escape',
     title: 'Crimson Escape',
     file: 'crimson-escape-2026-09-22T16-32-00.mp4',
@@ -120,7 +276,7 @@ function page(f) {
     trailer: { '@type': 'VideoObject', name: f.title, contentUrl: video, thumbnailUrl: `${url}still-1.jpg`, uploadDate: f.released, duration: iso(f.seconds) },
   };
   const poems = f.poems
-    .map(([n, t, ch]) => `<li><span class="n">${esc(n)}</span> ${esc(t)} <span class="ch">${esc(ch)}</span></li>`)
+    .map(([n, t, ch]) => `<li><a class="pl" href="/#p${esc(n.replace('#', ''))}"><span class="n">${esc(n)}</span> ${esc(t)}</a> <span class="ch">${esc(ch)}</span></li>`)
     .join('');
   const credits = f.credits.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('');
   const stills = f.stills
@@ -163,6 +319,7 @@ function page(f) {
   h2{font-family:'Courier New',monospace;font-weight:400;font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
   ul{list-style:none;padding:0;margin:0 0 18px}
   li{font-family:Georgia,serif;font-size:15px;padding:3px 0;border-bottom:1px solid #141418}
+  .pl{color:inherit;text-decoration:none}.pl:hover{color:var(--red)}
   .n{font-family:'Courier New',monospace;color:var(--red);font-size:12px;margin-right:6px}
   .ch{font-family:'Courier New',monospace;color:var(--muted);font-size:10px;letter-spacing:.2em;float:right;margin-top:4px}
   dl{margin:0;font-size:13px;line-height:1.5}
@@ -192,7 +349,7 @@ function page(f) {
   <video controls preload="metadata" playsinline poster="still-1.jpg" src="${esc(video)}"></video>
   <div class="grid">
     <section class="syn"><h2>Synopsis</h2>${f.synopsis.map((p) => `<p>${esc(p)}</p>`).join('')}
-      <p style="font-size:14px;color:var(--muted)">Adult in mood, never explicit. On screen and in the voice: English. The LITPROM poems exist only in Russian and were translated line for line for the film.</p>
+      <p style="font-size:14px;color:var(--muted)">Adult in mood, never explicit. On screen and in the voice: English.${f.poems.some((p) => p[2] === 'LITPROM') ? ' The LITPROM poems exist only in Russian and were translated line for line for the film.' : ' Every stanza is the poet\u2019s own English, unchanged. Each poem opens in the vault.'}</p>
     </section>
     <section><h2>Poems in the film</h2><ul>${poems}</ul><h2>Credits</h2><dl>${credits}</dl></section>
   </div>
