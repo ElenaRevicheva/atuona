@@ -25,7 +25,7 @@ const FILMS = [
     "poemsHeading": "Fragments in the film",
     "title": "Arearea",
     "file": "arearea-2026-10-11T20-16-33.mp4",
-    "seconds": 164,
+    "seconds": 161,
     "released": "2026-10-10",
     "number": 9,
     "logline": "A woman who will not whiten, a witness who is not a lover, and an island that sells everything, even a tear, by the lot.",
@@ -60,8 +60,8 @@ const FILMS = [
         "ATUONA"
       ],
       [
-        "#065",
-        "Atuona",
+        "#068",
+        "Digital Exile",
         "ATUONA"
       ],
       [
@@ -72,11 +72,6 @@ const FILMS = [
       [
         "#078",
         "Atuona Morning",
-        "ATUONA"
-      ],
-      [
-        "#068",
-        "Digital Exile",
         "ATUONA"
       ],
       [
@@ -122,11 +117,6 @@ const FILMS = [
       [
         "#097",
         "The Yellow Christ",
-        "ATUONA"
-      ],
-      [
-        "#089",
-        "The Contract",
         "ATUONA"
       ],
       [
