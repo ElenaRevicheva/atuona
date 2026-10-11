@@ -170,11 +170,7 @@ const FILMS = [
       ]
     ],
     "specs": "23 shots · English · 16:9 · stereo · 1080p master",
-    "stills": [
-      "Before a bare gallery wall: “What about the painting?” she asked. “Paradise?”",
-      "Mila on the window seat: “I remember Modigliani’s line: When I know your soul, I will paint your eyes.”",
-      "“Ule wiped his face. Salt left white trails on his skin — like maps of countries that don’t exist.”"
-    ]
+    "stills": []
   },
   {
     slug: 'crimson-escape',
@@ -269,7 +265,7 @@ function page(f) {
     dateCreated: f.released,
     inLanguage: 'en',
     genre: ['Poetry film', 'Experimental', 'AI cinema'],
-    image: [1, 2, 3].map((i) => `${url}still-${i}.jpg`),
+    image: (f.stills.length ? f.stills.map((_, i) => i + 1) : [1]).map((i) => `${url}still-${i}.jpg`),
     director: { '@type': 'Person', name: 'Kira Velerevich', alternateName: 'Elena Revicheva', url: `${SITE}/` },
     author: { '@type': 'Person', name: 'Kira Velerevich', alternateName: 'Elena Revicheva' },
     productionCompany: { '@type': 'Organization', name: 'ATUONA AI Film Studio', url: `${SITE}/aifilmstudio/` },
@@ -353,7 +349,7 @@ function page(f) {
     </section>
     <section><h2>Poems in the film</h2><ul>${poems}</ul><h2>Credits</h2><dl>${credits}</dl></section>
   </div>
-  <div class="stills">${stills}</div>
+  ${f.stills.length ? `<div class="stills">${stills}</div>` : ''}
   <div class="links"><a href="${esc(video)}">Watch the film</a><a href="/">The vault: 99 fragments</a><a href="https://aideazz.xyz/portfolio">Artist portfolio</a></div>
 </main>
 <footer>ATUONA AI Film Studio &middot; <a href="https://atuona.xyz">atuona.xyz</a> &middot; A project of <strong>AIdeazz</strong> AI Lab &middot; <a href="https://aideazz.xyz/portfolio">aideazz.xyz/portfolio</a><br>Screenings, festivals, press: Kira Velerevich (Elena Revicheva) &middot; &copy; ${year}</footer>
