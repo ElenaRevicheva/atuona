@@ -21,11 +21,11 @@ const FILMS_BASE = 'https://webhook.aideazz.xyz/cto/films/';
 
 const FILMS = [
   {
-    "slug": "atuona",
+    "slug": "arearea",
     "poemsHeading": "Fragments in the film",
-    "title": "ATUONA",
-    "file": "atuona-2026-10-10T23-24-23.mp4",
-    "seconds": 161,
+    "title": "Arearea",
+    "file": "arearea-2026-10-11T20-16-33.mp4",
+    "seconds": 164,
     "released": "2026-10-10",
     "number": 9,
     "logline": "A woman who will not whiten, a witness who is not a lover, and an island that sells everything, even a tear, by the lot.",

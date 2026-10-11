@@ -9,13 +9,13 @@ Portfolio: https://aideazz.xyz/portfolio
 
 - [ATUONA gallery — the poetry vault (99 poems)](https://atuona.xyz/)
 - [AI Film Studio — nine finished films, watch free](https://atuona.xyz/aifilmstudio/)
-- [Film sheet: ATUONA (2026, 2:41) — synopsis, fragments linked to the vault, credits, stills](https://atuona.xyz/aifilmstudio/atuona/)
+- [Film sheet: Arearea (2026, 2:44) — synopsis, fragments linked to the vault, credits, stills](https://atuona.xyz/aifilmstudio/arearea/)
 - [Film sheet: Crimson Escape (2026, 3:36) — synopsis, poems, credits, stills](https://atuona.xyz/aifilmstudio/crimson-escape/)
 - [Film sheet: Could not generate content. (2026, 3:08) — synopsis, poems, credits, stills](https://atuona.xyz/aifilmstudio/could-not-generate-content/)
 
 ## Films
 
-- [ATUONA](https://webhook.aideazz.xyz/cto/films/atuona-2026-10-10T23-24-23.mp4) — released 2026-10-10
+- [Arearea](https://webhook.aideazz.xyz/cto/films/arearea-2026-10-11T20-16-33.mp4) — released 2026-10-10
 - [Crimson Escape](https://webhook.aideazz.xyz/cto/films/crimson-escape-2026-09-22T16-32-00.mp4) — released 2026-09-22
 - [Could not generate content.](https://webhook.aideazz.xyz/cto/films/could-not-generate-content-2026-09-22T10-50-15.mp4) — released 2026-09-22
 - [Recovered](https://webhook.aideazz.xyz/cto/films/recovered-2026-07-04T11-04-13.mp4) — released 2026-07-04
