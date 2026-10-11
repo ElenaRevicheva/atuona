@@ -22,6 +22,7 @@ const FILMS_BASE = 'https://webhook.aideazz.xyz/cto/films/';
 const FILMS = [
   {
     "slug": "atuona",
+    "poemsHeading": "Fragments in the film",
     "title": "ATUONA",
     "file": "atuona-2026-10-10T23-24-23.mp4",
     "seconds": 158,
@@ -141,7 +142,7 @@ const FILMS = [
     ],
     "credits": [
       [
-        "Poems, direction, edit",
+        "Fragments, direction, edit",
         "Kira Velerevich (Elena Revicheva)"
       ],
       [
@@ -166,7 +167,7 @@ const FILMS = [
       ],
       [
         "Text and glitch",
-        "Every stanza whole, in the poet’s words, set in Syne and arriving with the voice; a glitch that tears across every shot"
+        "Every stanza whole, in the poet’s words, typed into a PowerShell session with the voice (Get-Content .\\fragments\\NNN.txt, the number of the fragment it comes from); a glitch that tears across every shot"
       ]
     ],
     "specs": "23 shots · English · 16:9 · stereo · 1080p master",
@@ -345,9 +346,9 @@ function page(f) {
   <video controls preload="metadata" playsinline poster="still-1.jpg" src="${esc(video)}"></video>
   <div class="grid">
     <section class="syn"><h2>Synopsis</h2>${f.synopsis.map((p) => `<p>${esc(p)}</p>`).join('')}
-      <p style="font-size:14px;color:var(--muted)">Adult in mood, never explicit. On screen and in the voice: English.${f.poems.some((p) => p[2] === 'LITPROM') ? ' The LITPROM poems exist only in Russian and were translated line for line for the film.' : ' Every stanza is the poet\u2019s own English, unchanged. Each poem opens in the vault.'}</p>
+      <p style="font-size:14px;color:var(--muted)">Adult in mood, never explicit. On screen and in the voice: English.${f.poems.some((p) => p[2] === 'LITPROM') ? ' The LITPROM poems exist only in Russian and were translated line for line for the film.' : ' Every stanza is the poet\u2019s own English, unchanged. Each fragment opens in the vault.'}</p>
     </section>
-    <section><h2>Poems in the film</h2><ul>${poems}</ul><h2>Credits</h2><dl>${credits}</dl></section>
+    <section><h2>${esc(f.poemsHeading || 'Poems in the film')}</h2><ul>${poems}</ul><h2>Credits</h2><dl>${credits}</dl></section>
   </div>
   ${f.stills.length ? `<div class="stills">${stills}</div>` : ''}
   <div class="links"><a href="${esc(video)}">Watch the film</a><a href="/">The vault: 99 fragments</a><a href="https://aideazz.xyz/portfolio">Artist portfolio</a></div>
