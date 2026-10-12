@@ -25,12 +25,12 @@ const FILMS = [
     "poemsHeading": "Fragments in the film",
     "title": "Arearea",
     "file": "arearea-2026-10-11T20-16-33.mp4",
-    "seconds": 161,
+    "seconds": 169,
     "released": "2026-10-10",
     "number": 9,
     "logline": "A woman who will not whiten, a witness who is not a lover, and an island that sells everything, even a tear, by the lot.",
     "synopsis": [
-      "Kira and Ule stand apart before a bare gallery wall where Paradise should hang. She kisses the frost on a window, floats on black water and goes under, wakes, and finds her reflection living a different hour in the mirror.",
+      "Kira and Ule stand apart before a gallery wall where Gauguin’s Arearea surfaces like a ghost. She kisses the frost on a window, floats on black water and goes under, wakes, and finds her reflection living a different hour in the mirror.",
       "On the jetty Jean-Marc Dupont walks in with Mila, the face of a Saint Laurent campaign, his palm on her waist like a lot with a pre-sale estimate. A storm, an emerald clasp, a cage built for two, a tear that falls and becomes an auction lot. Salt on Ule’s skin like maps of countries that don’t exist. Not a lover. A witness. It ends on black volcanic sand: “I will not whiten.”"
     ],
     "poems": [
@@ -65,8 +65,8 @@ const FILMS = [
         "ATUONA"
       ],
       [
-        "#071",
-        "Crimson Escape",
+        "#093",
+        "Алгоритм голода",
         "ATUONA"
       ],
       [
@@ -160,7 +160,7 @@ const FILMS = [
         "Every stanza whole, in the poet’s words, typed into a PowerShell session with the voice (Get-Content .\\fragments\\NNN.txt, the number of the fragment it comes from); a glitch that tears across every shot"
       ]
     ],
-    "specs": "23 shots · English · 16:9 · stereo · 1080p master",
+    "specs": "25 shots · English · 16:9 · stereo · 1080p master",
     "stills": []
   },
   {
