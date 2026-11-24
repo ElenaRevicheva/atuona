@@ -1215,7 +1215,7 @@
 
     /* The typed line: faint, mono, typed on when the fragment opens. */
     .poem-typed{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.74rem;letter-spacing:0;
-      color:var(--silver-grey);opacity:.9;margin:0 0 .75rem;white-space:nowrap;overflow:hidden;
+      color:var(--silver-grey);opacity:.9;margin:0 0 2rem;white-space:nowrap;overflow:hidden;
       display:flex;align-items:center;}
     .poem-typed.ps{color:var(--silver-bright);}
     .poem-typed-t{display:inline-block;overflow:hidden;white-space:pre;}
@@ -1258,15 +1258,17 @@
       @supports (animation-timeline:view()){
         .vault .poem{view-timeline-name:--drop;view-timeline-axis:block;
           animation:poem-drop linear both;animation-timeline:--drop;animation-range:entry 0% cover 28%;}
-        .vault .poem-status.live{position:relative;}
+        .vault .poem-status.live{position:relative;isolation:isolate;}
         .vault .poem-status.live::after{content:"";position:absolute;left:50%;top:50%;width:3.6em;height:3.6em;
-          margin:-1.8em 0 0 -1.8em;border-radius:50%;pointer-events:none;
+          margin:-1.8em 0 0 -1.8em;border-radius:50%;pointer-events:none;z-index:-1;
           background:radial-gradient(circle,rgba(220,20,60,.7),rgba(139,0,0,.22) 45%,rgba(139,0,0,0) 70%);
           animation:poem-ink linear both;animation-timeline:--drop;animation-range:entry 40% cover 24%;}
       }
     }
     @keyframes poem-drop{from{opacity:.15;transform:translateY(-44px)}72%{opacity:1;transform:translateY(3px)}to{opacity:1;transform:none}}
-    @keyframes poem-ink{from{transform:scale(.15);opacity:0}30%{opacity:1}to{transform:scale(1.9);opacity:0}}
+    /* The ink LANDS AND STAYS as a soft stain (24 Nov v2 - v1 faded to nothing, so a
+       still page never showed it; Elena: 'I do not see any ink spot'). */
+    @keyframes poem-ink{from{transform:scale(.15);opacity:0}35%{opacity:1}to{transform:scale(1.5);opacity:.55}}
     @media (prefers-reduced-motion:reduce){
       .poem.open .poem-typed-t{animation:none;}
       .poem-typed::after{animation:none;}
