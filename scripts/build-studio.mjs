@@ -48,7 +48,7 @@ const block = `${START}
   #films .film h2{font-size:28px}
   #films .film .frags{margin-top:12px;font-family:'Courier New',monospace;font-size:11px;letter-spacing:.14em;
     text-transform:uppercase;color:var(--muted);line-height:2}
-  #films .film .frags a{color:var(--ink);text-decoration:none;border-bottom:1px solid #2a2a30;margin-right:10px;
+  #films .film .frags a{color:var(--ink);text-decoration:none;border-bottom:1px solid #2a2a30;margin-right:10px;display:inline-block;
     white-space:nowrap;transition:color .25s,border-color .25s}
   #films .film .frags a:hover{color:var(--red);border-color:var(--red)}
   #films .film.previewing video{filter:saturate(1.08) contrast(1.04)}
@@ -70,7 +70,7 @@ const block = `${START}
     if(list&&list.length){
       var d=document.createElement('div'); d.className='frags';
       d.innerHTML='Fragments in this film &nbsp; '+list.map(function(p){
-        return '<a href="/#p'+esc(p[0])+'" title="'+esc(p[1])+'">#'+esc(p[0])+'</a>';}).join('');
+        return '<a href="/#p'+esc(p[0])+'" title="'+esc(p[1])+'">#'+esc(p[0])+'</a>';}).join(' ');
       card.appendChild(d);
     }
     if(!canHover||still)return;
