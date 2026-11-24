@@ -33,6 +33,7 @@
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import { UNIT, count as unitCount } from './lib/words.mjs';
+import { loadFilms, filmsByFragment, englishTitles } from './lib/films.mjs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -95,6 +96,44 @@ const PARTS = [
   },
 ];
 
+/* ── The craft layer (Elena, 24 Nov 2026) ────────────────────────────────────
+   Three additions around each row, none inside the guarded fields: the title,
+   verse, card and claim button below are still carried verbatim.
+   - FILM LINKS: a fragment a film quotes says so ("appears in Arearea"). The
+     list comes from the film sheets' own records (lib/films.mjs), not a copy.
+   - THE TYPED LINE: Arearea's stanzas were typed into a PowerShell session as
+     `Get-Content .\fragments\NNN.txt` — that is in its credits, so those
+     fragments show that exact line. Every other fragment shows only its own
+     number and recorded date. Nothing claims a process that did not happen.
+   - RU/EN COLLISION: a Russian title collides with its English form, offset like
+     a misregistered print — ONLY where a published film sheet already gives that
+     English title. Nothing is translated here. */
+const FILMS = loadFilms();
+const FILM_OF = filmsByFragment(FILMS);
+const EN_OF = englishTitles(FILMS);
+
+function typedLine(p, date) {
+  const inArearea = (FILM_OF.get(p.id) || []).some((f) => f.slug === 'arearea');
+  const text = inArearea ? `PS> Get-Content .\\fragments\\${p.id}.txt` : `#${p.id}${date ? ` · ${date}` : ''}`;
+  return `<div class="poem-typed${inArearea ? ' ps' : ''}" aria-hidden="true" style="--n:${[...text].length}"><span class="poem-typed-t">${esc(text)}</span></div>`;
+}
+
+function filmLinks(p) {
+  const films = FILM_OF.get(p.id) || [];
+  if (!films.length) return '';
+  const links = films.map((f) => `<a href="/aifilmstudio/${escAttr(f.slug)}/">${esc(f.title.replace(/\.$/, ''))}</a>`).join(' · ');
+  return `
+              <div class="poem-films">appears in ${links}</div>`;
+}
+
+function titleSpan(p) {
+  const pair = EN_OF.get(p.id);
+  if (!pair) return `<span class="poem-title">${p.titleHtml}</span>`;
+  // The title span itself stays byte-identical — verify-vault.mjs reads it by that
+  // exact markup. The English plate sits beside it, in a wrapper.
+  return `<span class="poem-collide"><span class="poem-title">${p.titleHtml}</span><span class="poem-ghost" aria-hidden="true" lang="en">${esc(pair.en)}</span></span>`;
+}
+
 function poemRow(p) {
   const id = `p${p.id}`;
   const date = fmtDate(p);
@@ -108,7 +147,7 @@ function poemRow(p) {
             <button class="poem-btn" type="button" aria-expanded="false" aria-controls="${id}-body">
               <span class="poem-num">#${esc(p.id)}</span>
               <span class="poem-txt">
-                <span class="poem-title">${p.titleHtml}</span>
+                ${titleSpan(p)}
                 <span class="poem-sub">${esc(sub)}</span>
               </span>
               <span class="poem-side">
@@ -122,6 +161,7 @@ function poemRow(p) {
           </h4>
           <div class="poem-body" id="${id}-body">
             <div class="poem-in">
+              ${typedLine(p, date)}
               <div class="nft-card">
                 <div class="nft-header">
                   <div class="nft-id">#${esc(p.id)}</div>
@@ -141,7 +181,7 @@ function poemRow(p) {
                   </div>
                 </div>
               </div>
-              <a class="poem-permalink" href="#${id}">#${esc(p.id)} — permalink</a>
+              <a class="poem-permalink" href="#${id}">#${esc(p.id)} — permalink</a>${filmLinks(p)}
             </div>
           </div>
         </article>`;
@@ -315,6 +355,63 @@ const CSS = `
       .poem-leader,.poem-date{display:none;}
       .poem-in{padding-left:0;}
       .part-num{min-width:3.4rem;}
+    }
+
+    /* ── Craft layer (Elena, 24 Nov 2026) ─────────────────────────────────
+       Decoration only. None of it can hide a poem: the drop starts at partial
+       opacity, the typed line is aria-hidden, and with reduced motion or an
+       older engine every row simply stands still, fully visible. */
+
+    /* The typed line: faint, mono, typed on when the fragment opens. */
+    .poem-typed{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.66rem;letter-spacing:0;
+      color:var(--silver-dark);opacity:.6;margin:0 0 .75rem;white-space:nowrap;overflow:hidden;
+      display:flex;align-items:center;}
+    .poem-typed.ps{color:var(--silver-grey);}
+    .poem-typed-t{display:inline-block;overflow:hidden;white-space:pre;}
+    .poem-typed::after{content:"";display:inline-block;width:.55em;height:1em;margin-left:.12em;
+      background:var(--red-crimson);opacity:.75;animation:poem-caret 1.05s steps(1) infinite;}
+    .poem.open .poem-typed-t{animation:poem-type calc(var(--n) * 32ms) steps(var(--n)) .25s both;}
+    @keyframes poem-type{from{width:0}to{width:calc(var(--n) * 1ch)}}
+    @keyframes poem-caret{50%{opacity:0}}
+
+    /* Where a fragment appears in a film. */
+    .poem-films{margin-top:.55rem;font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.6rem;
+      letter-spacing:.14em;text-transform:uppercase;color:var(--grey-light);}
+    .poem-films a{color:var(--red-crimson);text-decoration:none;border-bottom:1px solid var(--red-dark);
+      transition:color .25s,border-color .25s;}
+    .poem-films a:hover{color:var(--silver-bright);border-color:var(--silver-dark);}
+
+    /* RU/EN collision: the Cyrillic title prints over its published English
+       form, a little out of register, the way a two-plate print slips. The
+       registration tightens when the row is touched. */
+    .poem-collide{position:relative;isolation:isolate;display:block;}
+    /* The English plate is larger, in capitals and faint, so it reads as a
+       second print layer slipping under the word — never as a typo after it. */
+    .poem-ghost{position:absolute;left:-.05em;top:-.22em;z-index:-1;max-width:100%;overflow:hidden;white-space:nowrap;
+      font-family:var(--font-display,'Syne',sans-serif);font-weight:700;font-size:1.5em;line-height:1;
+      text-transform:uppercase;letter-spacing:.01em;color:var(--red-crimson);opacity:.3;pointer-events:none;
+      transform:translate(.2em,.12em) rotate(-.7deg);transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .45s;}
+    .poem-btn:hover .poem-ghost,.poem.open .poem-ghost{transform:translate(.05em,.03em) rotate(0);opacity:.45;}
+
+    /* Drops: each row lands as it scrolls into view, and the red LIVE marker
+       takes a small ink spread. Native scroll-driven animation — no library. */
+    @media (prefers-reduced-motion:no-preference){
+      @supports (animation-timeline:view()){
+        .vault .poem{view-timeline-name:--drop;view-timeline-axis:block;
+          animation:poem-drop linear both;animation-timeline:--drop;animation-range:entry 0% cover 18%;}
+        .vault .poem-status.live{position:relative;}
+        .vault .poem-status.live::after{content:"";position:absolute;left:50%;top:50%;width:2.6em;height:2.6em;
+          margin:-1.3em 0 0 -1.3em;border-radius:50%;pointer-events:none;
+          background:radial-gradient(circle,rgba(220,20,60,.42),rgba(139,0,0,.12) 45%,rgba(139,0,0,0) 70%);
+          animation:poem-ink linear both;animation-timeline:--drop;animation-range:entry 40% cover 24%;}
+      }
+    }
+    @keyframes poem-drop{from{opacity:.3;transform:translateY(-16px)}70%{opacity:1;transform:translateY(1px)}to{opacity:1;transform:none}}
+    @keyframes poem-ink{from{transform:scale(.15);opacity:0}30%{opacity:1}to{transform:scale(1.9);opacity:0}}
+    @media (prefers-reduced-motion:reduce){
+      .poem.open .poem-typed-t{animation:none;}
+      .poem-typed::after{animation:none;}
+      .poem-ghost{transition:none;}
     }
 
     /* Without JavaScript every part and every poem simply stands open and the
