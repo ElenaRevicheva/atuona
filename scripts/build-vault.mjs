@@ -381,17 +381,25 @@ const CSS = `
       transition:color .25s,border-color .25s;}
     .poem-films a:hover{color:var(--silver-bright);border-color:var(--silver-dark);}
 
-    /* RU/EN collision: the Cyrillic title prints over its published English
-       form, a little out of register, the way a two-plate print slips. The
-       registration tightens when the row is touched. */
-    .poem-collide{position:relative;isolation:isolate;display:block;}
-    /* The English plate is larger, in capitals and faint, so it reads as a
-       second print layer slipping under the word — never as a typo after it. */
-    .poem-ghost{position:absolute;left:-.05em;top:-.22em;z-index:-1;max-width:100%;overflow:hidden;white-space:nowrap;
-      font-family:var(--font-display,'Syne',sans-serif);font-weight:700;font-size:1.5em;line-height:1;
-      text-transform:uppercase;letter-spacing:.01em;color:var(--red-crimson);opacity:.55;pointer-events:none;
-      transform:translate(.2em,.12em) rotate(-.7deg);transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .45s;}
-    .poem-btn:hover .poem-ghost,.poem.open .poem-ghost{transform:translate(.05em,.03em) rotate(0);opacity:.75;}
+    /* RU/EN collision: the published English form of a Russian title, struck
+       like a slipped stamp at the TAIL of the word — never on top of it.
+       (24 Nov 2026, v2. v1 laid a filled red plate over the title; once the row
+       opened, the title turned red too and the two smeared into one blot. Elena:
+       "it is ugly". Rule now: the Cyrillic is never covered, the plate is a thin
+       outline, and it goes grey whenever the title itself is red.) */
+    .poem-collide{position:relative;isolation:isolate;display:inline-block;align-self:flex-start;max-width:100%;}
+    .poem-ghost{position:absolute;left:100%;top:-.42em;margin-left:-.3em;z-index:-1;white-space:nowrap;
+      font-family:var(--font-display,'Syne',sans-serif);font-weight:700;font-size:1.25em;line-height:1;
+      text-transform:uppercase;letter-spacing:.04em;color:transparent;-webkit-text-stroke:1px var(--red-crimson);
+      opacity:.7;pointer-events:none;
+      transform:translate(.12em,.06em) rotate(-2deg);transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .45s;}
+    .poem-btn:hover .poem-ghost{transform:translate(.02em,.02em) rotate(-1deg);opacity:.95;}
+    .poem.open .poem-ghost{-webkit-text-stroke-color:var(--silver-dark);opacity:.6;}
+    /* Phones: titles wrap, so there is no room at the tail (WILD TALES CURL ran to
+       438px on a 375px screen). The stamp is struck just above the title's start. */
+    @media (max-width:760px){
+      .poem-ghost{left:0;margin-left:0;top:-1.05em;font-size:.9em;}
+    }
 
     /* Drops: each row lands as it scrolls into view, and the red LIVE marker
        takes a small ink spread. Native scroll-driven animation — no library. */
