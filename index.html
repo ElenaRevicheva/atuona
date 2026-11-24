@@ -876,6 +876,13 @@
         }
 
         /* Responsive Design */
+        /* 769-1180px (24 Nov 2026): the six-item nav ran ~36px past the right edge
+           beside the logo. Less air between items; nothing else changes. */
+        @media (min-width: 769px) and (max-width: 1180px) {
+            .nav { gap: .5rem; }
+            .nav-link { padding: .75rem .8rem; }
+        }
+
         @media (max-width: 768px) {
             .header .container {
                 flex-direction: column;
@@ -1030,7 +1037,7 @@
            above everything, cannot be clicked, and shifts a few times a second
            the way real grain does — still, for anyone who asks for less motion. */
         html::after{content:"";position:fixed;inset:-60px;z-index:2147483000;pointer-events:none;
-            background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 -.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:180px 180px;opacity:.055;
+            background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 -.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:180px 180px;opacity:.11;
             animation:craft-grain .9s steps(4) infinite;}
         @keyframes craft-grain{
             0%{transform:translate(0,0)}25%{transform:translate(-31px,17px)}
@@ -1207,10 +1214,10 @@
        older engine every row simply stands still, fully visible. */
 
     /* The typed line: faint, mono, typed on when the fragment opens. */
-    .poem-typed{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.66rem;letter-spacing:0;
-      color:var(--silver-dark);opacity:.6;margin:0 0 .75rem;white-space:nowrap;overflow:hidden;
+    .poem-typed{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.74rem;letter-spacing:0;
+      color:var(--silver-grey);opacity:.9;margin:0 0 .75rem;white-space:nowrap;overflow:hidden;
       display:flex;align-items:center;}
-    .poem-typed.ps{color:var(--silver-grey);}
+    .poem-typed.ps{color:var(--silver-bright);}
     .poem-typed-t{display:inline-block;overflow:hidden;white-space:pre;}
     .poem-typed::after{content:"";display:inline-block;width:.55em;height:1em;margin-left:.12em;
       background:var(--red-crimson);opacity:.75;animation:poem-caret 1.05s steps(1) infinite;}
@@ -1233,24 +1240,24 @@
        second print layer slipping under the word — never as a typo after it. */
     .poem-ghost{position:absolute;left:-.05em;top:-.22em;z-index:-1;max-width:100%;overflow:hidden;white-space:nowrap;
       font-family:var(--font-display,'Syne',sans-serif);font-weight:700;font-size:1.5em;line-height:1;
-      text-transform:uppercase;letter-spacing:.01em;color:var(--red-crimson);opacity:.3;pointer-events:none;
+      text-transform:uppercase;letter-spacing:.01em;color:var(--red-crimson);opacity:.55;pointer-events:none;
       transform:translate(.2em,.12em) rotate(-.7deg);transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .45s;}
-    .poem-btn:hover .poem-ghost,.poem.open .poem-ghost{transform:translate(.05em,.03em) rotate(0);opacity:.45;}
+    .poem-btn:hover .poem-ghost,.poem.open .poem-ghost{transform:translate(.05em,.03em) rotate(0);opacity:.75;}
 
     /* Drops: each row lands as it scrolls into view, and the red LIVE marker
        takes a small ink spread. Native scroll-driven animation — no library. */
     @media (prefers-reduced-motion:no-preference){
       @supports (animation-timeline:view()){
         .vault .poem{view-timeline-name:--drop;view-timeline-axis:block;
-          animation:poem-drop linear both;animation-timeline:--drop;animation-range:entry 0% cover 18%;}
+          animation:poem-drop linear both;animation-timeline:--drop;animation-range:entry 0% cover 28%;}
         .vault .poem-status.live{position:relative;}
-        .vault .poem-status.live::after{content:"";position:absolute;left:50%;top:50%;width:2.6em;height:2.6em;
-          margin:-1.3em 0 0 -1.3em;border-radius:50%;pointer-events:none;
-          background:radial-gradient(circle,rgba(220,20,60,.42),rgba(139,0,0,.12) 45%,rgba(139,0,0,0) 70%);
+        .vault .poem-status.live::after{content:"";position:absolute;left:50%;top:50%;width:3.6em;height:3.6em;
+          margin:-1.8em 0 0 -1.8em;border-radius:50%;pointer-events:none;
+          background:radial-gradient(circle,rgba(220,20,60,.7),rgba(139,0,0,.22) 45%,rgba(139,0,0,0) 70%);
           animation:poem-ink linear both;animation-timeline:--drop;animation-range:entry 40% cover 24%;}
       }
     }
-    @keyframes poem-drop{from{opacity:.3;transform:translateY(-16px)}70%{opacity:1;transform:translateY(1px)}to{opacity:1;transform:none}}
+    @keyframes poem-drop{from{opacity:.15;transform:translateY(-44px)}72%{opacity:1;transform:translateY(3px)}to{opacity:1;transform:none}}
     @keyframes poem-ink{from{transform:scale(.15);opacity:0}30%{opacity:1}to{transform:scale(1.9);opacity:0}}
     @media (prefers-reduced-motion:reduce){
       .poem.open .poem-typed-t{animation:none;}
@@ -7879,7 +7886,7 @@ Just for ODAT, твою мать.</div>
                         </p>
                         
                         <div class="blockchain-badge">
-                            <span>⚡</span> POWERED BY POLYGON
+                            <span>●</span> POWERED BY POLYGON
                         </div>
                         
                         <p>
@@ -7902,7 +7909,7 @@ Just for ODAT, твою мать.</div>
                     <h2 class="section-title">MINTABLE VAULT</h2>
                     <div style="text-align: center; margin-bottom: 3rem;">
                         <p style="color: var(--light-grey); font-size: 1.2rem; font-style: italic; margin-bottom: 1.5rem;">
-                            <span style="color: var(--red-dark);">45 soul fragments</span> scattered across the blockchain void.<br>
+                            <span style="color: var(--red-dark);">99 fragments</span> scattered across the blockchain void.<br>
                             Each fragment chooses its keeper. Each keeper receives their destined verse.
                         </p>
                         <p style="color: var(--silver-grey); font-size: 0.95rem; line-height: 1.6; max-width: 600px; margin: 0 auto;">
@@ -7910,7 +7917,7 @@ Just for ODAT, твою мать.</div>
                             but the blockchain decides which <span style="color: var(--silver-grey);">fragment finds you</span>.<br>
                             <br>
                             <span style="color: var(--red-dark);">• Touch any slot</span> → Summon a soul fragment<br>
-                            <span style="color: var(--red-dark);">• Receive mystery</span> → One of 45 authentic verses (2019-2025)<br>
+                            <span style="color: var(--red-dark);">• Receive mystery</span> → One of 99 authentic verses (2019-2026)<br>
                             <span style="color: var(--red-dark);">• Check wallet</span> → Discover your destined poem<br>
                             <span style="color: var(--red-dark);">• Collect more</span> → Build your underground anthology<br>
                             <br>
@@ -8892,7 +8899,7 @@ Just for ODAT, твою мать.</div>
                 notification.innerHTML = `
                     <div class="notification-border"></div>
                     <div class="notification-content">
-                        <div class="notification-icon">⚡</div>
+                        <div class="notification-icon">◆</div>
                         <p class="notification-text">${message}</p>
                         <div class="notification-close">×</div>
                     </div>
@@ -9166,7 +9173,9 @@ Just for ODAT, твою мать.</div>
                         
                         // Preserve original button text but add minting functionality
                         const originalText = buttonElement.textContent.trim();
-                        buttonElement.setAttribute('onclick', `claimPoem('${poemId}', '${poemTitle}')`);
+                        // JSON.stringify quotes the title safely: "I'll Drown" (#054) used to end the string early
+                        // and leave its claim button with code the browser could not read.
+                        buttonElement.setAttribute('onclick', `claimPoem(${JSON.stringify(poemId)}, ${JSON.stringify(poemTitle)})`);
                         
                         // Add anti-commercial message if not already present
                         if (!metaElement.querySelector('small')) {
@@ -9196,7 +9205,7 @@ Just for ODAT, твою мать.</div>
             // Test function for debugging
             window.testBlockchain = function() {
                 console.log("🧪 Testing blockchain state:", window.blockchainState);
-                showCyberNotification("🧪 Check console for blockchain state");
+                showCyberNotification("Check console for blockchain state");
             };
             
             // Parallax effect for particles

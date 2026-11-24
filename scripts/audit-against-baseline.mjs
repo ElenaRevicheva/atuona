@@ -63,6 +63,13 @@ const RETIRED_TEXT = new Map([
    'stated three times in ORACLE_ALL_PRODUCTS_RESILIENCE.md, and the word "Fleek" appears ' +
    'nowhere in it. Replaced with "4everland Deployed". A public page should not claim a ' +
    'vendor it does not use.'],
+  ['45 soul fragments',
+   'factually wrong since the vault reached 99. Elena, 24 Nov 2026: "change to 99 ' +
+   'fragments, without soul". Now reads "99 fragments".'],
+  ['→ One of 45 authentic verses (2019-2025)',
+   'same stale count on the same Mint panel, and the range ended at 2025 while ATUONA ' +
+   'runs to 2026 (DNA ledger: LITPROM 2019–2025, ATUONA 2024–2026). Now "One of 99 ' +
+   'authentic verses (2019-2026)".'],
 ]);
 
 const RETIRED_CLASSES = new Map([

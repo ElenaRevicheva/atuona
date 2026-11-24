@@ -363,10 +363,10 @@ const CSS = `
        older engine every row simply stands still, fully visible. */
 
     /* The typed line: faint, mono, typed on when the fragment opens. */
-    .poem-typed{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.66rem;letter-spacing:0;
-      color:var(--silver-dark);opacity:.6;margin:0 0 .75rem;white-space:nowrap;overflow:hidden;
+    .poem-typed{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.74rem;letter-spacing:0;
+      color:var(--silver-grey);opacity:.9;margin:0 0 .75rem;white-space:nowrap;overflow:hidden;
       display:flex;align-items:center;}
-    .poem-typed.ps{color:var(--silver-grey);}
+    .poem-typed.ps{color:var(--silver-bright);}
     .poem-typed-t{display:inline-block;overflow:hidden;white-space:pre;}
     .poem-typed::after{content:"";display:inline-block;width:.55em;height:1em;margin-left:.12em;
       background:var(--red-crimson);opacity:.75;animation:poem-caret 1.05s steps(1) infinite;}
@@ -389,24 +389,24 @@ const CSS = `
        second print layer slipping under the word — never as a typo after it. */
     .poem-ghost{position:absolute;left:-.05em;top:-.22em;z-index:-1;max-width:100%;overflow:hidden;white-space:nowrap;
       font-family:var(--font-display,'Syne',sans-serif);font-weight:700;font-size:1.5em;line-height:1;
-      text-transform:uppercase;letter-spacing:.01em;color:var(--red-crimson);opacity:.3;pointer-events:none;
+      text-transform:uppercase;letter-spacing:.01em;color:var(--red-crimson);opacity:.55;pointer-events:none;
       transform:translate(.2em,.12em) rotate(-.7deg);transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .45s;}
-    .poem-btn:hover .poem-ghost,.poem.open .poem-ghost{transform:translate(.05em,.03em) rotate(0);opacity:.45;}
+    .poem-btn:hover .poem-ghost,.poem.open .poem-ghost{transform:translate(.05em,.03em) rotate(0);opacity:.75;}
 
     /* Drops: each row lands as it scrolls into view, and the red LIVE marker
        takes a small ink spread. Native scroll-driven animation — no library. */
     @media (prefers-reduced-motion:no-preference){
       @supports (animation-timeline:view()){
         .vault .poem{view-timeline-name:--drop;view-timeline-axis:block;
-          animation:poem-drop linear both;animation-timeline:--drop;animation-range:entry 0% cover 18%;}
+          animation:poem-drop linear both;animation-timeline:--drop;animation-range:entry 0% cover 28%;}
         .vault .poem-status.live{position:relative;}
-        .vault .poem-status.live::after{content:"";position:absolute;left:50%;top:50%;width:2.6em;height:2.6em;
-          margin:-1.3em 0 0 -1.3em;border-radius:50%;pointer-events:none;
-          background:radial-gradient(circle,rgba(220,20,60,.42),rgba(139,0,0,.12) 45%,rgba(139,0,0,0) 70%);
+        .vault .poem-status.live::after{content:"";position:absolute;left:50%;top:50%;width:3.6em;height:3.6em;
+          margin:-1.8em 0 0 -1.8em;border-radius:50%;pointer-events:none;
+          background:radial-gradient(circle,rgba(220,20,60,.7),rgba(139,0,0,.22) 45%,rgba(139,0,0,0) 70%);
           animation:poem-ink linear both;animation-timeline:--drop;animation-range:entry 40% cover 24%;}
       }
     }
-    @keyframes poem-drop{from{opacity:.3;transform:translateY(-16px)}70%{opacity:1;transform:translateY(1px)}to{opacity:1;transform:none}}
+    @keyframes poem-drop{from{opacity:.15;transform:translateY(-44px)}72%{opacity:1;transform:translateY(3px)}to{opacity:1;transform:none}}
     @keyframes poem-ink{from{transform:scale(.15);opacity:0}30%{opacity:1}to{transform:scale(1.9);opacity:0}}
     @media (prefers-reduced-motion:reduce){
       .poem.open .poem-typed-t{animation:none;}

@@ -57,7 +57,7 @@ export default function ClaimPoem() {
         textAlign: "center",
       }}
     >
-      <h3 style={{ margin: '0 0 10px 0', fontSize: '14px' }}>🎭 REAL NFT CLAIMING</h3>
+      <h3 style={{ margin: '0 0 10px 0', fontSize: '14px' }}>REAL NFT CLAIMING</h3>
       {/* Wallet Connect Button */}
       <ConnectButton client={client} />
 
@@ -65,11 +65,9 @@ export default function ClaimPoem() {
       {isValidAddress ? (
         <ClaimButton
           client={client}
-          contract={{
-            address: CONTRACT_ADDRESS,
-            chain: polygon,
-          }}
-          quantity={1}
+          contractAddress={CONTRACT_ADDRESS}
+          chain={polygon}
+          claimParams={{ type: "ERC721", quantity: 1n }}
           onClaimed={(result) => {
             alert(
               `NFT claimed! Tx hash: ${result.transactionHash}`,

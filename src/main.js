@@ -103,10 +103,10 @@ async function claimPoem(poemId, poemTitle) {
     
     if (result && result.transactionHash) {
       console.log("✅ NFT claimed successfully!", result.transactionHash);
-      alert(`🔮 Soul Fragment Claimed!\n\n"The moment has chosen you."\n\nA piece of the underground has been immortalized in your wallet.\nThe blockchain has decided which verse was meant for you.\n\nTransaction: ${result.transactionHash}\n\n🎭 Check your wallet to discover your destined poem.\n\nPolygonscan: https://polygonscan.com/tx/${result.transactionHash}`);
+      alert(`Soul Fragment Claimed!\n\n"The moment has chosen you."\n\nA piece of the underground has been immortalized in your wallet.\nThe blockchain has decided which verse was meant for you.\n\nTransaction: ${result.transactionHash}\n\nCheck your wallet to discover your destined poem.\n\nPolygonscan: https://polygonscan.com/tx/${result.transactionHash}`);
     } else {
       console.log("❌ No transaction hash received");
-      alert("⚠️ Transaction was sent but no hash received. Please check your wallet.");
+      alert("Transaction was sent but no hash received. Please check your wallet.");
     }
     
   } catch (error) {

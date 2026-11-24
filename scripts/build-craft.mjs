@@ -4,8 +4,9 @@
  *
  * 2026's strongest design current is visible human craft: grain, ink, slightly
  * imperfect surfaces, a reaction to the too-clean look of generated images.
- * This adds ONE thing to the whole page: a very light film grain over the dark
- * red, like a frame of the films in the studio. Nothing heavier.
+ * This adds ONE thing to the whole page: a light film grain over the dark red,
+ * like a frame of the films in the studio. (24 Nov: raised .055 -> .11 - Elena
+ * could not see it at all; she chose 'clearly visible'.)
  *
  * Same contract as build-type.mjs: one marked block at the end of <head>, added
  * as a layer, never a rewrite. Remove the block and the page is exactly as it was.
@@ -39,7 +40,7 @@ const block = `${START}
            above everything, cannot be clicked, and shifts a few times a second
            the way real grain does — still, for anyone who asks for less motion. */
         html::after{content:"";position:fixed;inset:-60px;z-index:2147483000;pointer-events:none;
-            background-image:url("${NOISE}");background-size:180px 180px;opacity:.055;
+            background-image:url("${NOISE}");background-size:180px 180px;opacity:.11;
             animation:craft-grain .9s steps(4) infinite;}
         @keyframes craft-grain{
             0%{transform:translate(0,0)}25%{transform:translate(-31px,17px)}
