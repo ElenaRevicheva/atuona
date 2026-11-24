@@ -1071,7 +1071,11 @@
         html body .nft-verse{color:#ebe8e3;}
         /* Hard-coded red glows, quieted to match. */
         html body .header{background:rgba(20,20,20,.95);box-shadow:0 4px 40px rgba(0,0,0,.45);}
-        html body .site-title .russian{text-shadow:0 0 30px rgba(110,26,31,.35);}
+        html body .site-title .russian{text-shadow:0 0 30px rgba(110,26,31,.35);animation-name:palette-breathe;}
+        /* ATUONA used to cycle its hue 0 -> 90deg (red -> olive green). Elena: narrow
+           it so it only breathes between brick and oxblood. Same timing, same
+           alternate rhythm; only the colour range is narrowed. */
+        @keyframes palette-breathe{0%{filter:brightness(1)}100%{filter:brightness(.62)}}
         html body .nft-status.live{background:rgba(110,26,31,.18);}
         /* Menu button text sat in near-black on bright red; on oxblood it needs paper. */
         html body .nav-link::after{color:#ebe8e3;}
