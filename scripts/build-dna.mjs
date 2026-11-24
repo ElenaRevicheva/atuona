@@ -90,6 +90,34 @@ const CSS = `
     .dna-cell{background:var(--deep-black);padding:1.3rem 1.2rem;}
     .dna-n{font-family:var(--font-display,'Space Grotesk','Inter',sans-serif);font-size:1.9rem;font-weight:300;
       color:var(--red-crimson);line-height:1;margin-bottom:.55rem;}
+    /* Glitch on the numbers (Elena, 24 Nov 2026). Same idea as the hero's
+       glitch-1 / glitch-2 (two sliced copies of the text, nudged sideways), but
+       with thick slices and in bursts: the hero's hairline slices vanish at this
+       size. The real digit underneath never moves; still for reduced motion. */
+    .dna-n[data-text]{position:relative;display:inline-block;}
+    .dna-n[data-text]::before,.dna-n[data-text]::after{content:attr(data-text);position:absolute;top:0;left:0;
+      width:100%;height:100%;pointer-events:none;opacity:0;}
+    .dna-n[data-text]::before{color:var(--silver-bright);animation:dna-glitch-a 2.6s steps(1) infinite;}
+    .dna-n[data-text]::after{color:var(--red-dark);animation:dna-glitch-b 2.6s steps(1) infinite;}
+    @keyframes dna-glitch-a{
+      0%,58%,100%{opacity:0;transform:none;clip-path:none}
+      60%{opacity:1;clip-path:inset(10% 0 55% 0);transform:translate(-4px,0)}
+      64%{opacity:1;clip-path:inset(62% 0 8% 0);transform:translate(3px,0)}
+      68%{opacity:1;clip-path:inset(30% 0 40% 0);transform:translate(-2px,0)}
+      72%{opacity:0}
+      86%{opacity:1;clip-path:inset(45% 0 25% 0);transform:translate(5px,0)}
+      89%{opacity:0}}
+    @keyframes dna-glitch-b{
+      0%,58%,100%{opacity:0;transform:none;clip-path:none}
+      61%{opacity:1;clip-path:inset(55% 0 12% 0);transform:translate(4px,0)}
+      65%{opacity:1;clip-path:inset(5% 0 70% 0);transform:translate(-5px,0)}
+      70%{opacity:0}
+      87%{opacity:1;clip-path:inset(20% 0 50% 0);transform:translate(-3px,0)}
+      90%{opacity:0}}
+    .dna-cell:nth-child(2) .dna-n::before,.dna-cell:nth-child(2) .dna-n::after{animation-delay:-.7s;}
+    .dna-cell:nth-child(3) .dna-n::before,.dna-cell:nth-child(3) .dna-n::after{animation-delay:-1.4s;}
+    .dna-cell:nth-child(4) .dna-n::before,.dna-cell:nth-child(4) .dna-n::after{animation-delay:-2s;}
+    @media (prefers-reduced-motion:reduce){.dna-n[data-text]::before,.dna-n[data-text]::after{animation:none;display:none;}}
     .dna-l{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:.62rem;letter-spacing:.16em;
       text-transform:uppercase;color:var(--silver-dark);line-height:1.5;}
 
@@ -126,19 +154,19 @@ const section = `${DNA_START}
 
                         <div class="dna-ledger">
                             <div class="dna-cell">
-                                <div class="dna-n">${total}</div>
+                                <div class="dna-n" data-text="${total}">${total}</div>
                                 <div class="dna-l">${UNIT.Many}<br>in the vault</div>
                             </div>
                             <div class="dna-cell">
-                                <div class="dna-n">${litprom.length}</div>
+                                <div class="dna-n" data-text="${litprom.length}">${litprom.length}</div>
                                 <div class="dna-l">Published by LITPROM<br>${lp.from}–${lp.to}</div>
                             </div>
                             <div class="dna-cell">
-                                <div class="dna-n">${atuona.length}</div>
+                                <div class="dna-n" data-text="${atuona.length}">${atuona.length}</div>
                                 <div class="dna-l">Self-published here<br>${at.from}–${at.to}</div>
                             </div>
                             <div class="dna-cell">
-                                <div class="dna-n">2</div>
+                                <div class="dna-n" data-text="2">2</div>
                                 <div class="dna-l">Languages<br>Russian and English</div>
                             </div>
                         </div>
