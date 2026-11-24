@@ -1252,6 +1252,12 @@
       .poem-leader,.poem-date{display:none;}
       .poem-in{padding-left:0;}
       .part-num{min-width:3.4rem;}
+      /* Phone: "53 fragments" sat on the same line as the wide part title and
+         slid under it (Elena, 24 Nov 2026). The count and the +/- drop to their
+         own line, under the title, so the title gets the whole width. */
+      .part-btn{flex-wrap:wrap;row-gap:.7rem;}
+      .part-txt{flex:1 1 calc(100% - 4.6rem);}
+      .part-side{margin-left:calc(3.4rem + 1.1rem);}
     }
 
     /* ── Craft layer (Elena, 24 Nov 2026) ─────────────────────────────────
