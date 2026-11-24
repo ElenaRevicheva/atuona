@@ -462,7 +462,7 @@ const tree = `${MARK_START}
 
       <div class="vault-head">
         <div class="vault-kicker">Contents</div>
-        <h3 class="vault-title">Gallery of ${UNIT.Many}</h3>
+        <h3 class="vault-title">Drops of ${UNIT.Many}</h3>
         <p class="vault-note">${total} ${UNIT.many}, in two parts. Each one opens where it stands — the full
           text is on this page whether it is open or shut. Type a number or a word to find one.</p>
         <div class="vault-tools">
