@@ -45,7 +45,10 @@ const block = `${START}
 
         /* Display: negative tracking is the whole move. Large type used to
            breathe; now it bites. */
-        .hero-glitch{font-family:var(--font-display);font-weight:800;letter-spacing:${TRACK.hero};}
+        /* Hero at 700, not 800 (Elena, 24 Nov 2026): Syne 800 is its widest cut and
+           read as letters pressed flat from above and below. 700 is the same face,
+           still heavy, at normal proportions. */
+        .hero-glitch{font-family:var(--font-display);font-weight:700;letter-spacing:${TRACK.hero};}
         .site-title .russian{font-family:var(--font-display);font-weight:800;letter-spacing:-.04em;}
         .section-title{font-family:var(--font-display);font-weight:800;letter-spacing:${TRACK.display};}
         /* Poem titles use the CYRILLIC-CAPABLE face, not the display face. Syne
@@ -97,7 +100,7 @@ const block = `${START}
         .poem-leader{background:rgba(168,168,168,.2);}
 
         @media (max-width:760px){
-            .hero-glitch{letter-spacing:-.035em;}
+            .hero-glitch{letter-spacing:-.025em;}
             .site-title .english{letter-spacing:.2em;}
         }
     </style>

@@ -76,7 +76,7 @@ export const BODY = "'Inter',sans-serif";
 
 /** Tracking scale. Negative for display, positive for small caps-y labels. */
 export const TRACK = {
-  hero: '-.05em',
+  hero: '-.035em',
   display: '-.03em',
   title: '-.02em',
   label: '.16em',
