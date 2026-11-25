@@ -60,7 +60,7 @@ export function englishTitles(films = loadFilms()) {
     for (const [n, t] of f.poems) {
       const m = /^(.+?)\s*\(([^()]+)\)\s*$/.exec(String(t));
       if (!m || CY.test(m[1]) || !CY.test(m[2])) continue;
-      map.set(String(n).replace('#', ''), { en: m[1].trim(), ru: m[2].trim() });
+      map.set(String(n).replace('#', ''), { en: m[1].trim(), ru: m[2].trim(), film: String(f.title || '').replace(/\.$/, '') });
     }
   }
   return map;

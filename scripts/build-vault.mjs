@@ -131,7 +131,7 @@ function titleSpan(p) {
   if (!pair) return `<span class="poem-title">${p.titleHtml}</span>`;
   // The title span itself stays byte-identical — verify-vault.mjs reads it by that
   // exact markup. The English plate sits beside it, in a wrapper.
-  return `<span class="poem-collide"><span class="poem-title">${p.titleHtml}</span><span class="poem-ghost" aria-hidden="true" lang="en">${esc(pair.en)}</span></span>`;
+  return `<span class="poem-collide"><span class="poem-title">${p.titleHtml}</span><span class="poem-ghost" aria-hidden="true" lang="en"${pair.film ? ` data-film="${escAttr(pair.film)}"` : ''}>${esc(pair.en)}</span></span>`;
 }
 
 function poemRow(p) {
@@ -401,10 +401,23 @@ const CSS = `
       transform:translate(.12em,.06em) rotate(-2deg);transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .45s;}
     .poem-btn:hover .poem-ghost{transform:translate(.02em,.02em) rotate(-1deg);opacity:.95;}
     .poem.open .poem-ghost{-webkit-text-stroke-color:var(--silver-dark);opacity:.6;}
+    /* The clue (Elena, 25 Nov 2026, option 1): a stamp appears only where a film
+       already published the English title, so it says which film — on hover and
+       when the row is open. Phones get the same fact from the open row's
+       "appears in" line, so the caption stays a desktop detail. */
+    .poem-ghost[data-film]::after{content:"from the film\\A“" attr(data-film) "”";position:absolute;left:100%;top:50%;transform:translateY(-50%);margin-left:1.4em;
+      font-family:var(--font-mono,monospace);font-weight:400;font-size:.5em;letter-spacing:.12em;line-height:1.45;text-transform:none;white-space:pre-line;width:12em;
+      color:var(--red-crimson);-webkit-text-stroke:0;opacity:0;transition:opacity .35s;}
+    .poem-btn:hover .poem-ghost[data-film]::after,.poem.open .poem-ghost[data-film]::after{opacity:1;}
+    .poem.open .poem-ghost[data-film]::after{color:var(--silver-dark);}
+    /* Below 1000px the longest pair (Wild Tales Curl + its film) reaches the LIVE
+       column, so the caption steps aside there; the open row still names the film. */
+    @media (max-width:999px){ .poem-ghost[data-film]::after{display:none;} }
     /* Phones: titles wrap, so there is no room at the tail (WILD TALES CURL ran to
        438px on a 375px screen). The stamp is struck just above the title's start. */
     @media (max-width:760px){
       .poem-ghost{left:0;margin-left:0;top:-1.05em;font-size:.9em;}
+      .poem-ghost[data-film]::after{display:none;}
     }
 
     /* Drops: each row lands as it scrolls into view, and the red LIVE marker
