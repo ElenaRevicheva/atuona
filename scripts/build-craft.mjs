@@ -47,6 +47,26 @@ const block = `${START}
             50%{transform:translate(23px,-29px)}75%{transform:translate(-13px,-41px)}100%{transform:translate(0,0)}}
         @media (prefers-reduced-motion:reduce){ html::after{animation:none;} }
         @media print{ html::after{display:none;} }
+
+        /* ── "Underground Aesthetic" as an ink stamp (Elena, 24 Nov 2026) ─────
+           It is the core of ATUONA and it read as a footnote: .6rem, thin grey,
+           set left. Now a brick-red rubber stamp pressed a little crooked under
+           the logo, centred, with a blinking cursor like the typed line in the
+           vault (her pick: "A with D"). Words, click-to-Manifesto and the
+           element are untouched — this is styling only. */
+        html body .site-title{text-align:center;}
+        html body .site-title .english{display:inline-flex;align-items:center;gap:.5em;
+            margin-top:1.1rem;padding:.5em 1em .5em 1.25em;transform:rotate(-2.5deg);
+            border:2px solid #b0353a;color:#b0353a;background:transparent;
+            font-family:var(--font-mono);font-size:.92rem;font-weight:700;letter-spacing:.32em;
+            text-shadow:0 0 1px rgba(176,53,58,.55);}
+        html body .site-title .english::after{content:"";width:.55em;height:1.1em;background:#b0353a;
+            animation:craft-cursor 1.05s steps(1) infinite;}
+        html body .site-title .english:hover{background:#b0353a;color:#ebe8e3;transform:rotate(0deg);}
+        html body .site-title .english:hover::after{background:#ebe8e3;}
+        @keyframes craft-cursor{50%{opacity:0}}
+        @media (max-width:768px){ html body .site-title .english{font-size:.84rem;letter-spacing:.24em;} }
+        @media (prefers-reduced-motion:reduce){ html body .site-title .english::after{animation:none;} }
     </style>
     ${END}`;
 
