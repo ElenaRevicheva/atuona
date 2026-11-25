@@ -1,0 +1,47 @@
+{
+  "name": "На память #001",
+  "description": "ATUONA Gallery of Moments - Underground Poem 001. \"На память\" - A raw, uncompromising piece about youth, loss, and the brutal machinery of existence. Written with underground intensity, this poem captures the essence of a generation caught between memory and reality. Published: 29-08-2025",
+  "image": "https://atuona.xyz/nft/img/poem-001.png",
+  "attributes": [
+    {
+      "trait_type": "Title",
+      "value": "На память"
+    },
+    {
+      "trait_type": "ID",
+      "value": "001"
+    },
+    {
+      "trait_type": "Collection",
+      "value": "GALLERY OF MOMENTS"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Free Underground Poetry"
+    },
+    {
+      "trait_type": "Language",
+      "value": "Russian"
+    },
+    {
+      "trait_type": "Publication Date",
+      "value": "29-08-2025"
+    },
+    {
+      "trait_type": "Year",
+      "value": "2025"
+    },
+    {
+      "trait_type": "Theme",
+      "value": "Underground Culture"
+    },
+    {
+      "trait_type": "Poem Text",
+      "value": "Были, друг, мы когда-то дети. Вместо нас теперь, вон, кресты. В этой долбаной эстафете Победили не я и не ты. Победили голодные бдетели И блюстители чистоты - Снова пробуя меф с добродетелью, Жрут яичницу из инсты. Раскидаем по моргам шкуры. Эта фабрика - Круглосут. Плачут умные, плачут дуры - Чей-то ж были мы, блять, Абсолют!... Все запомнили нас красавцами, С оголтелыми, дерзкими мышцами, Что так честно умели трахаться, Даже с кем-то делиться смыслами. Оставляя от нас на память Что-то вот из карманов джинс, Ну давай же не будем хаять Нашу вечную, братка, жизнь."
+    },
+    {
+      "trait_type": "English Analysis",
+      "value": "A raw, uncompromising piece about youth, loss, and the brutal machinery of existence. Written with underground intensity, this poem captures the essence of a generation caught between memory and reality."
+    }
+  ]
+}

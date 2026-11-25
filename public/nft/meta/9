@@ -1,0 +1,47 @@
+{
+  "name": "Билет #010",
+  "description": "ATUONA Gallery of Moments - Underground Poem 010. \"Билет\" - A haunting meditation on loss, addiction, and the choice between destruction and redemption. The grandmother's absence creates a void filled with temptation, while the \"return ticket to eternal life\" offers both hope and darkness. A masterful exploration of suicidal ideation and spiritual choice. Published: 07-05-2024",
+  "image": "https://atuona.xyz/nft/img/poem-010.png",
+  "attributes": [
+    {
+      "trait_type": "Title",
+      "value": "Билет"
+    },
+    {
+      "trait_type": "ID",
+      "value": "010"
+    },
+    {
+      "trait_type": "Collection",
+      "value": "GALLERY OF MOMENTS"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Free Underground Poetry"
+    },
+    {
+      "trait_type": "Language",
+      "value": "Russian"
+    },
+    {
+      "trait_type": "Publication Date",
+      "value": "07-05-2024"
+    },
+    {
+      "trait_type": "Year",
+      "value": "2024"
+    },
+    {
+      "trait_type": "Theme",
+      "value": "Underground Culture"
+    },
+    {
+      "trait_type": "Poem Text",
+      "value": "Моя бабушка больше не снится, Не ругает меня, на чем свет. Накуриться бы мне и напиться, Только я говорю себе: нет. Эти давние, ржавые спицы Проникают сквозь тысячу лет. Разогнаться бы мне и убиться, Отослав всем далекий привет... Только я возвращаюсь в столицу, Там в комоде лежит пистолет, И завернутый в плащаницу Вечной жизни обратный билет."
+    },
+    {
+      "trait_type": "English Analysis",
+      "value": "A haunting meditation on loss, addiction, and the choice between destruction and redemption. The grandmother's absence creates a void filled with temptation, while the \"return ticket to eternal life\" offers both hope and darkness. A masterful exploration of suicidal ideation and spiritual choice."
+    }
+  ]
+}
